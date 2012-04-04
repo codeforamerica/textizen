@@ -1,0 +1,33 @@
+<h1>Listing polls</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Text</th>
+    <th>Phone</th>
+    <th>Start date</th>
+    <th>End date</th>
+    <th>Type</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @polls.each do |poll| %>
+  <tr>
+    <td><%= poll.title %></td>
+    <td><%= poll.text %></td>
+    <td><%= poll.phone %></td>
+    <td><%= poll.start_date %></td>
+    <td><%= poll.end_date %></td>
+    <td><%= poll.poll_type %></td>
+    <td><%= link_to 'Show', poll %></td>
+    <td><%= link_to 'Edit', edit_poll_path(poll) %></td>
+    <td><%= link_to 'Destroy', poll, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Poll', new_poll_path %>
