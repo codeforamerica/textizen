@@ -5,12 +5,12 @@ common: &common
 
 development:
   <<: *common
-  database: myapp_development
+  database: textyourcity_dev
 
 test:
   <<: *common
-  database: myapp_test
+  database: textyourcity_test
 
 production:
   <<: *common
-  database: myapp_production
+  database: textyourcity_production
