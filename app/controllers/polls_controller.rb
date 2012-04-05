@@ -80,4 +80,34 @@ class PollsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def receive_message
+    if params[:incoming_number] # flocky
+      params[:incoming_number] = $1 if params[:incoming_number]=~/^1(\d{10})$/
+      params[:origin_number] = $1 if params[:origin_number]=~/^1(\d{10})$/
+      # needs to return something API-like, yo
+      render :text=>"sent", :status=>202
+
+    elsif params[:session] # tropo api
+      
+    end
+    #      sent_by_admin=@group.user.phone_number==params[:origin_number]
+     #     @sending_student = @group.students.find_by_phone_number(params[:origin_number])
+#    if (@group=Group.find_by_phone_number(params[:incoming_number]))
+
+  end
+  
+  private
+  def get_new_phone_number
+    r=$outbound_flocky.create_phone_number_synchronous(nil)
+    if r[:response].code == 200
+      return r[:response].parsed_response["href"].match(/\+1(\d{10})/)[1] rescue nil
+    end
+
+    return nil
+  end
+  def destroy_phone_number(num)
+    $outbound_flocky.destroy_phone_number_synchronous(num)
+  end
+  
 end
