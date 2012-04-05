@@ -18,7 +18,7 @@ class PollsControllerTest < ActionController::TestCase
 
   test "should create poll" do
     assert_difference('Poll.count') do
-      post :create, poll: { end_date: @poll.end_date, phone: @poll.phone, start_date: @poll.start_date, text: @poll.text, title: @poll.title, type: @poll.type }
+      post :create, poll: { end_date: @poll.end_date, phone: @poll.phone, start_date: @poll.start_date, text: @poll.text, title: @poll.title, type: @poll.poll_type }
     end
 
     assert_redirected_to poll_path(assigns(:poll))
