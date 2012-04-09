@@ -27,8 +27,10 @@ gem 'tropo-webapi-ruby'
 
 
 group :test, :development do
+  gem 'test-unit'
   gem 'rspec-rails'
   gem 'shoulda'
+  gem 'factory_girl_rails'
 end
 
 # To use ActiveModel has_secure_password
