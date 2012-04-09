@@ -25,6 +25,12 @@ gem 'flocky', :git => 'git://github.com/codeforamerica/flocky.git'
 gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 gem 'tropo-webapi-ruby'
 
+
+group :test, :development do
+  gem 'rspec-rails'
+  gem 'shoulda'
+end
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
