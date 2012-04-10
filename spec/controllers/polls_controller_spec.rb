@@ -5,5 +5,7 @@ describe PollsController, "#show" do
     before do
       get :show, :id => 1
     end
+    
+    
   end    
 end
