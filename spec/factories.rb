@@ -3,6 +3,9 @@ FactoryGirl.define do
   factory :poll do
     start_date { Time.now }
     end_date { Time.now + 1.week }
-    
+    phone { '9091234567' }
+    poll_type { 'OPEN' }
+    text { 'Where do you buy your groceries?' }
+    title { 'Groceries' }
   end
 end
