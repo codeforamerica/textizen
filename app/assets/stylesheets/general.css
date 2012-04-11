@@ -1,4 +1,6 @@
 body {
 	background-color: #EFEED0;
-	background-image: url('../../assets/images/header-ribbons.png');
+	background-image: url('/assets/header-ribbons.png');
+	background-repeat: repeat-x;
+	margin-top: 20px;
 }
