@@ -5,10 +5,14 @@ if not Rails.env.production?
     return '1'+rand(10 ** 9).to_s
   end
   
-  @poll = Poll.create(:start_date => Time.now, :end_date => Time.now + 1.year, :phone => '19091234567', :text => 'Where do you buy your groceries?', :title=> 'Groceries', :poll_type=>'OPEN')
-  10.times { @poll.responses.create(:from => get_fake_phone, :to => @poll.phone, :response => 'I buy groceries IN YOUR FACE') }
-  5.times { @poll.responses.create(:from => get_fake_phone, :to => @poll.phone, :response => 'I buy groceries in Paris') }
-end  
+  #first create one with a valid tropo phone number for later testing
+  @polls = []
+  4.times { @polls << Poll.create(:start_date => Time.now, :end_date => Time.now + 1.year, :phone => get_fake_phone, :text => 'Where do you buy your groceries?', :title=> 'Groceries', :poll_type=>'OPEN')}
+  @polls.each do |p|
+    10.times { p.responses.create(:from => get_fake_phone, :to => p.phone, :response => 'I buy groceries IN YOUR FACE') }
+    5.times { p.responses.create(:from => get_fake_phone, :to => p.phone, :response => 'I buy groceries in Paris') }
+  end
+end
 # Response.craete()
 #   factory :poll do
 #     start_date { Time.now }
