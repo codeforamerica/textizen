@@ -30,6 +30,13 @@
   <%= @poll.poll_type %>
 </p>
 
+<h3>Responses</h3>
+<ul>
+	<% @poll.responses.each do |resp| %>
+		<li><strong><%= resp.from %> </strong><%= resp.response %></li>
+	<% end %>
+</ul>
+
 
 <%= link_to 'Edit', edit_poll_path(@poll) %> |
 <%= link_to 'Back', polls_path %>
