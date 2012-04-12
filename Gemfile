@@ -24,13 +24,13 @@ gem 'jquery-rails'
 gem 'flocky', :git => 'git://github.com/codeforamerica/flocky.git'
 gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 gem 'tropo-webapi-ruby'
+gem 'factory_girl_rails'
 
 
 group :test, :development do
   gem 'test-unit'
   gem 'rspec-rails'
   gem 'shoulda'
-  gem 'factory_girl_rails'
   gem 'faker'
 end
 
