@@ -9,25 +9,23 @@
 
 <table>
   <tr>
-    <th>Title</th>
-    <th>Text</th>
-    <th>Phone</th>
-    <th>Start date</th>
-    <th>End date</th>
+    <th></th>
+    <th class="span4">Text</th>
     <th>Type</th>
+    <th>Start date</th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
 
-<% @polls.each do |poll| %>
+<% @polls.each_with_index do |poll, i| %>
   <tr>
-    <td><%= poll.title %></td>
-    <td><%= poll.text %></td>
-    <td><%= poll.phone %></td>
-    <td><%= poll.start_date %></td>
-    <td><%= poll.end_date %></td>
+    <td><%= i+1 %></td>
+
+    <td class="polltext"><%= poll.text %></td>
+
     <td><%= poll.poll_type %></td>
+    <td><%= poll.start_date.to_formatted_s(:short) %><br>Live since <%= time_ago_in_words(poll.start_date, include_seconds = false) %></td>
     <td><%= link_to 'Show', poll %></td>
     <td><%= link_to 'Edit', edit_poll_path(poll) %></td>
     <td><%= link_to 'Destroy', poll, confirm: 'Are you sure?', method: :delete %></td>

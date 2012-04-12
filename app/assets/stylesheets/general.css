@@ -4,3 +4,8 @@ body {
 	background-repeat: repeat-x;
 	margin-top: 20px;
 }
+
+.polltext{
+	font-size: 140%;
+	font-weight:bold;
+}
