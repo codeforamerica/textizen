@@ -6,5 +6,8 @@ class ResponsesController < ApplicationController
     if params[:session]
       puts params[:session]
     end
+
+    render :text=>"received", :status=>202
+
   end
 end
