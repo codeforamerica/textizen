@@ -1,18 +1,21 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-if not Rails.env.production?
-  def get_fake_phone
-    return '1'+rand(10 ** 9).to_s
-  end
-  
-  #first create one with a valid tropo phone number for later testing
-  @polls = []
-  4.times { @polls << Poll.create(:start_date => Time.now, :end_date => Time.now + 1.year, :phone => get_fake_phone, :text => 'Where do you buy your groceries?', :title=> 'Groceries', :poll_type=>'OPEN')}
-  @polls.each do |p|
-    10.times { p.responses.create(:from => get_fake_phone, :to => p.phone, :response => 'I buy groceries IN YOUR FACE') }
-    5.times { p.responses.create(:from => get_fake_phone, :to => p.phone, :response => 'I buy groceries in Paris') }
-  end
+#if not Rails.env.production?
+
+#first create one with a valid tropo phone number for later testing
+@polls = []
+4.times { @polls << FactoryGirl.create(:poll)}
+begin
+  @polls << FactoryGirl.create(:poll_valid_phone)
+rescue
+  puts "Valid phone number poll already created #{$!}"
 end
+
+@polls.each do |p|
+  10.times { p.responses.create(:from => '1'+rand(10 ** 9).to_s, :to => p.phone, :response => 'I buy groceries IN YOUR FACE') }
+  5.times { p.responses.create(:from => '1'+rand(10 ** 9).to_s, :to => p.phone, :response => 'I buy groceries in Paris') }
+end
+
 # Response.craete()
 #   factory :poll do
 #     start_date { Time.now }
