@@ -10,7 +10,11 @@ TxtyourcityRails::Application.routes.draw do
     end
   end
 
-  resources :responses
+  resources :responses do
+    collection do
+      post "receive_message"
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
