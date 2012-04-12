@@ -188,6 +188,10 @@ GEM
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
+    tropo-provisioning (0.0.23)
+      activesupport
+      hashie (>= 0.2.1)
+      i18n
     tropo-webapi-ruby (0.1.11)
       hashie (>= 0.2.0)
       json_pure (>= 1.2.0)
@@ -217,5 +221,6 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   shoulda
   test-unit
+  tropo-provisioning
   tropo-webapi-ruby
   uglifier (>= 1.0.3)
