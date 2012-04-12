@@ -14,4 +14,5 @@
 /log/*.log
 /tmp
 heroku-env.sh
+env.sh
 .DS_Store
