@@ -7,10 +7,10 @@
     <div class="span12">
 <h1>Northeast District</h1>
 
-<table>
+<table class="pollslist">
   <tr>
     <th></th>
-    <th class="span4">Text</th>
+    <th class="span3">Text</th>
     <th>Type</th>
     <th>Start date</th>
     <th></th>
@@ -20,7 +20,7 @@
 
 <% @polls.each_with_index do |poll, i| %>
   <tr>
-    <td><%= i+1 %></td>
+    <td class="number"><%= i+1 %></td>
 
     <td class="polltext"><%= poll.text %></td>
 

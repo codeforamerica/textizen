@@ -5,6 +5,18 @@ body {
 	margin-top: 20px;
 }
 
+.pollslist td {
+	vertical-align: text-top;
+	padding: 0.5em;
+	border-bottom: 1px solid #BEBEA6;
+}
+
+.number{
+	text-align: right;
+	font-size: 120%;
+	color: #999;
+}
+
 .polltext{
 	font-size: 140%;
 	font-weight:bold;
