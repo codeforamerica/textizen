@@ -1,42 +1,54 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+<div class="row">
+    <div class="span8"><img src="/assets/logo.png"></div>
+    <div class="span4 login">Logout</div>
+</div>
 
-<p>
-  <b>Title:</b>
-  <%= @poll.title %>
-</p>
+<div class="container">
+  <div class="row">
+    <div class="span12 main">
+      <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Text:</b>
-  <%= @poll.text %>
-</p>
+      <p>
+        <b>Title:</b>
+        <%= @poll.title %>
+      </p>
 
-<p>
-  <b>Phone:</b>
-  <%= @poll.phone %>
-</p>
+      <p>
+        <b>Text:</b>
+        <%= @poll.text %>
+      </p>
 
-<p>
-  <b>Start date:</b>
-  <%= @poll.start_date %>
-</p>
+      <p>
+        <b>Phone:</b>
+        <%= @poll.phone %>
+      </p>
 
-<p>
-  <b>End date:</b>
-  <%= @poll.end_date %>
-</p>
+      <p>
+        <b>Start date:</b>
+        <%= @poll.start_date %>
+      </p>
 
-<p>
-  <b>Type:</b>
-  <%= @poll.poll_type %>
-</p>
+      <p>
+        <b>End date:</b>
+        <%= @poll.end_date %>
+      </p>
 
-<h3>Responses</h3>
-<ul>
-	<% @poll.responses.each do |resp| %>
-		<li><strong><%= resp.from %> </strong><%= resp.response %></li>
-	<% end %>
-</ul>
+      <p>
+        <b>Type:</b>
+        <%= @poll.poll_type %>
+      </p>
+
+      <h3>Responses</h3>
+      <ul>
+      	<% @poll.responses.each do |resp| %>
+      		<li><strong><%= resp.from %> </strong><%= resp.response %></li>
+      	<% end %>
+      </ul>
 
 
-<%= link_to 'Edit', edit_poll_path(@poll) %> |
-<%= link_to 'Back', polls_path %>
+      <%= link_to 'Edit', edit_poll_path(@poll) %> |
+      <%= link_to 'Back', polls_path %>
+    </div>
+  </div>
+</div>

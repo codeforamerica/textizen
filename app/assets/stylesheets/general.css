@@ -5,9 +5,24 @@ body {
 	margin-top: 20px;
 }
 
+.login {
+	text-align: right;
+}
+
+.main{
+	margin-top: 2em;
+}
+
+.grouptitle{
+	font-size: 115%;
+	color: #838383;
+}
+
 .pollslist td {
 	vertical-align: text-top;
 	padding: 0.5em;
+	padding-top: 1em;
+	padding-bottom: 1em;
 	border-bottom: 1px solid #BEBEA6;
 }
 
