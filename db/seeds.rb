@@ -5,15 +5,16 @@
 #first create one with a valid tropo phone number for later testing
 @polls = []
 4.times { @polls << FactoryGirl.create(:poll)}
-begin
-  @polls << FactoryGirl.create(:poll_valid_phone)
-rescue
-  puts "Valid phone number poll already created #{$!}"
-end
 
 @polls.each do |p|
   10.times { p.responses.create(:from => '1'+rand(10 ** 9).to_s, :to => p.phone, :response => 'I buy groceries IN YOUR FACE') }
   5.times { p.responses.create(:from => '1'+rand(10 ** 9).to_s, :to => p.phone, :response => 'I buy groceries in Paris') }
+end
+
+begin
+  FactoryGirl.create(:poll_valid_phone)
+rescue
+  puts "Valid phone number poll already created #{$!}"
 end
 
 # Response.craete()
