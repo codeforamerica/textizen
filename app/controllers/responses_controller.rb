@@ -1,14 +1,14 @@
 class ResponsesController < ApplicationController
   #post /responses/receive_message
-  require 'phoneutils'
+  
   def receive_message
     @session = Tropo::Generator.parse params
     puts @session
 
     
     # if params[:session][:to][:network] == "IM" #debug mode
-    @to = PhoneUtils::normalize_phone(@session[:session][:to][:id])
-    @from = PhoneUtils::normalize_phone(@session[:session][:from][:id])
+    @to = @session[:session][:to][:id]
+    @from = @session[:session][:from][:id]
     
     @poll = get_poll_by_phone(@to)
     puts "poll"
