@@ -4,10 +4,10 @@
 
 #first create one with a valid tropo phone number for later testing
 @polls = []
-4.times { @polls << FactoryGirl.create(:poll)}
+3.times { @polls << FactoryGirl.create(:poll)}
 
 @polls.each do |p|
-  10.times { p.responses.create(:from => '1'+rand(10 ** 9).to_s, :to => p.phone, :response => 'I buy groceries IN YOUR FACE') }
+  3.times { p.responses.create(:from => '1'+rand(10 ** 9).to_s, :to => p.phone, :response => 'I buy groceries IN YOUR FACE') }
   5.times { p.responses.create(:from => '1'+rand(10 ** 9).to_s, :to => p.phone, :response => 'I buy groceries in Paris') }
 end
 
