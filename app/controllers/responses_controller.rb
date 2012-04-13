@@ -1,5 +1,5 @@
 class ResponsesController < ApplicationController
-
+  include PhoneUtils
   #post /responses/receive_message
   def receive_message
     @session = Tropo::Generator.parse params
@@ -43,10 +43,4 @@ class ResponsesController < ApplicationController
     return Poll.where(:phone=>phone)[0]
   end
 
-  def normalize_phone(phone)
-    if phone.match(/^\+/)
-      phone = phone.slice(1,11)
-    end
-    return phone
-  end
 end

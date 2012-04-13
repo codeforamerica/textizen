@@ -1,4 +1,6 @@
 class Poll < ActiveRecord::Base
+  include PhoneUtils
+  
   attr_accessible :end_date, :phone, :start_date, :text, :title, :poll_type, :user_id
   belongs_to :user
   has_many :responses
@@ -37,20 +39,12 @@ class Poll < ActiveRecord::Base
 
   def destroy_phone_number(phone = '')
     phone = phone || self.phone
-    puts 'destroy phone number'
-    tp = TropoProvisioning.new(ENV['TROPO_USERNAME'], ENV['TROPO_PASSWORD'])
-    tp.delete_address(ENV['TROPO_APP_ID'], phone)
-  end
-
-  def normalize_phone(phone)
-    # puts 'normalizing phone %s' % phone
-    if phone.match(/^\+/)
-      phone = phone.slice(1,11)
+    begin
+      puts 'destroy phone number'
+      tp = TropoProvisioning.new(ENV['TROPO_USERNAME'], ENV['TROPO_PASSWORD'])
+      tp.delete_address(ENV['TROPO_APP_ID'], phone)
+    rescue
+      puts 'Unable to delete number #{$!}'
     end
-  
-    return phone
   end
-
-
-
 end
