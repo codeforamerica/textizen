@@ -14,9 +14,9 @@ class ResponsesController < ApplicationController
     @from = params[:session]['from']['id']
     
     puts 'tropo session'
-    puts session[:session][:to][:id]
-    puts session[:session][:from][:id]
-    puts session[:session][:initialText]
+    puts @session[:session][:to][:id]
+    puts @session[:session][:from][:id]
+    puts @session[:session][:initialText]
 
     @poll = get_poll_by_phone(@from)
     @response = params[:session]['initialText']
