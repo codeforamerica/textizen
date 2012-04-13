@@ -5,24 +5,16 @@ class ResponsesController < ApplicationController
     @session = Tropo::Generator.parse params
     puts @session
 
-    puts params
-    if params[:session]
-      puts params[:session]
-    end
-    # if params[:session][:to][:network] == "IM" #debug mode
-    @to = normalize_phone(params[:session]['to']['id'])
-    @from = normalize_phone(params[:session]['from']['id'])
     
-    puts 'tropo session'
-    puts @session[:session][:to][:id]
-    puts @session[:session][:from][:id]
-    puts @session[:session][:initialText]
-
-    @poll = get_poll_by_phone(@from)
+    # if params[:session][:to][:network] == "IM" #debug mode
+    @to = normalize_phone(@session[:session][:to][:id])
+    @from = normalize_phone(@session[:session][:from][:id])
+    
+    @poll = get_poll_by_phone(@to)
     puts "poll"
     puts @poll
 
-    @response = params[:session]['initialText']
+    @response = @session[:session][:initialText]
 
     if @poll
       puts "poll found"
