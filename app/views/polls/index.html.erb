@@ -1,43 +1,40 @@
 <div class="container">
 <div class="row">
-<div class="span8"><img src="/assets/logo.png"></div>
-<div class="span4">Logout</div>
+    <div class="span8"><img src="/assets/logo.png"></div>
+    <div class="span4 login">Logout</div>
 </div>
 <div class="row">
-    <div class="span12">
-<h1>Northeast District</h1>
+    <div class="span12 main">
+        <div class="grouptitle">Northeast District</div>
+            <table class="pollslist">
+              <tr>
+                <th></th>
+                <th class="span3">Text</th>
+                <th>Type</th>
+                <th>Start date</th>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Text</th>
-    <th>Phone</th>
-    <th>Start date</th>
-    <th>End date</th>
-    <th>Type</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+            <% @polls.each_with_index do |poll, i| %>
+              <tr>
+                <td class="number"><%= i+1 %></td>
 
-<% @polls.each do |poll| %>
-  <tr>
-    <td><%= poll.title %></td>
-    <td><%= poll.text %></td>
-    <td><%= poll.phone %></td>
-    <td><%= poll.start_date %></td>
-    <td><%= poll.end_date %></td>
-    <td><%= poll.poll_type %></td>
-    <td><%= link_to 'Show', poll %></td>
-    <td><%= link_to 'Edit', edit_poll_path(poll) %></td>
-    <td><%= link_to 'Destroy', poll, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
+                <td class="polltext"><%= poll.text %></td>
 
-<br />
+                <td><%= poll.poll_type %></td>
+                <td><%= poll.start_date.to_formatted_s(:short) %><br>Live since <%= time_ago_in_words(poll.start_date, include_seconds = false) %></td>
+                <td><%= link_to 'Show', poll %></td>
+                <td><%= link_to 'Edit', edit_poll_path(poll) %></td>
+                <td><%= link_to 'Destroy', poll, confirm: 'Are you sure?', method: :delete %></td>
+              </tr>
+            <% end %>
+            </table>
 
-<%= link_to 'New Poll', new_poll_path %>
-</div>
-</div>
+            <br />
+
+            <%= link_to 'New Poll', new_poll_path %>
+        </div>
+    </div>
 </div>
