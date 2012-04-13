@@ -1,6 +1,5 @@
 class Poll < ActiveRecord::Base
-  include PhoneUtils
-  
+
   attr_accessible :end_date, :phone, :start_date, :text, :title, :poll_type, :user_id
   belongs_to :user
   has_many :responses
@@ -23,7 +22,7 @@ class Poll < ActiveRecord::Base
     tp = TropoProvisioning.new(ENV['TROPO_USERNAME'], ENV['TROPO_PASSWORD'])
     address = tp.create_address(ENV['TROPO_APP_ID'], { :type => 'number', :prefix => '1415' })
 
-    @address = normalize_phone(address['address'])
+    @address = PhoneUtils::normalize_phone(address['address'])
 
     unless Poll.where(:phone=>@address).empty?
       addresses_to_clear.push(@address)
