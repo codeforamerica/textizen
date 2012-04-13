@@ -21,7 +21,7 @@ class ResponsesController < ApplicationController
       puts "poll found"
       @response = @poll.responses.create(:from => @from, :response => @response)
       puts "response created"
-      render :text => say("Thanks for your response")
+      render :text => say("Thank you for you for responding to our poll on %s. Your response has been recorded." % poll.title)
     else
       puts "poll not found"
       render :text => reject("poll not found")
@@ -29,13 +29,13 @@ class ResponsesController < ApplicationController
   end
 
   def say(message)
-    puts "say "+message
+    puts "say %s" % message
     return (Tropo::Generator.say message)
   end
 
   # reject the message
   def reject(message)
-    return say("Sorry, " + message)
+    return say("Sorry, %s" % message)
   end
 
   def get_poll_by_phone(phone)
