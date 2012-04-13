@@ -10,8 +10,8 @@ class ResponsesController < ApplicationController
       puts params[:session]
     end
     # if params[:session][:to][:network] == "IM" #debug mode
-    @to = params[:session]['to']['id']
-    @from = params[:session]['from']['id']
+    @to = normalize_phone(params[:session]['to']['id'])
+    @from = normalize_phone(params[:session]['from']['id'])
     
     puts 'tropo session'
     puts @session[:session][:to][:id]
