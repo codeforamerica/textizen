@@ -4,7 +4,7 @@ class ResponsesController < ApplicationController
   def receive_message
     @session = Tropo::Generator.parse params
     puts @session
-    
+
     puts params
     if params[:session]
       puts params[:session]
@@ -12,14 +12,20 @@ class ResponsesController < ApplicationController
     # if params[:session][:to][:network] == "IM" #debug mode
     @to = params[:session]['to']['id']
     @from = params[:session]['from']['id']
+    
+    puts 'tropo session'
+    puts session[:session][:to][:id]
+    puts session[:session][:from][:id]
+    puts session[:session][:initialText]
+
     @poll = get_poll_by_phone(@from)
     @response = params[:session]['initialText']
 
     if @poll
       @poll.responses.create(:from => normalize_phone(@from), :response => @response)
-      render Tropo::Generator.say "Thanks for your response"
+      render :text=>Tropo::Generator.say "Thanks for your response"
     else
-      render reject("poll not found")
+      render :text=>reject("poll not found")
     end
   end
 
