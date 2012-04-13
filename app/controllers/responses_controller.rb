@@ -4,24 +4,27 @@ class ResponsesController < ApplicationController
   def receive_message
     puts session = Tropo::Generator.parse params
 
-    # puts params
-    # if params[:session]
-    #   puts params[:session]
-    # end
-    # # if params[:session][:to][:network] == "IM" #debug mode
-    # @to = params[:session]['to']['id']
-    # @from = params[:session]['from']['id']
-    # @poll = get_poll_by_phone(@from)
+    puts params
+    if params[:session]
+      puts params[:session]
+    end
+    # if params[:session][:to][:network] == "IM" #debug mode
+    @to = params[:session]['to']['id']
+    @from = params[:session]['from']['id']
+    @poll = get_poll_by_phone(@from)
+    @response = params[:session]['initialText']
 
-#      10.times { p.responses.create(:from => '1'+rand(10 ** 9).to_s, :to => p.phone, :response => 'I buy groceries IN YOUR FACE') }
-
-
-    render Tropo::Generator.say "hi"
+    if @poll
+      @poll.responses.create(:from => normalize_phone(@from), :response => @response)
+      render Tropo::Generator.say "Thanks for your response"
+    else
+      render reject("poll not found")
+    end
   end
 
   # reject the message
   def reject(message)
-    return Tropo::Generator.say "Sorry, invalid input"
+    return Tropo::Generator.say "Sorry, " + message
   end
 
   def get_poll_by_phone(phone)
