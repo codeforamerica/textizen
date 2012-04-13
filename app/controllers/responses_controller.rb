@@ -23,15 +23,19 @@ class ResponsesController < ApplicationController
 
     if @poll
       @poll.responses.create(:from => normalize_phone(@from), :response => @response)
-      render :text=>Tropo::Generator.say "Thanks for your response"
+      render :text=>say("Thanks for your response")
     else
       render :text=>reject("poll not found")
     end
   end
 
+  def say(message)
+    return Tropo::Generator.say message
+  end
+
   # reject the message
   def reject(message)
-    return Tropo::Generator.say "Sorry, " + message
+    return say("Sorry, " + message)
   end
 
   def get_poll_by_phone(phone)
