@@ -64,4 +64,5 @@ class Poll < ActiveRecord::Base
     end
     puts 'denormalized phone %s' % phone
     return phone
+  end
 end
