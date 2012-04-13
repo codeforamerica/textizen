@@ -19,12 +19,19 @@ class ResponsesController < ApplicationController
     puts @session[:session][:initialText]
 
     @poll = get_poll_by_phone(@from)
+    puts "poll"
+    puts @poll
+
     @response = params[:session]['initialText']
 
     if @poll
-      @poll.responses.create(:from => normalize_phone(@from), :response => @response)
+      puts "poll found"
+      @response = @poll.responses.create(:from => normalize_phone(@from), :response => @response)
+      puts "response created"
+      puts @response
       render :text=>say("Thanks for your response")
     else
+      puts "poll not found"
       render :text=>reject("poll not found")
     end
   end
