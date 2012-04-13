@@ -15,6 +15,7 @@ class ResponsesController < ApplicationController
     puts @poll
 
     @response = @session[:session][:initialText]
+    puts "response "+@response
 
     if @poll
       puts "poll found"
