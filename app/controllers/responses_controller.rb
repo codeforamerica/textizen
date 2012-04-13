@@ -45,7 +45,7 @@ class ResponsesController < ApplicationController
 
   def normalize_phone(phone)
     if phone.match(/^\+/)
-      phone = phone.slice(1,10)
+      phone = phone.slice(1,11)
     end
     return phone
   end
