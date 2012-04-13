@@ -12,6 +12,7 @@
                 <th class="span3">Text</th>
                 <th>Type</th>
                 <th>Start date</th>
+                <th>Responses</th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -25,6 +26,7 @@
 
                 <td><%= poll.poll_type %></td>
                 <td><%= poll.start_date.to_formatted_s(:short) %><br>Live since <%= time_ago_in_words(poll.start_date, include_seconds = false) %></td>
+                <td><%= poll.responses.count %></td>
                 <td><%= link_to 'Show', poll %></td>
                 <td><%= link_to 'Edit', edit_poll_path(poll) %></td>
                 <td><%= link_to 'Destroy', poll, confirm: 'Are you sure?', method: :delete %></td>
