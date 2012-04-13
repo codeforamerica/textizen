@@ -21,7 +21,7 @@ class ResponsesController < ApplicationController
 
   # reject the message
   def reject(message)
-
+    return Tropo::Generator.say "Sorry, invalid input"
   end
 
   def get_poll_by_phone(phone)
