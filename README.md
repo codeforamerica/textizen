@@ -12,6 +12,16 @@ Blah blah blah
 	$ rake db:migrate
 	$ rake db:seed
 
+### Other stuff
+Make sure you have these environment variables set to enable sms
+
+	$ export TROPO_APP_ID=
+	$ export TROPO_USERNAME=
+	$ export TROPO_PASSWORD=
+	$ export TROPO_TOKEN=
+	$ export TROPO_APP_ID= #get from api.tropo.com/v1/applications
+
+
 ## <a name="usage"></a>Usage
     rails server
 
@@ -67,15 +77,8 @@ bug report should include a pull request with failing specs.
 This library aims to support and is [tested against][travis] the following Ruby
 implementations:
 
-<!-- * Ruby 1.8.7
-* Ruby 1.9.2
- -->
  * Ruby 1.9.3
-<!-- * [Rubinius][]
-* [Ruby Enterprise Edition][ree] -->
 
-[rubinius]: http://rubini.us/
-[ree]: http://www.rubyenterpriseedition.com/
 
 If something doesn't work on one of these interpreters, it should be considered
 a bug.
@@ -99,15 +102,3 @@ Copyright (c) 2012 Code for America. See [LICENSE][] for details.
 [![Code for America Tracker](http://stats.codeforamerica.org/codeforamerica/cfa_template.png)][tracker]
 
 [tracker]: http://stats.codeforamerica.org/projects/textyourcity
-
-
-### Other stuff
-
-
-heroku config:add TROPO_APP_ID=2340349
-get from api.tropo.com/v1/applications
-export instead of heroku config:add for local apps (but tropo won't work without tunnlr)
-heroku config:add TROPO_USERNAME=
-heroku config:add TROPO_PASSWORD=
-heroku config:add TROPO_TOKEN=
-heroku config:add TROPO_APP_ID=
