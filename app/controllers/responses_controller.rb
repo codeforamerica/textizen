@@ -21,7 +21,7 @@ class ResponsesController < ApplicationController
       puts "poll found"
       @response = @poll.responses.create(:from => @from, :response => @response)
       puts "response created"
-      render :text => say("Thank you for you for responding to our poll on %s. Your response has been recorded." % poll.title)
+      render :text => say("Thank you for you for responding to our poll on %s. Your response has been recorded." % @poll.title)
     else
       puts "poll not found"
       render :text => reject("poll not found")
