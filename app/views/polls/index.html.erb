@@ -9,6 +9,7 @@
             <table class="pollslist">
               <tr>
                 <th></th>
+                <th>Title</th>
                 <th class="span3">Text</th>
                 <th>Type</th>
                 <th>Start date</th>
@@ -22,6 +23,7 @@
               <tr>
                 <td class="number"><%= i+1 %></td>
 
+                <td class="polltitle"><%= poll.title %></td>
                 <td class="polltext"><%= poll.text %></td>
 
                 <td><%= poll.poll_type %></td>
