@@ -21,7 +21,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem 'flocky', :git => 'git://github.com/codeforamerica/flocky.git'
+# gem 'flocky', :git => 'git://github.com/codeforamerica/flocky.git'
 gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 gem 'tropo-webapi-ruby'
 gem 'factory_girl_rails'
