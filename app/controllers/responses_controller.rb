@@ -14,7 +14,7 @@ class ResponsesController < ApplicationController
     puts "poll"
     puts @poll
 
-    @response = @session[:session][:initialText]
+    @response = @session[:session][:initial_text]
     puts "response "+@response
 
     if @poll
