@@ -26,7 +26,7 @@ class ResponsesController < ApplicationController
 
     if @poll
       puts "poll found"
-      @response = @poll.responses.create(:from => normalize_phone(@from), :response => @response)
+      @response = @poll.responses.create(:from => @from, :response => @response)
       puts "response created"
       puts @response
       render :text=>say("Thanks for your response")
@@ -37,7 +37,7 @@ class ResponsesController < ApplicationController
   end
 
   def say(message)
-    return Tropo::Generator.say message
+    return (Tropo::Generator.say message)
   end
 
   # reject the message
@@ -46,12 +46,13 @@ class ResponsesController < ApplicationController
   end
 
   def get_poll_by_phone(phone)
+    puts ("finding poll " + phone)
     return Poll.where(:phone=>phone)[0]
   end
 
   def normalize_phone(phone)
-    unless phone.match(/^\+/)
-      phone = "+" + phone
+    if phone.match(/^\+/)
+      phone = phone.slice(1,10)
     end
     return phone
   end

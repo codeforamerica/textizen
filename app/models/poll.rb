@@ -20,16 +20,19 @@ class Poll < ActiveRecord::Base
     puts 'get phone number'
     tp = TropoProvisioning.new(ENV['TROPO_USERNAME'], ENV['TROPO_PASSWORD'])
     address = tp.create_address(ENV['TROPO_APP_ID'], { :type => 'number', :prefix => '1415' })
-    unless Poll.where(:phone=>address['address']).empty?
-      addresses_to_clear.push(address['address'])
+
+    @address = normalize_phone(address['address'])
+
+    unless Poll.where(:phone=>@address).empty?
+      addresses_to_clear.push(@address)
       return get_phone_number(addresses_to_clear)
     else
       addresses_to_clear.each do |a|
         destroy_phone_number(a)
       end
     end
-    puts address['address']
-    return address['address']
+    puts @address
+    return @address
   end
 
   def destroy_phone_number(phone = '')
@@ -38,6 +41,14 @@ class Poll < ActiveRecord::Base
     tp = TropoProvisioning.new(ENV['TROPO_USERNAME'], ENV['TROPO_PASSWORD'])
     tp.delete_address(ENV['TROPO_APP_ID'], phone)
   end
+
+  def normalize_phone(phone)
+    if phone.match(/^\+/)
+      phone = phone.slice(1,10)
+    end
+    return phone
+  end
+
 
 
 end
