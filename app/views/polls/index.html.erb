@@ -9,9 +9,11 @@
             <table class="pollslist">
               <tr>
                 <th></th>
+                <th>Title</th>
                 <th class="span3">Text</th>
                 <th>Type</th>
                 <th>Start date</th>
+                <th>Responses</th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -21,10 +23,12 @@
               <tr>
                 <td class="number"><%= i+1 %></td>
 
+                <td class="polltitle"><%= poll.title %></td>
                 <td class="polltext"><%= poll.text %></td>
 
                 <td><%= poll.poll_type %></td>
                 <td><%= poll.start_date.to_formatted_s(:short) %><br>Live since <%= time_ago_in_words(poll.start_date, include_seconds = false) %></td>
+                <td><%= poll.responses.count %></td>
                 <td><%= link_to 'Show', poll %></td>
                 <td><%= link_to 'Edit', edit_poll_path(poll) %></td>
                 <td><%= link_to 'Destroy', poll, confirm: 'Are you sure?', method: :delete %></td>

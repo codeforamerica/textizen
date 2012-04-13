@@ -37,7 +37,7 @@
       <h3>Responses</h3>
       <ul>
       	<% @poll.responses.each do |resp| %>
-      		<li><strong><%= resp.from %> </strong><%= resp.response %></li>
+      		<li><%= resp.response %> (<%= resp.from %> )</li>
       	<% end %>
       </ul>
 

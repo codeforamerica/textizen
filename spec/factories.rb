@@ -24,7 +24,8 @@ FactoryGirl.define do
 
     factory :poll_valid_phone do
       phone '14842020381'
-      title 'Groceries with Valid Phone'
+      title 'New SEPTA Stop'
+      text 'Where should the new SEPTA stop go?'
     end
   end
 
