@@ -1,5 +1,6 @@
 class ResponsesController < ApplicationController
   #post /responses/receive_message
+  require 'phoneutils'
   def receive_message
     @session = Tropo::Generator.parse params
     puts @session
