@@ -38,6 +38,7 @@ class Poll < ActiveRecord::Base
 
   def destroy_phone_number(phone = '')
     phone = phone || self.phone
+    phone = denormalize_phone(phone)
     begin
       puts 'destroy phone number'
       tp = TropoProvisioning.new(ENV['TROPO_USERNAME'], ENV['TROPO_PASSWORD'])
@@ -55,4 +56,12 @@ class Poll < ActiveRecord::Base
     puts 'normalized phone %s' % phone
     return phone
   end
+
+  def denormalize_phone(phone)
+    puts 'denormalizing phone %s' % phone
+    unless phone.match(/^\+/)
+      phone = "+%s" % phone
+    end
+    puts 'denormalized phone %s' % phone
+    return phone
 end
