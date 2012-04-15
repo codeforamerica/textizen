@@ -37,7 +37,7 @@
       <h3>Responses</h3>
       <ul>
       	<% @poll.responses.each do |resp| %>
-      		<li><%= resp.created_at.strftime("%m/%d/%Y at %I:%M%p")%> <%= resp.response %> (<%= resp.from %> )</li>
+      		<li><%= resp.response %> (from <%= resp.from %> on <%= resp.created_at.strftime("%m/%d/%Y at %I:%M%p")%>)</li>
       	<% end %>
       </ul>
 
