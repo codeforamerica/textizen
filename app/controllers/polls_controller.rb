@@ -18,6 +18,7 @@ class PollsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @poll }
+      format.csv { render csv: @poll }
     end
   end
 
