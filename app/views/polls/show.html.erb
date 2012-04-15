@@ -41,7 +41,7 @@
       	<% end %>
       </ul>
 
-
+      <%= link_to "Export to csv", request.parameters.merge({:format => :csv})%> |
       <%= link_to 'Edit', edit_poll_path(@poll) %> |
       <%= link_to 'Back', polls_path %>
     </div>
