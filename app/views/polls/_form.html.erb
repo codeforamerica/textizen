@@ -12,11 +12,11 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :title %><br />
+    <%= f.label :title %>
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label :text %><br />
+    <%= f.label :text %>
     <%= f.text_area :text %>
   </div>
 <!--   <div class="field">
@@ -24,18 +24,18 @@
     <%= f.text_field :phone %>
   </div> -->
   <div class="field">
-    <%= f.label :start_date %><br />
+    <%= f.label :start_date %>
     <%= f.datetime_select :start_date %>
   </div>
   <div class="field">
-    <%= f.label :end_date %><br />
+    <%= f.label :end_date %>
     <%= f.datetime_select :end_date %>
   </div>
   <div class="field">
-    <%= f.label :poll_type %><br />
+    <%= f.label :poll_type %>
     <%= f.text_field :poll_type %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :class => 'btn' %>
   </div>
 <% end %>

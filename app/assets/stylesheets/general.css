@@ -3,6 +3,7 @@ body {
 	background-image: url('/assets/header-ribbons.png');
 	background-repeat: repeat-x;
 	margin-top: 20px;
+	padding-bottom: 20px;
 }
 
 .login {
