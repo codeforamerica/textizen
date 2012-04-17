@@ -28,7 +28,6 @@ describe PollsController do
       [:show,:edit].each do |meth|
         get meth, {:id=>@poll.id}
         assigns[:poll].should_not be_nil
-        assigns[:page_title].should_not be_nil
       end
     end
   end

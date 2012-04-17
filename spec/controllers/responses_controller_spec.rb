@@ -4,12 +4,13 @@ describe ResponsesController do
   describe "POST receive_message" do
     context "multiple choice poll" do
       before :each do
-        @poll = FactoryGirl.new(:poll_multi)
+        @poll = FactoryGirl.create(:poll_multi, :phone=>'19091234567')
       end  
       
       describe "sms with valid parameters" do
         it "should create a new response" do
           post :receive_message, :params => fixture("sms_multi.json")
+          @poll.responses.length.should eq 1
           # Response.where
         end
       end
@@ -23,7 +24,7 @@ describe ResponsesController do
     
     context "open-ended poll" do
       before :each do
-        @poll = FactoryGirl.new(:poll_open)
+        @poll = FactoryGirl.create(:poll_open)
       end
       
       describe "sms with valid parameters" do
