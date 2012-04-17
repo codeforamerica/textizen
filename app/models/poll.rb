@@ -52,7 +52,7 @@ class Poll < ActiveRecord::Base
       tp = TropoProvisioning.new(ENV['TROPO_USERNAME'], ENV['TROPO_PASSWORD'])
       tp.delete_address(ENV['TROPO_APP_ID'], phone)
     rescue
-      puts 'Unable to delete number #{$!}'
+      puts 'Unable to delete number #{!$}'
     end
   end
 
