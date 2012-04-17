@@ -9,7 +9,7 @@ describe ResponsesController do
       
       describe "sms with valid parameters" do
         it "should create a new response" do
-          post :receive_message, :params => fixture("sms_multi.json")
+          post :receive_message, :params => fixture("sms_multi.json").read
           @poll.responses.length.should eq 1
           # Response.where
         end
@@ -17,7 +17,7 @@ describe ResponsesController do
     
       describe "sms with invalid parameters" do
         it "should not create a new response" do
-          post :receive_message, :params => fixture("sms_open.json")
+          post :receive_message, :params => body => fixture("sms_open.json").read
         end
       end
     end
@@ -29,13 +29,13 @@ describe ResponsesController do
       
       describe "sms with valid parameters" do
         it "should create a new response" do
-          post :receive_message, :params => fixture("sms_open.json")
+          post :receive_message, :params => fixture("sms_open.json").read
         end
       end
     
       describe "sms with invalid parameters" do
         it "should not create a new response" do
-          post :receive_message, :params => fixture("sms_multi.json")
+          post :receive_message, :params => fixture("sms_multi.json").read
         end
       end
       
