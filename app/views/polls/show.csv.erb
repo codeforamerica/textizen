@@ -1,7 +1,1 @@
-<%- headers = ["Id", "Created", "From", "Response"] -%>
-<%= CSV.generate_line headers %>
-<%- @poll.responses.each do |p| -%>
-<%- row = [ p.poll_id,
-            p.created_at, p.from, p.response ] -%>
-<%=   CSV.generate_line row %>
-<%- end -%>
+<%= @poll.to_csv %>
