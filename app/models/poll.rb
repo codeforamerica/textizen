@@ -36,6 +36,14 @@ class Poll < ActiveRecord::Base
     return @address
   end
 
+  def to_csv
+    csv = self.responses[0].attributes.keys.to_csv
+    self.responses.each do |r|
+      csv += r.attributes.values.to_csv
+    end
+    return csv
+  end
+
   def destroy_phone_number(phone = '')
     phone = phone || self.phone
     phone = denormalize_phone(phone)
@@ -44,7 +52,7 @@ class Poll < ActiveRecord::Base
       tp = TropoProvisioning.new(ENV['TROPO_USERNAME'], ENV['TROPO_PASSWORD'])
       tp.delete_address(ENV['TROPO_APP_ID'], phone)
     rescue
-      puts 'Unable to delete number #{$!}'
+      puts 'Unable to delete number #{!$}'
     end
   end
 
