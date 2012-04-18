@@ -3,7 +3,7 @@ FactoryGirl.define do
   factory :poll do
     start_date { Time.now }
     end_date { Time.now + 1.week }
-    phone {'1'+rand(10 ** 9).to_s}
+    phone {'1'+rand(10 ** 10).to_s}
     text 'Where do you buy your groceries?'
     title 'Groceries'
     poll_type 'OPEN'
@@ -30,7 +30,7 @@ FactoryGirl.define do
   end
 
   factory :response do
-    from {'1'+rand(10 ** 9).to_s}
+    from {'1'+rand(10 ** 10).to_s}
     response 'I buy groceries IN YOUR FACE'
     poll
   end
