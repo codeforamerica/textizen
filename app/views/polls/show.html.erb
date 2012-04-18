@@ -1,8 +1,6 @@
 <div class="container">
-<div class="row">
-    <div class="span8"><img src="/assets/logo.png"></div>
-    <div class="span4 login">Logout</div>
-</div>
+
+<%= render 'header' %>
 
 <div class="row">
   <div class="span12 main">
@@ -35,7 +33,7 @@
     <div class="settings">
     <span class="caption">Assigned phone</span>
     <br>
-    <span class="settingstext"><%= @poll.phone %></span>
+    <span class="settingstext"><%= number_to_phone(@poll.phone, :area_code => true) %></span>
     <br>
 
     <span class="caption">Type</span>
@@ -46,11 +44,6 @@
     <span class="caption">Start date</span>
     <br>
     <span class="settingstext"><%= @poll.start_date.strftime("%m/%d/%Y at %I:%M%p") %></span>
-    <br>
-
-    <span class="caption">End date</span>
-    <br>
-    <span class="settingstext"><%= @poll.end_date.strftime("%m/%d/%Y at %I:%M%p") %></span>
     <br>
     
 
@@ -66,6 +59,7 @@
 
 <div class="row">
   <div class="span12">
+    <%= link_to "→ Download CSV", request.parameters.merge({:format => :csv})%>
     <table class="table">
         <tr>
           <th>Timestamp</th>
@@ -79,9 +73,8 @@
           <td><%= resp.from %></td>
         </tr>
     	<% end %>
-    </table>>
+    </table>
 
-    <%= link_to "Export to csv", request.parameters.merge({:format => :csv})%> |
     <%= link_to 'Edit', edit_poll_path(@poll) %> |
     <%= link_to 'Back', polls_path %>
   </div>

@@ -50,7 +50,7 @@ body {
 	margin-bottom:1em;
 }
 
-/* Show poll page */
+/* Poll Show page */
 .summaryviz{
 	margin-top:1em;
 }
@@ -63,9 +63,10 @@ body {
 }
 
 .responsecount{
-	font-size:400%;
+	font-size:500%;
 	font-weight:bold;
-	margin-top:0.5em;
+	margin-top:1.2em;
+	margin-left:-0.1em;
 }
 
 .settings{
@@ -83,3 +84,9 @@ body {
 	color:#666;
 	font-size:96%;
 }
+
+/*
+tr:nth-of-type(odd) {
+  background-color:#F1DCA7;
+}
+*/
