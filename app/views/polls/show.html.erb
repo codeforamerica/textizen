@@ -66,10 +66,18 @@
 
 <div class="row">
   <div class="span12">
-    <h3>Responses</h3>
     <table class="table">
+        <tr>
+          <th>Timestamp</th>
+          <th>Response</th>
+          <th>Phone number</th>
+        </tr>
     	<% @poll.responses.each do |resp| %>
-    		<tr><td><%= resp.response %> (from <%= resp.from %> on <%= resp.created_at.strftime("%m/%d/%Y at %I:%M%p")%>)</td></tr>
+    		<tr>
+          <td><%= resp.created_at.strftime("%m/%d/%Y at %I:%M%p")%></td>
+          <td><%= resp.response %></td>
+          <td><%= resp.from %></td>
+        </tr>
     	<% end %>
     </table>>
 
