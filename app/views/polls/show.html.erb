@@ -4,46 +4,58 @@
     <div class="span4 login">Logout</div>
 </div>
 
-<div class="container">
-  <div class="row">
-    <div class="span12 main">
-      <div class="grouptitle">Lower Northeast &rsaquo; #2</div>
-      <p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="span12 main">
+    <div class="grouptitle">Lower Northeast &rsaquo; #2</div>
+    <p id="notice"><%= notice %></p>
+  </div>
+</div>
 
-      <div class="titlequestion">
-        <%= @poll.text %>
-      </div>
+<div class="row">
+  <div class="span6">
+    <div class="titlequestion">
+      <%= @poll.text %>
+    </div>
+    placeholder for response graphs and visualizations
+  </div>
 
-      <p>
-        <b>Phone:</b>
-        <%= @poll.phone %>
-      </p>
 
-      <p>
-        <b>Start date:</b>
-        <%= @poll.start_date.strftime("%m/%d/%Y at %I:%M%p") %>
-      </p>
+  <div class="span3 counter">
+    responses count
+  </div>
 
-      <p>
-        <b>End date:</b>
-        <%= @poll.end_date.strftime("%m/%d/%Y at %I:%M%p") %>
-      </p>
+  <div class="span3">
+    <div class="settings">
+    <p><span class="caption">Phone:</span>
+      <br><%= @poll.phone %></p>
 
-      <p>
-        <b>Type:</b>
-        <%= @poll.poll_type %>
-      </p>
+    <p><span class="caption">Start date:</span>
+      <br><%= @poll.start_date.strftime("%m/%d/%Y at %I:%M%p") %></p>
 
-      <h3>Responses</h3>
-      <ul>
-      	<% @poll.responses.each do |resp| %>
-      		<li><%= resp.response %> (from <%= resp.from %> on <%= resp.created_at.strftime("%m/%d/%Y at %I:%M%p")%>)</li>
-      	<% end %>
-      </ul>
+    <p><span class="caption">End date:</span>
+      <br></a> <%= @poll.end_date.strftime("%m/%d/%Y at %I:%M%p") %></p>
 
-      <%= link_to "Export to csv", request.parameters.merge({:format => :csv})%> |
-      <%= link_to 'Edit', edit_poll_path(@poll) %> |
-      <%= link_to 'Back', polls_path %>
+    <p><span class="caption">Type:</span>
+      <br> <%= @poll.poll_type %></p>
     </div>
   </div>
+</div>
+
+<hr>
+
+<div class="row">
+  <div class="span12">
+    <h3>Responses</h3>
+    <table class="table">
+    	<% @poll.responses.each do |resp| %>
+    		<tr><td><%= resp.response %> (from <%= resp.from %> on <%= resp.created_at.strftime("%m/%d/%Y at %I:%M%p")%>)</td></tr>
+    	<% end %>
+    </table>>
+
+    <%= link_to "Export to csv", request.parameters.merge({:format => :csv})%> |
+    <%= link_to 'Edit', edit_poll_path(@poll) %> |
+    <%= link_to 'Back', polls_path %>
+  </div>
+</div>
+
 </div>

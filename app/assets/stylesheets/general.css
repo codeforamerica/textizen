@@ -38,8 +38,22 @@ body {
 	font-weight:bold;
 }
 
-
 .titlequestion{
 	font-size: 200%;
 	font-weight:bold;
+}
+
+/* Show poll page */
+.counter{
+	background-color: #F1DCA7;
+}
+
+.settings{
+	background-color: #BFDCD0;
+	padding:0.7em;
+}
+
+.caption{
+	color:#666;
+	font-size:96%;
 }
