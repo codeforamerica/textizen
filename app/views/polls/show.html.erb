@@ -20,23 +20,34 @@
   </div>
 
 
-  <div class="span3 counter">
-    responses count
+  <div class="span3">
+    <div class="counterdash">
+      <span class="responsecount"><%= @poll.responses.count %></span>
+      <br>
+      <span class="caption">responses</span>
+    </div>
   </div>
 
   <div class="span3">
     <div class="settings">
-    <p><span class="caption">Phone:</span>
-      <br><%= @poll.phone %></p>
+    <span class="caption">Phone</span>
+    <br>
+    <span class="settingstext"><%= @poll.phone %></span>
+    <br>
 
-    <p><span class="caption">Start date:</span>
-      <br><%= @poll.start_date.strftime("%m/%d/%Y at %I:%M%p") %></p>
+    <span class="caption">Start date</span>
+    <br>
+    <span class="settingstext"><%= @poll.start_date.strftime("%m/%d/%Y at %I:%M%p") %></span>
+    <br>
 
-    <p><span class="caption">End date:</span>
-      <br></a> <%= @poll.end_date.strftime("%m/%d/%Y at %I:%M%p") %></p>
+    <span class="caption">End date</span>
+    <br>
+    <span class="settingstext"><%= @poll.end_date.strftime("%m/%d/%Y at %I:%M%p") %></span>
+    <br>
 
-    <p><span class="caption">Type:</span>
-      <br> <%= @poll.poll_type %></p>
+    <span class="caption">Type</span>
+    <br>
+    <span class="settingstext"><%= @poll.poll_type %></span>
     </div>
   </div>
 </div>

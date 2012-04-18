@@ -44,13 +44,25 @@ body {
 }
 
 /* Show poll page */
-.counter{
+.counterdash{
 	background-color: #F1DCA7;
+	padding:1.7em;
+	text-align:center;
+}
+
+.responsecount{
+	font-size:400%;
+	font-weight:bold;
 }
 
 .settings{
 	background-color: #BFDCD0;
 	padding:0.7em;
+}
+
+.settingstext{
+	font-size:120%;
+	font-weight:bold;
 }
 
 .caption{
