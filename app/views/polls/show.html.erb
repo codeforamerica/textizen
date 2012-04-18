@@ -16,13 +16,16 @@
     <div class="titlequestion">
       <%= @poll.text %>
     </div>
+    <div class="summaryviz">
     placeholder for response graphs and visualizations
+    </div>
+    
   </div>
 
 
   <div class="span3">
     <div class="counterdash">
-      <span class="responsecount"><%= @poll.responses.count %></span>
+      <div class="responsecount"><%= @poll.responses.count %></div>
       <br>
       <span class="caption">responses</span>
     </div>
@@ -30,9 +33,14 @@
 
   <div class="span3">
     <div class="settings">
-    <span class="caption">Phone</span>
+    <span class="caption">Assigned phone</span>
     <br>
     <span class="settingstext"><%= @poll.phone %></span>
+    <br>
+
+    <span class="caption">Type</span>
+    <br>
+    <span class="settingstext"><%= @poll.poll_type %></span>
     <br>
 
     <span class="caption">Start date</span>
@@ -44,15 +52,17 @@
     <br>
     <span class="settingstext"><%= @poll.end_date.strftime("%m/%d/%Y at %I:%M%p") %></span>
     <br>
+    
 
-    <span class="caption">Type</span>
     <br>
-    <span class="settingstext"><%= @poll.poll_type %></span>
+    <input type="button" class="btn btn-danger" value="End poll">
     </div>
   </div>
 </div>
 
-<hr>
+<div class="row">
+  <div class="span12 horiz"></div>
+</div>
 
 <div class="row">
   <div class="span12">

@@ -43,21 +43,35 @@ body {
 	font-weight:bold;
 }
 
+.horiz{
+	background-color: #BEBEA6;
+	height:1px;
+	margin-top:1em;
+	margin-bottom:1em;
+}
+
 /* Show poll page */
+.summaryviz{
+	margin-top:1em;
+}
+
 .counterdash{
 	background-color: #F1DCA7;
-	padding:1.7em;
+	padding:0.7em;
 	text-align:center;
+	height:200px;
 }
 
 .responsecount{
 	font-size:400%;
 	font-weight:bold;
+	margin-top:0.5em;
 }
 
 .settings{
 	background-color: #BFDCD0;
 	padding:0.7em;
+	height:200px;
 }
 
 .settingstext{
