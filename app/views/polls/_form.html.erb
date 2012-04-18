@@ -33,7 +33,7 @@
   </div>
   <div class="field">
     <%= f.label :poll_type %>
-    <%= f.text_field :poll_type %>
+    <%= f.select(:poll_type, options_for_select([['Open',"OPEN"],['Multiple Choice',"MULTI"]],1)) %>
   </div>
   <div class="actions">
     <%= f.submit :class => 'btn' %>
