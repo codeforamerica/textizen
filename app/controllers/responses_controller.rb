@@ -2,6 +2,7 @@ class ResponsesController < ApplicationController
   #post /responses/receive_message
   
   def receive_message
+    puts params
     @session = Tropo::Generator.parse params
     puts @session
 
