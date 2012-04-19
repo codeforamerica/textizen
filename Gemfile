@@ -33,6 +33,7 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'shoulda'
   gem 'faker'
+  gem 'simplecov'
 end
 
 # To use ActiveModel has_secure_password
