@@ -24,7 +24,7 @@
                 <td class="polltitle"><%= poll.title %></td>
                 <td class="polltext"><%= poll.text %></td>
 
-                <td><%= poll.poll_type %></td>
+                <td><%= format_poll_type(poll.poll_type) %></td>
                 <td><%= poll.start_date.to_formatted_s(:short) %><br>Live since <%= time_ago_in_words(poll.start_date, include_seconds = false) %></td>
                 <td><%= poll.responses.count %></td>
                 <td><%= link_to 'Show', poll %></td>
