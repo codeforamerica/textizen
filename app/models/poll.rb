@@ -56,6 +56,7 @@ class Poll < ActiveRecord::Base
     end
   end
 
+  #takes in a phone number and removes a plus if it has one
   def self.normalize_phone(phone)
     puts 'normalizing phone %s' % phone
     if phone.match(/^\+/)
@@ -64,7 +65,7 @@ class Poll < ActiveRecord::Base
     puts 'normalized phone %s' % phone
     return phone
   end
-
+  #adds a plus to a phone number if it doesn't have one
   def self.denormalize_phone(phone)
     puts 'denormalizing phone %s' % phone
     unless phone.match(/^\+/)
