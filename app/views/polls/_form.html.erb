@@ -17,16 +17,16 @@
   </div>
   <div class="field">
     <%= f.label :text %>
-    <%= f.text_area :text %>
+    <%= f.text_area :text, :rows => 3 %>
   </div>
-<!--   <div class="field">
-    <%= f.label :phone %><br />
-    <%= f.text_field :phone %>
-  </div> -->
   <div class="field">
+    <%= f.label :phone %>
+    <%= f.text_field :phone %>
+  </div>
+<!--  <div class="field">
     <%= f.label :start_date %>
     <%= f.datetime_select :start_date %>
-  </div>
+  </div> -->
   <div class="field">
     <%= f.label :poll_type %>
     <%= f.select(:poll_type, options_for_select([['Open','OPEN'],['Multiple Choice','MULTI']],1)) %>
