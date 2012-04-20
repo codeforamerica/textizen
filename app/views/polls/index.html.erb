@@ -13,7 +13,7 @@
                 <td class="span4 polltext"><%= poll.text %></td>
                 <td><span class="dashboardresponsecount"><%= poll.responses.count %></span><br><span class="caption">responses</span></td>
 
-                <td><%= poll.poll_type %></td>
+                <td><%= format_poll_type(poll.poll_type) %></td>
                 <td><%= poll.start_date.to_formatted_s(:short) %><br>Live since <%= time_ago_in_words(poll.start_date, include_seconds = false) %></td>
                 
                 <td><%= link_to 'Show', poll %></td>
