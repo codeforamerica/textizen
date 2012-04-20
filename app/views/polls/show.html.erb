@@ -31,24 +31,22 @@
 
   <div class="span3">
     <div class="settings">
-    <span class="caption">Assigned phone</span>
-    <br>
-    <span class="settingstext"><%= number_to_phone(@poll.phone, :area_code => true) %></span>
-    <br>
 
-    <span class="caption">Type</span>
-    <br>
-    <span class="settingstext"><%= @poll.poll_type %></span>
-    <br>
+      <div class="caption">Assigned phone</div>
+      <div class="settingstext"><%= number_to_phone(@poll.phone, :area_code => true) %></div>
 
-    <span class="caption">Start date</span>
-    <br>
-    <span class="settingstext"><%= @poll.start_date.strftime("%m/%d/%Y at %I:%M%p") %></span>
-    <br>
-    
+      <div class="caption">Type</div>
+      <div class="settingstext"><%= @poll.poll_type %></div>
 
-    <br>
-    <input type="button" class="btn btn-danger" value="End poll">
+      <div class="caption">Start date</div>
+      <div class="settingstext"><%= @poll.start_date.strftime("%m/%d/%Y at %I:%M%p") %></div>
+
+      <div class="btngroup">
+        <input type="button" class="btn btn-danger" value="Close poll">
+        <%= link_to 'Edit', edit_poll_path(@poll), :class => "btn" %>
+        &nbsp;<%= link_to 'Trash', @poll, confirm: 'Are you sure?', method: :delete %>
+      </div>
+      
     </div>
   </div>
 </div>
@@ -59,24 +57,25 @@
 
 <div class="row">
   <div class="span12">
-    <%= link_to "→ Download CSV", request.parameters.merge({:format => :csv})%>
+    <div class="download">
+      <%= link_to "→ Download CSV", request.parameters.merge({:format => :csv})%>
+    </div>
     <table class="table">
         <tr>
+          <th>
           <th>Timestamp</th>
           <th>Response</th>
           <th>Phone number</th>
         </tr>
-    	<% @poll.responses.each do |resp| %>
+    	<% @poll.responses.each_with_index do |resp, i| %>
     		<tr>
+          <td><%= i+1 %></td>
           <td><%= resp.created_at.strftime("%m/%d/%Y at %I:%M%p")%></td>
           <td><%= resp.response %></td>
-          <td><%= resp.from %></td>
+          <td><%= number_to_phone(resp.from, :area_code => true) %></td>
         </tr>
     	<% end %>
     </table>
-
-    <%= link_to 'Edit', edit_poll_path(@poll) %> |
-    <%= link_to 'Back', polls_path %>
   </div>
 </div>
 
