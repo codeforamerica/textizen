@@ -15,8 +15,8 @@
     <div class="control-group">
       <%= f.label :text, :class => "control-label"%>
       <div class="controls">
-        <%= f.text_area :text, :rows => 3 %>
-        <p class="help-block">To be printed on posters</p>
+        <%= f.text_area :text, :rows => 3 %> <span class="help-inline">To be printed on posters</span>
+        
       </div>
     </div>
   </fieldset>
@@ -25,9 +25,7 @@
     <div class="control-group">
       <%= f.label :title, :class => "control-label"%>
       <div class="controls">
-        <%= f.text_field :title %>
-        <p class="help-block">This is how we'll refer to the poll in text messages and reports</p>
-      </div>
+        <%= f.text_field :title %> <span class="help-inline">This is how we'll refer to the poll in text messages and reports</span>
     </div>
   </fieldset>
 
@@ -44,8 +42,7 @@
     <div class="control-group">
       <%= f.label :phone, :class => "control-label"%>
       <div class="controls">
-        <input class="input disabled" type="text" disabled="" placeholder="<%= number_to_phone(@poll.phone, :area_code => true) %>">
-         <p class="help-block">Automatically assigned</p>
+        <input class="input disabled" type="text" disabled="" placeholder="<%= number_to_phone(@poll.phone, :area_code => true) %>"> <span class="help-inline">Automatically assigned</span>
       </div>
     </div>
   </fieldset>
@@ -54,9 +51,6 @@
     <%= f.label :start_date %>
     <%= f.datetime_select :start_date %>
   </div>
-
-  
-
 
 <div class="form-actions">
     <%= f.submit :class => 'btn btn-large btn-primary' %>
