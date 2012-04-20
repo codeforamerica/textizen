@@ -4,7 +4,7 @@ describe ResponsesController do
   describe "POST receive_message" do
     context "multiple choice poll" do
       before :each do
-        @poll = FactoryGirl.create(:poll_multi, :phone=>'14152751223')
+        @poll = FactoryGirl.create(:poll_multi, :phone=>'14153334444')
       end  
       
       describe "sms with valid parameters" do
@@ -24,7 +24,7 @@ describe ResponsesController do
     
     context "open-ended poll" do
       before :each do
-        @poll = FactoryGirl.create(:poll_open, :phone=>'14152751223')
+        @poll = FactoryGirl.create(:poll_open, :phone=>'14153334444')
       end
       
       describe "sms with valid parameters" do
