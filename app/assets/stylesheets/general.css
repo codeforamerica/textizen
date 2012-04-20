@@ -46,6 +46,7 @@ body {
 .titlequestion{
 	font-size: 200%;
 	font-weight:bold;
+	line-height:100%;
 }
 
 .horiz{
