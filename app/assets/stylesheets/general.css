@@ -89,6 +89,8 @@ body {
 .settingstext{
 	font-size:120%;
 	font-weight:bold;
+	margin-top:-0.1em;
+	margin-bottom:0.5em;
 }
 
 .settings .btngroup{
