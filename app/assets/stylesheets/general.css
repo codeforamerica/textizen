@@ -1,5 +1,5 @@
 body {
-	background-color: #EFEED0;
+	background-color: #efefef;
 	background-image: url('/assets/header-ribbons.png');
 	background-repeat: repeat-x;
 	margin-top: 20px;
@@ -50,6 +50,16 @@ body {
 	margin-bottom:1em;
 }
 
+
+/* Polls page */
+.dashboardresponsecount{
+	vertical-align: sub;
+	margin-bottom: 0.2em;
+	font-size:300%;
+	font-weight:bold;
+}
+
+
 /* Poll Show page */
 .summaryviz{
 	margin-top:1em;
@@ -73,6 +83,7 @@ body {
 	background-color: #BFDCD0;
 	padding:0.7em;
 	height:200px;
+	position:relative;
 }
 
 .settingstext{
@@ -80,11 +91,21 @@ body {
 	font-weight:bold;
 }
 
+.settings .btngroup{
+	position:absolute;
+	bottom:1em;
+}
+
 .caption{
 	color:#666;
 	font-size:96%;
 }
 
+.download{
+	float:right;
+	margin: 0.5em 0 1.5em 0;
+	text-align:right;
+}
 /*
 tr:nth-of-type(odd) {
   background-color:#F1DCA7;

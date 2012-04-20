@@ -31,24 +31,27 @@
 
   <div class="span3">
     <div class="settings">
-    <span class="caption">Assigned phone</span>
-    <br>
-    <span class="settingstext"><%= number_to_phone(@poll.phone, :area_code => true) %></span>
-    <br>
+      <span class="caption">Assigned phone</span>
+      <br>
+      <span class="settingstext"><%= number_to_phone(@poll.phone, :area_code => true) %></span>
+      <br>
 
-    <span class="caption">Type</span>
-    <br>
-    <span class="settingstext"><%= @poll.poll_type %></span>
-    <br>
+      <span class="caption">Type</span>
+      <br>
+      <span class="settingstext"><%= @poll.poll_type %></span>
+      <br>
 
-    <span class="caption">Start date</span>
-    <br>
-    <span class="settingstext"><%= @poll.start_date.strftime("%m/%d/%Y at %I:%M%p") %></span>
-    <br>
-    
+      <span class="caption">Start date</span>
+      <br>
+      <span class="settingstext"><%= @poll.start_date.strftime("%m/%d/%Y at %I:%M%p") %></span>
+      <br>
+      
 
-    <br>
-    <input type="button" class="btn btn-danger" value="End poll">
+      <br>
+      <div class="btngroup">
+        <input type="button" class="btn" value="Edit">
+        <input type="button" class="btn btn-danger" value="End poll">
+      </div>
     </div>
   </div>
 </div>
@@ -59,7 +62,9 @@
 
 <div class="row">
   <div class="span12">
-    <%= link_to "→ Download CSV", request.parameters.merge({:format => :csv})%>
+    <div class="download">
+      <%= link_to "→ Download CSV", request.parameters.merge({:format => :csv})%>
+    </div>
     <table class="table">
         <tr>
           <th>Timestamp</th>
@@ -75,8 +80,6 @@
     	<% end %>
     </table>
 
-    <%= link_to 'Edit', edit_poll_path(@poll) %> |
-    <%= link_to 'Back', polls_path %>
   </div>
 </div>
 
