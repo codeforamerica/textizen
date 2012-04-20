@@ -28,6 +28,10 @@ body {
 	border-bottom: 1px solid #BEBEA6;
 }
 
+.pollslist tr:hover{
+	cursor:pointer;
+}
+
 .number{
 	text-align: right;
 	font-size: 120%;
