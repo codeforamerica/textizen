@@ -12,11 +12,17 @@ describe Poll do
 
 
   describe "check phone number normalizer" do
-    pending   
+    it "should return 16661231234" do
+      result = Poll.normalize_phone('+16661231234')
+      result.should == '16661231234'
+    end
   end
 
   describe "check phone number denormalizer" do
-    pending 
+    it "should return +16661231234" do
+      result = Poll.denormalize_phone('16661231234')
+      result.should == '+16661231234'
+    end
   end
 
 
