@@ -56,7 +56,7 @@ class Poll < ActiveRecord::Base
     end
   end
 
-  def normalize_phone(phone)
+  def self.normalize_phone(phone)
     puts 'normalizing phone %s' % phone
     if phone.match(/^\+/)
       phone = phone.slice(1,11)
@@ -65,7 +65,7 @@ class Poll < ActiveRecord::Base
     return phone
   end
 
-  def denormalize_phone(phone)
+  def self.denormalize_phone(phone)
     puts 'denormalizing phone %s' % phone
     unless phone.match(/^\+/)
       phone = "+%s" % phone
