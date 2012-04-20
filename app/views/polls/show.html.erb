@@ -31,7 +31,7 @@
 
   <div class="span3">
     <div class="settings">
-      
+
       <div class="caption">Assigned phone</div>
       <div class="settingstext"><%= number_to_phone(@poll.phone, :area_code => true) %></div>
 
@@ -43,7 +43,7 @@
 
       <div class="btngroup">
         <input type="button" class="btn btn-danger" value="Close poll">
-        <input type="button" class="btn" value="Edit">
+        <%= link_to 'Edit', edit_poll_path(@poll), :class => "btn" %>
         &nbsp;<%= link_to 'Trash', @poll, confirm: 'Are you sure?', method: :delete %>
       </div>
       
@@ -72,7 +72,7 @@
           <td><%= i+1 %></td>
           <td><%= resp.created_at.strftime("%m/%d/%Y at %I:%M%p")%></td>
           <td><%= resp.response %></td>
-          <td><%= resp.from %></td>
+          <td><%= number_to_phone(resp.from, :area_code => true) %></td>
         </tr>
     	<% end %>
     </table>
