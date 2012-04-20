@@ -46,6 +46,7 @@ GEM
     activesupport (3.2.3)
       i18n (~> 0.6)
       multi_json (~> 1.0)
+    addressable (2.2.7)
     arel (3.0.2)
     bbenezech-nested_form (0.0.6)
     bcrypt-ruby (3.0.1)
@@ -58,6 +59,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.2.0)
+    crack (0.3.1)
     devise (1.4.8)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
@@ -179,6 +181,9 @@ GEM
       multi_json (>= 1.0.2)
     warden (1.0.6)
       rack (>= 1.0)
+    webmock (1.8.6)
+      addressable (>= 2.2.7)
+      crack (>= 0.1.7)
 
 PLATFORMS
   ruby
@@ -200,3 +205,4 @@ DEPENDENCIES
   tropo-provisioning
   tropo-webapi-ruby
   uglifier (>= 1.0.3)
+  webmock
