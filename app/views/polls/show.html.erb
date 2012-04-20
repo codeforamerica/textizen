@@ -26,6 +26,10 @@
       <div class="responsecount"><%= @poll.responses.count %></div>
       <br>
       <span class="caption">responses</span>
+      <br>
+      <img src="http://chart.apis.google.com/chart?chf=a,s,000000&chs=100x40&cht=ls&chd=s:degddgjmqxuurruxwrro&chls=1&chf=bg,s,65432100" width="100" height="40" alt="" />
+      <br>
+      <span class="caption">latest about 40 minutes ago</span>
     </div>
   </div>
 
@@ -36,7 +40,7 @@
       <div class="settingstext"><%= number_to_phone(@poll.phone, :area_code => true) %></div>
 
       <div class="caption">Type</div>
-      <div class="settingstext"><%= format_poll_type(@poll.poll_type) %></div>
+      <div class="settingstext"><%= format_poll_type(@poll.poll_type)  %></div>
 
       <div class="caption">Start date</div>
       <div class="settingstext"><%= @poll.start_date.strftime("%m/%d/%Y at %I:%M%p") %></div>
