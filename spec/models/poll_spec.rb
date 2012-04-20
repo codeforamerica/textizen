@@ -10,6 +10,16 @@ describe Poll do
   it { should allow_value("OPEN").for(:poll_type) }
   it { should_not allow_value("foo").for(:poll_type) }
 
+
+  describe "check phone number normalizer" do
+    pending   
+  end
+
+  describe "check phone number denormalizer" do
+    pending 
+  end
+
+
   describe "check phone assignment and uniqueness" do
 
     before(:each) do
@@ -20,7 +30,7 @@ describe Poll do
     
     it "should be assigned a tropo phone number if not already assigned" do
       Poll.stub(:get_phone_number).and_return("14153334444")
-      @poll = Poll.create(:poll_type=>'OPEN')
+      @poll = FactoryGirl.create(:poll, :phone=>"14153334444")
       @poll.phone.should == "14153334444"
     end
 
