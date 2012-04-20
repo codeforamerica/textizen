@@ -17,6 +17,7 @@ body {
 .grouptitle{
 	font-size: 115%;
 	color: #838383;
+	margin-bottom: 1em;
 }
 
 .pollslist td {
