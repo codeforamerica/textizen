@@ -21,7 +21,7 @@ body {
 }
 
 .pollslist td {
-	vertical-align: text-top;
+	vertical-align: middle;
 	padding: 0.5em;
 	padding-top: 1em;
 	padding-bottom: 1em;
@@ -59,9 +59,7 @@ body {
 
 /* Polls page */
 .dashboardresponsecount{
-	vertical-align: sub;
-	margin-bottom: 0.2em;
-	font-size:300%;
+	font-size:200%;
 	font-weight:bold;
 }
 
