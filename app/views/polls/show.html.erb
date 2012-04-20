@@ -36,7 +36,7 @@
 
       <div class="caption">Type</div>
       <div class="settingstext"><%= @poll.poll_type %></div>
-      
+
       <div class="caption">Start date</div>
       <div class="settingstext"><%= @poll.start_date.strftime("%m/%d/%Y at %I:%M%p") %></div>
 
@@ -59,12 +59,14 @@
     </div>
     <table class="table">
         <tr>
+          <th>
           <th>Timestamp</th>
           <th>Response</th>
           <th>Phone number</th>
         </tr>
-    	<% @poll.responses.each do |resp| %>
+    	<% @poll.responses.each_with_index do |resp, i| %>
     		<tr>
+          <td><%= i+1 %></td>
           <td><%= resp.created_at.strftime("%m/%d/%Y at %I:%M%p")%></td>
           <td><%= resp.response %></td>
           <td><%= resp.from %></td>
