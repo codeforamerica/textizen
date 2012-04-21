@@ -25,4 +25,15 @@ describe PollsHelper do
       result.should == ''
     end
   end
+
+  describe "sparkline helper" do
+    it "should generate a sparline image tag" do
+      @data = [10, 10, 4, 8, 12, 7, 7, 2, 0]
+      @width = 100
+      @height = 40
+      @expected = "<img alt=\"Chart?chd=s:zzup9kkka&amp;cht=lc&amp;chs=100x40&amp;chxr=0,10,12\" class=\"\" src=\"http://chart.apis.google.com/chart?chd=s:zzUp9kkKA&amp;cht=lc&amp;chs=100x40&amp;chxr=0,10,12\" style=\"\" />"
+      puts sparkline(@data, @width, @height)
+      sparkline(@data, @width, @height).should == @expected
+    end
+  end
 end

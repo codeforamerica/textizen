@@ -81,7 +81,7 @@ class Poll < ActiveRecord::Base
       @range_end = self.end_date #otherwise, use poll end date?
     end
     self.start_date.to_date.upto(@range_end.to_date+1.days) do |day|
-      @datearray << @datehash[day.to_date.to_s]
+      @datearray << (@datehash[day.to_date.to_s] || 0)
     end
     return @datearray
   end
