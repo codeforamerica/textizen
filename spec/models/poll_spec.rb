@@ -25,6 +25,16 @@ describe Poll do
     end
   end
 
+  describe "check poll open function" do
+    it "should return true" do
+      @poll = FactoryGirl.create(:poll)
+      @poll.running?.should be_true
+    end
+    it "should return false" do
+      @poll = FactoryGirl.create(:poll_ended)
+      @poll.running?.should be_false
+    end
+  end
 
   describe "check phone assignment and uniqueness" do
 

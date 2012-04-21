@@ -9,6 +9,11 @@ class Poll < ActiveRecord::Base
   before_create :set_new_phone_number
   before_destroy :destroy_phone_number
 
+
+  def running?
+    return self.start_date < Time.now && self.end_date > Time.now
+  end
+
   def set_new_phone_number
     puts 'set new phone number'
     self.phone = self.phone || get_phone_number
@@ -65,7 +70,7 @@ class Poll < ActiveRecord::Base
       .each{|i| @datehash[i.keys[0]] = i.values[0]}
     puts @datehash
     # if poll hasn't ended, only build time series for responses until now (dont show nil for future dates)
-    if self.end_date > Time.now
+    if self.running?
       @range_end = Time.now
     else
       @range_end = self.end_date #otherwise, use poll end date?
