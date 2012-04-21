@@ -55,7 +55,7 @@
       <div class="btngroup">
         <!--<input type="button" class="btn btn-danger" value="Close poll">-->
         <% if @poll.running? %>
-        <%= link_to 'End poll', end_poll_path(@poll), :class => "btn btn-dnager", :method => :put %>
+        <%= link_to 'End poll', end_poll_path(@poll), :class => "btn btn-danger", :method => :put %>
         <% end %>
         <%= link_to 'Edit', edit_poll_path(@poll), :class => "btn" %>
         &nbsp;<%= link_to 'Trash', @poll, confirm: 'Are you sure?', method: :delete %>
