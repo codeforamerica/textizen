@@ -37,6 +37,15 @@ describe Poll do
   end
 
 
+  describe "check get_poll_by_phone" do
+    it "should find a poll by phone number" do
+      @phone = '16172223333'
+      @poll = FactoryGirl.create(:poll, :phone=>@phone)
+      Poll.get_poll_by_phone(@phone).should_not be_nil
+    end
+  end
+
+
 
   describe "check phone assignment and uniqueness" do
 
