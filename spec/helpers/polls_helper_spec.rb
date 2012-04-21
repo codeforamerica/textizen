@@ -27,7 +27,7 @@ describe PollsHelper do
   end
 
   describe "sparkline helper" do
-    it "should generate a sparline image tag" do
+    it "should generate a sparkline image tag" do
       @data = [10, 10, 4, 8, 12, 7, 7, 2, 0]
       @width = 100
       @height = 40
