@@ -14,6 +14,11 @@ class Poll < ActiveRecord::Base
     return self.start_date < Time.now && self.end_date > Time.now
   end
 
+  # ends a poll
+  def end
+    self.end_date = Time.now
+  end
+
   def set_new_phone_number
     puts 'set new phone number'
     self.phone = self.phone || get_phone_number
@@ -80,6 +85,9 @@ class Poll < ActiveRecord::Base
     end
     return @datearray
   end
+
+
+  #CLASS METHODS
 
   #takes in a phone number and removes a plus if it has one
   def self.normalize_phone(phone)
