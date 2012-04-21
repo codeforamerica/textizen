@@ -45,6 +45,14 @@ describe Poll do
     end
   end
 
+  describe "check poll ender" do
+    it "should end the poll" do
+      @poll = FactoryGirl.create(:poll)
+      @poll.running?.should be_true
+      @poll.end
+      @poll.running?.should be_false
+    end
+  end
 
 
   describe "check phone assignment and uniqueness" do
