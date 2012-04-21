@@ -86,7 +86,7 @@ class PollsController < ApplicationController
   def end
     @poll = Poll.find(params[:id])
     @poll.update_attributes({:end_date=> Time.now})
-    flash[:notice] = "ended poll"
+    #flash[:notice] = "ended poll"
   end
   
 end
