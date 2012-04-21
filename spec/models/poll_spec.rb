@@ -29,11 +29,27 @@ describe Poll do
   describe "check phone assignment and uniqueness" do
 
     before(:each) do
-      FactoryGirl.create(:poll)
+      @poll = FactoryGirl.create(:poll)
     end
     
     it { should validate_uniqueness_of(:phone) }
     
+    it "should get a phone number from tropo" do
+      @number_response = '
+        {
+            "href":"https://api.tropo.com/v1/applications/123456/addresses/number/+14075551234"
+        }'
+      stub_request(:get, "https://api.tropo.com/v1/users/").
+         with(:headers => {'Content-Type'=>'application/json'}).
+         to_return(:status => 200, :body => '', :headers => {})
+      stub_request(:post, "https://api.tropo.com/v1/applications//addresses").
+         with(:body => "{\"type\":\"number\",\"prefix\":\"1415\"}",
+              :headers => {'Content-Type'=>'application/json'}).
+         to_return(:status => 200, :body => @number_response, :headers => {'Content-Type'=>'application/json'})
+      result = @poll.get_phone_number
+      result.should == '1407'
+    end
+
     it "should be assigned a tropo phone number if not already assigned" do
       Poll.stub(:get_phone_number).and_return("14153334444")
       @poll = FactoryGirl.create(:poll, :phone=>"14153334444")
@@ -41,7 +57,7 @@ describe Poll do
     end
 
     it "should be assigned a passed-in phone number" do
-      @poll = Poll.create(:poll_type=>'OPEN', :phone=>"14151112222")
+      @poll = FactoryGirl.create(:poll, :phone=>"14151112222")
       @poll.phone.should == "14151112222"
     end
 
