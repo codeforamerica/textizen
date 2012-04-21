@@ -11,7 +11,7 @@ class ResponsesController < ApplicationController
     @to = @session[:session][:to][:id]
     @from = @session[:session][:from][:id]
     
-    @poll = get_poll_by_phone(@to)
+    @poll = Poll.get_poll_by_phone(@to)
     puts "poll"
     puts @poll
 
@@ -20,9 +20,13 @@ class ResponsesController < ApplicationController
 
     if @poll
       puts "poll found"
-      @response = @poll.responses.create(:from => @from, :response => @response)
-      puts "response created"
-      render :text => say("Thank you for you for responding to our poll on %s. Your response has been recorded." % @poll.title)
+      if @poll.running?
+        @response = @poll.responses.create(:from => @from, :response => @response)
+        puts "response created"
+        render :text => say("Thank you for you for responding to our poll on %s. Your response has been recorded." % @poll.title)
+      else 
+        render :text => reject("poll on %s not active" % @poll.title)
+      end
     else
       puts "poll not found"
       render :text => reject("poll not found")
@@ -37,11 +41,6 @@ class ResponsesController < ApplicationController
   # reject the message
   def reject(message)
     return say("Sorry, %s" % message)
-  end
-
-  def get_poll_by_phone(phone)
-    puts ("finding poll " + phone)
-    return Poll.where(:phone=>phone)[0]
   end
 
 end

@@ -99,4 +99,9 @@ class Poll < ActiveRecord::Base
     puts 'denormalized phone %s' % phone
     return phone
   end
+
+  def self.get_poll_by_phone(phone)
+    puts ("finding poll " + phone)
+    return Poll.where(:phone=>phone)[0]
+  end
 end
