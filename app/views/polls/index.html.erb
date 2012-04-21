@@ -19,9 +19,14 @@
 
                 <td><img src="http://chart.apis.google.com/chart?chf=a,s,000000&chs=100x40&cht=ls&chd=s:degddgjmqxuurruxwrro&chls=1&chf=bg,s,65432100" width="100" height="40" alt="" style="margin-bottom:-1em;"/><br><span class="caption">latest 12 mins ago</span></td>
 
-                <td><%= poll.start_date.to_formatted_s(:short) %><br>Live since <%= time_ago_in_words(poll.start_date, include_seconds = false) %></td>
+                <td>Live <%= poll.start_date.to_formatted_s(:short) %> &middot; <%= time_ago_in_words(poll.start_date, include_seconds = false) %> ago</td>
                 
-                <td><%= link_to 'Show', poll %>&nbsp;&nbsp;&nbsp;<%= link_to 'Edit', edit_poll_path(poll) %></td>
+                <td id="pollactions">
+                    <i class="icon-th-large"></i>
+                    <%= link_to 'Show', poll %>&nbsp;&nbsp;&nbsp;
+                    <i class="icon-pencil"></i>
+                    <%= link_to 'Edit', edit_poll_path(poll) %>
+                </td>
 
               </tr>
             <% end %>

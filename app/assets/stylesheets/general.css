@@ -63,6 +63,10 @@ body {
 	font-weight:bold;
 }
 
+#pollactions{
+	text-align:right;
+	font-size: 95%;
+}
 
 /* Poll Show page */
 .summaryviz{
