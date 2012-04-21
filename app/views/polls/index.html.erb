@@ -7,7 +7,7 @@
             <table class="table pollslist">
 
             <% @polls.each_with_index do |poll, i| %>
-              <tr onClick="window.location.href='http://localhost:3000/polls/<%= i+1 %>'">
+              <tr onClick="window.location.href='http://localhost:3000/polls/<%= poll.id %>'">
                 <td class="number"><%= i+1 %></td>
 
                 <td class="span4 polltext"><%= poll.text %></td>
