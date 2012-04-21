@@ -56,6 +56,9 @@ body {
 	margin-bottom:1em;
 }
 
+i {
+	margin-right: 0.3em;
+}
 
 /* Polls page */
 .dashboardresponsecount{

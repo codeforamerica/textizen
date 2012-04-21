@@ -22,10 +22,9 @@
                 <td>Live <%= poll.start_date.to_formatted_s(:short) %> &middot; <%= time_ago_in_words(poll.start_date, include_seconds = false) %> ago</td>
                 
                 <td id="pollactions">
-                    <i class="icon-th-large"></i>
-                    <%= link_to 'Show', poll %>&nbsp;&nbsp;&nbsp;
-                    <i class="icon-pencil"></i>
-                    <%= link_to 'Edit', edit_poll_path(poll) %>
+                    <%= link_to(raw('<i class="icon-th-large"></i>Show'), poll) %>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <%= link_to(raw('<i class="icon-pencil"></i>Edit'), edit_poll_path(poll)) %>
                 </td>
 
               </tr>
