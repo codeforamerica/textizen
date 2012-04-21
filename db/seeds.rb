@@ -6,11 +6,15 @@
 @polls = []
 3.times { @polls << FactoryGirl.create(:poll)}
 
-responses = ['Acme or Supreme', 'I buy groceries in Paris', 'Wal-mart', 'Walgreens', 'CVS', 'Stater bros']
+@responses = ['Acme or Supreme', 'I buy groceries in Paris', 'Wal-mart', 'Walgreens', 'CVS', 'Stater bros']
 
 @polls.each do |p|
-  53.times { p.responses.create(:from => '1'+rand(10 ** 10).to_s, :to => p.phone, :response => responses.sample) }
+  53.times { p.responses.create(:from => '1'+rand(10 ** 10).to_s, :to => p.phone, :response => @responses.sample) }
 end
+
+@poll_multi = FactoryGirl.create(:poll_multi)
+@choices = ['a','b','c']
+60.times { @poll_multi.responses.create(:from => '1'+rand(10 ** 10).to_s, :to => @poll_multi.phone, :response => @choices.sample)}
 
 begin
   FactoryGirl.create(:poll_valid_phone)
