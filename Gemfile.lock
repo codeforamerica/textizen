@@ -75,6 +75,7 @@ GEM
       railties (>= 3.0.0)
     faker (1.0.1)
       i18n (~> 0.4)
+    googlecharts (1.6.8)
     haml (3.1.4)
     hashie (1.2.0)
     hike (1.2.1)
@@ -193,6 +194,7 @@ DEPENDENCIES
   devise
   factory_girl_rails
   faker
+  googlecharts
   jquery-rails
   pg
   rails (= 3.2.3)

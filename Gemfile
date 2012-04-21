@@ -26,6 +26,7 @@ gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 gem 'tropo-webapi-ruby'
 gem 'factory_girl_rails'
 gem 'tropo-provisioning'
+gem 'googlecharts'
 
 
 group :test, :development do
