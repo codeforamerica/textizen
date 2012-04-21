@@ -21,11 +21,15 @@ body {
 }
 
 .pollslist td {
-	vertical-align: text-top;
+	vertical-align: middle;
 	padding: 0.5em;
 	padding-top: 1em;
 	padding-bottom: 1em;
 	border-bottom: 1px solid #BEBEA6;
+}
+
+.pollslist tr:hover{
+	cursor:pointer;
 }
 
 .number{
@@ -42,6 +46,7 @@ body {
 .titlequestion{
 	font-size: 200%;
 	font-weight:bold;
+	line-height:100%;
 }
 
 .horiz{
@@ -51,15 +56,20 @@ body {
 	margin-bottom:1em;
 }
 
+i {
+	margin-right: 0.3em;
+}
 
 /* Polls page */
 .dashboardresponsecount{
-	vertical-align: sub;
-	margin-bottom: 0.2em;
-	font-size:300%;
+	font-size:200%;
 	font-weight:bold;
 }
 
+#pollactions{
+	text-align:right;
+	font-size: 95%;
+}
 
 /* Poll Show page */
 .summaryviz{
@@ -76,7 +86,7 @@ body {
 .responsecount{
 	font-size:500%;
 	font-weight:bold;
-	margin-top:1.2em;
+	margin-top:1em;
 	margin-left:-0.1em;
 }
 
