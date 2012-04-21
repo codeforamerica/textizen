@@ -14,6 +14,16 @@ describe PollsController do
     end
   end
   
+  describe "#end" do
+    it "should end a running poll" do
+      pending "fix me"
+      @poll.running? should be_true
+      put :end, {:id=>@poll.id}
+      @poll.running? should be_true
+    end
+  end
+
+
   describe "boilerplate stuff" do
     describe "index" do
       it "should set @polls" do
