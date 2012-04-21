@@ -4,7 +4,7 @@ TxtyourcityRails::Application.routes.draw do
   devise_for :users
 
   resources :polls do
-    
+    put :end, :on => :member
     collection do
       post "receive_message"
     end
