@@ -56,6 +56,26 @@ class Poll < ActiveRecord::Base
     end
   end
 
+  # returns an array of responses per day suitable for google chart time series visualization
+  def time_series
+    @datehash = {}
+    @datearray = []
+    self.responses.group_by { |s| s.created_at.beginning_of_day }
+      .map{|item| {item[0].to_date.to_s => item[1].length}}
+      .each{|i| @datehash[i.keys[0]] = i.values[0]}
+    puts @datehash
+    # if poll hasn't ended, only build time series for responses until now (dont show nil for future dates)
+    if self.end_date > Time.now
+      @range_end = Time.now
+    else
+      @range_end = self.end_date #otherwise, use poll end date?
+    end
+    self.start_date.to_date.upto(@range_end.to_date) do |day|
+      @datearray << @datehash[day.to_date.to_s]
+    end
+    return @datearray
+  end
+
   #takes in a phone number and removes a plus if it has one
   def self.normalize_phone(phone)
     puts 'normalizing phone %s' % phone
