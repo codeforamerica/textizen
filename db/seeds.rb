@@ -16,7 +16,7 @@ end
 @choices = ['a','b','c']
 60.times { 
   @resp = @poll_multi.responses.create(:from => '1'+rand(10 ** 10).to_s, :to => @poll_multi.phone, :response => @choices.sample)
-  @resp.created_at = (rand*10).days.ago
+  @resp.created_at = (rand*7).days.ago
   @resp.save
 }
 

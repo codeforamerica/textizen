@@ -1,7 +1,7 @@
 FactoryGirl.define do
   
   factory :poll do
-    start_date { Time.now }
+    start_date { Time.now - 1.week }
     end_date { Time.now + 1.week }
     phone {'1'+rand(10 ** 10).to_s}
     text 'Where do you buy your groceries?'
@@ -9,7 +9,7 @@ FactoryGirl.define do
     poll_type 'OPEN'
     
     factory :poll_multi do
-      choices {{ "a" => "Wal-mart", "b" => "Bi-rite", "c" => "Bodega"}}
+      choices '{ "a":"Wal-mart", "b":"Bi-rite", "c":"Bodega"}'
       poll_type 'MULTI'
     end
     
