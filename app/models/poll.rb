@@ -32,7 +32,7 @@ class Poll < ActiveRecord::Base
     tp = TropoProvisioning.new(ENV['TROPO_USERNAME'], ENV['TROPO_PASSWORD'])
     address = tp.create_address(ENV['TROPO_APP_ID'], { :type => 'number', :prefix => '1415' })
 
-    @address = normalize_phone(address['address'])
+    @address = Poll.normalize_phone(address['address'])
 
     unless Poll.where(:phone=>@address).empty?
       addresses_to_clear.push(@address)
@@ -56,7 +56,7 @@ class Poll < ActiveRecord::Base
 
   def destroy_phone_number(phone = '')
     phone = phone || self.phone
-    phone = denormalize_phone(phone)
+    phone = Poll.denormalize_phone(phone)
     begin
       puts 'destroy phone number'
       tp = TropoProvisioning.new(ENV['TROPO_USERNAME'], ENV['TROPO_PASSWORD'])
