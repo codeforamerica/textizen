@@ -88,7 +88,11 @@ class Poll < ActiveRecord::Base
 
   # returns the time since the last response for the poll
   def time_since_last_response
-    Time.now - self.responses.sort{|a,b| a.created_at <=> b.created_at}.last.created_at
+    if self.responses.length > 0
+      Time.now - self.responses.sort{|a,b| a.created_at <=> b.created_at}.last.created_at
+    else
+      return 0
+    end
   end
 
   #CLASS METHODS
