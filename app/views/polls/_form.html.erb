@@ -49,11 +49,11 @@
  
  <div class="field" style="display:none">
     <%= f.label :start_date %>
-    <%= f.datetime_select :start_date, :default=>Time.now %>
+    <%= f.date_select :start_date, :default=>Time.now %>
   </div>
  <div class="field" style="">
     <%= f.label :end_date %>
-    <%= f.datetime_select :end_date, :default=>Time.now + 1.month %>
+    <%= f.date_select :end_date, :default=>Time.now + 1.month %>
   </div>
 <div class="form-actions">
     <%= f.submit :class => 'btn btn-large btn-primary' %>
