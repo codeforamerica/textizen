@@ -31,12 +31,18 @@ $(function(){
 
   function build_multi_inputs(){
     var choices = {};
+    var choicesPayload = choicesJSONInput.val();
     choiceInputs = [];
     choicesDiv.empty();
-    choices = JSON.parse(choicesJSONInput.val())
-    $.each(choices, function(key, value){
-      build_multi_input(key, value);
-    });
+    if (choicesPayload){
+      choices = JSON.parse(choicesJSONInput.val())
+      $.each(choices, function(key, value){
+        build_multi_input(key, value);
+      });
+    } else {
+      build_multi_input(alphabet[0]);
+    }
+    
   }
 
   function build_multi_input(key, value){
