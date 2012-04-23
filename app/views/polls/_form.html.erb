@@ -116,6 +116,21 @@ $(function(){
     </div>
   </fieldset>
 
+  <fieldset class="multichoice" style="display:none">
+    <div class="control-group">
+      <%= f.label :choices, :class=> "control-label"%>
+      <input id="add-choice" class="btn add-choice" value="+" type="button" style="position:relative; top: 2em; right: 2em;"></input>
+      <div class="field" id="choices-container">
+        <div class="controls">
+          <%= f.text_area :choices, :style=>'display:none' %>
+          <div id="choices" class="choices">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+
   <fieldset>
     <div class="control-group">
       <%= f.label :phone, :class => "control-label"%>
@@ -124,9 +139,10 @@ $(function(){
       </div>
     </div>
   </fieldset>
+  
  
- <fieldset>
-  <div class="control-group">
+  <fieldset>
+    <div class="control-group">
      <div class="field" style="display:none">
         <%= f.label :start_date %>
         <%= f.datetime_select :start_date, :default=>Time.now %>
@@ -138,22 +154,9 @@ $(function(){
     </div>
   </fieldset>
 
-  <fieldset class="multichoice" style="display:none">
-    <div class="control-group">
-      <div class="field" id="choices-container">
-        <div class="controls">
-          <%= f.label :choices, :style=>"display:inline"%>
-          <input id="add-choice" class="btn add-choice" value="+" type="button" style="margin: 0 0 10px 10px"></input>
-          <%= f.text_area :choices, :style=>'display:none' %>
-          <div id="choices" class="choices">
 
-          </div>
-        </div>
-      </div>
-    </div>
-  </fieldset>
-<div class="form-actions">
-    <%= f.submit :class => 'btn btn-large btn-primary' %>
-    <%= link_to 'Cancel', @poll, :class => 'btn btn-large' %>
-</div>
+  <div class="form-actions">
+      <%= f.submit :class => 'btn btn-large btn-primary' %>
+      <%= link_to 'Cancel', @poll, :class => 'btn btn-large' %>
+  </div>
 <% end %>
