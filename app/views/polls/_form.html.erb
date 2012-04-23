@@ -1,3 +1,57 @@
+<script type="text/javascript">
+$(function(){
+  var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l'];
+  var choiceInputs = [];
+  var choicesDiv = $('#choices');
+  $('#poll_poll_type').bind('change', function(e){
+    if (e.currentTarget.value == 'MULTI'){
+      // show multiple choice inputs
+      show_multi_inputs();
+    } else {
+      hide_multi_inputs();
+      // hide multiple choice inputs
+    }
+  });
+
+  $('.add-choice').click(function(){
+    build_multi_input(alphabet[choiceInputs.length]);
+  });
+
+  function show_multi_inputs(){
+    build_multi_inputs();
+    $('.multichoice').show()
+  }
+
+  function hide_multi_inputs(){
+    $('.multichoice').hide()
+  }
+
+  function build_multi_inputs(){
+    var choices = {};
+    choiceInputs = [];
+    choicesDiv.empty();
+    choices = JSON.parse($('#poll_choices').val())
+    $.each(choices, function(key, value){
+      build_multi_input(key, value);
+    });
+  }
+
+  function build_multi_input(key, value){
+    console.log("creating input for "+key+" "+value);
+    var choiceDiv = $(document.createElement('div'));
+    choiceDiv.class = "choice";
+    choiceDiv.text(key + ". ");
+    var choiceInput = $(document.createElement('textarea'));
+    choiceInput.class = "choice-input";
+    choiceInput.val(value);
+    choiceDiv.append(choiceInput);
+    choiceInputs.push(choiceInput);
+    choicesDiv.append(choiceDiv);
+  }
+});
+
+</script>
+
 <%= form_for(@poll, :html => { :class => "form-horizontal"}) do |f| %>
   <% if @poll.errors.any? %>
     <div id="error_explanation">
@@ -33,7 +87,8 @@
     <div class="control-group">
       <%= f.label :poll_type, :class => "control-label"%>
       <div class="controls">
-        <%= f.select(:poll_type, options_for_select([['Open','OPEN'],['Multiple Choice','MULTI']],1)) %>
+        <% selected_index = @poll.poll_type == 'OPEN' ? 1 : 2 %>
+        <%= f.select(:poll_type, options_for_select([['Open','OPEN'],['Multiple Choice','MULTI']], selected_index)) %> <!-- broken! -->
       </div>
     </div>
   </fieldset>
@@ -47,14 +102,33 @@
     </div>
   </fieldset>
  
- <div class="field" style="display:none">
-    <%= f.label :start_date %>
-    <%= f.datetime_select :start_date, :default=>Time.now %>
-  </div>
- <div class="field" style="">
-    <%= f.label :end_date %>
-    <%= f.date_select :end_date, :default=>Time.now + 1.month %>
-  </div>
+ <fieldset>
+  <div class="control-group">
+     <div class="field" style="display:none">
+        <%= f.label :start_date %>
+        <%= f.datetime_select :start_date, :default=>Time.now %>
+      </div>
+     <div class="field" style="">
+        <%= f.label :end_date %>
+        <%= f.date_select :end_date, :default=>Time.now + 1.month %>
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset class="multichoice" style="display:none">
+    <div class="control-group">
+      <div class="field" id="choices-container">
+        <div class="controls">
+          <%= f.label :choices, :style=>"display:inline"%>
+          <input id="add-choice" class="btn add-choice" value="+" type="button" style="margin: 0 0 10px 10px"></input>
+          <%= f.text_area :choices, :style=>'display:none' %>
+          <div id="choices" class="choices">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </fieldset>
 <div class="form-actions">
     <%= f.submit :class => 'btn btn-large btn-primary' %>
     <%= link_to 'Cancel', @poll, :class => 'btn btn-large' %>
