@@ -6,27 +6,22 @@ $(function(){
   var choicesJSONInput = $('#poll_choices');
   var boundInputs = [];
 
-  $('#poll_poll_type').bind('change', function(e){
-    if (e.currentTarget.value == 'MULTI'){
-      // show multiple choice inputs
-      show_multi_inputs();
-    } else {
-      hide_multi_inputs();
-      // hide multiple choice inputs
-    }
-  });
+  scan_for_multi();
+  
+  $('#poll_poll_type').bind('change', scan_for_multi);
 
   $('.add-choice').click(function(){
     build_multi_input(alphabet[choiceInputs.length]);
   });
 
-  function show_multi_inputs(){
-    build_multi_inputs();
-    $('.multichoice').show()
-  }
-
-  function hide_multi_inputs(){
-    $('.multichoice').hide()
+  function scan_for_multi(){
+    if ($('#poll_poll_type').val() == 'MULTI'){
+      build_multi_inputs();
+      $('.multichoice').show()
+    } else {
+      $('.multichoice').hide()
+      // hide multiple choice inputs
+    }
   }
 
   function build_multi_inputs(){
@@ -110,8 +105,7 @@ $(function(){
     <div class="control-group">
       <%= f.label :poll_type, :class => "control-label"%>
       <div class="controls">
-        <% selected_index = @poll.poll_type == 'OPEN' ? 1 : 2 %>
-        <%= f.select(:poll_type, options_for_select([['Open','OPEN'],['Multiple Choice','MULTI']], selected_index)) %> <!-- broken! -->
+        <%= f.select(:poll_type, options_for_select([['Open','OPEN'],['Multiple Choice','MULTI']], @poll.poll_type)) %> <!-- broken! -->
       </div>
     </div>
   </fieldset>
