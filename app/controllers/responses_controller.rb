@@ -18,19 +18,28 @@ class ResponsesController < ApplicationController
     @response = @session[:session][:initial_text]
     puts "response "+@response
 
-    if @poll
+    if @poll # TODO: check for blank response
       puts "poll found"
       if @poll.running?
-        @response = @poll.responses.create(:from => @from, :response => @response)
-        puts "response created"
-        render :text => say("Thank you for you for responding to our poll on %s. Your response has been recorded." % @poll.title)
+        unless @poll.poll_type == 'MULTI'
+          save(@poll, @from, @response)
+        elsif ActiveSupport::JSON.decode(@poll.choices)[@response.downcase]
+          save(@poll, @from, @response)
+        else
+          render :text => reject("invalid response")
+        end
       else 
         render :text => reject("poll on %s not active" % @poll.title)
       end
     else
-      puts "poll not found"
       render :text => reject("poll not found")
     end
+  end
+
+  def save(poll, from, resp)
+    poll.responses.create(:from => from, :response => resp)
+    puts "response created"
+    render :text => say("Thank you for you for responding to our poll on %s. Your response has been recorded." % poll.title)
   end
 
   def say(message)
