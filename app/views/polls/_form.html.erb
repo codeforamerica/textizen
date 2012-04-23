@@ -3,6 +3,9 @@ $(function(){
   var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l'];
   var choiceInputs = [];
   var choicesDiv = $('#choices');
+  var choicesJSONInput = $('#poll_choices');
+  var boundInputs = [];
+
   $('#poll_poll_type').bind('change', function(e){
     if (e.currentTarget.value == 'MULTI'){
       // show multiple choice inputs
@@ -30,7 +33,7 @@ $(function(){
     var choices = {};
     choiceInputs = [];
     choicesDiv.empty();
-    choices = JSON.parse($('#poll_choices').val())
+    choices = JSON.parse(choicesJSONInput.val())
     $.each(choices, function(key, value){
       build_multi_input(key, value);
     });
@@ -47,6 +50,20 @@ $(function(){
     choiceDiv.append(choiceInput);
     choiceInputs.push(choiceInput);
     choicesDiv.append(choiceDiv);
+    choiceInput.bind('change',on_multi_input_change);
+  }
+
+  function push_choices(){
+    var choicesObj = {};
+    $.each(choiceInputs, function(index,item){
+      choicesObj[alphabet[index]] = item.val();
+    });
+    choicesJSONInput.val(JSON.stringify(choicesObj));
+  }
+
+  function on_multi_input_change(){
+    console.log('input changed');
+    push_choices();
   }
 });
 
