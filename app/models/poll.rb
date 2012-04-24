@@ -13,6 +13,9 @@ class Poll < ActiveRecord::Base
   def running?
     return self.start_date < Time.now && self.end_date > Time.now
   end
+  def multi?
+    return self.poll_type == 'MULTI'
+  end
 
   # ends a poll
   def end
