@@ -122,6 +122,19 @@ i {
 
 .header{
 }
+
+.histogram-word{
+	padding-right: 1em;
+}
+
+.histogram-count{
+	padding-right: 0.3em;
+}
+
+.histogram-graph{
+	height: 14px;
+	background-color:#aaa; 
+}
 /*
 tr:nth-of-type(odd) {
   background-color:#F1DCA7;
