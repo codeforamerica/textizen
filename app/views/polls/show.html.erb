@@ -1,3 +1,5 @@
+<% if @poll.multi? && @poll.choices then choices = ActiveSupport::JSON.decode(@poll.choices) end %>
+
 <div class="container">
 
 <%= render 'header' %>
@@ -85,7 +87,7 @@
     		<tr>
           <td><%= i+1 %></td>
           <td><%= resp.created_at.strftime("%m/%d/%Y at %I:%M%p")%></td>
-          <td><%= resp.response %></td>
+          <td><%= resp.response %><%= if @poll.multi? && choices then raw ".&nbsp;&nbsp;#{choices[resp.response]} " end %></td>
           <td><%= number_to_phone(resp.from, :area_code => true) %></td>
         </tr>
     	<% end %>
