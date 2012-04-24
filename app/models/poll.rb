@@ -100,12 +100,20 @@ class Poll < ActiveRecord::Base
 
   def response_histogram
     exclusion = /[^[in][i][or]]/i
-    if self.poll_type == 'OPEN' && self.responses.length > 0
+    if self.responses.length > 0
+      # create an array with all the words from all the responses
       words = self.responses.map{ |r| r.response.downcase.split(/[^A-Za-z\-]/)}.flatten
+      if self.multi? && self.choices
+        @choices = ActiveSupport::JSON.decode(self.choices)
+        words.map!{|w| "#{w}. #{@choices[w]}"}
+      end
       #hist = Hash.new(0)
       #words.each{|w| hist[w] += 1}
+      # reduce the words array to a set of word => frequency pairs
       hist = words.reduce(Hash.new(0)){|set, val| set[val] += 1; set}
+      # sort the hash (into an array) by frequency, descending
       hist_sorted = hist.sort{|a,b| b[1] <=> a[1]}
+      # return the histogram after filtering out excluded words
       return hist_sorted.select{|i| exclusion.match(i[0])}
     end
   end
