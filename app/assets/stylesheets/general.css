@@ -119,6 +119,9 @@ i {
 	margin: 0.5em 0 1.5em 0;
 	text-align:right;
 }
+
+.header{
+}
 /*
 tr:nth-of-type(odd) {
   background-color:#F1DCA7;

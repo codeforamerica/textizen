@@ -30,9 +30,11 @@ module PollsHelper
   def html_histogram(histogram)
     result = '' 
     if histogram
+      result << "<table>"
       histogram.slice(0,7).each do |h|
-        result << "<div style='font-size:#{h[1]/8.0}em' class='histogram-pair'><span class='histogram-word'>#{h[0]}</span><span class='histogram-separator'>:</span><span class='histogram-count'>#{h[1]}</span></div>\n"
+        result << "<tr style='font-size:#{h[1]/8.0}em' class='histogram-pair'><td class='histogram-word'>#{h[0]}</td><td class='histogram-separator'>:</td><td class='histogram-count'>#{h[1]}</td></tr>\n"
       end
+      result << "</table>"
     end
     return raw result
   end
