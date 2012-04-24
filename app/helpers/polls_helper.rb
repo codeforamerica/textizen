@@ -32,7 +32,7 @@ module PollsHelper
     if histogram
       result << "<table>"
       histogram.slice(0,7).each do |h|
-        result << "<tr style='font-size:#{0.6+h[1]/20.0}em' class='histogram-pair'><td class='histogram-word'>#{h[0]}</td><td class='histogram-count'>#{h[1]}</td><td style='width:200px;'><div class='histogram-graph' style='width:#{h[1]*8}px;'>&nbsp;</div></td></tr>\n"
+        result << "<tr style='font-size:#{0.8+h[1]/20.0}em' class='histogram-pair'><td class='histogram-word'>#{h[0]}</td><td class='histogram-count'>#{h[1]}</td><td style='width:200px;'><div class='histogram-graph' style='width:#{h[1]*8}px;'>&nbsp;</div></td></tr>\n"
       end
       result << "</table>"
     end
