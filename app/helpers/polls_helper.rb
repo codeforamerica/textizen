@@ -25,4 +25,11 @@ module PollsHelper
       return pluralize((secs/60/60/24).round, 'day')
     end
   end
+  # takes in an array of word, count  array pairs and prints them out in html
+  # => [["Paris", 12], ["Wal-mart", 12], ["I", 12], ["buy", 12], ["groceries", 12], ["in", 12], ["Stater", 8], ["Acme", 8], ["or", 8], ["Supreme", 8], ["CVS", 8], ["bros", 8], ["Walgreens", 5]] 
+  def html_histogram(histogram)
+    result = '' 
+    histogram.slice(0,7).each{|h| result << %Q(<div class='histogram-pair'><span class='histogram-word'>#{h[0]}</span><span class='histogram-separator'>:</span><span class='histogram-count'>#{h[1]}</span></div>\n)}
+    return result
+  end
 end

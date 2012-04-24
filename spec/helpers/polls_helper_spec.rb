@@ -26,6 +26,13 @@ describe PollsHelper do
     end
   end
 
+  describe "word histogram helper" do
+    it "should generate a word histogram hash for a poll's responses" do
+      pending "factory for poll with responses"
+    end
+  end
+
+
   describe "sparkline helper" do
     it "should generate a sparkline image tag" do
       @data = [10, 10, 4, 8, 12, 7, 7, 2, 0]

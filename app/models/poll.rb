@@ -96,12 +96,14 @@ class Poll < ActiveRecord::Base
   end
 
   def response_histogram
+    exclusion = /[^[in][i][or]]/i
     if self.poll_type == 'OPEN' && self.responses.length > 0
       words = self.responses.map{ |r| r.response.split(/[^A-Za-z\-]/)}.flatten
       #hist = Hash.new(0)
       #words.each{|w| hist[w] += 1}
       hist = words.reduce(Hash.new(0)){|set, val| set[val] += 1; set}
       hist_sorted = hist.sort{|a,b| b[1] <=> a[1]}
+      return hist_sorted.select{|i| exclusion.match(i[0])}
     end
   end
   #CLASS METHODS

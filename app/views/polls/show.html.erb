@@ -17,7 +17,7 @@
     <br>
     placeholder for follow-up questions
     <div class="summaryviz">
-    placeholder for response graphs and visualizations
+      <%= raw html_histogram(@poll.response_histogram) %>
     </div>
     
   </div>
