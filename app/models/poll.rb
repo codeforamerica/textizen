@@ -95,6 +95,15 @@ class Poll < ActiveRecord::Base
     end
   end
 
+  def response_histogram
+    if self.responses.length > 0
+      words = self.responses.map{ |r| r.response.split(/[^A-Za-z\-]/)}.flatten
+      #hist = Hash.new(0)
+      #words.each{|w| hist[w] += 1}
+      hist = words.reduce(Hash.new(0)){|set, val| set[val] += 1; set}
+      hist_sorted = hist.sort{|a,b| b[1] <=> a[1]}
+    end
+  end
   #CLASS METHODS
 
   #takes in a phone number and removes a plus if it has one
