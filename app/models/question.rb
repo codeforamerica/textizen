@@ -5,5 +5,5 @@ class Question < ActiveRecord::Base
   belongs_to :poll
 
   validates :question_type, :inclusion => { :in => %w(MULTI OPEN YN), :message => "%{value} is not a valid poll type" }  
- 
+  validates_presence_of :poll_id, :question_type
 end
