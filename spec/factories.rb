@@ -25,16 +25,25 @@ FactoryGirl.define do
 
   factory :question do
     text "Where do you buy groceries?"
-    next_question_id 1
-    poll_id 1
-    options "MyText"
-    question_type "MyString"
+      question_type 'OPEN'
+    poll
+
+    factory :question_multi do
+      question_type 'MULTI'
+      options '{ "a":{"val":"Wal-mart"}, "b":{"val":"Bi-rite"}, "c":{"val":"Bodega"} }'
+    end
+
+    factory :question_yn do
+      question_type 'YN'
+      text "Do you ride public transit?"
+      options '{ "y":{"val":"Yes"}, "n": {"val":"No"} }'
+    end
   end
 
   factory :response do
     from {'1'+rand(10 ** 10).to_s}
     response 'I buy groceries IN YOUR FACE'
-    poll
+    question
   end
 
 
