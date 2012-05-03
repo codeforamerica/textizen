@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120503183611) do
+ActiveRecord::Schema.define(:version => 20120503184951) do
 
   create_table "polls", :force => true do |t|
     t.string   "title"
@@ -50,9 +50,9 @@ ActiveRecord::Schema.define(:version => 20120503183611) do
     t.string   "from"
     t.string   "to"
     t.text     "response"
-    t.integer  "poll_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "question_id"
   end
 
   create_table "users", :force => true do |t|
