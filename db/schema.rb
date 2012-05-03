@@ -11,19 +11,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120417220404) do
+ActiveRecord::Schema.define(:version => 20120503183611) do
 
   create_table "polls", :force => true do |t|
     t.string   "title"
-    t.text     "text"
     t.string   "phone"
     t.datetime "start_date"
     t.datetime "end_date"
-    t.string   "poll_type"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "user_id"
-    t.text     "choices"
+  end
+
+  create_table "questions", :force => true do |t|
+    t.string   "text"
+    t.integer  "next_question_id"
+    t.integer  "poll_id"
+    t.text     "options"
+    t.string   "question_type"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "rails_admin_histories", :force => true do |t|
