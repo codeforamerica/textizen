@@ -1,10 +1,10 @@
 class Poll < ActiveRecord::Base
 
-  attr_accessible :end_date, :phone, :start_date, :text, :title, :poll_type, :user_id, :choices
+  attr_accessible :end_date, :phone, :start_date, :title, :user_id
   belongs_to :user
-  has_many :responses
+  has_many :questions
+  has_many :responses, :through => :questions
   
-  validates :poll_type, :inclusion => { :in => %w(MULTI OPEN), :message => "%{value} is not a valid poll type" }  
   validates_uniqueness_of :phone
   before_create :set_new_phone_number
   before_destroy :destroy_phone_number
