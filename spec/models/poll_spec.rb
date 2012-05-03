@@ -6,9 +6,6 @@ describe Poll do
   it { should have_many(:responses) }
   it { should belong_to(:user) }
   
-  it { should allow_value("MULTI").for(:poll_type) }
-  it { should allow_value("OPEN").for(:poll_type) }
-  it { should_not allow_value("foo").for(:poll_type) }
 
 
   describe "check phone number normalizer" do
