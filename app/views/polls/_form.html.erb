@@ -22,29 +22,8 @@
     </div>
   </fieldset>
   <%= f.fields_for :questions do |builder| %>
-    <fieldset>
-      <div class="control-group">
-        <%= builder.label :text, :class => "control-label"%>
-        <div class="controls">
-          <%= builder.text_area :text, :rows => 3 %> <span class="help-inline">To be printed on posters</span>
-        </div>
-      </div>
-    </fieldset>
-    <fieldset>
-      <div class="control-group">
-        <%= builder.label :question_type, :class => "control-label"%>
-        <div class="controls">
-          <%= builder.select(:question_type, options_for_select([['Open','OPEN'],['Multiple Choice','MULTI'],['Yes/No', 'YN']],1)) %>
-        </div>
-        <div>
-          <%= builder.check_box :_destroy %>
-          <%= builder.label :_destroy, "Remove Question" %>
-        </div>
-      </div>
-    </fieldset>
+    <%= render 'question_fields', :f => builder %>
   <% end %>
-
-  
 
   <fieldset>
     <div class="control-group">
