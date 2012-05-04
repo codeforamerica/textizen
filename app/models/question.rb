@@ -7,5 +7,5 @@ class Question < ActiveRecord::Base
   belongs_to :option, :foreign_key => "parent_option_id"
 
   validates :question_type, :inclusion => { :in => %w(MULTI OPEN YN), :message => "%{value} is not a valid poll type" }  
-  validates_presence_of :poll_id, :question_type
+  validates_presence_of :question_type
 end
