@@ -21,7 +21,7 @@
       </div>
     </div>
   </fieldset>
-
+  <%= @poll.questions %>
   <% f.fields_for :questions do |builder| %>
     <fieldset>
       <div class="control-group">
