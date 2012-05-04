@@ -42,6 +42,18 @@ class PollsController < ApplicationController
   # POST /polls.json
   def create
     @poll = Poll.new(params[:poll])
+#    temp_questions = []
+#    prev_question = nil
+#    params[:questions].each do |q|
+#      q = Question.new(q)
+#      q.poll = @poll
+#      unless prev_question.nil?
+#        prev_question.next_question = q
+#        prev_question.save!
+#      end
+#      temp_questions.push({:question => q, :options => q[:options])
+#    end
+
 
     respond_to do |format|
       if @poll.save
