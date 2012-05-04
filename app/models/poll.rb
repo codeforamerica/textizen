@@ -4,7 +4,7 @@ class Poll < ActiveRecord::Base
   belongs_to :user
   has_many :questions, :dependent => :destroy
   has_many :responses, :through => :questions
-  accepts_nested_attributes_for :questions, :allow_destroy => true
+  accepts_nested_attributes_for :questions, :reject_if => lambda { |a| a[:text].blank? }, :allow_destroy => true
   
   validates_uniqueness_of :phone
   before_create :set_new_phone_number
