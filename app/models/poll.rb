@@ -1,6 +1,6 @@
 class Poll < ActiveRecord::Base
 
-  attr_accessible :end_date, :phone, :start_date, :title, :user_id
+  attr_accessible :end_date, :phone, :start_date, :title, :user_id, :questions_attributes
   belongs_to :user
   has_many :questions, :dependent => :destroy
   has_many :responses, :through => :questions
