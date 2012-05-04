@@ -21,8 +21,7 @@
       </div>
     </div>
   </fieldset>
-  <%= @poll.questions %>
-  <% f.fields_for :questions do |builder| %>
+  <%= f.fields_for :questions do |builder| %>
     <fieldset>
       <div class="control-group">
         <%= builder.label :text, :class => "control-label"%>
