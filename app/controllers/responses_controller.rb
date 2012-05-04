@@ -23,7 +23,7 @@ class ResponsesController < ApplicationController
       if @poll.running?
         @response = @poll.responses.create(:from => @from, :response => @response)
         puts "response created"
-        render :text => say("Thank you for you for responding to our poll on %s. Your response has been recorded." % @poll.title)
+        render :text => say("Thank you for responding to our poll on %s. Your response has been recorded." % @poll.title)
       else 
         render :text => reject("poll on %s not active" % @poll.title)
       end
