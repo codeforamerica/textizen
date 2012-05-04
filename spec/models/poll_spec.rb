@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Poll do
 
-  
+  it { should have_many(:questions) }
   it { should have_many(:responses) }
   it { should belong_to(:user) }
   

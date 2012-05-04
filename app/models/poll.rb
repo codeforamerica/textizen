@@ -2,8 +2,9 @@ class Poll < ActiveRecord::Base
 
   attr_accessible :end_date, :phone, :start_date, :title, :user_id
   belongs_to :user
-  has_many :questions
+  has_many :questions, :dependent => :destroy
   has_many :responses, :through => :questions
+  accepts_nested_attributes_for :questions
   
   validates_uniqueness_of :phone
   before_create :set_new_phone_number
