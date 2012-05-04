@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe Question do
   it { should have_many(:responses) }
-  it { should have_one(:next_question) }
   it { should belong_to(:poll) }
 
   it { should validate_presence_of(:poll_id) }
