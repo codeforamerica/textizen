@@ -21,9 +21,12 @@
       </div>
     </div>
   </fieldset>
-  <%= f.fields_for :questions do |builder| %>
-    <%= render 'question_fields', :f => builder %>
-  <% end %>
+  <div class="items">
+    <%= f.nested_fields_for :questions do |builder| %>
+      <%= render 'question_fields', :f => builder %>
+    <% end %>
+  </div>
+  <a href="#" class="add">add question</a>
 
   <fieldset>
     <div class="control-group">

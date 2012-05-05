@@ -26,10 +26,6 @@ class PollsController < ApplicationController
   # GET /polls/new.json
   def new
     @poll = Poll.new
-    3.times do
-      question = @poll.questions.build
-      3.times { question.options.build }
-    end
 
     respond_to do |format|
       format.html # new.html.erb

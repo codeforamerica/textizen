@@ -1,5 +1,5 @@
 
-<fieldset>
+<fieldset class="item">
   <div class="control-group">
     <%= f.label :text, :class => "control-label"%>
     <div class="controls">
@@ -8,16 +8,11 @@
   </div>
 </fieldset>
 <fieldset>
-  <div class="control-group">
     <%= f.label :question_type, :class => "control-label"%>
-    <div class="controls">
-      <%= f.select(:question_type, options_for_select([['Open','OPEN'],['Multiple Choice','MULTI'],['Yes/No', 'YN']],1)) %>
-    </div>
-    <div>
-      <%= f.check_box :_destroy %>
-      <%= f.label :_destroy, "Remove Question" %>
-    </div>
-  </div>
+    <%= f.select(:question_type, options_for_select([['Open','OPEN'],['Multiple Choice','MULTI'],['Yes/No', 'YN']],1)) %>
+    <a href="#" class="remove">remove</a>
+    <%= f.hidden_field :id %>
+    <%= f.hidden_field :_destroy %>
 </fieldset>
 <%= f.fields_for :options do |builder| %>
   <%= render 'option_fields', :f => builder %>

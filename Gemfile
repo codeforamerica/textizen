@@ -6,7 +6,7 @@ gem 'rails', '3.2.3'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
-
+gem 'awesome_nested_fields'
 
 # Gems used only for assets and not required
 # in production environments by default.
