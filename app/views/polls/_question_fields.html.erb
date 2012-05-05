@@ -6,14 +6,13 @@
       <%= f.text_area :text, :rows => 3 %> <span class="help-inline">To be printed on posters</span>
     </div>
   </div>
+  <%= f.label :question_type, :class => "control-label"%>
+  <%= f.select(:question_type, options_for_select([['Open','OPEN'],['Multiple Choice','MULTI'],['Yes/No', 'YN']],1)) %>
+  <a href="#" class="remove">remove</a>
+  <%= f.hidden_field :id %>
+  <%= f.hidden_field :_destroy %>
 </fieldset>
-<fieldset>
-    <%= f.label :question_type, :class => "control-label"%>
-    <%= f.select(:question_type, options_for_select([['Open','OPEN'],['Multiple Choice','MULTI'],['Yes/No', 'YN']],1)) %>
-    <a href="#" class="remove">remove</a>
-    <%= f.hidden_field :id %>
-    <%= f.hidden_field :_destroy %>
-</fieldset>
-<%= f.fields_for :options do |builder| %>
+<%= f.nested_fields_for :options do |builder| %>
   <%= render 'option_fields', :f => builder %>
 <% end %>
+<a href="#" class="add">add option</a>
