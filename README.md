@@ -1,31 +1,26 @@
-# Text Your City
-Blah blah blah
-
-## <a name="build"></a>Build Status
-[![Build Status](https://secure.travis-ci.org/codeforamerica/cfa_template.png?branch=master)][travis]
+# Text Your City [![Build Status](https://secure.travis-ci.org/codeforamerica/cfa_template.png?branch=master)][travis]
 
 [travis]: http://travis-ci.org/codeforamerica/textyourcity
 
-## <a name="installation"></a>Installation
+## Installation
 
-	$ bundle install
-	$ rake db:migrate
-	$ rake db:seed
+    bundle install
+    rake db:migrate
+    rake db:seed
 
 ### Other stuff
 Make sure you have these environment variables set to enable sms
 
-	$ export TROPO_APP_ID=
-	$ export TROPO_USERNAME=
-	$ export TROPO_PASSWORD=
-	$ export TROPO_TOKEN=
-	$ export TROPO_APP_ID= #get from api.tropo.com/v1/applications
+    export TROPO_APP_ID=
+    export TROPO_USERNAME=
+    export TROPO_PASSWORD=
+    export TROPO_TOKEN=
+    export TROPO_APP_ID= #get from api.tropo.com/v1/applications
 
-
-## <a name="usage"></a>Usage
+## Usage
     rails server
 
-## <a name="contributing"></a>Contributing
+## Contributing
 In the spirit of [free software][free-sw], **everyone** is encouraged to help
 improve this project.
 
@@ -50,7 +45,7 @@ Here are some ways *you* can contribute:
 [issues]: https://github.com/codeforamerica/cfa_template/issues
 [financially]: https://secure.codeforamerica.org/page/contribute
 
-## <a name="issues"></a>Submitting an Issue
+## Submitting an Issue
 We use the [GitHub issue tracker][issues] to track bugs and features. Before
 submitting a bug report or feature request, check to make sure it hasn't
 already been submitted. You can indicate support for an existing issue by
@@ -61,7 +56,7 @@ bug report should include a pull request with failing specs.
 
 [gist]: https://gist.github.com/
 
-## <a name="pulls"></a>Submitting a Pull Request
+## Submitting a Pull Request
 1. Fork the project.
 2. Create a topic branch.
 3. Implement your feature or bug fix.
@@ -73,12 +68,11 @@ bug report should include a pull request with failing specs.
    version file. (If you want to create your own version for some reason,
    please do so in a separate commit.)
 
-## <a name="versions"></a>Supported Ruby Versions
+## Supported Ruby Versions
 This library aims to support and is [tested against][travis] the following Ruby
 implementations:
 
  * Ruby 1.9.3
-
 
 If something doesn't work on one of these interpreters, it should be considered
 a bug.
@@ -94,7 +88,7 @@ implementation, you will be personally responsible for providing patches in a
 timely fashion. If critical issues for a particular implementation exist at the
 time of a major release, support for that Ruby version may be dropped.
 
-## <a name="copyright"></a>Copyright
+## Copyright
 Copyright (c) 2012 Code for America. See [LICENSE][] for details.
 
 [license]: https://github.com/codeforamerica/cfa_template/blob/master/LICENSE.mkd
