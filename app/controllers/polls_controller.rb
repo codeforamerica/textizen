@@ -85,7 +85,16 @@ class PollsController < ApplicationController
   # PUT /polls/1/end
   def end
     @poll = Poll.find(params[:id])
-    @poll.update_attributes({:end_date=> Time.now})
+
+    respond_to do |format|
+      if @poll.update_attributes({:end_date=> Time.now})
+        format.html { redirect_to @poll, notice: 'Poll was successfully ended.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "index" }
+        format.json { render json: @poll.errors, status: :unprocessable_entity }
+      end
+    end
     #flash[:notice] = "ended poll"
   end
   
