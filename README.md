@@ -43,6 +43,10 @@ _Remember, deploying locally means that you can't receive Tropo messages via the
     $ heroku config:add TROPO_TOKEN=#################
     $ heroku config:add TROPO_APP_ID=################
 
+## Testing
+
+TextYourCity uses the `rspec` gem for testing.  Make sure you create a test database: `textyourcity_test` and set it up with `$ rake environment RAILS_ENV=test db:migrate`. You can run tests by `$ rspec` or `$ bundle exec rspec` (if your global rspec is of a different version).
+
 ## Contributing
 In the spirit of [free software][free-sw], **everyone** is encouraged to help
 improve this project.
