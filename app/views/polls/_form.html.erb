@@ -22,12 +22,13 @@
     </div>
   </fieldset>
   <div class="items">
-    <%= f.nested_fields_for :questions do |builder| %>
+    <%= f.fields_for :questions do |builder| %>
       <%= render 'question_fields', :f => builder %>
     <% end %>
   </div>
-  <a href="#" class="add">add question</a>
-
+  <div class="links">
+    <%= link_to_add_association 'add question', f, :questions %>
+  </div>
   <fieldset>
     <div class="control-group">
       <%= f.label :phone, :class => "control-label"%>

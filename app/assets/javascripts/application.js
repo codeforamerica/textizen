@@ -13,10 +13,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
-//= require jquery.nested-fields
+//= require cocoon
 
-// for awesome_nested_fields
-// https://github.com/lailsonbm/awesome_nested_fields
-$(document).ready(function(e) {
-  $('FORM').nestedFields();
-});
