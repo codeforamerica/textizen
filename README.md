@@ -4,21 +4,44 @@
 
 ## Installation
 
-    bundle install
-    rake db:migrate
-    rake db:seed
+    $ bundle install
+    $ rake db:migrate
+    $ rake db:seed
+
+## Configuring Tropo
+
+1. [Create a Tropo account](https://www.tropo.com/account/register.jsp) if you don't already have one, and login
+2. Create a new WebAPI application. Enter an arbitrary Application ID, e.g. `mytextyourcity`. Enter the URL that powers your app, which is _[Your Domain]/responses/receive_message_, e.g. `http://my.example.com/responses/receive_message`
+3. Take note of your Tropo _Username_, _Password_ and _Outbound Messaging Token_ (for setting up your environment variables in the _Other Stuff_ section)
+4. Lastly, take note of your Application ID by visiting `http://api.tropo.com/v1/applications`, entering your Tropo username/password and take note of the value of your app's `id` from the resulting JSON. It should be a 6-7 digit number.
+
 
 ### Other stuff
-Make sure you have these environment variables set to enable sms
+Make sure you have these environment variables set to enable SMS; you can acquire them in steps 2 and 3 of the _Configuring Tropo_ section above. You can either add them to your $PATH or rename the included `sample.env` to `.env` if using Foreman. 
 
-    export TROPO_APP_ID=
     export TROPO_USERNAME=
     export TROPO_PASSWORD=
     export TROPO_TOKEN=
-    export TROPO_APP_ID= #get from api.tropo.com/v1/applications
+    export TROPO_APP_ID=
 
 ## Usage
-    rails server
+    
+    $ rails server
+
+With Foreman:
+    
+    $ foreman run bundle exec rails server -p $PORT
+
+_Remember, deploying locally means that you can't receive Tropo messages via their webhook. See below for deploying to Heroku._
+
+## Deploying to Heroku
+    
+    $ heroku create mytextyourcity --stack cedar
+    $ heroku run rake db:migrate
+    $ heroku config:add TROPO_USERNAME=##############
+    $ heroku config:add TROPO_PASSWORD=##############
+    $ heroku config:add TROPO_TOKEN=#################
+    $ heroku config:add TROPO_APP_ID=################
 
 ## Contributing
 In the spirit of [free software][free-sw], **everyone** is encouraged to help
