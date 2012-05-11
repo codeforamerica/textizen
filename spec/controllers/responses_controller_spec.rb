@@ -9,7 +9,7 @@ describe ResponsesController do
       
       describe "sms with valid parameters" do
         it "should create a new response" do
-          post :receive_message, :params => TROPO_SMS_RESPONSE_MULTI
+          post :receive_message, TROPO_SMS_RESPONSE_MULTI
           @poll.responses.length.should eq 1
           # Response.where
         end
@@ -17,7 +17,7 @@ describe ResponsesController do
     
       describe "sms with invalid parameters" do
         it "should not create a new response" do
-          post :receive_message, :params => TROPO_SMS_RESPONSE_OPEN
+          post :receive_message, TROPO_SMS_RESPONSE_OPEN
         end
       end
     end
@@ -29,13 +29,13 @@ describe ResponsesController do
       
       describe "sms with valid parameters" do
         it "should create a new response" do
-          post :receive_message, :params => TROPO_SMS_RESPONSE_OPEN
+          post :receive_message, TROPO_SMS_RESPONSE_OPEN
         end
       end
     
       describe "sms with invalid parameters" do
         it "should not create a new response" do
-          post :receive_message, :params => TROPO_SMS_RESPONSE_OPEN
+          post :receive_message, TROPO_SMS_RESPONSE_OPEN
         end
       end
       

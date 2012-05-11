@@ -70,13 +70,15 @@ describe Poll do
         }'
       stub_request(:get, "https://api.tropo.com/v1/users/").
          with(:headers => {'Content-Type'=>'application/json'}).
-         to_return(:status => 200, :body => '', :headers => {})
+         to_return(:status => 200, :body => '{"dust": "dust"}', :headers => {})
       stub_request(:post, "https://api.tropo.com/v1/applications//addresses").
          with(:body => "{\"type\":\"number\",\"prefix\":\"1415\"}",
               :headers => {'Content-Type'=>'application/json'}).
          to_return(:status => 200, :body => @number_response, :headers => {'Content-Type'=>'application/json'})
       result = @poll.get_phone_number
-      result.should == '1407'
+      puts "Phone: "+result
+      
+      result.should == '14075551234'
     end
 
     it "should be assigned a tropo phone number if not already assigned" do
