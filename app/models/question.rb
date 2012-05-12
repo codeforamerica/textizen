@@ -1,5 +1,5 @@
 class Question < ActiveRecord::Base
-  attr_accessible :poll_id, :question_type, :text, :parent_option_id
+  attr_accessible :poll_id, :question_type, :text, :parent_option_id, :sequence
   has_many :responses
   has_many :options, :dependent => :destroy
   accepts_nested_attributes_for :options, :reject_if => lambda { |o| o[:value].blank? }, :allow_destroy => true
