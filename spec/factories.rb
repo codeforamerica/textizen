@@ -11,6 +11,14 @@ FactoryGirl.define do
     
     factory :poll_open do
     end
+
+    factory :poll_yn do
+
+    end
+
+    factory :poll_no_questions do
+
+    end
     
     factory :poll_ended do
       start_date { Time.now - 1.week }
@@ -25,18 +33,18 @@ FactoryGirl.define do
 
   factory :question do
     text "Where do you buy groceries?"
-      question_type 'OPEN'
+    question_type 'OPEN'
     poll
 
     factory :question_multi do
       question_type 'MULTI'
-      options '{ "a":{"val":"Wal-mart"}, "b":{"val":"Bi-rite"}, "c":{"val":"Bodega"} }'
+#      options '{ "a":{"val":"Wal-mart"}, "b":{"val":"Bi-rite"}, "c":{"val":"Bodega"} }'
     end
 
     factory :question_yn do
       question_type 'YN'
       text "Do you ride public transit?"
-      options '{ "y":{"val":"Yes"}, "n": {"val":"No"} }'
+#      options '{ "y":{"val":"Yes"}, "n": {"val":"No"} }'
     end
   end
 
