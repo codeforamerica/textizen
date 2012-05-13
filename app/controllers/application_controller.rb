@@ -3,8 +3,6 @@ class ApplicationController < ActionController::Base
    def index
     if user_signed_in?
       redirect_to :polls
-#    elsif admin_signed_in?
-#      redirect_to "/admin"
     else
       redirect_to new_user_session_path #"/welcome"
     end

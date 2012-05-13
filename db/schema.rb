@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120417220404) do
+ActiveRecord::Schema.define(:version => 20120512234503) do
+
+  create_table "options", :force => true do |t|
+    t.string   "text"
+    t.integer  "question_id"
+    t.string   "value"
+    t.integer  "follow_up_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
   create_table "polls", :force => true do |t|
     t.string   "title"
@@ -24,6 +33,16 @@ ActiveRecord::Schema.define(:version => 20120417220404) do
     t.datetime "updated_at", :null => false
     t.integer  "user_id"
     t.text     "choices"
+  end
+
+  create_table "questions", :force => true do |t|
+    t.string   "text"
+    t.integer  "poll_id"
+    t.string   "question_type"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "sequence"
+    t.integer  "parent_option_id"
   end
 
   create_table "rails_admin_histories", :force => true do |t|
