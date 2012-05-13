@@ -1,4 +1,4 @@
 <div class="row header">
     <div class="span8"><a href="/polls"><img src="/assets/logo.png"></a></div>
-<div class="span4 login"><%= link_to "Logout", destroy_user_session_path %></div>
+    <div class="span4 login"><%= link_to "Logout", destroy_user_session_path, :method=>:delete %></div>
 </div>
