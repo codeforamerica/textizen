@@ -1,4 +1,6 @@
 class PollsController < ApplicationController
+  before_filter :authenticate_user!
+  
   # GET /polls
   # GET /polls.json
   def index
