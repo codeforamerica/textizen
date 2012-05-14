@@ -1,18 +1,4 @@
-<%= form_for(@poll, :html => { :class => "form-horizontal"}) do |f| %>
-  <% if @poll.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@poll.errors.count, "error") %> prohibited this poll from being saved:</h2>
-
-      <ul>
-      <% @poll.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-
-
+<%= simple_form_for @poll, :html => { :class => "form-horizontal"} do |f| %>
   <fieldset>
     <div class="control-group">
       <%= f.label :title, :class => "control-label"%>
@@ -22,7 +8,7 @@
     </div>
   </fieldset>
   <div class="items">
-    <%= f.fields_for :questions do |builder| %>
+    <%= f.simple_fields_for :questions do |builder| %>
       <%= render 'question_fields', :f => builder %>
     <% end %>
   </div>
