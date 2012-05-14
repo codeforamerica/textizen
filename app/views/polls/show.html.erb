@@ -19,7 +19,7 @@
     placeholder for follow-up questions
     <div class="summaryviz">
       <span class='caption'>Frequently mentioned words</span><br>
-      <%= html_histogram(@poll.response_histogram) %>
+      <!-- html_histogram(@poll.response_histogram)-->
     </div>
     
   </div>
@@ -97,7 +97,7 @@
     		<tr>
           <td><%= i+1 %></td>
           <td><%= resp.created_at.strftime("%m/%d/%Y at %I:%M%p")%></td>
-          <td><%= resp.response %><%= if @poll.multi? && choices then raw ".&nbsp;&nbsp;#{choices[resp.response.downcase]} " end %></td>
+          <td><%= resp.response %></td>
           <td><%= number_to_phone(resp.from, :area_code => true) %></td>
         </tr>
     	<% end %>
