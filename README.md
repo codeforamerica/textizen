@@ -1,31 +1,53 @@
-# Text Your City
-Blah blah blah
-
-## <a name="build"></a>Build Status
-[![Build Status](https://secure.travis-ci.org/codeforamerica/cfa_template.png?branch=master)][travis]
+# Text Your City [![Build Status](https://secure.travis-ci.org/codeforamerica/cfa_template.png?branch=master)][travis]
 
 [travis]: http://travis-ci.org/codeforamerica/textyourcity
 
-## <a name="installation"></a>Installation
+## Installation
 
-	$ bundle install
-	$ rake db:migrate
-	$ rake db:seed
+    $ bundle install
+    $ rake db:migrate
+    $ rake db:seed
+
+## Configuring Tropo
+
+1. [Create a Tropo account](https://www.tropo.com/account/register.jsp) if you don't already have one, and login
+2. Create a new WebAPI application. Enter an arbitrary Application ID, e.g. `mytextyourcity`. Enter the URL that powers your app, which is _[Your Domain]/responses/receive_message_, e.g. `http://my.example.com/responses/receive_message`
+3. Take note of your Tropo _Username_, _Password_ and _Outbound Messaging Token_ (for setting up your environment variables in the _Other Stuff_ section)
+4. Lastly, take note of your Application ID by visiting `http://api.tropo.com/v1/applications`, entering your Tropo username/password and take note of the value of your app's `id` from the resulting JSON. It should be a 6-7 digit number.
+
 
 ### Other stuff
-Make sure you have these environment variables set to enable sms
+Make sure you have these environment variables set to enable SMS; you can acquire them in steps 2 and 3 of the _Configuring Tropo_ section above. You can either add them to your $PATH or rename the included `sample.env` to `.env` if using Foreman. 
 
-	$ export TROPO_APP_ID=
-	$ export TROPO_USERNAME=
-	$ export TROPO_PASSWORD=
-	$ export TROPO_TOKEN=
-	$ export TROPO_APP_ID= #get from api.tropo.com/v1/applications
+    export TROPO_USERNAME=
+    export TROPO_PASSWORD=
+    export TROPO_TOKEN=
+    export TROPO_APP_ID=
 
+## Usage
+    
+    $ rails server
 
-## <a name="usage"></a>Usage
-    rails server
+With Foreman:
+    
+    $ foreman run bundle exec rails server -p $PORT
 
-## <a name="contributing"></a>Contributing
+_Remember, deploying locally means that you can't receive Tropo messages via their webhook. See below for deploying to Heroku._
+
+## Deploying to Heroku
+    
+    $ heroku create mytextyourcity --stack cedar
+    $ heroku run rake db:migrate
+    $ heroku config:add TROPO_USERNAME=##############
+    $ heroku config:add TROPO_PASSWORD=##############
+    $ heroku config:add TROPO_TOKEN=#################
+    $ heroku config:add TROPO_APP_ID=################
+
+## Testing
+
+TextYourCity uses the `rspec` gem for testing.  Make sure you create a test database: `textyourcity_test` and set it up with `$ rake environment RAILS_ENV=test db:migrate`. You can run tests by `$ rspec` or `$ bundle exec rspec` (if your global rspec is of a different version).
+
+## Contributing
 In the spirit of [free software][free-sw], **everyone** is encouraged to help
 improve this project.
 
@@ -50,7 +72,7 @@ Here are some ways *you* can contribute:
 [issues]: https://github.com/codeforamerica/cfa_template/issues
 [financially]: https://secure.codeforamerica.org/page/contribute
 
-## <a name="issues"></a>Submitting an Issue
+## Submitting an Issue
 We use the [GitHub issue tracker][issues] to track bugs and features. Before
 submitting a bug report or feature request, check to make sure it hasn't
 already been submitted. You can indicate support for an existing issue by
@@ -61,7 +83,7 @@ bug report should include a pull request with failing specs.
 
 [gist]: https://gist.github.com/
 
-## <a name="pulls"></a>Submitting a Pull Request
+## Submitting a Pull Request
 1. Fork the project.
 2. Create a topic branch.
 3. Implement your feature or bug fix.
@@ -73,12 +95,11 @@ bug report should include a pull request with failing specs.
    version file. (If you want to create your own version for some reason,
    please do so in a separate commit.)
 
-## <a name="versions"></a>Supported Ruby Versions
+## Supported Ruby Versions
 This library aims to support and is [tested against][travis] the following Ruby
 implementations:
 
  * Ruby 1.9.3
-
 
 If something doesn't work on one of these interpreters, it should be considered
 a bug.
@@ -94,7 +115,7 @@ implementation, you will be personally responsible for providing patches in a
 timely fashion. If critical issues for a particular implementation exist at the
 time of a major release, support for that Ruby version may be dropped.
 
-## <a name="copyright"></a>Copyright
+## Copyright
 Copyright (c) 2012 Code for America. See [LICENSE][] for details.
 
 [license]: https://github.com/codeforamerica/cfa_template/blob/master/LICENSE.mkd
