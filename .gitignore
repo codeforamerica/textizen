@@ -17,4 +17,3 @@ heroku-env.sh
 env.sh
 .DS_Store
 /coverage
-tags

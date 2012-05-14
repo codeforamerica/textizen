@@ -42,6 +42,16 @@ ActiveRecord::Schema.define(:version => 20120512234503) do
     t.integer  "parent_option_id"
   end
 
+  create_table "questions", :force => true do |t|
+    t.string   "text"
+    t.integer  "poll_id"
+    t.string   "question_type"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "sequence"
+    t.integer  "parent_option_id"
+  end
+
   create_table "rails_admin_histories", :force => true do |t|
     t.text     "message"
     t.string   "username"
