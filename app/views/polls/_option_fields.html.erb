@@ -1,10 +1,7 @@
-<fieldset class="item">
-  <div>
-    <%= f.label :text, "Option" %>
-    <%= f.text_field :text %>
-    <a href="#" class="remove">remove</a>
-    <%= f.hidden_field :id %>
-    <%= f.hidden_field :_destroy %>
-
-  </div>
-</fieldset>
+<div class="nested-fields">
+  <fieldset>
+    <%= f.input :text %>
+    <%= f.input :value %>
+    <%= link_to_remove_association "remove option", f %>
+  </fieldset>
+</div>

@@ -1,19 +1,11 @@
-
-<fieldset class="item">
-  <div class="control-group">
-    <%= f.label :text, :class => "control-label"%>
-    <div class="controls">
-      <%= f.text_area :text, :rows => 3 %> <span class="help-inline">To be printed on posters</span>
-    </div>
-  </div>
-  <%= f.label :question_type, :class => "control-label"%>
-  <%= f.select(:question_type, options_for_select([['Open','OPEN'],['Multiple Choice','MULTI'],['Yes/No', 'YN']],1)) %>
-  <a href="#" class="remove">remove</a>
-  <%= f.hidden_field :id %>
-  <%= f.hidden_field :_destroy %>
-</fieldset>
-<%= f.fields_for :options do |builder| %>
-  <%= render 'option_fields', :f => builder %>
+<div class="nested-fields">
+<%= f.input :text, :hint => "To be printed on posters" %>
+<%= f.select(:question_type, options_for_select([['Open','OPEN'],['Multiple Choice','MULTI'],['Yes/No', 'YN']],1)) %>
+<%= link_to_remove_association "remove question", f %>
+<div class="options">
+<%= f.simple_fields_for :options do |option| %>
+  <%= render 'option_fields', :f => option %>
 <% end %>
 <%= link_to_add_association 'add option', f, :options %>
-
+</div>
+</div>
