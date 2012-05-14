@@ -7,12 +7,15 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <!--<% if user_signed_in? %>
+	<div class="container">
+
+  <% if user_signed_in? %>
     <%= render "users/top_bar" %>
   <% else %>
     <%= render "layouts/default_top_bar" %>
-  <%end %>-->
+  <%end %>
 <%= yield %>
+</div>
 
 </body>
 </html>

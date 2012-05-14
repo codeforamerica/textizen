@@ -1,8 +1,5 @@
 <% if @poll.multi? && @poll.choices then choices = ActiveSupport::JSON.decode(@poll.choices) end %>
 
-<div class="container">
-
-<%= render 'header' %>
 
 <div class="row">
   <div class="span12 main">
@@ -94,6 +91,4 @@
     	<% end %>
     </table>
   </div>
-</div>
-
 </div>
