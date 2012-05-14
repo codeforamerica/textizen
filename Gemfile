@@ -8,6 +8,9 @@ gem 'rails', '3.2.3'
 gem 'pg'
 # gem 'awesome_nested_fields'
 gem 'cocoon' # for nested models->forms
+gem 'devise'
+gem 'simple_form'
+
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -58,4 +61,3 @@ end
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
 
-gem "devise"
