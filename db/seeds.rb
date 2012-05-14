@@ -5,6 +5,11 @@
 @q = @p.questions.create(:text=>"yes or no?", :question_type=>"YN")
 @q.options.create(:text=>"yes", :value=>"yes")
 @q.options.create(:text=>"no", :value=>"no")
+53.times { 
+    @resp = @q.responses.create(:from => '1'+rand(10 ** 10).to_s, :to => @p.phone, :response => ['y','n'].sample) 
+    @resp.created_at = (rand*7).days.ago
+    @resp.save
+  }
 
 #first create one with a valid tropo phone number for later testing
 #@polls = []
