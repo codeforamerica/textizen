@@ -1,37 +1,23 @@
 <%= simple_form_for @poll, :html => { :class => "form-horizontal"} do |f| %>
-  <fieldset>
-    <div class="control-group">
-      <%= f.label :title, :class => "control-label"%>
-      <div class="controls">
-        <%= f.text_field :title %> <span class="help-inline">This is how we'll refer to the poll in text messages and reports</span>
-      </div>
-    </div>
-  </fieldset>
-  <div class="items">
-    <%= f.simple_fields_for :questions do |builder| %>
-      <%= render 'question_fields', :f => builder %>
-    <% end %>
+  <%= f.input :title, :hint => "This is how we'll refer to the poll in text messages and reports" %>
+  <%= f.simple_fields_for :questions do |builder| %>
+    <%= render 'question_fields', :f => builder %>
+  <% end %>
+  <%= f.input :phone, :disabled => true, :hint => "Automatically assigned" %>
+ 
+  <div class="field" style="display:none;">
+    <%= f.label :start_date %>
+    <%= f.datetime_select :start_date %>
+  </div>
+  <div class="field">
+    <%= f.input :end_date, :as => :date %>
   </div>
   <div class="links">
     <%= link_to_add_association 'add question', f, :questions %>
   </div>
-  <fieldset>
-    <div class="control-group">
-      <%= f.label :phone, :class => "control-label"%>
-      <div class="controls">
-        <input class="input disabled" type="text" disabled="" placeholder="<%= number_to_phone(@poll.phone, :area_code => true) %>"> <span class="help-inline">Automatically assigned</span>
-        
-      </div>
-    </div>
-  </fieldset>
- 
- <div class="field" style="display:none;">
-    <%= f.label :start_date %>
-    <%= f.datetime_select :start_date %>
-  </div>
 
 <div class="form-actions">
-    <%= f.submit :class => 'btn btn-large btn-primary' %>
+    <%= f.button :submit, :class => 'btn btn-large btn-primary' %>
     <%= link_to 'Cancel', @poll, :class => 'btn btn-large' %>
 </div>
 <% end %>
