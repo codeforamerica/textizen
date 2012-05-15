@@ -43,9 +43,7 @@ class PollsController < ApplicationController
   # POST /polls
   # POST /polls.json
   def create
-    puts params[:poll]
     @poll = Poll.new(params[:poll])
-    puts @poll
 #    temp_questions = []
 #    prev_question = nil
 #    params[:questions].each do |q|
@@ -64,6 +62,8 @@ class PollsController < ApplicationController
         format.html { redirect_to @poll, notice: 'Poll was successfully created.' }
         format.json { render json: @poll, status: :created, location: @poll }
       else
+        puts 'errors'
+        puts @poll.errors.full_messages
         format.html { render action: "new" }
         format.json { render json: @poll.errors, status: :unprocessable_entity }
       end
