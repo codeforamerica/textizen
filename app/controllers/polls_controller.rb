@@ -43,7 +43,9 @@ class PollsController < ApplicationController
   # POST /polls
   # POST /polls.json
   def create
+    puts params[:poll]
     @poll = Poll.new(params[:poll])
+    puts @poll
 #    temp_questions = []
 #    prev_question = nil
 #    params[:questions].each do |q|
