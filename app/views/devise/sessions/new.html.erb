@@ -22,13 +22,23 @@
 		</div>
 	</fieldset>
 
-	<% if devise_mapping.rememberable? -%>
-	<%= f.check_box :remember_me %> <%= f.label :remember_me, :class => "control-label" %>
-	<% end -%>
+	<fieldset>
+		<div class="control-group">
+			<% if devise_mapping.rememberable? -%>
+				<%= f.label :remember_me, :class => "checkbox" do %>
+				<div class="controls">
+					<%= f.check_box :remember_me %> Remember me
+				</div>
+				<% end %>
+			<% end -%>
+		</div>
+	</fieldset>
 
-	<div><%= f.submit "Sign in", :class => 'btn btn-large btn-primary' %></div>
+	<div class="form-actions">
+		<%= f.submit "Sign in", :class => 'btn btn-large btn-primary' %>
+		<br>
+		<%= render :partial => "devise/shared/links" %>
+	</div>
 	<% end %>
-
-	<%= render :partial => "devise/shared/links" %>
 
 </div>
