@@ -120,9 +120,6 @@ i {
 	text-align:right;
 }
 
-.header{
-}
-
 .histogram-word{
 	padding-right: 1em;
 }
@@ -136,9 +133,25 @@ i {
 	background-color:#aaa; 
 }
 
-.hero-unit{
-	border: 1px solid #ccc;
+.login-panel{
+	width: 540px;
+	background-color: #DCD9D5;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top: 2em;
 }
+
+.login-panel h2{
+	padding-top: 18px;
+	margin-left: 24px;
+	margin-bottom: 0.6em;
+}
+
+.login-actions{
+	border-top-color: #bbb;
+	background-color:transparent;
+}
+
 
 /*
 tr:nth-of-type(odd) {
