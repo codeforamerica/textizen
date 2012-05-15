@@ -1,18 +1,34 @@
+<div class="login-box">
 
-<h2>Sign in</h2>
+	<h2>Sign in</h2>
 
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
+	<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "form-horizontal"}) do |f| %>
 
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
+	<fieldset>
+		<div class="control-group">
+			<%= f.label :email, :class => "control-label" %>
+			<div class="controls">
+				<%= f.email_field :email %>
+			</div>
+		</div>
+	</fieldset>
 
-  <% if devise_mapping.rememberable? -%>
-    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-  <% end -%>
+	<fieldset>
+		<div class="control-group">
+			<%= f.label :password, :class => "control-label" %>
+			<div class="controls">
+				<%= f.password_field :password %>
+			</div>
+		</div>
+	</fieldset>
 
-  <div><%= f.submit "Sign in" %></div>
-<% end %>
+	<% if devise_mapping.rememberable? -%>
+	<%= f.check_box :remember_me %> <%= f.label :remember_me, :class => "control-label" %>
+	<% end -%>
 
-<%= render :partial => "devise/shared/links" %>
+	<div><%= f.submit "Sign in", :class => 'btn btn-large btn-primary' %></div>
+	<% end %>
+
+	<%= render :partial => "devise/shared/links" %>
+
+</div>

@@ -135,6 +135,11 @@ i {
 	height: 14px;
 	background-color:#aaa; 
 }
+
+.hero-unit{
+	border: 1px solid #ccc;
+}
+
 /*
 tr:nth-of-type(odd) {
   background-color:#F1DCA7;
