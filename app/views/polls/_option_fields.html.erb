@@ -6,6 +6,8 @@
     <%= f.simple_fields_for :follow_up do |followup| %>
       <%= render 'question_fields', :f => followup %>
     <% end %>
-    <%= link_to_add_association 'add followup', f, :follow_up %>
   </fieldset>
+  <div class="links">
+    <%= link_to_add_association 'add followup', f, :follow_up %>
+  </div>
 </div>
