@@ -3,8 +3,11 @@
   <%= f.simple_fields_for :questions do |question| %>
     <%= render 'question_fields', :f => question %>
   <% end %>
-
-  <%= f.input :phone, :hint => "Automatically assigned" %>
+  <% unless Rails.env.development? %>
+    <%= f.input :phone, :hint => "Automatically assigned", :disabled => true %>
+  <% else %>
+    <%= f.input :phone, :hint => "Enter test phone number" %>
+  <% end %>
  
   <div class="field" style="display:none;">
     <%= f.label :start_date %>
