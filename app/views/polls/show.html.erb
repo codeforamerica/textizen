@@ -81,6 +81,18 @@
           <ul>
             <% q.options.each do |o| %>
               <li><%= o.value %> = <%= o.text %></li>
+              <% if o.follow_up %>
+                <ul>
+                  <li><%= o.follow_up.text %> (<%= o.follow_up.question_type %>)</li>
+                  <% unless o.follow_up.options.empty? %>
+                    <ul>
+                      <% o.follow_up.options.each do |o| %>
+                        <li><%= o.value %> = <%= o.text %></li>
+                      <% end %>
+                    </ul>
+                  <% end %>
+                </ul>
+              <% end %>
             <% end %>
           </ul>
         <% end %>
