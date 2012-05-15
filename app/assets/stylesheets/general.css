@@ -135,6 +135,10 @@ i {
 	height: 14px;
 	background-color:#aaa; 
 }
+.nested-fields {
+  border-left: 2px solid #ccc;
+  padding-left: 10px;
+}
 /*
 tr:nth-of-type(odd) {
   background-color:#F1DCA7;
