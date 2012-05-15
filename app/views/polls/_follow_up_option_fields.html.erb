@@ -1,0 +1,10 @@
+<div class="nested-fields">
+  <fieldset>
+    <%= f.input :text %>
+    <%= f.input :value %>
+    <%= link_to_remove_association "remove option", f %>
+    <%= f.simple_fields_for :follow_up do |followup| %>
+      <%= render 'question_fields', :f => followup %>  
+    <% end %>
+  </fieldset>
+</div>
