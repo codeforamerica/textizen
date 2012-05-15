@@ -7,7 +7,7 @@ gem 'rails', '3.2.3'
 
 gem 'pg'
 # gem 'awesome_nested_fields'
-gem 'cocoon' # for nested models->forms
+gem 'cocoon', '1.0.21' # for nested models->forms
 gem 'devise'
 gem 'simple_form'
 
