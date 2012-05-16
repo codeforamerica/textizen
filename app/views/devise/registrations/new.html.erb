@@ -32,6 +32,18 @@
 		</div>
 	</fieldset>
 
+	<fieldset>
+		<div class="control-group">
+			<% if devise_mapping.rememberable? -%>
+				<%= f.label :remember_me, :class => "checkbox" do %>
+				<div class="controls">
+					<%= f.check_box :remember_me %> Remember me
+				</div>
+				<% end %>
+			<% end -%>
+		</div>
+	</fieldset>
+
 	<div class="form-actions login-actions">
 		<%= f.submit "Create account", :class => 'btn btn-large btn-primary' %>
 		<br>
