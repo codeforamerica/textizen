@@ -120,7 +120,12 @@ i {
 	text-align:right;
 }
 
-.header{
+#tag {
+    position: fixed;
+    right: 25px;
+    top: -5px;
+    width: 100px;
+    z-index: 2147483647;
 }
 
 .histogram-word{

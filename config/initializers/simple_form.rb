@@ -1,5 +1,6 @@
 # Use this setup block to configure all options available in SimpleForm.
 SimpleForm.setup do |config|
+
   # Wrappers are used by the form builder to generate a
   # complete input. You can remove any component from the
   # wrapper, change the order or even add your own to the
@@ -52,7 +53,7 @@ SimpleForm.setup do |config|
     b.wrapper :tag => 'div', :class => 'controls' do |ba|
       ba.use :input
       ba.use :error, :wrap_with => { :tag => 'span', :class => 'help-inline' }
-      ba.use :hint,  :wrap_with => { :tag => 'p', :class => 'help-block' }
+      ba.use :hint,  :wrap_with => { :tag => 'span', :class => 'help-inline' }
     end
   end
 
@@ -64,7 +65,7 @@ SimpleForm.setup do |config|
       input.wrapper :tag => 'div', :class => 'input-prepend' do |prepend|
         prepend.use :input
       end
-      input.use :hint,  :wrap_with => { :tag => 'span', :class => 'help-block' }
+      input.use :hint,  :wrap_with => { :tag => 'span', :class => 'help-inline' }
       input.use :error, :wrap_with => { :tag => 'span', :class => 'help-inline' }
     end
   end
@@ -77,7 +78,7 @@ SimpleForm.setup do |config|
       input.wrapper :tag => 'div', :class => 'input-append' do |append|
         append.use :input
       end
-      input.use :hint,  :wrap_with => { :tag => 'span', :class => 'help-block' }
+      input.use :hint,  :wrap_with => { :tag => 'span', :class => 'help-inline' }
       input.use :error, :wrap_with => { :tag => 'span', :class => 'help-inline' }
     end
   end

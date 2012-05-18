@@ -1,5 +1,5 @@
-<%= simple_form_for @poll do |f| %>
-  <%= f.input :title, :hint => "This is how we'll refer to the poll in text messages and reports" %>
+<%= simple_form_for @poll, :html => { :class => "form-horizontal"} do |f| %>
+  <%= f.input :title, :hint => "How we'll refer to the poll in text messages and reports" %>
   <%= f.simple_fields_for :questions do |question| %>
     <%= render 'question_fields', :f => question %>
   <% end %>
