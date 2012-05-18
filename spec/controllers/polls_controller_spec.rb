@@ -24,7 +24,7 @@ describe PollsController do
       put :end, {:id=>@poll.id}
       p @poll.end_date
       p @poll.running?
-      @poll.running?.should be_true
+      @poll.running?.should be_false
     end
   end
 
