@@ -22,14 +22,6 @@ TROPO_SMS_RESPONSE_N = {"session"=>{"id"=>"f33027a075e4381b8cd25a77b4523ed1", "a
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 RSpec.configure do |config|
-  # ## Mock Framework
-  #
-  # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
-  #
-  # config.mock_with :mocha
-  # config.mock_with :flexmock
-  # config.mock_with :rr
-
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
@@ -43,7 +35,9 @@ RSpec.configure do |config|
   # rspec-rails.
   config.infer_base_class_for_anonymous_controllers = false
 
+  # For testing devise
   config.include Devise::TestHelpers, :type => :controller
+  config.extend ControllerMacros, :type => :controller
 end
 
 def fixture_path

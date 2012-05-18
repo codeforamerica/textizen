@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe PollsController do
+  login_user
+
   #, "#show" do
   before(:each) do
     @poll = FactoryGirl.create(:poll) #:user=>controller.current_user
