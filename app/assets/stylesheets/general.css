@@ -60,6 +60,13 @@ i {
 	margin-right: 0.3em;
 }
 
+hr {
+	border:0;
+	height: 1px;
+	color: #DDDDDD;
+	background-color: #DDDDDD;
+}
+
 /* Polls page */
 .dashboardresponsecount{
 	font-size:200%;

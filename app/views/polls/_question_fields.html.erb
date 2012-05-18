@@ -1,7 +1,7 @@
 <div class="nested-fields">
   <%= f.input :text, :hint => "To be printed on posters" %>
   <%= f.select(:question_type, options_for_select([['Open','OPEN'],['Multiple Choice','MULTI'],['Yes/No', 'YN']],1)) %>
-  <%= link_to_remove_association "remove question", f %>
+  <%= link_to_remove_association "Remove question", f %>
   <div class="options">
     <%= f.simple_fields_for :options do |option| %>
       <%= render 'option_fields', :f => option %>
