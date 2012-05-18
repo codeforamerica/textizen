@@ -18,12 +18,9 @@ describe PollsController do
   
   describe "#end" do
     it "should end a running poll" do
-      p @poll.end_date
-      p @poll.running?
       @poll.running?.should be_true
       put :end, {:id=>@poll.id}
-      p @poll.end_date
-      p @poll.running?
+      @poll.reload
       @poll.running?.should be_false
     end
   end
