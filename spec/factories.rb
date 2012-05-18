@@ -1,5 +1,11 @@
 FactoryGirl.define do
   
+  factory :user do
+    email "test@codeforamerica.org"
+    password "testpass"
+    password_confirmation "testpass"
+  end
+
   factory :poll do
     start_date { Time.now - 1.week }
     end_date { Time.now + 1.week }
