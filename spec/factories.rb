@@ -8,9 +8,15 @@ FactoryGirl.define do
     #user
     
     factory :poll_multi do
+      after_create do |poll, evaluator|
+        FactoryGirl.create(:question_multi,  poll: poll)
+      end
     end
     
     factory :poll_open do
+      after_create do |poll, evaluator|
+        FactoryGirl.create(:question,  poll: poll)
+      end
     end
 
     factory :poll_yn do
