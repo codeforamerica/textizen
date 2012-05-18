@@ -5,6 +5,7 @@ describe Poll do
   it { should have_many(:questions) }
   it { should have_many(:responses) }
   it { should belong_to(:user) }
+#  it { should authenticate_user }
   
 
 
@@ -22,7 +23,7 @@ describe Poll do
     end
   end
 
-  describe "check poll open function" do
+  describe "check poll running function" do
     it "should return true for an open poll" do
       @poll = FactoryGirl.create(:poll)
       @poll.running?.should be_true
@@ -32,7 +33,6 @@ describe Poll do
       @poll.running?.should be_false
     end
   end
-
 
   describe "check get_poll_by_phone" do
     it "should find a poll by phone number" do

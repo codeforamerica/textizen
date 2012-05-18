@@ -62,7 +62,6 @@ class PollsController < ApplicationController
         format.html { redirect_to @poll, notice: 'Poll was successfully created.' }
         format.json { render json: @poll, status: :created, location: @poll }
       else
-        puts 'errors'
         puts @poll.errors.full_messages
         format.html { render action: "new" }
         format.json { render json: @poll.errors, status: :unprocessable_entity }
