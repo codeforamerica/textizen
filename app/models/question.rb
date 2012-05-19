@@ -12,15 +12,15 @@ class Question < ActiveRecord::Base
   validates_presence_of :question_type
   
   def multi?
-    return self.question_type != 'MULTI'
+    return self.question_type == 'MULTI'
   end
 
   def yn?
-    return self.question_type != 'YN'
+    return self.question_type == 'YN'
   end
 
   def open?
-    return self.question_type != 'OPEN'
+    return self.question_type == 'OPEN'
   end
 
 end
