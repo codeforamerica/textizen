@@ -21,26 +21,41 @@ class ResponsesController < ApplicationController
     if @poll
       puts "poll found"
       if @poll.running?
-        @response = @poll.responses.create(:from => @from, :response => @response)
-        puts "response created"
-        render :text => say("Thank you for responding to our poll on %s. Your response has been recorded." % @poll.title)
+        if @poll.questions.length > 1
+          @poll.questions_ordered.each do |q|
+            
+
+
+          end
+        else
+          puts "poll has no questions"
+          error
+        end
+
+        #@response = @poll.responses.create(:from => @from, :response => @response)
+        #puts "response created"
+        #say("Thank you for responding to our poll on %s. Your response has been recorded." % @poll.title)
       else 
-        render :text => reject("poll on %s not active" % @poll.title)
+        reject("poll is not active")
       end
     else
       puts "poll not found"
-      render :text => reject("poll not found")
+      reject("poll not found")
     end
   end
 
   def say(message)
     puts "say %s" % message
-    return (Tropo::Generator.say message)
+    render :text => (Tropo::Generator.say message)
   end
 
   # reject the message
   def reject(message)
     return say("Sorry, %s" % message)
+  end
+
+  def error
+    reject("there is something wrong with this poll")
   end
 
 end

@@ -11,6 +11,9 @@ class Poll < ActiveRecord::Base
   before_destroy :destroy_phone_number
 
 
+  def questions_ordered
+    return self.questions.order(:sequence)
+  end
   def running?
     return self.start_date < Time.now && self.end_date > Time.now
   end
