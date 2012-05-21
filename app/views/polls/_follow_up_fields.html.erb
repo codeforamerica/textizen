@@ -1,5 +1,5 @@
 <div class="nested-fields">
-  <%= f.input :text, :hint => "to be sent to user" %>
+  <%= f.input :text, :hint => "User reads this message" %>
   <%= f.select(:question_type, options_for_select([['Open','OPEN'],['Multiple Choice','MULTI'],['Yes/No', 'YN']],1)) %>
   <%= link_to_remove_association "remove followup", f %>
   <div class="options">
