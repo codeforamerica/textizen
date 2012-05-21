@@ -66,10 +66,22 @@ FactoryGirl.define do
         FactoryGirl.create_list(:response, evaluator.response_count, question: question)
       end
     end
-
+    
     factory :question_multi do
       question_type 'MULTI'
 #      options '{ "a":{"val":"Wal-mart"}, "b":{"val":"Bi-rite"}, "c":{"val":"Bodega"} }'
+    end
+
+    factory :question_with_follow_up do
+      question_type 'YN'
+      text "Would you ride light rail along the boulevard?"
+      after(:create) do |question, evaluator|
+        @y = FactoryGirl.create(:option_y, question: question) 
+        @fup = FactoryGirl.create(:question)
+        @y.follow_up = @fup
+        @y.save
+        FactoryGirl.create(:option_n, question: question) 
+      end
     end
 
     factory :question_yn do
@@ -87,8 +99,12 @@ FactoryGirl.define do
     response 'I buy groceries IN YOUR FACE'
     question
     
-    factory :response_y { response 'y' }
-    factory :response_n { response 'n' }
+    factory :response_y do
+      response 'y'
+    end
+    factory :response_n do
+      response 'n'
+    end
   end
 
   factory :option do
