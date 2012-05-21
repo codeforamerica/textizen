@@ -20,7 +20,7 @@ class Question < ActiveRecord::Base
     return false
   end
   # determines if a follow_up was triggered by a past response
-  def follow_up_triggered(phone)?
+  def follow_up_triggered?(phone)
     @follow = self.get_followup
     @responses = self.responses.where(:from=>phone)
     if @follow && @responses.length > 0
