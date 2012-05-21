@@ -14,25 +14,25 @@ FactoryGirl.define do
     #user
     
     factory :poll_multi do
-      after_create do |poll, evaluator|
+      after(:create) do |poll, evaluator|
         FactoryGirl.create(:question_multi,  poll: poll)
       end
     end
     
     factory :poll_open do
-      after_create do |poll, evaluator|
+      after(:create) do |poll, evaluator|
         FactoryGirl.create(:question,  poll: poll)
       end
     end
 
     factory :poll_yn do
-      after_create do |poll, evaluator|
+      after(:create) do |poll, evaluator|
         FactoryGirl.create(:question_yn,  poll: poll)
       end
     end
 
     factory :poll_with_question do
-      after_create do |poll, evaluator|
+      after(:create) do |poll, evaluator|
         FactoryGirl.create(:question,  poll: poll)
       end
     end
@@ -57,8 +57,14 @@ FactoryGirl.define do
     question_type 'OPEN'
     poll
 
+    # factory for question with responses, pass in response_count to create more responses
     factory :question_with_responses do
-
+      ignore do
+        response_count 1
+      end
+      after(:create) do |question, evaluator|
+        FactoryGirl.create_list(:response, evaluator.response_count, question: question)
+      end
     end
 
     factory :question_multi do
@@ -69,7 +75,7 @@ FactoryGirl.define do
     factory :question_yn do
       question_type 'YN'
       text "Would you ride light rail along the boulevard?"
-      after_create do |question, evaluator|
+      after(:create) do |question, evaluator|
         FactoryGirl.create(:option_y, question: question) 
         FactoryGirl.create(:option_n, question: question) 
       end
@@ -79,6 +85,10 @@ FactoryGirl.define do
   factory :response do
     from {'1'+rand(10 ** 10).to_s}
     response 'I buy groceries IN YOUR FACE'
+    question
+    
+    factory :response_y { response 'y' }
+    factory :response_n { response 'n' }
   end
 
   factory :option do
