@@ -17,8 +17,22 @@ describe Question do
   end 
   
   describe 'check followup functions' do
+    it 'should return false for get_follow_up' do
+      pending
+    end
+    # create question with followup
+    it 'should return a follow_up for get_follow_up' do
+      pending
+    end
 
+    it 'untriggered follow-up should return false for follow_up_triggered' do
+      pending
+    end
 
+    # create question with answered follow_up
+    it 'should return true for follow_up_triggered' do
+      pending
+    end
   end
 
   describe 'check question type helper booleans' do
