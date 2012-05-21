@@ -5,4 +5,9 @@ class Option < ActiveRecord::Base
   validates_presence_of :text, :value
 
   accepts_nested_attributes_for :follow_up, :reject_if => :all_blank, :allow_destroy => true
+
+  # determines if a response matched the option, with handling for yes/y/No/n 
+  def match?(response)
+    return response.text[0].downcase.match(self.value)
+  end  
 end

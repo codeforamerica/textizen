@@ -15,6 +15,11 @@ describe Question do
     it { should validate_presence_of(:poll_id) }
     it { should validate_presence_of(:question_type) }
   end 
+  
+  describe 'check followup functions' do
+
+
+  end
 
   describe 'check question type helper booleans' do
     it 'should return true for YN if a YN poll was created' do

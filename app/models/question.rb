@@ -11,6 +11,25 @@ class Question < ActiveRecord::Base
   validates :question_type, :inclusion => { :in => %w(MULTI OPEN YN), :message => "%{value} is not a valid question type" }  
   validates_presence_of :question_type
   
+  def get_followup
+    if self.options.length > 0
+      self.options.each do |o|
+        return o.follow_up if o.follow_up
+      end
+    end
+    return false
+  end
+  # determines if a follow_up was triggered by a past response
+  def follow_up_triggered(phone)?
+    @follow = self.get_followup
+    @responses = self.responses.where(:from=>phone)
+    if @follow && @responses.length > 0
+      @responses.each do |r|
+        return @follow.match?(r)
+      end
+    end
+    return false
+  end
   def multi?
     return self.question_type == 'MULTI'
   end
