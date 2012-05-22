@@ -16,6 +16,28 @@ describe Question do
     it { should validate_presence_of(:question_type) }
   end 
   
+  describe '#valid_response?' do
+    before(:each) do
+      @question = FactoryGirl.create(:question_yn)
+    end
+    context 'valid y response' do
+      it 'should return true for #valid_response?' do
+        @question.valid_response?('y').should == true
+      end
+    end
+
+    context 'valid YES response' do
+      it 'should return true for #valid_response?' do
+        @question.valid_response?('YES').should == true
+      end
+
+    end
+    context 'invalid POTATOE response' do
+      it 'should return true for #valid_response?' do
+        @question.valid_response?('POTATOE').should == false
+      end
+    end
+  end
   describe 'followup functions' do
     context "has no followup" do
       it 'should return false for get_follow_up' do

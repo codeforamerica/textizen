@@ -39,6 +39,13 @@ class Question < ActiveRecord::Base
   end
 
   def valid_response?(response)
+    if self.question_type == 'OPEN'
+      return true
+    else
+      self.options.each do |o|
+        return true if o.match?(response)
+      end
+    end
     false
   end
 
