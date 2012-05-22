@@ -31,7 +31,7 @@ class ResponsesController < ApplicationController
                 if q.send_follow_up?(@response)
                   send_follow_up(q)
                 else
-                  send_next_question_or_thanks(@poll, @from, @response)
+                  send_next_question_or_thanks(@poll, @from)
                 end
                 return
               else
@@ -39,8 +39,8 @@ class ResponsesController < ApplicationController
                 return
               end
             elsif q.get_follow_up && q.follow_up_triggered?(@from) #has a previous response from this person
-              q.get_follow_up.responses.create(phone: @from, response: @response)
-              send_next_question_or_thanks(@poll)
+              q.get_follow_up.responses.create(from: @from, response: @response)
+              send_next_question_or_thanks(@poll, @from)
               return
             end
           end
@@ -63,16 +63,21 @@ class ResponsesController < ApplicationController
   end
 
   # sends the next question in the poll, or says thanks
-  def send_next_question_or_thanks(poll)
-    if poll.send_follow_up?
-      send_follow_up(poll)
+  def send_next_question_or_thanks(poll, from)
+    qnext = poll.get_next_question(from)
+    if qnext
+      send_question(qnext)
     else
       say("Thank you for responding to our poll on %s. Your response has been recorded." % @poll.title)
     end
   end
   
+  def send_question(q)
+    say(q.to_sms)
+  end
+
   def send_follow_up(q)
-    say("Follow-up question: %s" % q.get_follow_up.text)
+    say("Follow-up question: %s" % q.to_sms)
   end
 
   def say(message)
