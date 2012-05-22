@@ -23,10 +23,10 @@ class ResponsesController < ApplicationController
         puts "poll running"
         if @poll.questions.length > 1 #and has questions
           @poll.questions_ordered.each do |q|
-            if q.responses.where(from: @from).length == 0 #and has no responses from this person
+            if !q.answered?(@from) #and has no responses from this person
               puts "no previous responses to question"
               if q.valid_response?(@response) #make sure it's  valid response
-                puts "valid response"
+                puts "valid response, creating new response"
                 q.responses.create(from: @from, response: @response)
                 if q.send_follow_up?(@response)
                   send_follow_up(q)
@@ -38,10 +38,13 @@ class ResponsesController < ApplicationController
                 reject('invalid response')
                 return
               end
-            elsif q.get_follow_up && q.follow_up_triggered?(@from) #has a previous response from this person
+            elsif q.get_follow_up && !q.get_follow_up.answered?(@from) && q.follow_up_triggered?(@from)
+              puts "previous response detected and follow-up triggered but not answered"
               q.get_follow_up.responses.create(from: @from, response: @response)
               send_next_question_or_thanks(@poll, @from)
               return
+            else
+              puts "question already answered by this person"
             end
           end
         else
@@ -66,6 +69,7 @@ class ResponsesController < ApplicationController
   def send_next_question_or_thanks(poll, from)
     qnext = poll.get_next_question(from)
     if qnext
+      puts 'sending next question'
       send_question(qnext)
     else
       say("Thank you for responding to our poll on %s. Your response has been recorded." % @poll.title)
