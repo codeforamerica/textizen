@@ -83,7 +83,7 @@ describe ResponsesController do
 
       describe "sms with valid n response" do
         it "should create a new response" do
-          post :receive_message, TROPO_SMS_RESPONSE_n
+          post :receive_message, TROPO_SMS_RESPONSE_N
           @poll.responses.length.should eq 1
         end
       end
