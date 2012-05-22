@@ -9,6 +9,10 @@ describe Poll do
   
 
 
+  describe "check get_next_question" do
+    pending
+  end
+
   describe "check phone number normalizer" do
     it "should return 16661231234" do
       result = Poll.normalize_phone('+16661231234')

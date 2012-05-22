@@ -23,6 +23,16 @@ class Poll < ActiveRecord::Base
     self.end_date = Time.now
   end
 
+  # returns the next unanswered question for this person
+  def get_next_question(phone)
+    if self.questions.length > 0
+      self.questions_ordered.each do |q|
+        return q if q.responses.where(from: phone).length == 0
+      end
+    end
+    false
+  end
+
   def set_new_phone_number
     puts 'set new phone number'
     self.phone = self.phone || get_phone_number

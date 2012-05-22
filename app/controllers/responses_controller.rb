@@ -28,7 +28,11 @@ class ResponsesController < ApplicationController
               if q.valid_response?(@response) #make sure it's  valid response
                 puts "valid response"
                 q.responses.create(from: @from, response: @response)
-                send_next_question_or_thanks(@poll)
+                if q.send_follow_up?(@response)
+                  send_follow_up(q)
+                else
+                  send_next_question_or_thanks(@poll, @from, @response)
+                end
                 return
               else
                 reject('invalid response')
@@ -60,7 +64,15 @@ class ResponsesController < ApplicationController
 
   # sends the next question in the poll, or says thanks
   def send_next_question_or_thanks(poll)
-    say("Thank you for responding to our poll on %s. Your response has been recorded." % @poll.title)
+    if poll.send_follow_up?
+      send_follow_up(poll)
+    else
+      say("Thank you for responding to our poll on %s. Your response has been recorded." % @poll.title)
+    end
+  end
+  
+  def send_follow_up(q)
+    say("Follow-up question: %s" % q.get_follow_up.text)
   end
 
   def say(message)
