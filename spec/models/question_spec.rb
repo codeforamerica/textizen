@@ -19,8 +19,8 @@ describe Question do
   describe 'followup functions' do
     context "has no followup" do
       it 'should return false for get_follow_up' do
-        @question = FactoryGirl.create(:question)
-        @question.get_follow_up.should == false
+        question = FactoryGirl.create(:question)
+        question.get_follow_up.should == false
       end
     end
 
@@ -36,12 +36,20 @@ describe Question do
     end
 
     it 'should return false for follow_up_triggered when no follow-up triggered' do
-      pending
+      question = FactoryGirl.create(:question)
+      follow_up = FactoryGirl.create(:question)
+      option = FactoryGirl.create(:option_y, question: question, follow_up: follow_up)
+      question.responses.create(from: '12223334444', response: 'n')
+      question.follow_up_triggered?('12223334444').should eq false
     end
 
     # create question with answered follow_up
     it 'should return true for follow_up_triggered' do
-      pending 
+      question = FactoryGirl.create(:question)
+      follow_up = FactoryGirl.create(:question)
+      option = FactoryGirl.create(:option_y, question: question, follow_up: follow_up)
+      question.responses.create(from: '12223334444', response: 'y')
+      question.follow_up_triggered?('12223334444').should eq true
     end
   end
 

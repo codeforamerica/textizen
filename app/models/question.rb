@@ -22,10 +22,10 @@ class Question < ActiveRecord::Base
 
   # determines if a follow_up was triggered by a past response
   def follow_up_triggered?(phone)
-    @follow = self.get_followup
+    @follow = self.get_follow_up
     @response = self.responses.where(:from=>phone).last
     if @follow && @response
-      return true if @follow.parent_option.match(@response)
+      return true if @follow.parent_option.match?(@response.response)
     end
     false
   end

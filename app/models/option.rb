@@ -8,10 +8,13 @@ class Option < ActiveRecord::Base
 
   # determines if a response matched the option, with handling for yes/y/No/n 
   def match?(text)
-    if text[0].downcase.match(self.value)
-      return true
-    elsif text.downcase.match(self.text)
-      return true
+    puts "matching #{text} against #{self.value} or #{self.text}"
+    if text
+      if text[0].downcase.match(self.value)
+        return true
+      elsif text.downcase.match(self.text)
+        return true
+      end
     end
     false
   end  

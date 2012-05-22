@@ -28,7 +28,7 @@ class ResponsesController < ApplicationController
               end
               # no responses yet for this question from this person
             elsif q.get_follow_up && q.follow_up_triggered
-              q.get_follow_up.responses.create(:phone=>@from)
+              q.get_follow_up.responses.create(phone: @from, response: @response)
               return
             end
           end
