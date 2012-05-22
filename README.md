@@ -5,6 +5,7 @@
 ## Installation
 
     $ bundle install
+    $ rake db:create
     $ rake db:migrate
     $ rake db:seed
 
@@ -37,6 +38,7 @@ _Remember, deploying locally means that you can't receive Tropo messages via the
 ## Deploying to Heroku
     
     $ heroku create mytextyourcity --stack cedar
+    $ git push heroku master
     $ heroku run rake db:migrate
     $ heroku config:add TROPO_USERNAME=##############
     $ heroku config:add TROPO_PASSWORD=##############
