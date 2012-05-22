@@ -5,7 +5,6 @@ class ResponsesController < ApplicationController
     puts params
     @session = Tropo::Generator.parse params
     puts @session
-
     
     # if params[:session][:to][:network] == "IM" #debug mode
     @to = @session[:session][:to][:id]
@@ -23,9 +22,15 @@ class ResponsesController < ApplicationController
       if @poll.running?
         if @poll.questions.length > 1
           @poll.questions_ordered.each do |q|
-            
-
-
+            if !q.responses.where(:phone => @from)
+              if q.validate_response?(@response)
+                q.responses.create(phone: @from, response: @response)
+              end
+              # no responses yet for this question from this person
+            elsif q.get_follow_up && q.follow_up_triggered
+              q.get_follow_up.responses.create(:phone=>@from)
+              return
+            end
           end
         else
           puts "poll has no questions"
