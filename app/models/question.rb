@@ -65,4 +65,18 @@ class Question < ActiveRecord::Base
     return self.question_type == 'OPEN'
   end
 
+  #returns a nicely formatted string for sending via sms
+  def to_sms
+    ret = self.text
+    if self.question_type == 'YN'
+      ret += 'Reply with yes or no'
+    elsif self.question_type == 'MULTI'
+      ret += 'Reply with the letter of your choice: '
+      self.options.each do |o|
+        ret += o.value + '. '
+        ret += o.text
+      end
+    end
+    return ret
+  end
 end
