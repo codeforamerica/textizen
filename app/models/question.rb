@@ -30,6 +30,14 @@ class Question < ActiveRecord::Base
     false
   end
 
+  def send_follow_up?(response)
+    @follow = self.get_follow_up
+    if @follow
+      return true if @follow.parent_option.match?(response)
+    end
+    false
+  end
+
   def valid_response?(response)
     false
   end

@@ -22,6 +22,10 @@ describe Question do
         question = FactoryGirl.create(:question)
         question.get_follow_up.should == false
       end
+      it 'should return false for send_follow_up?' do
+        question = FactoryGirl.create(:question)
+        question.send_follow_up?('y').should == false
+      end
     end
 
     # create question with followup
@@ -32,6 +36,25 @@ describe Question do
         option = FactoryGirl.create(:option, :question => question, :follow_up => follow_up)
 
         question.get_follow_up.should eq(follow_up)
+      end
+
+      context "response matches followup value" do
+        it 'should return true for #get_follow_up' do
+          question = FactoryGirl.create(:question)
+          follow_up = FactoryGirl.create(:question)
+          option = FactoryGirl.create(:option_y, :question => question, :follow_up => follow_up)
+          question.send_follow_up?('y').should == true
+        end
+      end
+
+      context "response does not match followup value" do
+        it 'should return false for #get_follow_up' do
+          question = FactoryGirl.create(:question)
+          follow_up = FactoryGirl.create(:question)
+          option = FactoryGirl.create(:option_y, :question => question, :follow_up => follow_up)
+          question.send_follow_up?('n').should == false
+          
+        end
       end
     end
 
