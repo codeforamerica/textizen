@@ -30,6 +30,10 @@ class Question < ActiveRecord::Base
     false
   end
 
+  def valid_response?(response)
+    false
+  end
+
   def parent_option
     Option.find(self.parent_option_id)
   end
