@@ -112,4 +112,18 @@ describe Question do
       @q.open?.should == true
     end
   end
+
+  describe '#answered?' do
+    before :each do
+      @from = '15553331234'
+      @question = FactoryGirl.create(:question)
+    end
+    it 'should return true if question was answered by this person' do
+      @question.responses.create(from: @from, response: 'hello')
+      @question.answered?(@from).should == true
+    end
+    it 'should return false if question was not answered by this person' do
+      @question.answered?(@from).should == false 
+    end
+  end
 end
