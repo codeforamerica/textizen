@@ -6,10 +6,7 @@ describe ResponsesController do
       before :each do
         @p = FactoryGirl.create(:poll, :phone=>'14153334444')
         @q = @p.questions.create(:text=>"Would you ride along the blvd?", :question_type=>"YN")
-        @y = @q.options.create(:text=>"yes", :value=>"y")
-        @fup = Question.create(:text=>"Wyx?", :question_type=>"OPEN")
-        @y.follow_up = @fup
-        @y.save
+        @y = @q.options.create(:text=>"yes", :value=>"y", :follow_up => FactoryGirl.create(:question))
         @q.options.create(:text=>"no", :value=>"n")
         @qn = @p.questions.create(:text=>"where are you from?", :question_type=>"OPEN")
       end
@@ -34,7 +31,7 @@ describe ResponsesController do
         it "should save a responses for the followup and send the next question" do
           post :receive_message, TROPO_SMS_RESPONSE_Y
           post :receive_message, TROPO_SMS_RESPONSE_OPEN
-          @fup.responses.length.should eq 1
+          @y.follow_up.responses.length.should eq 1
           pending "check that next question was sent"
         end
       end
@@ -54,7 +51,7 @@ describe ResponsesController do
           post :receive_message, TROPO_SMS_RESPONSE_OPEN
           post :receive_message, TROPO_SMS_RESPONSE_OPEN
           @q.responses.length.should eq 1
-          @fup.responses.length.should eq 1
+          @q.get_follow_up.responses.length.should eq 1
           @qn.responses.length.should eq 1
           pending "check that we said thanks"
         end

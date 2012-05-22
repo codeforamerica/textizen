@@ -19,16 +19,24 @@ class ResponsesController < ApplicationController
 
     if @poll
       puts "poll found"
-      if @poll.running?
-        if @poll.questions.length > 1
+      if @poll.running? #if the poll is running
+        puts "poll running"
+        if @poll.questions.length > 1 #and has questions
           @poll.questions_ordered.each do |q|
-            if !q.responses.where(:phone => @from)
-              if q.validate_response?(@response)
-                q.responses.create(phone: @from, response: @response)
+            if q.responses.where(from: @from).length == 0 #and has no responses from this person
+              puts "no previous responses to question"
+              if q.valid_response?(@response) #make sure it's  valid response
+                puts "valid response"
+                q.responses.create(from: @from, response: @response)
+                send_next_question_or_thanks(@poll)
+                return
+              else
+                reject('invalid response')
+                return
               end
-              # no responses yet for this question from this person
-            elsif q.get_follow_up && q.follow_up_triggered
+            elsif q.get_follow_up && q.follow_up_triggered?(@from) #has a previous response from this person
               q.get_follow_up.responses.create(phone: @from, response: @response)
+              send_next_question_or_thanks(@poll)
               return
             end
           end
@@ -36,17 +44,23 @@ class ResponsesController < ApplicationController
           puts "poll has no questions"
           error
         end
+        puts "end of active poll tree"
 
         #@response = @poll.responses.create(:from => @from, :response => @response)
         #puts "response created"
-        #say("Thank you for responding to our poll on %s. Your response has been recorded." % @poll.title)
       else 
         reject("poll is not active")
+        puts "poll inactive"
       end
     else
       puts "poll not found"
       reject("poll not found")
     end
+  end
+
+  # sends the next question in the poll, or says thanks
+  def send_next_question_or_thanks(poll)
+    say("Thank you for responding to our poll on %s. Your response has been recorded." % @poll.title)
   end
 
   def say(message)
@@ -56,7 +70,7 @@ class ResponsesController < ApplicationController
 
   # reject the message
   def reject(message)
-    return say("Sorry, %s" % message)
+    say("Sorry, %s" % message)
   end
 
   def error
