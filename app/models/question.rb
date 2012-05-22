@@ -65,6 +65,10 @@ class Question < ActiveRecord::Base
     return self.question_type == 'OPEN'
   end
 
+  def answered?(from)
+    return self.responses.where(from: from).length > 0
+  end
+
   #returns a nicely formatted string for sending via sms
   def to_sms
     ret = self.text
