@@ -16,22 +16,32 @@ describe Question do
     it { should validate_presence_of(:question_type) }
   end 
   
-  describe 'check followup functions' do
-    it 'should return false for get_follow_up' do
-      pending
-    end
-    # create question with followup
-    it 'should return a follow_up for get_follow_up' do
-      pending
+  describe 'followup functions' do
+    context "has no followup" do
+      it 'should return false for get_follow_up' do
+        @question = FactoryGirl.create(:question)
+        @question.get_follow_up.should == false
+      end
     end
 
-    it 'untriggered follow-up should return false for follow_up_triggered' do
+    # create question with followup
+    context "option has a followup question" do
+      it 'should return a follow_up for get_follow_up' do
+        question = FactoryGirl.create(:question)
+        follow_up = FactoryGirl.create(:question)
+        option = FactoryGirl.create(:option, :question => question, :follow_up => follow_up)
+
+        question.get_follow_up.should eq(follow_up)
+      end
+    end
+
+    it 'should return false for follow_up_triggered when no follow-up triggered' do
       pending
     end
 
     # create question with answered follow_up
     it 'should return true for follow_up_triggered' do
-      pending
+      pending 
     end
   end
 
