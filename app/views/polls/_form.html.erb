@@ -1,5 +1,7 @@
-<%= simple_form_for @poll do |f| %>
-  <%= f.input :title, :hint => "This is how we'll refer to the poll in text messages and reports" %>
+<%= simple_form_for @poll, :html => { :class => "form-horizontal"} do |f| %>
+
+  <h3>Settings</h3>
+  <%= f.input :title, :hint => "How we'll refer to the poll in text messages and reports" %>
   <%= f.simple_fields_for :questions do |question| %>
     <%= render 'question_fields', :f => question %>
   <% end %>
@@ -16,6 +18,9 @@
   <div class="field">
     <%= f.input :end_date, :as => :date %>
   </div>
+
+  <hr>
+  <h3>Script</h3>
   <div class="links">
     <%= link_to_add_association 'add question', f, :questions %>
   </div>
