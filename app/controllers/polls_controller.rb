@@ -67,6 +67,7 @@ class PollsController < ApplicationController
         format.html { redirect_to @poll, notice: 'Poll was successfully updated.' }
         format.json { head :no_content }
       else
+        puts @poll.errors.full_messages
         format.html { render action: "edit" }
         format.json { render json: @poll.errors, status: :unprocessable_entity }
       end
