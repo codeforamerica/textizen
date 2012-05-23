@@ -15,8 +15,16 @@
     <%= f.label :start_date %>
     <%= f.datetime_select :start_date %>
   </div>
+
   <div class="field">
-    <%= f.input :end_date, :as => :date %>
+    <fieldset>
+      <div class="control-group">
+          <%= f.label :end_date, :class => "control-label" %>
+        <div class="controls">
+          <%= f.date_select(:end_date, {:use_short_month => 1, :order => [:month, :day, :year]}, {:class => "span1"}) %>
+        </div>
+      </div>
+  </fieldset>
   </div>
 
   <hr>
