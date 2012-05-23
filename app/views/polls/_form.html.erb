@@ -4,7 +4,9 @@
   <%= f.simple_fields_for :questions do |question| %>
     <%= render 'question_fields', :f => question %>
   <% end %>
+
   <div class="links">
+    <br>
     <%= link_to_add_association 'Add Question', f, :questions, :class => "btn" %>
   </div>
 
