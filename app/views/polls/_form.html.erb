@@ -1,13 +1,15 @@
 <%= simple_form_for @poll, :html => { :class => "form-horizontal"} do |f| %>
 
-  <hr>
   <h3>Script</h3>
   <%= f.simple_fields_for :questions do |question| %>
     <%= render 'question_fields', :f => question %>
   <% end %>
   <div class="links">
-    <%= link_to_add_association 'add question', f, :questions %>
+    <%= link_to_add_association 'Add Question', f, :questions, :class => "btn" %>
   </div>
+
+  <hr>
+
   <h3>Settings</h3>
   <%= f.input :title, :hint => "How we'll refer to the poll in text messages and reports" %>
   <% unless Rails.env.development? %>
@@ -32,11 +34,6 @@
   </fieldset>
   </div>
 
-  <hr>
-  <h3>Script</h3>
-  <div class="links">
-    <%= link_to_add_association 'Add Question', f, :questions, :class => "btn" %>
-  </div>
 
 <div class="form-actions">
     <%= f.button :submit, :class => 'btn btn-large btn-primary' %>
