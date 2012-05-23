@@ -60,7 +60,7 @@ describe ResponsesController do
 
     context "yn poll" do
       before :each do
-        @poll = FactoryGirl.create(:poll_yn, :phone=>'14153334444')
+        @poll = FactoryGirl.create(:poll_yn, phone: '14153334444')
       end
       describe "sms with valid y response" do
         it "should create a new response" do
