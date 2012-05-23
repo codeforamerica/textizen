@@ -21,7 +21,7 @@ class ResponsesController < ApplicationController
       puts "poll found"
       if @poll.running? #if the poll is running
         puts "poll running"
-        if @poll.questions.length > 1 #and has questions
+        if @poll.questions.length > 0 #and has questions
           @poll.questions_ordered.each do |q|
             if !q.answered?(@from) #and has no responses from this person
               puts "no previous responses to question"
