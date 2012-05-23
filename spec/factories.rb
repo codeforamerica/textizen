@@ -70,6 +70,11 @@ FactoryGirl.define do
     factory :question_multi do
       question_type 'MULTI'
 #      options '{ "a":{"val":"Wal-mart"}, "b":{"val":"Bi-rite"}, "c":{"val":"Bodega"} }'
+      after(:create) do |question, evaluator|
+        FactoryGirl.create(:option, value: 'a', text: 'wal-mart', question: question) 
+        FactoryGirl.create(:option, value: 'b', text: 'farmers market', question: question) 
+        FactoryGirl.create(:option, value: 'c', text: 'corner store', question: question) 
+      end
     end
 
     factory :question_with_follow_up do
