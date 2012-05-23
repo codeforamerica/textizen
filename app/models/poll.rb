@@ -11,6 +11,9 @@ class Poll < ActiveRecord::Base
   before_destroy :destroy_phone_number
 
 
+  def questions_ordered
+    return self.questions.order(:sequence)
+  end
   def running?
     return self.start_date < Time.now && self.end_date > Time.now
   end
@@ -18,6 +21,16 @@ class Poll < ActiveRecord::Base
   # ends a poll
   def end
     self.end_date = Time.now
+  end
+
+  # returns the next unanswered question for this person
+  def get_next_question(phone)
+    if self.questions.length > 0
+      self.questions_ordered.each do |q|
+        return q if q.responses.where(from: phone).length == 0
+      end
+    end
+    false
   end
 
   def set_new_phone_number

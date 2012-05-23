@@ -28,7 +28,7 @@ gem 'jquery-rails'
 # gem 'flocky', :git => 'git://github.com/codeforamerica/flocky.git'
 gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 gem 'tropo-webapi-ruby'
-gem 'factory_girl_rails'
+gem 'factory_girl_rails', '~> 3.3.0'
 gem 'tropo-provisioning'
 gem 'googlecharts'
 
