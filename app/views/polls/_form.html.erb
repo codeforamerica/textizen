@@ -11,7 +11,7 @@
   <h3>Settings</h3>
   <%= f.input :title, :hint => "How we'll refer to the poll in text messages and reports" %>
   <% unless Rails.env.development? %>
-    <%= f.input :phone, :hint => "Automatically assigned", :disabled => true %>
+    <%= f.input :phone, :hint => "Automatically assigned" %>
   <% else %>
     <%= f.input :phone, :hint => "Enter test phone number" %>
   <% end %>
