@@ -81,7 +81,7 @@ class ResponsesController < ApplicationController
   end
 
   def send_follow_up(q)
-    say("Follow-up question: %s" % q.to_sms)
+    say("Follow-up question: %s" % q.get_follow_up.to_sms)
   end
 
   def say(message)
