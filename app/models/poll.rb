@@ -4,7 +4,9 @@ class Poll < ActiveRecord::Base
   belongs_to :user
   has_many :questions, :dependent => :destroy
   has_many :responses, :through => :questions
+#  has_many :options, :through => :questions # broken
   has_many :follow_ups, :through => :questions
+  has_many :follow_up_options, :through => :questions
   has_many :follow_up_responses, :through => :questions
   accepts_nested_attributes_for :questions, :reject_if => :all_blank, :allow_destroy => true
   
@@ -33,6 +35,16 @@ class Poll < ActiveRecord::Base
   # returns all questions, including followups
   def all_questions
     return self.questions + self.follow_ups
+  end
+  
+  def all_options
+    #return self.options + self.follow_up_options
+    opts = []
+    self.questions.each do |q|
+      opts += q.follow_up_options
+      opts += q.options
+    end
+    return opts
   end
 
   # a nice flat view of responses, sorted by first response time
