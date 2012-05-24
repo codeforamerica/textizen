@@ -11,6 +11,10 @@
                 <td class="number"><%= i+1 %></td>
 
                 <td>
+                     <%= poll.questions.first.text if poll.questions.length > 0 %>
+                </td>
+
+                <td>
                     <div class="dashboardresponsecount"><%= poll.responses.count %></div>
                     <div class="caption">responses</div>
                 </td>
