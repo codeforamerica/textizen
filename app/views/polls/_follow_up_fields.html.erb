@@ -1,7 +1,16 @@
-<div class="nested-fields">
+<div class="nested-fields tempfollowup">
   <%= f.input :text, :label => 'Followup question', :hint => "User reads this message" %>
-  <%= f.select(:question_type, options_for_select([['Open','OPEN'],['Multiple Choice','MULTI'],['Yes/No', 'YN']],1)) %>
-  <%= link_to_remove_association "Remove followup", f %>
+  
+  <fieldset>
+    <div class="control-group">
+      <label class="control-label">Followup type</label>
+      <div class="controls">
+        <%= f.select(:question_type, options_for_select([['Open','OPEN'],['Multiple Choice','MULTI'],['Yes/No', 'YN']],1)) %>
+        <%= link_to_remove_association "Remove followup", f %>
+      </div>
+    </div>
+  </fieldset>
+
   <div class="options">
     <%= f.simple_fields_for :options do |option| %>
       <%= render 'option_fields', :f => option %>
