@@ -32,7 +32,7 @@ class Poll < ActiveRecord::Base
     return (self.responses + self.follow_up_responses).sort{|a,b| a.created_at <=> b.created_at}
   end
 
-  # returns all questions, including followups
+  # returns all questions, including followups IN ORDER
   def all_questions
     allq = []
     self.questions_ordered.each do |q|
