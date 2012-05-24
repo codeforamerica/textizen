@@ -28,12 +28,12 @@ class Poll < ActiveRecord::Base
   end
 
   # returns all responses, including from followups
-  def all_responses
+  def responses_all
     return (self.responses + self.follow_up_responses).sort{|a,b| a.created_at <=> b.created_at}
   end
 
   # returns all questions, including followups IN ORDER
-  def all_questions
+  def questions_all
     allq = []
     self.questions_ordered.each do |q|
       allq.push(q)
@@ -44,7 +44,7 @@ class Poll < ActiveRecord::Base
     #return self.questions + self.follow_ups
   end
   
-  def all_options
+  def options_all
     #return self.options + self.follow_up_options #broken
     opts = []
     self.questions.each do |q|
@@ -59,11 +59,11 @@ class Poll < ActiveRecord::Base
   # [{from: 123, responses: {0:'n', 1: 'just cuz', 2: '02459'} ...}]
   def responses_flat
     _flat = []
-    _hash = self.all_responses.group_by {|r| r.from}
+    _hash = self.responses_all.group_by {|r| r.from}
     _hash.each do |from, responses|
       _rObj = {:from => from, :first_response_created => responses.first.created_at, :last_response_created => responses.last.created_at}
       _rObj[:texts] = {}
-      responses.each{|resp| _rObj[:texts][resp.id] = resp.response}
+      responses.each{|resp| _rObj[:texts][resp.question_id] = resp.response}
       _flat.push(_rObj)
     end
     #> {"15226438959"=>[#<Response id: 55, from: "15226438959", to: nil, response: "I buy groceries IN YOUR FACE", created_at: "2012-05-24 01:37:47", updated_at: "2012-05-24 01:37:47", question_id: 40>, #<Response id: 56, from: "15226438959", to: nil, response: "I buy groceries IN YOUR FACE", created_at: "2012-05-24 01:38:26", updated_at: "2012-05-24 02:07:35", question_id: 48>]} 

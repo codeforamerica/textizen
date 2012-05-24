@@ -102,17 +102,19 @@
         <tr>
           <th>
           <th>Timestamp</th>
-          <th>Response</th>
-          <th>QID</th>
+          <% @poll.questions_all.each do |q| %>
+            <th><%= q.text %></th>
+          <% end %>
           <th>Phone number</th>
         </tr>
-    	<% @poll.all_responses.each_with_index do |resp, i| %>
+    	<% @poll.responses_flat.each_with_index do |resp, i| %>
     		<tr>
           <td><%= i+1 %></td>
-          <td><%= resp.created_at.strftime("%m/%d/%Y at %I:%M%p")%></td>
-          <td><%= resp.response %></td>
-          <td><%= resp.question_id %></td>
-          <td><%= number_to_phone(resp.from, :area_code => true) %></td>
+          <td><%= resp[:first_response_created].strftime("%m/%d/%Y at %I:%M%p")%></td>
+          <% @poll.questions_all.each do |q| %>
+            <td><%= resp[:texts][q.id] %></td>
+          <% end %>
+          <td><%= number_to_phone(resp[:from], :area_code => true) %></td>
         </tr>
     	<% end %>
     </table>
