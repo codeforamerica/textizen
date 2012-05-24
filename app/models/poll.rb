@@ -79,7 +79,11 @@ class Poll < ActiveRecord::Base
   #returns an array of all question headers?
   # [{id: 0, title: 'whatever', sequence: 0}]
   def question_headers
-
+    headers = []
+    self.all_questions.each do |q|
+      headers.push({id: q.id, text: q.text, sequence: q.sequence})
+    end
+    return headers
   end
 
   # returns the next unanswered question for this person
