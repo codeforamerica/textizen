@@ -4,6 +4,7 @@ class Poll < ActiveRecord::Base
   belongs_to :user
   has_many :questions, :dependent => :destroy
   has_many :responses, :through => :questions
+  has_many :follow_up_responses, :through => :questions
   accepts_nested_attributes_for :questions, :reject_if => :all_blank, :allow_destroy => true
   
   validates_uniqueness_of :phone
@@ -21,6 +22,21 @@ class Poll < ActiveRecord::Base
   # ends a poll
   def end
     self.end_date = Time.now
+  end
+
+  # returns all responses, including from followups
+  def all_responses
+    return self.responses + self.follow_up_responses
+  end
+
+  #returns an array of option key objects used to decode responses?
+  def option_keys
+
+  end
+
+  #returns an array of all question headers?
+  def question_titles
+
   end
 
   # returns the next unanswered question for this person
