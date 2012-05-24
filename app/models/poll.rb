@@ -4,6 +4,7 @@ class Poll < ActiveRecord::Base
   belongs_to :user
   has_many :questions, :dependent => :destroy
   has_many :responses, :through => :questions
+  has_many :follow_ups, :through => :questions
   has_many :follow_up_responses, :through => :questions
   accepts_nested_attributes_for :questions, :reject_if => :all_blank, :allow_destroy => true
   
@@ -29,13 +30,27 @@ class Poll < ActiveRecord::Base
     return self.responses + self.follow_up_responses
   end
 
-  #returns an array of option key objects used to decode responses?
+  # returns all questions, including followups
+  def all_questions
+    return self.questions + self.follow_ups
+  end
+
+  # a nice flat view of responses, sorted by first response time
+  # [{from: 124, responses: {0:'y', 2:'02460'}, first_response_time: , last_response_time: }]
+  # [{from: 123, responses: {0:'n', 1: 'just cuz', 2: '02459'} ...}]
+  def responses_flat
+
+  end
+
+  #returns a double hash of option keys used to decode responses?
+  #{0 => {'a':'wal-mart'}}
   def option_keys
 
   end
 
   #returns an array of all question headers?
-  def question_titles
+  # [{id: 0, title: 'whatever', sequence: 0}]
+  def question_headers
 
   end
 
