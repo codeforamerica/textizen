@@ -8,26 +8,37 @@
     }
   </script>
 
-  <hr>
   <h3>Script</h3>
   <%= f.simple_fields_for :questions do |question| %>
     <%= render 'question_fields', :f => question %>
   <% end %>
+
   <div class="links">
-    <%= link_to_add_association 'add question', f, :questions %>
+    <br>
+    <%= link_to_add_association 'Add Question', f, :questions, :class => "btn" %>
   </div>
+
+  <hr>
+
   <h3>Settings</h3>
   <%= f.input :title, :hint => "How we'll refer to the poll in text messages and reports" %>
   <%= f.input :phone, :hint => "Automatically assign?", :disabled => "false" %><input type="checkbox" name="auto_assign" onClick="togglePhone()"></input>
-    
+  
   <div class="field" style="display:none;">
     <%= f.label :start_date %>
     <%= f.datetime_select :start_date %>
   </div>
-  <div class="field">
-    <%= f.input :end_date, :as => :date %>
-  </div>
 
+  <div class="field">
+    <fieldset>
+      <div class="control-group">
+          <%= f.label :end_date, :class => "control-label" %>
+        <div class="controls">
+          <%= f.date_select(:end_date, {:use_short_month => 1, :order => [:month, :day, :year]}, {:class => "span1"}) %>
+        </div>
+      </div>
+  </fieldset>
+  </div>
 
 <div class="form-actions">
     <%= f.button :submit, :class => 'btn btn-large btn-primary' %>

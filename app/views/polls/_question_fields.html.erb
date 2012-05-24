@@ -1,6 +1,6 @@
 <div class="nested-fields">
 
-  <%= f.input :text %> <%= link_to_remove_association "Remove question", f %>
+  <%= f.input :text, :hint => (link_to_remove_association "Remove question", f, :class => "inline") %>
 
   <fieldset>
     <div class="control-group">
@@ -14,6 +14,6 @@
     <%= f.simple_fields_for :options do |option| %>
       <%= render 'option_fields', :f => option %>
     <% end %>
-    <%= link_to_add_association 'add option', f, :options %>
+    <%= link_to_add_association 'Add option', f, :options %>
   </div>
 </div>
