@@ -34,7 +34,14 @@ class Poll < ActiveRecord::Base
 
   # returns all questions, including followups
   def all_questions
-    return self.questions + self.follow_ups
+    allq = []
+    self.questions_ordered.each do |q|
+      allq.push(q)
+      f = q.get_follow_up
+      allq.push(f) if f
+    end
+    return allq
+    #return self.questions + self.follow_ups
   end
   
   def all_options
