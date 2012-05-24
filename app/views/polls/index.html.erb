@@ -3,12 +3,16 @@
 
 <div class="row">
     <div class="span12 main">
-        <div class="grouptitle">Lower Northeast</div>
+        <div class="grouptitle">Philadelphia2035 June Pilot</div>
             <table class="table pollslist">
 
             <% @polls.each_with_index do |poll, i| %>
               <tr onClick="window.location.href='polls/<%= poll.id %>'">
                 <td class="number"><%= i+1 %></td>
+
+                <td class="polltext">
+                     <%= poll.questions.first.text if poll.questions.length > 0 %>
+                </td>
 
                 <td>
                     <div class="dashboardresponsecount"><%= poll.responses.count %></div>
