@@ -11,6 +11,25 @@
     @resp.save
   }
 
+@p2 = Poll.create(:title=>"test poll", :phone=>'1'+rand(10 ** 10).to_s, :start_date=>Time.now, :end_date=>Time.now + 1.week)
+@p2q = @p2.questions.create(:text=>"yes or no?", :question_type=>"YN")
+@p2qy = @p2q.options.create(:text=>"yes", :value=>"yes")
+@p2qyFup = Question.create(:text=>"why", :question_type=>"OPEN")
+@p2qy.follow_up = @p2qyFup
+@p2qy.save
+@p2q.options.create(:text=>"no", :value=>"no")
+@p2q2 = @p2.questions.create(:text=>"where?", :question_type=>"OPEN")
+10.times {
+  @from = '1'+rand(10 ** 10).to_s
+  @r = @p2q.responses.create(:from => @from, :to => @p2.phone, :response => 'yes')
+  @rf = @p2qyFup.responses.create(:from => @from, :to => @p2.phone, :response => 'because')
+  @r2 = @p2q2.responses.create(:from => @from, :to => @p2.phone, :response => 'wherever')
+}
+5.times {
+  @from = '1'+rand(10 ** 10).to_s
+  @r = @p2q.responses.create(:from => @from, :to => @p2.phone, :response => 'no')
+  @r2 = @p2q2.responses.create(:from => @from, :to => @p2.phone, :response => 'everywhere')
+}  
 #first create one with a valid tropo phone number for later testing
 #@polls = []
 ##3.times { @polls << FactoryGirl.create(:poll)}
