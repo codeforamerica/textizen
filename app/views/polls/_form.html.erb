@@ -1,4 +1,12 @@
 <%= simple_form_for @poll, :html => { :class => "form-horizontal"} do |f| %>
+  <script>
+    function togglePhone(){
+      console.log('toggle');
+      var phoneInput = $('#poll_phone')
+      phoneInput.prop('disabled', function(i,v){ console.log(v); return !v; });
+      phoneInput.toggleClass('disabled');
+    }
+  </script>
 
   <h3>Script</h3>
   <%= f.simple_fields_for :questions do |question| %>
@@ -14,11 +22,7 @@
 
   <h3>Settings</h3>
   <%= f.input :title, :hint => "How we'll refer to the poll in text messages and reports" %>
-  <% unless Rails.env.development? %>
-    <%= f.input :phone, :hint => "Automatically assigned", :disabled => true %>
-  <% else %>
-    <%= f.input :phone, :hint => "Enter test phone number" %>
-  <% end %>
+   <%= f.input :phone, :hint => "Automatically assign?", :disabled => "false" %><input type="checkbox" name="auto_assign" onClick="togglePhone()"></input>
  
   <div class="field" style="display:none;">
     <%= f.label :start_date %>
@@ -35,7 +39,6 @@
       </div>
   </fieldset>
   </div>
-
 
 <div class="form-actions">
     <%= f.button :submit, :class => 'btn btn-large btn-primary' %>
