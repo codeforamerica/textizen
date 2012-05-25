@@ -1,9 +1,11 @@
 require 'spec_helper'
 
 describe PollsController do
+  login_user
+
   #, "#show" do
   before(:each) do
-    @poll=FactoryGirl.create(:poll) #:user=>controller.current_user
+    @poll = FactoryGirl.create(:poll) #:user=>controller.current_user
   end
   
   describe "#create" do
@@ -16,10 +18,10 @@ describe PollsController do
   
   describe "#end" do
     it "should end a running poll" do
-      pending "fix me"
-      @poll.running? should be_true
+      @poll.running?.should be_true
       put :end, {:id=>@poll.id}
-      @poll.running? should be_true
+      @poll.reload
+      @poll.running?.should be_false
     end
   end
 

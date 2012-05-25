@@ -1,16 +1,13 @@
 require 'spec_helper'
 
-describe Poll do
-  before(:each) do
-    FactoryGirl.create(:poll)
-  end
-  
-  it { should have_many(:responses) }
-  it { should belong_to(:user) }
-  
-  it { should allow_value("MULTI").for(:poll_type) }
-  it { should allow_value("OPEN").for(:poll_type) }
-  it { should_not allow_value("foo").for(:poll_type) }
-
-  it { should validate_uniqueness_of(:phone) }
+describe User do
+#  before(:each) do
+#    @user_attr = FactoryGirl.attributes_for(:user)
+#  end
+#  
+#  it "should create a new user given valid attributes" do
+#    @user = User.create(@user_attr)
+#    @user.should_not be_nil
+#  end
+#
 end

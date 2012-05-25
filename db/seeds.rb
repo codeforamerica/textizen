@@ -1,35 +1,62 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #if not Rails.env.production?
-
-#first create one with a valid tropo phone number for later testing
-@polls = []
-3.times { @polls << FactoryGirl.create(:poll)}
-
-@responses = ['Acme or Supreme', 'I buy groceries in Paris', 'Wal-mart', 'Walgreens', 'CVS', 'Stater bros']
-
-@polls.each do |p|
-  53.times { 
-    @resp = p.responses.create(:from => '1'+rand(10 ** 10).to_s, :to => p.phone, :response => @responses.sample) 
+@p = Poll.create(:title=>"test poll", :phone=>'1'+rand(10 ** 10).to_s, :start_date=>Time.now, :end_date=>Time.now + 1.week)
+@q = @p.questions.create(:text=>"yes or no?", :question_type=>"YN")
+@q.options.create(:text=>"yes", :value=>"yes")
+@q.options.create(:text=>"no", :value=>"no")
+53.times { 
+    @resp = @q.responses.create(:from => '1'+rand(10 ** 10).to_s, :to => @p.phone, :response => ['y','n'].sample) 
     @resp.created_at = (rand*7).days.ago
     @resp.save
   }
-end
 
-@poll_multi = FactoryGirl.create(:poll_multi)
-@choices = ['a','b','c']
-60.times { 
-  @resp = @poll_multi.responses.create(:from => '1'+rand(10 ** 10).to_s, :to => @poll_multi.phone, :response => @choices.sample)
-  @resp.created_at = (rand*7).days.ago
-  @resp.save
+@p2 = Poll.create(:title=>"test poll", :phone=>'1'+rand(10 ** 10).to_s, :start_date=>Time.now, :end_date=>Time.now + 1.week)
+@p2q = @p2.questions.create(:text=>"yes or no?", :question_type=>"YN")
+@p2qy = @p2q.options.create(:text=>"yes", :value=>"yes")
+@p2qyFup = Question.create(:text=>"why", :question_type=>"OPEN")
+@p2qy.follow_up = @p2qyFup
+@p2qy.save
+@p2q.options.create(:text=>"no", :value=>"no")
+@p2q2 = @p2.questions.create(:text=>"where?", :question_type=>"OPEN")
+10.times {
+  @from = '1'+rand(10 ** 10).to_s
+  @r = @p2q.responses.create(:from => @from, :to => @p2.phone, :response => 'yes')
+  @rf = @p2qyFup.responses.create(:from => @from, :to => @p2.phone, :response => 'because')
+  @r2 = @p2q2.responses.create(:from => @from, :to => @p2.phone, :response => 'wherever')
 }
-
-begin
-  FactoryGirl.create(:poll_valid_phone)
-rescue
-  puts "Valid phone number poll already created #{$!}"
-end
-
+5.times {
+  @from = '1'+rand(10 ** 10).to_s
+  @r = @p2q.responses.create(:from => @from, :to => @p2.phone, :response => 'no')
+  @r2 = @p2q2.responses.create(:from => @from, :to => @p2.phone, :response => 'everywhere')
+}  
+#first create one with a valid tropo phone number for later testing
+#@polls = []
+##3.times { @polls << FactoryGirl.create(:poll)}
+#
+#@responses = ['Acme or Supreme', 'I buy groceries in Paris', 'Wal-mart', 'Walgreens', 'CVS', 'Stater bros']
+#
+#@polls.each do |p|
+#  53.times { 
+#    @resp = p.responses.create(:from => '1'+rand(10 ** 10).to_s, :to => p.phone, :response => @responses.sample) 
+#    @resp.created_at = (rand*7).days.ago
+#    @resp.save
+#  }
+#end
+#
+#@poll_multi = FactoryGirl.create(:poll_multi)
+#60.times { 
+#  @resp = @poll_multi.responses.create(:from => '1'+rand(10 ** 10).to_s, :to => @poll_multi.phone, :response => @choices.sample)
+#  @resp.created_at = (rand*7).days.ago
+#  @resp.save
+#}
+#
+#begin
+#  FactoryGirl.create(:poll_valid_phone)
+#rescue
+#  puts "Valid phone number poll already created #{$!}"
+#end
+#
 # Response.craete()
 #   factory :poll do
 #     start_date { Time.now }

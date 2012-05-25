@@ -24,15 +24,12 @@ ActiveRecord::Schema.define(:version => 20120512234503) do
 
   create_table "polls", :force => true do |t|
     t.string   "title"
-    t.text     "text"
     t.string   "phone"
     t.datetime "start_date"
     t.datetime "end_date"
-    t.string   "poll_type"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "user_id"
-    t.text     "choices"
   end
 
   create_table "questions", :force => true do |t|
@@ -62,9 +59,9 @@ ActiveRecord::Schema.define(:version => 20120512234503) do
     t.string   "from"
     t.string   "to"
     t.text     "response"
-    t.integer  "poll_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "question_id"
   end
 
   create_table "users", :force => true do |t|

@@ -1,156 +1,47 @@
-<script type="text/javascript">
-$(function(){
-  var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l'];
-  var choiceInputs = [];
-  var choicesDiv = $('#choices');
-  var choicesJSONInput = $('#poll_choices');
-  var boundInputs = [];
-
-  scan_for_multi();
-  
-  $('#poll_poll_type').bind('change', scan_for_multi);
-
-  $('.add-choice').click(function(){
-    build_multi_input(alphabet[choiceInputs.length]);
-  });
-
-  function scan_for_multi(){
-    if ($('#poll_poll_type').val() == 'MULTI'){
-      build_multi_inputs();
-      $('.multichoice').show()
-    } else {
-      $('.multichoice').hide()
-      // hide multiple choice inputs
+<%= simple_form_for @poll, :html => { :class => "form-horizontal"} do |f| %>
+  <script>
+    function togglePhone(){
+      console.log('toggle');
+      var phoneInput = $('#poll_phone')
+      phoneInput.prop('disabled', function(i,v){ console.log(v); return !v; });
+      phoneInput.toggleClass('disabled');
     }
-  }
+  </script>
 
-  function build_multi_inputs(){
-    var choices = {};
-    var choicesPayload = choicesJSONInput.val();
-    choiceInputs = [];
-    choicesDiv.empty();
-    if (choicesPayload){
-      choices = JSON.parse(choicesJSONInput.val())
-      $.each(choices, function(key, value){
-        build_multi_input(key, value);
-      });
-    } else {
-      build_multi_input(alphabet[0]);
-    }
-    
-  }
-
-  function build_multi_input(key, value){
-    console.log("creating input for "+key+" "+value);
-    var choiceDiv = $(document.createElement('div'));
-    choiceDiv.class = "choice";
-    choiceDiv.text(key + ". ");
-    var choiceInput = $(document.createElement('textarea'));
-    choiceInput.class = "choice-input";
-    choiceInput.val(value);
-    choiceDiv.append(choiceInput);
-    choiceInputs.push(choiceInput);
-    choicesDiv.append(choiceDiv);
-    choiceInput.bind('change',on_multi_input_change);
-  }
-
-  function push_choices(){
-    var choicesObj = {};
-    $.each(choiceInputs, function(index,item){
-      choicesObj[alphabet[index]] = item.val();
-    });
-    choicesJSONInput.val(JSON.stringify(choicesObj));
-  }
-
-  function on_multi_input_change(){
-    console.log('input changed');
-    push_choices();
-  }
-});
-
-</script>
-
-<%= form_for(@poll, :html => { :class => "form-horizontal"}) do |f| %>
-  <% if @poll.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@poll.errors.count, "error") %> prohibited this poll from being saved:</h2>
-
-      <ul>
-      <% @poll.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
+  <h3>Script</h3>
+  <%= f.simple_fields_for :questions do |question| %>
+    <%= render 'question_fields', :f => question %>
   <% end %>
 
-  <fieldset>
-    <div class="control-group">
-      <%= f.label :text, :class => "control-label"%>
-      <div class="controls">
-        <%= f.text_area :text, :rows => 3 %> <span class="help-inline">To be printed on posters</span>
-        
-      </div>
-    </div>
-  </fieldset>
+  <div class="links">
+    <br>
+    <%= link_to_add_association 'Add Question', f, :questions, :class => "btn" %>
+  </div>
 
-  <fieldset>
-    <div class="control-group">
-      <%= f.label :title, :class => "control-label"%>
-      <div class="controls">
-        <%= f.text_field :title %> <span class="help-inline">This is how we'll refer to the poll in text messages and reports</span>
-    </div>
-  </fieldset>
+  <hr>
 
-  <fieldset>
-    <div class="control-group">
-      <%= f.label :poll_type, :class => "control-label"%>
-      <div class="controls">
-        <%= f.select(:poll_type, options_for_select([['Open','OPEN'],['Multiple Choice','MULTI']], @poll.poll_type)) %> <!-- broken! -->
-      </div>
-    </div>
-  </fieldset>
+  <h3>Settings</h3>
+  <%= f.input :title, :hint => "How we'll refer to the poll in text messages and reports" %>
+  <%= f.input :phone, :hint => "Automatically assign?", :disabled => "false" %><input type="checkbox" name="auto_assign" onClick="togglePhone()"></input>
+  
+  <div class="field" style="display:none;">
+    <%= f.label :start_date %>
+    <%= f.datetime_select :start_date %>
+  </div>
 
-  <fieldset class="multichoice" style="display:none">
-    <div class="control-group">
-      <%= f.label :choices, :class=> "control-label"%>
-      <input id="add-choice" class="btn add-choice" value="+" type="button" style="position:relative; top: 2em; right: 2em;"></input>
-      <div class="field" id="choices-container">
+  <div class="field">
+    <fieldset>
+      <div class="control-group">
+          <%= f.label :end_date, :class => "control-label" %>
         <div class="controls">
-          <%= f.text_area :choices, :style=>'display:none' %>
-          <div id="choices" class="choices">
-
-          </div>
+          <%= f.date_select(:end_date, {:use_short_month => 1, :order => [:month, :day, :year]}, {:class => "span1"}) %>
         </div>
       </div>
-    </div>
   </fieldset>
-
-  <fieldset>
-    <div class="control-group">
-      <%= f.label :phone, :class => "control-label"%>
-      <div class="controls">
-        <input class="input disabled" type="text" disabled="" placeholder="<%= number_to_phone(@poll.phone, :area_code => true) %>"> <span class="help-inline">Automatically assigned</span>
-      </div>
-    </div>
-  </fieldset>
-  
- 
-  <fieldset>
-    <div class="control-group">
-     <div class="field" style="display:none">
-        <%= f.label :start_date %>
-        <%= f.datetime_select :start_date, :default=>Time.now %>
-      </div>
-     <div class="field" style="">
-        <%= f.label :end_date %>
-        <%= f.date_select :end_date, :default=>Time.now + 1.month %>
-      </div>
-    </div>
-  </fieldset>
-
-
-  <div class="form-actions">
-      <%= f.submit :class => 'btn btn-large btn-primary' %>
-      <%= link_to 'Cancel', @poll, :class => 'btn btn-large' %>
   </div>
+
+<div class="form-actions">
+    <%= f.button :submit, :class => 'btn btn-large btn-primary' %>
+    <%= link_to 'Cancel', @poll, :class => 'btn btn-large' %>
+</div>
 <% end %>

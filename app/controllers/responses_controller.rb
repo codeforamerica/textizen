@@ -5,7 +5,6 @@ class ResponsesController < ApplicationController
     puts params
     @session = Tropo::Generator.parse params
     puts @session
-
     
     # if params[:session][:to][:network] == "IM" #debug mode
     @to = @session[:session][:to][:id]
@@ -20,27 +19,83 @@ class ResponsesController < ApplicationController
 
     if @poll
       puts "poll found"
-      if @poll.running?
-        @response = @poll.responses.create(:from => @from, :response => @response)
-        puts "response created"
-        render :text => say("Thank you for responding to our poll on %s. Your response has been recorded." % @poll.title)
+      if @poll.running? #if the poll is running
+        puts "poll running"
+        if @poll.questions.length > 0 #and has questions
+          @poll.questions_ordered.each do |q|
+            if !q.answered?(@from) #and has no responses from this person
+              puts "no previous responses to question"
+              if q.valid_response?(@response) #make sure it's  valid response
+                puts "valid response, creating new response"
+                q.responses.create(from: @from, response: @response)
+                if q.send_follow_up?(@response)
+                  send_follow_up(q)
+                else
+                  send_next_question_or_thanks(@poll, @from)
+                end
+                return
+              else
+                reject('invalid response')
+                return
+              end
+            elsif q.get_follow_up && !q.get_follow_up.answered?(@from) && q.follow_up_triggered?(@from)
+              puts "previous response detected and follow-up triggered but not answered"
+              q.get_follow_up.responses.create(from: @from, response: @response)
+              send_next_question_or_thanks(@poll, @from)
+              return
+            else
+              puts "question already answered by this person"
+            end
+          end
+        else
+          puts "poll has no questions"
+          error
+        end
+        puts "end of active poll tree"
+
+        #@response = @poll.responses.create(:from => @from, :response => @response)
+        #puts "response created"
       else 
-        render :text => reject("poll on %s not active" % @poll.title)
+        reject("poll is not active")
+        puts "poll inactive"
       end
     else
       puts "poll not found"
-      render :text => reject("poll not found")
+      reject("poll not found")
     end
+  end
+
+  # sends the next question in the poll, or says thanks
+  def send_next_question_or_thanks(poll, from)
+    qnext = poll.get_next_question(from)
+    if qnext
+      puts 'sending next question'
+      send_question(qnext)
+    else
+      say("Thank you for responding to our poll on %s. Your response has been recorded." % @poll.title)
+    end
+  end
+  
+  def send_question(q)
+    say(q.to_sms)
+  end
+
+  def send_follow_up(q)
+    say("Follow-up question: %s" % q.get_follow_up.to_sms)
   end
 
   def say(message)
     puts "say %s" % message
-    return (Tropo::Generator.say message)
+    render :text => (Tropo::Generator.say message)
   end
 
   # reject the message
   def reject(message)
-    return say("Sorry, %s" % message)
+    say("Sorry, %s" % message)
+  end
+
+  def error
+    reject("there is something wrong with this poll")
   end
 
 end

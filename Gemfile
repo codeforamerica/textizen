@@ -6,6 +6,10 @@ gem 'rails', '3.2.3'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
+# gem 'awesome_nested_fields'
+gem 'cocoon', '1.0.21' # for nested models->forms
+gem 'devise'
+gem 'simple_form'
 
 
 # Gems used only for assets and not required
@@ -24,7 +28,7 @@ gem 'jquery-rails'
 # gem 'flocky', :git => 'git://github.com/codeforamerica/flocky.git'
 gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 gem 'tropo-webapi-ruby'
-gem 'factory_girl_rails'
+gem 'factory_girl_rails', '~> 3.3.0'
 gem 'tropo-provisioning'
 gem 'googlecharts'
 
@@ -57,4 +61,3 @@ end
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
 
-gem "devise"
