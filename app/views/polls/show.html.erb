@@ -80,12 +80,12 @@
             <ul>
               <% q.options.each do |o| %>
                 <li><%= o.value %> = <%= o.text %></li>
-                <% if o.follow_up %>
+                <% o.follow_up.each do |fup| %>
                   <ul>
-                    <li><%= o.follow_up.text %> (<%= o.follow_up.question_type %>)</li>
-                    <% unless o.follow_up.options.empty? %>
+                    <li><%= fup.text %> (<%= fup.question_type %>)</li>
+                    <% unless fup.options.empty? %>
                       <ul>
-                        <% o.follow_up.options.each do |o| %>
+                        <% fup.options.each do |o| %>
                           <li><%= o.value %> = <%= o.text %></li>
                         <% end %>
                       </ul>

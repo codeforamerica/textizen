@@ -2,7 +2,7 @@ class Question < ActiveRecord::Base
   attr_accessible :poll_id, :question_type, :text, :parent_option_id, :sequence, :options_attributes
   has_many :responses
   has_many :options, :dependent => :destroy
-  has_many :follow_ups, :through => :options
+  has_many :follow_up, :through => :options
   has_many :follow_up_options, :through => :options 
   has_many :follow_up_responses, :through => :options
   accepts_nested_attributes_for :options, :reject_if => :all_blank, :allow_destroy => true
@@ -17,7 +17,7 @@ class Question < ActiveRecord::Base
   def get_follow_up
     if self.options.length > 0
       self.options.each do |o|
-        return o.follow_up if o.follow_up
+        return o.follow_up[0] unless o.follow_up.blank?
       end
     end
     return false
