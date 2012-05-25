@@ -62,7 +62,7 @@
       <div class="settings">
 
         <div class="caption">Assigned phone</div>
-        <div class="settingstext"><%= number_to_phone(@poll.phone, :area_code => true) %></div>
+        <div class="settingstext"><%= number_to_phone(@poll.phone, :area_code => true)[1..-1] %></div>
 
         <div class="caption">Start date</div>
         <div class="settingstext"><%= @poll.start_date.strftime("%m/%d/%Y at %I:%M%p") %></div>
@@ -111,7 +111,7 @@
               <% @poll.questions_all.each do |q| %>
                 <td><%= resp[:texts][q.id] %></td>
               <% end %>
-              <td><%= number_to_phone(resp[:from], :area_code => true) %></td>
+              <td><%= number_to_phone(resp[:from], :area_code => true)[1..-1] %></td>
             </tr>
           <% end %>
         </table>
