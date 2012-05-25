@@ -1,4 +1,10 @@
 TxtyourcityRails::Application.routes.draw do
+  get "static_pages/home"
+
+  get "static_pages/about"
+
+  get "static_pages/privacy"
+
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   devise_for :users
