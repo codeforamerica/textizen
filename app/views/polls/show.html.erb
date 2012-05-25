@@ -15,7 +15,30 @@
     <div class="span6">
       <div class="titlequestion">
       </div>
-      <br>
+      <ol>
+        <% @poll.questions.each do |q| %>
+          <li><span class="qtext"><%= q.text %></span> <span class="qtype">(<%= q.question_type %>)</span></li>
+          <% unless q.options.empty? %>
+            <ul>
+              <% q.options.each do |o| %>
+                <li><span class="optionvalue"><%= o.value %>:</span> <%= o.text %></li>
+                <% if o.follow_up %>
+                  <ul>
+                    <li><span class="qtext"><%= o.follow_up.text %></span> <span class="qtype">(<%= o.follow_up.question_type %>)</span></li>
+                    <% unless o.follow_up.options.empty? %>
+                      <ul>
+                        <% o.follow_up.options.each do |o| %>
+                          <li><%= o.value %> = <%= o.text %></li>
+                        <% end %>
+                      </ul>
+                    <% end %>
+                  </ul>
+                <% end %>
+              <% end %>
+            </ul>
+          <% end %>
+        <% end %>
+      </ol>
       <div class="summaryviz">
         <span class='caption'>Frequently mentioned words</span><br>
         <%= html_histogram(@poll.response_histogram)%>
@@ -72,31 +95,8 @@
       <div class="download">
         <%= link_to "→ Download CSV", request.parameters.merge({:format => :csv})%>
       </div>
-      <h3>questions</h3>
-      <ol>
-        <% @poll.questions.each do |q| %>
-          <li><%= q.text %> (<%= q.question_type %>)</li>
-          <% unless q.options.empty? %>
-            <ul>
-              <% q.options.each do |o| %>
-                <li><%= o.value %> = <%= o.text %></li>
-                <% if o.follow_up %>
-                  <ul>
-                    <li><%= o.follow_up.text %> (<%= o.follow_up.question_type %>)</li>
-                    <% unless o.follow_up.options.empty? %>
-                      <ul>
-                        <% o.follow_up.options.each do |o| %>
-                          <li><%= o.value %> = <%= o.text %></li>
-                        <% end %>
-                      </ul>
-                    <% end %>
-                  </ul>
-                <% end %>
-              <% end %>
-            </ul>
-          <% end %>
-        <% end %>
-      </ol>
+      <h3>Responses</h3>
+      
       <table class="table">
         <tr>
           <th>
