@@ -1,0 +1,26 @@
+<div class="login-panel">
+
+	<h2>Forgot your password?</h2>
+
+	<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :class => "form-horizontal"}) do |f| %>
+	<%= devise_error_messages! %>
+
+	<fieldset>
+		<div class="control-group">
+			<%= f.label :email, :class => "control-label" %>
+			<div class="controls">
+				<%= f.email_field :email %>
+				<p class="help-block">We'll send password reset instructions to this address.</p>
+			</div>
+
+		</div>
+	</fieldset>
+
+	<div class="form-actions login-actions">
+		<%= f.submit "Reset password", :class => 'btn btn-large btn-primary' %>
+		<br>
+		<%= render :partial => "devise/shared/links" %>
+	</div>
+	<% end %>
+
+</div>
