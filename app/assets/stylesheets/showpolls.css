@@ -50,6 +50,12 @@
 	font-size:96%;
 }
 
+.summarysectiontitle{
+	font-size: 85%;
+	color:#999;
+	text-transform: uppercase;
+}
+
 .download{
 	float:right;
 	margin: 0.5em 0 1.5em 0;
