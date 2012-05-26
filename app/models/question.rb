@@ -81,7 +81,7 @@ class Question < ActiveRecord::Base
       ret += 'Reply with the letter of your choice: '
       self.options.each do |o|
         ret += o.value + '. '
-        ret += o.text
+        ret += o.text + ' '
       end
     end
     return ret
