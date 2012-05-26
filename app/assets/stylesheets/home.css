@@ -1,0 +1,29 @@
+.heroblock{
+	margin-top: 2em;
+	margin-bottom: 3em;
+}
+
+.heroicon{
+	text-align:right;
+}
+
+.herotext{
+	padding-top:10em;
+}
+
+.morecolumn{
+	height:200px;
+	margin-right: -1px;
+	border-right:1px solid #BFD5E0;
+}
+
+.morecolumn:last-child{
+	border-right:none
+}
+
+
+
+.moretitle{
+	text-align:center;
+	font-size:140%;
+}
