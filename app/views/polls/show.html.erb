@@ -11,7 +11,7 @@
 <div class="row">
   <div class="span6">
     <ol>
-      <% @poll.questions.each do |q| %>
+      <% @poll.questions_ordered.each do |q| %>
         <li><span class="qtext"><%= q.text %></span> <span class="qtype">(<%= q.question_type %>)</span></li>
         <% unless q.options.empty? %>
           <ul>
@@ -92,23 +92,26 @@
       <%= link_to "→ Download CSV", request.parameters.merge({:format => :csv})%>
     </div>
     <h3>Responses</h3>
-
     <table class="table">
       <tr>
         <th>
           <th>Timestamp</th>
-          <% @poll.responses_flat.each_with_index do |resp, i| %>
-            <tr>
-              <td><%= i+1 %></td>
-              <td><%= resp[:first_response_created].strftime("%m/%d/%Y at %I:%M%p")%></td>
-              <% @poll.questions_all.each do |q| %>
-                <td><%= resp[:texts][q.id] %></td>
-              <% end %>
-              <td><%= number_to_phone(resp[:from], :area_code => true)[1..-1] %></td>
-            </tr>
+          <% @poll.questions_all.each do |q| %>
+            <th><%= q.text %></th>
           <% end %>
-        </table>
-      </div>
+          <th>Phone number</th>
+        </tr>
+        <% @poll.responses_flat.each_with_index do |resp, i| %>
+          <tr>
+            <td><%= i+1 %></td>
+            <td><%= resp[:first_response_created].strftime("%m/%d/%Y at %I:%M%p")%></td>
+            <% @poll.questions_all.each do |q| %>
+              <td><%= resp[:texts][q.id] %></td>
+            <% end %>
+            <td><%= number_to_phone(resp[:from], :area_code => true) %></td>
+          </tr>
+        <% end %>
+      </table>
     </div>
   </div>
 </div>
