@@ -12,7 +12,7 @@ class Question < ActiveRecord::Base
   belongs_to :option, :foreign_key => "parent_option_id"
 
   validates :question_type, :inclusion => { :in => %w(MULTI OPEN YN), :message => "%{value} is not a valid question type" }  
-#  validates_presence_of :question_type, :poll_id
+  validates_presence_of :question_type#, :poll_id
   
   def get_follow_up
     if self.options.length > 0
