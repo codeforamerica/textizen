@@ -124,10 +124,47 @@ class Poll < ActiveRecord::Base
   end
 
   def to_csv
-    csv = self.responses[0].attributes.keys.to_csv
-    self.responses.each do |r|
-      csv += r.attributes.values.to_csv
+    puts 'converting to csv'
+    qs = self.questions_all
+
+      #    <th>Timestamp</th>
+      #    <% @poll.questions_all.each do |q| %>
+      #      <th><%= q.text %></th>
+      #    <% end %>
+      #    <th>Phone number</th>
+      #  </tr>
+      #  <% @poll.responses_flat.each_with_index do |resp, i| %>
+      #    <tr>
+      #      <td><%= i+1 %></td>
+      #      <td><%= resp[:first_response_created].strftime("%m/%d/%Y at %I:%M%p")%></td>
+      #      <% @poll.questions_all.each do |q| %>
+      #        <td><%= resp[:texts][q.id] %></td>
+      #      <% end %>
+      #      <td><%= number_to_phone(resp[:from], :area_code => true) %></td>
+      #    </tr>
+      #  <% end %>
+
+
+    headers = ['Timestamp:first', 'Timestamp:last']
+    qs.each{ |q| headers.push(q.text)}
+    headers.push('Area Code')
+    csv = headers.to_csv
+    self.responses_flat.each do |resp|
+      r = []
+      r.push(resp[:first_response_created])
+      r.push(resp[:last_response_created])
+      qs.each do |q|
+        r.push(resp[:texts][q.id])
+      end
+      r.push(resp[:from][1,3])
+      csv += r.to_csv
     end
+
+    # csv = self.responses[0].attributes.keys.to_csv
+    # self.responses.each do |r|
+    #   csv += r.attributes.values.to_csv
+    # end
+    # return csv
     return csv
   end
 
