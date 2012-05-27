@@ -36,7 +36,7 @@
     </ol>
     <div class="summaryviz">
       <span class='summarysectiontitle'>Frequently mentioned words</span><br>
-      <%= html_histogram(@poll.response_histogram)%>
+      <%= html_histogram(Poll.response_histogram(@poll.responses))%>
     </div>
   </div>
 
@@ -106,7 +106,11 @@
             <td><%= i+1 %></td>
             <td><%= resp[:first_response_created].strftime("%m/%d/%Y at %I:%M%p")%></td>
             <% @poll.questions_all.each do |q| %>
-              <td><%= resp[:texts][q.id] %></td>
+              <td><%= resp[:texts][q.id] %>
+                <% q.options.each do |o| %>
+                  <%= o.match?(resp[:texts][q.id])? '('+o.text+')' : '' =%>
+                <% end %>
+              </td>
             <% end %>
             <td><%= number_to_phone(resp[:from], :area_code => true) %></td>
           </tr>

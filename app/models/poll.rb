@@ -126,25 +126,6 @@ class Poll < ActiveRecord::Base
   def to_csv
     puts 'converting to csv'
     qs = self.questions_all
-
-      #    <th>Timestamp</th>
-      #    <% @poll.questions_all.each do |q| %>
-      #      <th><%= q.text %></th>
-      #    <% end %>
-      #    <th>Phone number</th>
-      #  </tr>
-      #  <% @poll.responses_flat.each_with_index do |resp, i| %>
-      #    <tr>
-      #      <td><%= i+1 %></td>
-      #      <td><%= resp[:first_response_created].strftime("%m/%d/%Y at %I:%M%p")%></td>
-      #      <% @poll.questions_all.each do |q| %>
-      #        <td><%= resp[:texts][q.id] %></td>
-      #      <% end %>
-      #      <td><%= number_to_phone(resp[:from], :area_code => true) %></td>
-      #    </tr>
-      #  <% end %>
-
-
     headers = ['Timestamp:first', 'Timestamp:last']
     qs.each{ |q| headers.push(q.text)}
     headers.push('Area Code')
@@ -209,13 +190,14 @@ class Poll < ActiveRecord::Base
     end
   end
 
-  def response_histogram
+  #CLASS METHODS
+
+  def self.response_histogram(responses)
     exclusion = /[^[in][i][or]]/i
-    q = self.questions.first
-    r = self.responses
-    if self.responses.length > 0
+    r = responses
+    if r.length > 0
       # create an array with all the words from all the responses
-      words = self.responses.map{ |r| r.response.downcase.split(/[^A-Za-z\-]/)}.flatten
+      words = r.map{ |rs| rs.response.downcase.split(/[^A-Za-z\-]/)}.flatten
       #if self.multi? && self.choices
       #  @choices = ActiveSupport::JSON.decode(self.choices)
       #  words.map!{|w| "#{w}. #{@choices[w]}"}
@@ -229,8 +211,6 @@ class Poll < ActiveRecord::Base
       return hist_sorted.select{|i| exclusion.match(i[0])}
     end
   end
-  #CLASS METHODS
-
   #takes in a phone number and removes a plus if it has one
   def self.normalize_phone(phone)
     puts 'normalizing phone %s' % phone
