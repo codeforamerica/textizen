@@ -3,21 +3,41 @@
 
 <div class="row">
   <div class="span12 main">
-    <div class="grouptitle">Philadelphia2035 June Pilot &rsaquo; pollid</div>
+    <div class="grouptitle">Philadelphia2035 June Pilot &rsaquo;</div>
     <p id="notice"><%= notice %></p>
   </div>
 </div>
 
 <div class="row">
   <div class="span6">
-    <div class="titlequestion">
-    </div>
-    <br>
+    <ol>
+      <% @poll.questions.each do |q| %>
+        <li><span class="qtext"><%= q.text %></span> <span class="qtype">(<%= q.question_type %>)</span></li>
+        <% unless q.options.empty? %>
+          <ul>
+            <% q.options.each do |o| %>
+              <li><span class="optionvalue"><%= o.value %>:</span> <%= o.text %></li>
+              <% o.follow_up.each do |fup| %>
+                <ul>
+                  <li><span class="qtext"><%= fup.text %></span> <span class="qtype">(<%= fup.question_type %>)</span></li>
+                  <% unless fup.options.empty? %>
+                    <ul>
+                      <% fup.options.each do |o| %>
+                        <li><%= o.value %> = <%= o.text %></li>
+                      <% end %>
+                    </ul>
+                  <% end %>
+                </ul>
+              <% end %>
+            <% end %>
+          </ul>
+        <% end %>
+      <% end %>
+    </ol>
     <div class="summaryviz">
-      <span class='caption'>Frequently mentioned words</span><br>
+      <span class='summarysectiontitle'>Frequently mentioned words</span><br>
       <%= html_histogram(@poll.response_histogram)%>
     </div>
-
   </div>
 
 
@@ -36,6 +56,8 @@
 
   <div class="span3">
     <div class="settings">
+      <div class="caption">Assigned phone</div>
+      <div class="settingstext"><%= number_to_phone(@poll.phone, :area_code => true)[1..-1] %></div>
 
       <div class="caption">Assigned phone</div>
       <div class="settingstext"><%= number_to_phone(@poll.phone, :area_code => true) %></div>
@@ -69,52 +91,24 @@
     <div class="download">
       <%= link_to "→ Download CSV", request.parameters.merge({:format => :csv})%>
     </div>
-    <h3>questions</h3>
-    <ol>
-      <% @poll.questions.each do |q| %>
-        <li><%= q.text %> (<%= q.question_type %>)</li>
-        <% unless q.options.empty? %>
-          <ul>
-            <% q.options.each do |o| %>
-              <li><%= o.value %> = <%= o.text %></li>
-              <% o.follow_up.each do |fup| %>
-                <ul>
-                  <li><%= fup.text %> (<%= fup.question_type %>)</li>
-                  <% unless fup.options.empty? %>
-                    <ul>
-                      <% fup.options.each do |o| %>
-                        <li><%= o.value %> = <%= o.text %></li>
-                      <% end %>
-                    </ul>
-                  <% end %>
-                </ul>
-              <% end %>
-            <% end %>
-          </ul>
-        <% end %>
-      <% end %>
-    </ol>
+    <h3>Responses</h3>
+
     <table class="table">
       <tr>
         <th>
           <th>Timestamp</th>
-          <% @poll.questions_all.each do |q| %>
-            <th><%= q.text %></th>
+          <% @poll.responses_flat.each_with_index do |resp, i| %>
+            <tr>
+              <td><%= i+1 %></td>
+              <td><%= resp[:first_response_created].strftime("%m/%d/%Y at %I:%M%p")%></td>
+              <% @poll.questions_all.each do |q| %>
+                <td><%= resp[:texts][q.id] %></td>
+              <% end %>
+              <td><%= number_to_phone(resp[:from], :area_code => true)[1..-1] %></td>
+            </tr>
           <% end %>
-          <th>Phone number</th>
-        </tr>
-        <% @poll.responses_flat.each_with_index do |resp, i| %>
-          <tr>
-            <td><%= i+1 %></td>
-            <td><%= resp[:first_response_created].strftime("%m/%d/%Y at %I:%M%p")%></td>
-            <% @poll.questions_all.each do |q| %>
-              <td><%= resp[:texts][q.id] %></td>
-            <% end %>
-            <td><%= number_to_phone(resp[:from], :area_code => true) %></td>
-          </tr>
-        <% end %>
-      </table>
+        </table>
+      </div>
     </div>
   </div>
-
 </div>
