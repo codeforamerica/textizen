@@ -1,4 +1,4 @@
-<% unless question.nil? %>
+<% unless question.nil? || question.responses.empty? %>
   <% num_entries ||= 7 %>
   <table>
     <% Poll.response_histogram(question.responses).slice(0, num_entries).each do |h| %>
