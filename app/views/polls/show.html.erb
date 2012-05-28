@@ -36,7 +36,7 @@
     </ol>
     <div class="summaryviz">
       <span class='summarysectiontitle'>Frequently mentioned words</span><br>
-      <%= render "histogram", :responses=>@poll.responses %>
+      <%= render "histogram", :question=>@poll.questions.first %>
     </div>
   </div>
 
