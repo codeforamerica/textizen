@@ -11,6 +11,16 @@
 	padding-top:10em;
 }
 
+.herotitle{
+	padding-top:10em;
+}
+
+.herocopy{
+	font-family: 'Signika Negative', Helvetica, Arial, sans-serif;
+	font-size: 150%;
+	line-height:120%;
+}
+
 .morecolumn{
 	height:200px;
 	margin-right: -1px;
@@ -21,9 +31,8 @@
 	border-right:none
 }
 
-
-
 .moretitle{
+	font-family: 'Signika Negative', Helvetica, Arial, sans-serif;
 	text-align:center;
-	font-size:140%;
+	font-size:175%;
 }
