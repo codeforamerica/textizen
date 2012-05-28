@@ -4,7 +4,7 @@ body {
 	background-image: url('/assets/header-ribbons.png');
 	background-repeat: repeat-x;
 	margin-top: 20px;
-	padding-bottom: 20px;
+	margin-bottom: 100px;
 }
 
 .login {
@@ -101,6 +101,11 @@ hr {
 	background-color:transparent;
 }
 
+.footer {
+	margin-top: 3em;
+	text-align: center;
+	color:#666;
+}
 
 /*
 tr:nth-of-type(odd) {

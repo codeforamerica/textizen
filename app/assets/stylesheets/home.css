@@ -19,13 +19,13 @@
 }
 
 .morecolumn{
-	height:200px;
+	min-height:250px;
 	margin-right: -1px;
 	border-right:1px solid #BFD5E0;
 }
 
 .morebody{
-	padding: 1.2em 0.5em 0 0.5em;
+	padding: 0 0.5em 0 0.5em;
 }
 
 .morecolumn:last-child{
@@ -36,6 +36,7 @@
 	font-family: 'Signika Negative', Helvetica, Arial, sans-serif;
 	text-align:center;
 	font-size:175%;
+	margin-bottom:0.8em;
 }
 
 .mention{
