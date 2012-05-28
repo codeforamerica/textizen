@@ -23,6 +23,15 @@ class Question < ActiveRecord::Base
     return false
   end
 
+  def get_matching_option(response)
+    self.options.each do |o|
+      if o.match?(response)
+        return o.text
+      end
+    end
+    false
+  end
+
   # determines if a follow_up was triggered by a past response
   def follow_up_triggered?(phone)
     @follow = self.get_follow_up
