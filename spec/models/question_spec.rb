@@ -12,7 +12,6 @@ describe Question do
   it { should_not allow_value("foo").for(:question_type) }
 
   describe 'check validations' do
-    it { should validate_presence_of(:poll_id) }
     it { should validate_presence_of(:question_type) }
   end 
   
@@ -54,8 +53,8 @@ describe Question do
     context "option has a followup question" do
       it 'should return a follow_up for get_follow_up' do
         question = FactoryGirl.create(:question)
-        follow_up = FactoryGirl.create(:question)
-        option = FactoryGirl.create(:option, :question => question, :follow_up => follow_up)
+        option = FactoryGirl.create(:option, :question => question)
+        follow_up = option.follow_up.create(:text => "YOU SUCK, yes?", :question_type => "OPEN")
 
         question.get_follow_up.should eq(follow_up)
       end
@@ -63,8 +62,8 @@ describe Question do
       context "response matches followup value" do
         it 'should return true for #get_follow_up' do
           question = FactoryGirl.create(:question)
-          follow_up = FactoryGirl.create(:question)
-          option = FactoryGirl.create(:option_y, :question => question, :follow_up => follow_up)
+          option = FactoryGirl.create(:option_y, :question => question)
+          follow_up = option.follow_up.create(:text => "YOU SUCK, yes?", :question_type => "OPEN")
           question.send_follow_up?('y').should == true
         end
       end
@@ -72,8 +71,8 @@ describe Question do
       context "response does not match followup value" do
         it 'should return false for #get_follow_up' do
           question = FactoryGirl.create(:question)
-          follow_up = FactoryGirl.create(:question)
-          option = FactoryGirl.create(:option_y, :question => question, :follow_up => follow_up)
+          option = FactoryGirl.create(:option_y, :question => question)
+          follow_up = option.follow_up.create(:text => "YOU SUCK, yes?", :question_type => "OPEN")
           question.send_follow_up?('n').should == false
           
         end
@@ -82,8 +81,8 @@ describe Question do
 
     it 'should return false for follow_up_triggered when no follow-up triggered' do
       question = FactoryGirl.create(:question)
-      follow_up = FactoryGirl.create(:question)
-      option = FactoryGirl.create(:option_y, question: question, follow_up: follow_up)
+      option = FactoryGirl.create(:option_y, :question => question)
+      follow_up = option.follow_up.create(:text => "YOU SUCK, yes?", :question_type => "OPEN")
       question.responses.create(from: '12223334444', response: 'n')
       question.follow_up_triggered?('12223334444').should eq false
     end
@@ -91,8 +90,8 @@ describe Question do
     # create question with answered follow_up
     it 'should return true for follow_up_triggered' do
       question = FactoryGirl.create(:question)
-      follow_up = FactoryGirl.create(:question)
-      option = FactoryGirl.create(:option_y, question: question, follow_up: follow_up)
+      option = FactoryGirl.create(:option_y, :question => question)
+      follow_up = option.follow_up.create(:text => "YOU SUCK, yes?", :question_type => "OPEN")
       question.responses.create(from: '12223334444', response: 'y')
       question.follow_up_triggered?('12223334444').should eq true
     end

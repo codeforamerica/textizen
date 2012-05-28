@@ -10,6 +10,7 @@ gem 'pg'
 gem 'cocoon', '1.0.21' # for nested models->forms
 gem 'devise'
 gem 'simple_form'
+gem 'thin'
 
 
 # Gems used only for assets and not required
