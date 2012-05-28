@@ -106,10 +106,7 @@
             <td><%= i+1 %></td>
             <td><%= resp[:first_response_created].strftime("%m/%d/%Y at %I:%M%p")%></td>
             <% @poll.questions_all.each do |q| %>
-              <td><%= resp[:texts][q.id] %>
-                <% q.options.each do |o| %>
-                  <%= o.match?(resp[:texts][q.id])?': '+o.text: ''=%>
-                <% end %>
+              <td><%= resp[:texts][q.id] %><% unless q.options.empty? %>: <%= q.get_matching_option(resp[:texts][q.id]) %><% end %>
               </td>
             <% end %>
             <td><%= number_to_phone(resp[:from], :area_code => true)[1..-1] %></td>
