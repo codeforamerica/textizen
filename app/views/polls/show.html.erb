@@ -108,7 +108,7 @@
             <% @poll.questions_all.each do |q| %>
               <td><%= resp[:texts][q.id] %>
                 <% q.options.each do |o| %>
-                  <%= o.match?(resp[:texts][q.id])? '('+o.text+')' : '' =%>
+                  <%= o.match?(resp[:texts][q.id])?': '+o.text: ''=%>
                 <% end %>
               </td>
             <% end %>
