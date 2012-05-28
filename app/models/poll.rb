@@ -5,7 +5,7 @@ class Poll < ActiveRecord::Base
   has_many :questions, :dependent => :destroy
   has_many :responses, :through => :questions
 #  has_many :options, :through => :questions # broken
-  has_many :follow_ups, :through => :questions
+  has_many :follow_up, :through => :questions
   has_many :follow_up_options, :through => :questions
   has_many :follow_up_responses, :through => :questions
   accepts_nested_attributes_for :questions, :reject_if => :all_blank, :allow_destroy => true
@@ -124,10 +124,28 @@ class Poll < ActiveRecord::Base
   end
 
   def to_csv
-    csv = self.responses[0].attributes.keys.to_csv
-    self.responses.each do |r|
-      csv += r.attributes.values.to_csv
+    puts 'converting to csv'
+    qs = self.questions_all
+    headers = ['Timestamp:first', 'Timestamp:last']
+    qs.each{ |q| headers.push(q.text)}
+    headers.push('Area Code')
+    csv = headers.to_csv
+    self.responses_flat.each do |resp|
+      r = []
+      r.push(resp[:first_response_created])
+      r.push(resp[:last_response_created])
+      qs.each do |q|
+        r.push(resp[:texts][q.id])
+      end
+      r.push(resp[:from][1,3])
+      csv += r.to_csv
     end
+
+    # csv = self.responses[0].attributes.keys.to_csv
+    # self.responses.each do |r|
+    #   csv += r.attributes.values.to_csv
+    # end
+    # return csv
     return csv
   end
 
@@ -172,13 +190,14 @@ class Poll < ActiveRecord::Base
     end
   end
 
-  def response_histogram
+  #CLASS METHODS
+
+  def self.response_histogram(responses)
     exclusion = /[^[in][i][or]]/i
-    q = self.questions.first
-    r = self.responses
-    if self.responses.length > 0
+    r = responses
+    if r.length > 0
       # create an array with all the words from all the responses
-      words = self.responses.map{ |r| r.response.downcase.split(/[^A-Za-z\-]/)}.flatten
+      words = r.map{ |rs| rs.response.downcase.split(/[^A-Za-z\-]/)}.flatten
       #if self.multi? && self.choices
       #  @choices = ActiveSupport::JSON.decode(self.choices)
       #  words.map!{|w| "#{w}. #{@choices[w]}"}
@@ -192,8 +211,6 @@ class Poll < ActiveRecord::Base
       return hist_sorted.select{|i| exclusion.match(i[0])}
     end
   end
-  #CLASS METHODS
-
   #takes in a phone number and removes a plus if it has one
   def self.normalize_phone(phone)
     puts 'normalizing phone %s' % phone

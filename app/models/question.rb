@@ -2,7 +2,7 @@ class Question < ActiveRecord::Base
   attr_accessible :poll_id, :question_type, :text, :parent_option_id, :sequence, :options_attributes
   has_many :responses
   has_many :options, :dependent => :destroy
-  has_many :follow_ups, :through => :options
+  has_many :follow_up, :through => :options
   has_many :follow_up_options, :through => :options 
   has_many :follow_up_responses, :through => :options
   accepts_nested_attributes_for :options, :reject_if => :all_blank, :allow_destroy => true
@@ -12,12 +12,12 @@ class Question < ActiveRecord::Base
   belongs_to :option, :foreign_key => "parent_option_id"
 
   validates :question_type, :inclusion => { :in => %w(MULTI OPEN YN), :message => "%{value} is not a valid question type" }  
-#  validates_presence_of :question_type, :poll_id
+  validates_presence_of :question_type#, :poll_id
   
   def get_follow_up
     if self.options.length > 0
       self.options.each do |o|
-        return o.follow_up if o.follow_up
+        return o.follow_up[0] unless o.follow_up.blank?
       end
     end
     return false
@@ -81,7 +81,7 @@ class Question < ActiveRecord::Base
       ret += 'Reply with the letter of your choice: '
       self.options.each do |o|
         ret += o.value + '. '
-        ret += o.text
+        ret += o.text + ' '
       end
     end
     return ret

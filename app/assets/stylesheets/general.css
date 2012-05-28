@@ -68,6 +68,40 @@ hr {
 	background-color: #DDDDDD;
 }
 
+.histogram-word{
+	padding-right: 1em;
+}
+
+.histogram-count{
+	padding-right: 0.3em;
+}
+
+.histogram-graph{
+	height: 14px;
+	background-color:#aaa; 
+}
+
+.login-panel{
+	width: 520px;
+	background-color: #DCD9D5;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top: 2em;
+	padding: 0 1em 0 1em;
+}
+
+.login-panel h2{
+	padding-top: 18px;
+	margin-left: 8px;
+	margin-bottom: 0.6em;
+}
+
+.login-actions{
+	border-top-color: #bbb;
+	background-color:transparent;
+}
+
+
 /*
 tr:nth-of-type(odd) {
   background-color:#F1DCA7;
