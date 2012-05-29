@@ -193,7 +193,7 @@ class Poll < ActiveRecord::Base
   #CLASS METHODS
 
   def self.response_histogram(responses)
-    exclusion = /[^[of][i][or]]/i
+    excludes = ['in','i','or','and','of','at']
     r = responses
     puts "response histogramming time: #{responses}"
     if r.length > 0
@@ -207,7 +207,7 @@ class Poll < ActiveRecord::Base
       puts "hist_sorted #{hist_sorted}"
       
       # return the histogram after filtering out excluded words
-      return hist_sorted #.select{|i| exclusion.match(i[0])}
+      return hist_sorted.select{|i| !excludes.include?(i[0])}
     end
   end
   #takes in a phone number and removes a plus if it has one
