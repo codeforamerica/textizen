@@ -16,7 +16,7 @@ class Option < ActiveRecord::Base
         return true
       end
 
-      if text.downcase.match(self.value)
+      if text.downcase.strip == self.value.strip
         puts "matched #{self.value}"
         return true
       elsif text.downcase.match(self.text)
