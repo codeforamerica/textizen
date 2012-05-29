@@ -13,7 +13,7 @@
             <%= h[1] %>
           </td>
           <td style='width:200px'>
-            <div class='histogram-graph' style='width: <%= h[1]*8 %>px;'>&nbsp;</div>
+            <div class='histogram-graph' style='width: <%= (h[1].to_f) / (@poll.responses.count) * 200 %>px;'>&nbsp;</div>
           </td>
         </tr>
       <% end %>
