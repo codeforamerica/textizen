@@ -49,3 +49,40 @@ h2{
 	font-weight:normal;
 	margin: 0.8em 0 -0.1em 0;
 }
+
+.comment{
+	color:#666;
+	font-weight:bold;
+}
+
+.profiles{
+	clear:both;
+}
+
+.shoutout{
+	width: 80px;
+	height: 97px;
+	margin-right:20px;
+	margin-bottom:20px;
+	background-color: #efefef;
+	border: 1px solid #ddd;
+	color: #666;
+	text-align:middle;
+	float:left;
+}
+
+.biopic{
+	width:70px;
+	height:70px;
+	margin: 5px 0 0 5px;
+}
+
+.shoutout em {
+    color: #666;
+    display: block;
+    font-size: 90%;
+    font-style:normal;
+    margin: 3px 5px 0;
+    overflow: hidden;
+    text-align: center;
+}
