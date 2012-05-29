@@ -4,7 +4,7 @@
   <% else %>
     <% num_entries ||= 7 %>
     <table>
-      <% Poll.response_histogram(question.responses).slice(0, num_entries).each do |h| %>
+      <% question.response_histogram.slice(0, num_entries).each do |h| %>
         <tr style='font-size:<%= 0.8+h[1]/20.0 %>em' class='histogram-pair'>
           <td class='histogram-word'>
             <%= h[0].strip %><% unless question.options.empty? %>: <%= question.get_matching_option(h[0]) %><% end %>

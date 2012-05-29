@@ -192,24 +192,6 @@ class Poll < ActiveRecord::Base
 
   #CLASS METHODS
 
-  def self.response_histogram(responses)
-    excludes = ['in','i','or','and','of','at']
-    r = responses
-    puts "response histogramming time: #{responses}"
-    if r.length > 0
-      # create an array with all the words from all the responses
-      words = r.map{ |rs| rs.response.downcase.split(/[^A-Za-z\-]/)}.flatten
-      
-      # reduce the words array to a set of word => frequency pairs
-      hist = words.reduce(Hash.new(0)){|set, val| set[val] += 1; set}
-      # sort the hash (into an array) by frequency, descending
-      hist_sorted = hist.sort{|a,b| b[1] <=> a[1]}
-      puts "hist_sorted #{hist_sorted}"
-      
-      # return the histogram after filtering out excluded words
-      return hist_sorted.select{|i| !excludes.include?(i[0])}
-    end
-  end
   #takes in a phone number and removes a plus if it has one
   def self.normalize_phone(phone)
     puts 'normalizing phone %s' % phone
