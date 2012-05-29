@@ -1,14 +1,13 @@
-body {
-	font-family: Helvetica, Arial, sans-serif;
-	background-color: #efefef;
-	background-image: url('/assets/header-ribbons.png');
-	background-repeat: repeat-x;
-	margin-top: 20px;
-	padding-bottom: 20px;
+html{
+	min-height:100%;
 }
 
-.login {
-	text-align: right;
+body {
+	font-family: Helvetica, Arial, sans-serif;
+	background-color: #fff;
+	min-height:100%;
+	background-image: url('/assets/header-bg.png');
+	background-repeat: repeat-x;
 }
 
 .main{
@@ -101,7 +100,6 @@ hr {
 	border-top-color: #bbb;
 	background-color:transparent;
 }
-
 
 /*
 tr:nth-of-type(odd) {

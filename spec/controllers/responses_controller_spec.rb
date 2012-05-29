@@ -89,9 +89,11 @@ describe ResponsesController do
         end
       end
       describe "sms with invalid response" do
-        it "should create a new response" do
+        it "should not create a new response" do
+          puts "this test should fail for now"
+          puts "##############################"
           post :receive_message, TROPO_SMS_RESPONSE_OPEN
-          pending "behavior to be determined"
+          @poll.responses.length.should eq 0
         end
       end
     end

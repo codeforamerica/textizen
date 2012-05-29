@@ -47,6 +47,7 @@ class ResponsesController < ApplicationController
               puts "question already answered by this person"
             end
           end
+          puts "all questions answered?"
         else
           puts "poll has no questions"
           error

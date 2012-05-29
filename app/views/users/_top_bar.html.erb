@@ -1,4 +1,12 @@
 <div class="row header">
-    <div class="span8"><a href="/polls"><img src="/assets/logo.png"></a></div>
-    <div class="span4 login"><%= link_to "Logout", destroy_user_session_path, :method=>:delete %></div>
+    <div class="span2"><a href="/"><img src="/assets/logo-color.png"></a></div>
+	<div class="span6">
+		<div class="nav">
+                  <%= link_to "HOME", "/welcome" %>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="/polls">POLLS</a>
+		</div>
+	</div>
+    <div class="span4">
+    	<div class="login"><%= link_to "Logout", destroy_user_session_path, :method=>:delete %></div>
+    </div>
 </div>
