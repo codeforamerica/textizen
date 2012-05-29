@@ -193,7 +193,8 @@ class Poll < ActiveRecord::Base
   #CLASS METHODS
 
   def self.response_histogram(responses)
-    exclusion = /[^[in][i][or]]/i
+    excludes = ['in','i','or','and','of','at']
+    puts excludes
     r = responses
     if r.length > 0
       # create an array with all the words from all the responses
@@ -208,7 +209,7 @@ class Poll < ActiveRecord::Base
       # sort the hash (into an array) by frequency, descending
       hist_sorted = hist.sort{|a,b| b[1] <=> a[1]}
       # return the histogram after filtering out excluded words
-      return hist_sorted.select{|i| exclusion.match(i[0])}
+      return hist_sorted.select{|i| !excludes.include?(i[0])}
     end
   end
   #takes in a phone number and removes a plus if it has one
