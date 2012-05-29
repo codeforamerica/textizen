@@ -5,7 +5,8 @@
     <% num_entries ||= 7 %>
     <table>
       <% question.response_histogram.slice(0, num_entries).each do |h| %>
-        <tr style='font-size:<%= 0.8+h[1]/20.0 %>em' class='histogram-pair'>
+        <!--<tr style='font-size:<%= 0.8+h[1]/20.0 %>em' class='histogram-pair'>-->
+        <tr class='histogram-pair'>
           <td class='histogram-word' nowrap="nowrap">
             <%= h[0] %>
           </td>
@@ -13,7 +14,7 @@
             <%= h[1] %>
           </td>
           <td style='width:200px'>
-            <div class='histogram-graph' style='width: <%= h[1]*8 %>px;'>&nbsp;</div>
+            <div class='histogram-graph' style='width: <%= (h[1].to_f) / (@poll.responses.count) * 200 %>px;'>&nbsp;</div>
           </td>
         </tr>
       <% end %>
