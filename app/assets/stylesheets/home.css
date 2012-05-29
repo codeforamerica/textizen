@@ -42,3 +42,10 @@
 .mention{
 	margin-bottom: 1.2em;
 }
+
+h2{
+	font-family: 'Signika Negative', Helvetica, Arial, sans-serif;
+	font-size:175%;
+	font-weight:normal;
+	margin: 0.8em 0 -0.1em 0;
+}
