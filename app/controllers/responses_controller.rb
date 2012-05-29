@@ -45,6 +45,7 @@ class ResponsesController < ApplicationController
               return
             else
               puts "question already answered by this person"
+              return
             end
           end
         else
