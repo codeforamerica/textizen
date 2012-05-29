@@ -72,7 +72,7 @@ class ResponsesController < ApplicationController
       puts 'sending next question'
       send_question(qnext)
     else
-      say("Thank you for responding to our poll on %s. Your response has been recorded." % @poll.title)
+      say("Thank you for responding to our poll on %s. More info: phila2035.org" % @poll.title)
     end
   end
   
@@ -95,7 +95,7 @@ class ResponsesController < ApplicationController
   end
 
   def error
-    reject("there is something wrong with this poll")
+    reject("there is something wrong with this poll, please try again soon")
   end
 
 end

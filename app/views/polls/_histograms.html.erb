@@ -1,0 +1,12 @@
+<% unless poll.nil? %>
+  <div class="row">
+    <% poll.questions_all.each do |q| %>
+      <div class="span3">
+        <div class="summarysectiontitle">
+          <%= q.text %>
+        </div>
+        <%= render "histogram", :question=>q %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

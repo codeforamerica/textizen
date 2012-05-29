@@ -12,7 +12,7 @@
                 </td>
 
                 <td>
-                    <div class="dashboardresponsecount"><%= poll.responses.count %></div>
+                    <div class="dashboardresponsecount"><%= poll.questions.empty? ? '0' : poll.questions.first.responses.count %></div>
                     <div class="caption">responses</div>
                 </td>
 
