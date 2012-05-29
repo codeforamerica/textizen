@@ -1,13 +1,13 @@
-body {
-	font-family: Helvetica, Arial, sans-serif;
-	background-color: #efefef;
-	background-image: url('/assets/header-ribbons.png');
-	background-repeat: repeat-x;
-	margin-top: 20px;
+html{
+	min-height:100%;
 }
 
-.login {
-	text-align: right;
+body {
+	font-family: Helvetica, Arial, sans-serif;
+	background-color: #fff;
+	min-height:100%;
+	background-image: url('/assets/header-bg.png');
+	background-repeat: repeat-x;
 }
 
 .main{
@@ -98,12 +98,6 @@ hr {
 .login-actions{
 	border-top-color: #bbb;
 	background-color:transparent;
-}
-
-.footer {
-	margin-top: 3em;
-	text-align: center;
-	color:#666;
 }
 
 /*

@@ -1,0 +1,25 @@
+.header{
+	margin-top: 4px;
+}
+
+.nav{
+	margin-top:20px;
+	margin-left:30px;
+}
+
+.nav a{
+	font-size:105%;
+	font-weight:bold;
+	color:black;
+	text-decoration:none;
+}
+
+.nav a:hover{
+	color:#0088CC;
+}
+
+.login{
+	text-align: right;
+	margin-top:20px;
+	margin-left:40px;
+}

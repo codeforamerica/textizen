@@ -1,0 +1,9 @@
+.footer {
+	margin-top: 3em;
+	padding-top: 3em;
+	padding-bottom: 2.8em;
+	text-align: center;
+	color:#666;
+	position:relative;
+	position-y:0;
+}
