@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
     if user_signed_in?
       redirect_to :polls
     else
-      redirect_to new_user_session_path #"/welcome"
+      render "static_pages/home" #redirect_to new_user_session_path #"/welcome"
     end
     #render welcome page by default
   end
