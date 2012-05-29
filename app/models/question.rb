@@ -104,7 +104,7 @@ class Question < ActiveRecord::Base
 
   #returns a nicely formatted string for sending via sms
   def to_sms
-    ret = self.text
+    ret = self.text + ' '
     if self.question_type == 'YN'
       ret += 'Reply with yes or no'
     elsif self.question_type == 'MULTI'

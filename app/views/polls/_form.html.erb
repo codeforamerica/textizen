@@ -21,9 +21,10 @@
   <hr>
 
   <h3>Settings</h3>
-  <%= f.input :title, :hint => "How we'll refer to the poll in text messages and reports" %>
-  <%= f.input :phone, :hint => "Automatically assign?", :disabled => "false" %><input type="checkbox" name="auto_assign" onClick="togglePhone()"></input>
-  
+  <%= f.input :title, :label => "Nickname", :hint => "For messages, e.g. \"Thanks for responding to our survey on [nickname]\"" %>
+  <%= f.input :phone, :hint => "<input type='checkbox' name='auto_assign' onClick='togglePhone()' class='alignbox'></input> Automatically assign?", :disabled => "false" %>
+  <!--<input type="checkbox" name="auto_assign" onClick="togglePhone()"></input>-->
+
   <div class="field" style="display:none;">
     <%= f.label :start_date %>
     <%= f.datetime_select :start_date %>

@@ -15,7 +15,8 @@ body {
 }
 
 .grouptitle{
-	font-size: 115%;
+	font-family: 'Signika Negative', Helvetica, Arial, sans-serif;
+	font-size: 145%;
 	color: #838383;
 	margin-bottom: 1em;
 }
