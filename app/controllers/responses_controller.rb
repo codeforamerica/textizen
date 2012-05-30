@@ -50,7 +50,7 @@ class ResponsesController < ApplicationController
           puts "all questions answered?"
         else
           puts "poll has no questions"
-          error
+          error "poll has no questions"
         end
         puts "end of active poll tree"
 
@@ -95,8 +95,9 @@ class ResponsesController < ApplicationController
     say("Sorry, %s" % message)
   end
 
-  def error
+  def error(message)
     reject("there is something wrong with this poll, please try again soon")
+    raise "poll error: %s" % message
   end
 
 end
