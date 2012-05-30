@@ -33,12 +33,12 @@ class Question < ActiveRecord::Base
   end
 
   def response_histogram
-    excludes = ['in','i','or','and','of','at']
+    excludes = ['in','i','or','and','of','at', ' ']
     r = self.responses
     puts "response histogramming time: #{responses}"
     if r.length > 0
       # create an array with all the words from all the responses
-      words = r.map{ |rs| rs.response.downcase.split(/[^A-Za-z\-]/).strip}.flatten
+      words = r.map{ |rs| rs.response.downcase.split(/[^A-Za-z\-]/)}.flatten
       unless self.options.empty?
         words.map!{ |w| self.get_matching_option(w) }
       end
