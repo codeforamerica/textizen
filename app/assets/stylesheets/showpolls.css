@@ -51,9 +51,7 @@
 }
 
 .summarysectiontitle{
-	font-size: 85%;
-	color:#999;
-	text-transform: uppercase;
+	font-weight:bold;
 }
 
 .download{
