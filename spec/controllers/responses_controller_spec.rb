@@ -59,6 +59,17 @@ describe ResponsesController do
       end 
     end
 
+    context "poll with no questions" do
+      before :each do
+        @poll = FactoryGirl.create(:poll, phone: '14153334444'        )
+      end
+      describe "sms with valid response to invalid poll" do
+        it "should send an error and raise an exception" do
+          lambda { post :receive_message, TROPO_SMS_RESPONSE_y }.should raise_error
+        end
+      end
+    end
+
     context "yn poll" do
       before :each do
         @poll = FactoryGirl.create(:poll_yn, phone: '14153334444')
@@ -90,8 +101,6 @@ describe ResponsesController do
       end
       describe "sms with invalid response" do
         it "should not create a new response" do
-          puts "this test should fail for now"
-          puts "##############################"
           post :receive_message, TROPO_SMS_RESPONSE_OPEN
           @poll.responses.length.should eq 0
         end
