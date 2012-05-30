@@ -60,10 +60,11 @@ h2{
 }
 
 .shoutout{
-	width: 80px;
-	height: 97px;
+	width: 90px;
+	min-height: 107px;
 	margin-right:20px;
 	margin-bottom:20px;
+	margin-top:5px;
 	background-color: #efefef;
 	border: 1px solid #ddd;
 	color: #666;
@@ -72,8 +73,8 @@ h2{
 }
 
 .biopic{
-	width:70px;
-	height:70px;
+	width:80px;
+	height:80px;
 	margin: 5px 0 0 5px;
 }
 
@@ -82,7 +83,8 @@ h2{
     display: block;
     font-size: 90%;
     font-style:normal;
-    margin: 3px 5px 0;
+    line-height: 110%;
+    margin: 5px;
     overflow: hidden;
     text-align: center;
 }
