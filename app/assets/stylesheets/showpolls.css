@@ -6,6 +6,7 @@
 #pollactions{
 	text-align:right;
 	font-size: 95%;
+	white-space: nowrap;
 }
 
 .summaryviz{
