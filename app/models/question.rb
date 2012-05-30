@@ -104,15 +104,16 @@ class Question < ActiveRecord::Base
 
   #returns a nicely formatted string for sending via sms
   def to_sms
-    ret = self.text + ' '
+    ret = "#{self.text} "
     if self.question_type == 'YN'
-      ret += 'Reply with yes or no'
+      ret << 'Reply with yes or no'
     elsif self.question_type == 'MULTI'
-      ret += 'Reply with letter: '
+      ret << 'Reply with letter: '
+      opts = []
       self.options.each do |o|
-        ret += o.value + '. '
-        ret += o.text + ' '
+        opts << "#{o.value.upcase} #{o.text}"
       end
+      ret << opts.join(' / ')
     end
     return ret
   end
