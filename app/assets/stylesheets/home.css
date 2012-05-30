@@ -61,7 +61,7 @@ h2{
 
 .shoutout{
 	width: 90px;
-	min-height: 107px;
+	height: 134px;
 	margin-right:20px;
 	margin-bottom:20px;
 	margin-top:5px;
@@ -80,11 +80,13 @@ h2{
 
 .shoutout em {
     color: #666;
-    display: block;
+    display:table-cell;
+    vertical-align:middle;
     font-size: 90%;
     font-style:normal;
+    height:52px;
+    vertical-align:middle;
     line-height: 110%;
-    margin: 5px;
     overflow: hidden;
     text-align: center;
 }
