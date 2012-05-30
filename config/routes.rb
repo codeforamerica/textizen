@@ -25,6 +25,8 @@ TxtyourcityRails::Application.routes.draw do
   end
 
   match 'welcome' => 'application#welcome'
+  match 'about' => 'application#about'
+  match 'privacy' => 'application#privacy'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
