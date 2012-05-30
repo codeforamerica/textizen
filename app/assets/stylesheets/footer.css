@@ -10,4 +10,9 @@
 
 .twittershare{
 	margin-left: 30px;
+	margin-top: 3px;
+}
+
+.twitter-follow{
+	display:inline;
 }
