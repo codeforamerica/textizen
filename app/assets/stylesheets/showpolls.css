@@ -69,14 +69,6 @@
 	text-align:right;
 }
 
-#tag {
-    position: fixed;
-    right: 25px;
-    top: -5px;
-    width: 100px;
-    z-index: 2147483647;
-}
-
 .histogram{
 	margin-bottom:12px;
 }
