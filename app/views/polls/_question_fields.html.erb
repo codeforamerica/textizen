@@ -5,7 +5,7 @@
   <fieldset>
     <div class="control-group">
       <div class="controls">
-        <%= f.select(:question_type, options_for_select([['Open','OPEN'],['Multiple Choice','MULTI'],['Yes / No', 'YN']],1)) %>
+        <%= f.input :question_type, :collection=>[['Open','OPEN'],['Multiple Choice','MULTI'],['Yes / No', 'YN']] %>
       </div>
     </div>
   </fieldset>
