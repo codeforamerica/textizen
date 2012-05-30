@@ -14,7 +14,7 @@
       <% @poll.questions_ordered.each do |q| %>
         <li><span class="qtext"><%= q.text %></span> <span class="qtype">(<%= q.question_type %>)</span></li>
         <% unless q.options.empty? %>
-          <ul>
+          <ul class="optionslist">
             <% q.options.each do |o| %>
               <li><span class="optionvalue"><%= o.value %>:</span> <%= o.text %></li>
               <% o.follow_up.each do |fup| %>
@@ -23,7 +23,7 @@
                   <% unless fup.options.empty? %>
                     <ul>
                       <% fup.options.each do |o| %>
-                        <li><%= o.value %> = <%= o.text %></li>
+                        <li><span class="optionvalue"><%= o.value %>:</span> <%= o.text %></li>
                       <% end %>
                     </ul>
                   <% end %>

@@ -12,6 +12,10 @@
 	margin-top:1em;
 }
 
+.optionslist{
+	list-style-type:none;
+}
+
 .counterdash{
 	background-color: #F1DCA7;
 	padding:0.7em;
