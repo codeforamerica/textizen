@@ -11,4 +11,10 @@ class ApplicationController < ActionController::Base
   def welcome
     render "static_pages/home"
   end
+  def privacy
+    render "static_pages/privacy"
+  end
+  def about
+    render "static_pages/about"
+  end
 end

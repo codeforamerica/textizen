@@ -51,9 +51,7 @@
 }
 
 .summarysectiontitle{
-	font-size: 85%;
-	color:#999;
-	text-transform: uppercase;
+	font-weight:bold;
 }
 
 .download{
@@ -68,6 +66,10 @@
     top: -5px;
     width: 100px;
     z-index: 2147483647;
+}
+
+.histogram{
+	margin-bottom:12px;
 }
 
 .histogram-word{

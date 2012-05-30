@@ -25,7 +25,7 @@
 }
 
 .morebody{
-	padding: 0 0.5em 0 0.5em;
+	padding: 0 0.9em 0 0.5em;
 }
 
 .morecolumn:last-child{
@@ -41,4 +41,52 @@
 
 .mention{
 	margin-bottom: 1.2em;
+}
+
+h2{
+	font-family: 'Signika Negative', Helvetica, Arial, sans-serif;
+	font-size:175%;
+	font-weight:normal;
+	margin: 0.8em 0 -0.1em 0;
+}
+
+.comment{
+	color:#666;
+	font-weight:bold;
+}
+
+.profiles{
+	clear:both;
+}
+
+.shoutout{
+	width: 90px;
+	height: 134px;
+	margin-right:20px;
+	margin-bottom:20px;
+	margin-top:5px;
+	background-color: #efefef;
+	border: 1px solid #ddd;
+	color: #666;
+	text-align:middle;
+	float:left;
+}
+
+.biopic{
+	width:80px;
+	height:80px;
+	margin: 5px 0 0 5px;
+}
+
+.shoutout em {
+    color: #666;
+    display:table-cell;
+    vertical-align:middle;
+    font-size: 90%;
+    font-style:normal;
+    height:52px;
+    vertical-align:middle;
+    line-height: 110%;
+    overflow: hidden;
+    text-align: center;
 }
