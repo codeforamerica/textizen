@@ -6,10 +6,19 @@
 #pollactions{
 	text-align:right;
 	font-size: 95%;
+	white-space: nowrap;
 }
 
 .summaryviz{
 	margin-top:1em;
+}
+
+.question{
+	margin-top: 0.5em;
+}
+
+.optionslist{
+	list-style-type:none;
 }
 
 .counterdash{

@@ -19,7 +19,7 @@
 }
 
 .morecolumn{
-	min-height:250px;
+	min-height:330px;
 	margin-right: -1px;
 	border-right:1px solid #BFD5E0;
 }
@@ -101,3 +101,7 @@ h2{
     text-align: center;
 }
 
+.twitter-follow{
+	display:inline;
+	margin-left:30px;
+}
