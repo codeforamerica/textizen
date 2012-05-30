@@ -80,6 +80,7 @@ h2{
 
 .shoutout em {
     color: #666;
+    width:90px;
     display:table-cell;
     vertical-align:middle;
     font-size: 90%;
