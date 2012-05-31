@@ -15,11 +15,10 @@ class Option < ActiveRecord::Base
       if self.value[0].match(/(y|n)/) && text[0].downcase.match(self.value)
         return true
       end
-
-      if text.downcase.strip == self.value.strip
+      if text.downcase.strip == self.value.downcase.strip
         puts "matched #{self.value}"
         return true
-      elsif text.downcase.match(self.text)
+      elsif text.downcase.match(self.text.downcase)
         puts "matched #{self.text}"
         return true
       end
