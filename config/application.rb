@@ -55,5 +55,8 @@ module TxtyourcityRails
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # Set default timezone for Philadelphia pilot only
+    config.time_zone = 'Eastern Time (US & Canada)'  
   end
 end
