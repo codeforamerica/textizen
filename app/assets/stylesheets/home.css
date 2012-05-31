@@ -105,3 +105,15 @@ h2{
 	display:inline;
 	margin-left:30px;
 }
+
+#cfa_corner_ribbon, #cfa_corner_ribbon a {
+  background-position-x: -32px !important;
+  width: 115px !important;
+
+}
+
+@media only screen and (max-device-width: 480px) {
+  .login {
+    margin-right: 95px;
+  }
+  
