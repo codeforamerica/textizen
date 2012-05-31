@@ -106,7 +106,7 @@ class Question < ActiveRecord::Base
   def to_sms
     ret = "#{self.text} "
     if self.question_type == 'YN'
-      ret << 'Reply with yes or no'
+      ret += 'Reply with Yes or No'
     elsif self.question_type == 'MULTI'
       ret << 'Reply with letter: '
       opts = []
