@@ -61,7 +61,7 @@
       <div class="settingstext"><%= @poll.running? ? 'Running' : 'Ended' %></div>
 
 
-      <div class="btngroup">
+      <div class="btngroup edit-poll">
         <!--<input type="button" class="btn btn-danger" value="Close poll">-->
         <% if @poll.running? %>
           <%= link_to 'End poll', end_poll_path(@poll), :class => "btn btn-danger", :confirm => 'Are you sure?', :method => :put %>

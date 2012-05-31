@@ -102,6 +102,9 @@ hr {
 	background-color:transparent;
 }
 
+.poll-edit {
+  display: none;
+}
 /*
 tr:nth-of-type(odd) {
   background-color:#F1DCA7;
