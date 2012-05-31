@@ -125,3 +125,7 @@ Copyright (c) 2012 Code for America. See [LICENSE][] for details.
 [![Code for America Tracker](http://stats.codeforamerica.org/codeforamerica/cfa_template.png)][tracker]
 
 [tracker]: http://stats.codeforamerica.org/projects/textyourcity
+
+## Changelog
+
+5/31/12 v0.1.0 now pushed! Ready for our first pilot with the Philadelphia City Planning Commission. Look for launch announcements coming shortly...
