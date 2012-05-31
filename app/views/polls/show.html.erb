@@ -18,7 +18,7 @@
             <% q.options.each do |o| %>
               <li><span class="optionvalue"><%= o.value %>:</span> <%= o.text %></li>
               <% o.follow_up.each do |fup| %>
-                <ul>
+                <ul class="optionslist">
                   <li class="question"><span class="qtext"><%= fup.text %></span> <span class="qtype">(<%= fup.question_type %>)</span></li>
                   <% unless fup.options.empty? %>
                     <ul>

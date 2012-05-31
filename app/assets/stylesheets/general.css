@@ -42,6 +42,7 @@ body {
 .polltext{
 	font-size: 140%;
 	font-weight:bold;
+	width:350px;
 }
 
 .titlequestion{
