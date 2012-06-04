@@ -33,7 +33,7 @@ class Question < ActiveRecord::Base
   end
 
   def response_histogram
-    excludes = ['in','i','or','and','of','at',' ','','for','on']
+    excludes = ['in','i','or','and','of','at',' ','','for','on',false]
     r = self.responses
     puts "response histogramming time: #{responses}"
     if r.length > 0
