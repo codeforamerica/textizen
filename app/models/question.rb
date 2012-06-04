@@ -50,7 +50,7 @@ class Question < ActiveRecord::Base
       puts "hist_sorted #{hist_sorted}"
       
       # return the histogram after filtering out excluded words
-      return hist_sorted.select{|i| !excludes.include?(i[0])}
+      return hist_sorted.select{|i| !excludes.include?(i[0]) && i[0].length > 1}
     end
   end
   # determines if a follow_up was triggered by a past response
