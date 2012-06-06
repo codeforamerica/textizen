@@ -9,7 +9,6 @@ rvm:
 
 env:
   - DB=postgres
-  - RAILS_ENV=test
 
 bundler_args: "--without assets:development:production"
 before_script: "bundle exec rake db:create db:migrate test"
