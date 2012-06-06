@@ -4,3 +4,5 @@
 require File.expand_path('../config/application', __FILE__)
 
 TxtyourcityRails::Application.load_tasks
+
+task :test => :spec
