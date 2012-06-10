@@ -13,7 +13,7 @@ class Question < ActiveRecord::Base
 
   validates :question_type, :inclusion => { :in => %w(MULTI OPEN YN), :message => "%{value} is not a valid question type" }  
   validates_presence_of :question_type#, :poll_id
-  
+
   def get_follow_up
     if self.options.length > 0
       self.options.each do |o|
@@ -24,9 +24,12 @@ class Question < ActiveRecord::Base
   end
 
   def get_matching_option(response)
-    self.options.each do |o|
-      if o.match?(response)
-        return o.text
+    puts "getting matching option for #{response}"
+    if response
+      self.options.each do |o|
+        if o.match?(response)
+          return o.text
+        end
       end
     end
     false
@@ -42,13 +45,13 @@ class Question < ActiveRecord::Base
       unless self.options.empty?
         words.map!{ |w| self.get_matching_option(w) }
       end
-      
+
       # reduce the words array to a set of word => frequency pairs
       hist = words.reduce(Hash.new(0)){|set, val| set[val] += 1; set}
       # sort the hash (into an array) by frequency, descending
       hist_sorted = hist.sort{|a,b| b[1] <=> a[1]}
       puts "hist_sorted #{hist_sorted}"
-      
+
       # return the histogram after filtering out excluded words
       return hist_sorted.select{|i| !excludes.include?(i[0]) && i[0].length > 1}
     end
@@ -85,7 +88,7 @@ class Question < ActiveRecord::Base
   def parent_option
     Option.find(self.parent_option_id)
   end
-  
+
   def multi?
     return self.question_type == 'MULTI'
   end
