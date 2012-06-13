@@ -125,7 +125,7 @@ class Poll < ActiveRecord::Base
 
   def to_csv
     def strip_commas(str)
-      if str
+      unless str.nil?
         return str.gsub(/\,/,'')
       else
         return str
