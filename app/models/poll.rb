@@ -124,9 +124,9 @@ class Poll < ActiveRecord::Base
   end
 
   def to_csv
-    def strip_commas(str)
+    def _strip(str)
       if str
-        return str.gsub(/\,/,'')
+        return str.gsub(/[\,\n]/,'')
       else
         return str
       end
@@ -136,9 +136,9 @@ class Poll < ActiveRecord::Base
     qs = self.questions_all
     headers = ['Timestamp:first', 'Timestamp:last']
     qs.each do |q| 
-      headers.push(strip_commas(q.text))
+      headers.push(_strip(q.text))
       unless q.options.empty?
-        headers.push("#{strip_commas(q.text)} (value)")
+        headers.push("#{_strip(q.text)} (value)")
       end
     end
     headers.push('Area Code')
@@ -148,9 +148,9 @@ class Poll < ActiveRecord::Base
       r.push(resp[:first_response_created])
       r.push(resp[:last_response_created])
       qs.each do |q|
-        r.push(strip_commas(resp[:texts][q.id])) # strip commas
+        r.push(_strip(resp[:texts][q.id])) # strip commas
         unless q.options.empty?
-          r.push(strip_commas(q.get_matching_option(resp[:texts][q.id])))
+          r.push(_strip(q.get_matching_option(resp[:texts][q.id])))
         end
       end
       r.push(resp[:from][1,3])
