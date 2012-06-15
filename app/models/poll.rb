@@ -124,10 +124,23 @@ class Poll < ActiveRecord::Base
   end
 
   def to_csv
+    def _strip(str)
+      if str
+        return str.gsub(/[\,\n]/,'')
+      else
+        return str
+      end
+    end
+
     puts 'converting to csv'
     qs = self.questions_all
     headers = ['Timestamp:first', 'Timestamp:last']
-    qs.each{ |q| headers.push(q.text)}
+    qs.each do |q| 
+      headers.push(_strip(q.text))
+      unless q.options.empty?
+        headers.push("#{_strip(q.text)} (value)")
+      end
+    end
     headers.push('Area Code')
     csv = headers.to_csv
     self.responses_flat.each do |resp|
@@ -135,17 +148,15 @@ class Poll < ActiveRecord::Base
       r.push(resp[:first_response_created])
       r.push(resp[:last_response_created])
       qs.each do |q|
-        r.push(resp[:texts][q.id])
+        r.push(_strip(resp[:texts][q.id])) # strip commas
+        unless q.options.empty?
+          r.push(_strip(q.get_matching_option(resp[:texts][q.id])))
+        end
       end
       r.push(resp[:from][1,3])
       csv += r.to_csv
     end
 
-    # csv = self.responses[0].attributes.keys.to_csv
-    # self.responses.each do |r|
-    #   csv += r.attributes.values.to_csv
-    # end
-    # return csv
     return csv
   end
 

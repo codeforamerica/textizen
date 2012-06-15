@@ -12,7 +12,7 @@ class Option < ActiveRecord::Base
   def match?(text)
     puts "matching #{text} against #{self.value} or #{self.text}"
     if text
-      if self.value[0].match(/(y|n)/) && text[0].downcase.match(self.value)
+      if text[0] && self.value[0].match(/(y|n)/) && text[0].downcase.match(self.value)
         return true
       end
       if text.downcase.strip == self.value.downcase.strip
