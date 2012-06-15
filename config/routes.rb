@@ -1,4 +1,6 @@
 TxtyourcityRails::Application.routes.draw do
+  resources :groups
+
   get "static_pages/home"
 
   get "static_pages/about"
