@@ -127,5 +127,5 @@ Copyright (c) 2012 Code for America. See [LICENSE][] for details.
 [tracker]: http://stats.codeforamerica.org/projects/textizen
 
 ## Changelog
-
+6/15/12 v0.1.1 pushed with bugfixes for csv export and poll viewing
 5/31/12 v0.1.0 now pushed! Ready for our first pilot with the Philadelphia City Planning Commission. Look for launch announcements coming shortly...
