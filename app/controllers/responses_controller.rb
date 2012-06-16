@@ -1,16 +1,16 @@
 class ResponsesController < ApplicationController
   #post /responses/receive_message
-  
+
   def receive_message
     puts params
     @session = Tropo::Generator.parse params
     puts @session
-    
+
     # if params[:session][:to][:network] == "IM" #debug mode
     @to = @session[:session][:to][:id]
     @from = @session[:session][:from][:id]
-    
-    @poll = Poll.get_poll_by_phone(@to)
+
+    @poll = Poll.find_by_phone(@to)
     puts "poll"
     puts @poll
 
@@ -56,7 +56,7 @@ class ResponsesController < ApplicationController
 
         #@response = @poll.responses.create(:from => @from, :response => @response)
         #puts "response created"
-      else 
+      else
         reject("poll is not active")
         puts "poll inactive"
       end
@@ -76,7 +76,7 @@ class ResponsesController < ApplicationController
       say("Thank you for responding to our poll on %s. More info: phila2035.org" % @poll.title)
     end
   end
-  
+
   def send_question(q)
     say(q.to_sms)
   end
