@@ -1,6 +1,7 @@
 branches:
   only:
     - 'master'
+    - 'dev'
 
 language: ruby
 rvm:
@@ -11,5 +12,10 @@ env:
   - DB=postgres
 
 bundler_args: "--without assets:development:production"
-before_script: "bundle exec rake db:create db:migrate test"
+before_script: bundle exec rake db:create db:migrate
+
+notifications:
+  irc:
+    channels:
+      - 'irc.freenode.org:6667#codeforamerica'
 
