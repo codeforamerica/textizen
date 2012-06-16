@@ -3,7 +3,7 @@ class Question < ActiveRecord::Base
   has_many :responses
   has_many :options, :dependent => :destroy
   has_many :follow_up, :through => :options
-  has_many :follow_up_options, :through => :options 
+  has_many :follow_up_options, :through => :options
   has_many :follow_up_responses, :through => :options
   accepts_nested_attributes_for :options, :reject_if => :all_blank, :allow_destroy => true
 
@@ -11,8 +11,11 @@ class Question < ActiveRecord::Base
   belongs_to :poll
   belongs_to :option, :foreign_key => "parent_option_id"
 
-  validates :question_type, :inclusion => { :in => %w(MULTI OPEN YN), :message => "%{value} is not a valid question type" }  
+  validates :question_type, :inclusion => { :in => %w(MULTI OPEN YN), :message => "%{value} is not a valid question type" }
   validates_presence_of :question_type#, :poll_id
+
+  scope :questions_ordered, order(:sequence)
+
 
   def get_follow_up
     if self.options.length > 0
