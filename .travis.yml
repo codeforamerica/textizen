@@ -18,5 +18,3 @@ notifications:
     channels:
       - 'irc.freenode.org:6667#codeforamerica'
 
-
-

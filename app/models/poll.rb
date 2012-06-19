@@ -1,3 +1,5 @@
+require 'csv'
+
 class Poll < ActiveRecord::Base
 
   attr_accessible :end_date, :phone, :start_date, :title, :user_id, :questions_attributes
@@ -9,7 +11,7 @@ class Poll < ActiveRecord::Base
   has_many :follow_up_options, :through => :questions
   has_many :follow_up_responses, :through => :questions
   accepts_nested_attributes_for :questions, :reject_if => :all_blank, :allow_destroy => true
-  
+
   validates_uniqueness_of :phone
   before_create :set_new_phone_number
   before_destroy :destroy_phone_number
@@ -43,7 +45,7 @@ class Poll < ActiveRecord::Base
     return allq
     #return self.questions + self.follow_ups
   end
-  
+
   def options_all
     #return self.options + self.follow_up_options #broken
     opts = []
@@ -66,7 +68,7 @@ class Poll < ActiveRecord::Base
       responses.each{|resp| _rObj[:texts][resp.question_id] = resp.response}
       _flat.push(_rObj)
     end
-    #> {"15226438959"=>[#<Response id: 55, from: "15226438959", to: nil, response: "I buy groceries IN YOUR FACE", created_at: "2012-05-24 01:37:47", updated_at: "2012-05-24 01:37:47", question_id: 40>, #<Response id: 56, from: "15226438959", to: nil, response: "I buy groceries IN YOUR FACE", created_at: "2012-05-24 01:38:26", updated_at: "2012-05-24 02:07:35", question_id: 48>]} 
+    #> {"15226438959"=>[#<Response id: 55, from: "15226438959", to: nil, response: "I buy groceries IN YOUR FACE", created_at: "2012-05-24 01:37:47", updated_at: "2012-05-24 01:37:47", question_id: 40>, #<Response id: 56, from: "15226438959", to: nil, response: "I buy groceries IN YOUR FACE", created_at: "2012-05-24 01:38:26", updated_at: "2012-05-24 02:07:35", question_id: 48>]}
     return _flat
   end
 
@@ -124,40 +126,36 @@ class Poll < ActiveRecord::Base
   end
 
   def to_csv
-    def _strip(str)
-      if str
-        return str.gsub(/[\,\n]/,'')
-      else
-        return str
-      end
-    end
+    Rails.logger.info "[INFO] Converting to CSV"
 
-    puts 'converting to csv'
     qs = self.questions_all
-    headers = ['Timestamp:first', 'Timestamp:last']
-    qs.each do |q| 
-      headers.push(_strip(q.text))
-      unless q.options.empty?
-        headers.push("#{_strip(q.text)} (value)")
-      end
-    end
-    headers.push('Area Code')
-    csv = headers.to_csv
-    self.responses_flat.each do |resp|
-      r = []
-      r.push(resp[:first_response_created])
-      r.push(resp[:last_response_created])
+
+    csv_data = CSV.generate do |csv|
+      headers = ['Timestamp:first', 'Timestamp:last']
       qs.each do |q|
-        r.push(_strip(resp[:texts][q.id])) # strip commas
+        headers.push(q.text)
         unless q.options.empty?
-          r.push(_strip(q.get_matching_option(resp[:texts][q.id])))
+          headers.push("#{q.text} (value)")
         end
       end
-      r.push(resp[:from][1,3])
-      csv += r.to_csv
+      headers.push('Area Code')
+      csv << headers
+      self.responses_flat.each do |resp|
+        r = []
+        r.push(resp[:first_response_created])
+        r.push(resp[:last_response_created])
+        qs.each do |q|
+          r.push(resp[:texts][q.id])
+          unless q.options.empty?
+            r.push((q.get_matching_option(resp[:texts][q.id])))
+          end
+        end
+        r.push(resp[:from][1,3])
+        csv << r
+      end
     end
 
-    return csv
+    csv_data
   end
 
   def destroy_phone_number(phone = '')

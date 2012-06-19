@@ -1,6 +1,6 @@
 class PollsController < ApplicationController
   before_filter :authenticate_user!
-  
+
   # GET /polls
   # GET /polls.json
   def index
@@ -20,7 +20,7 @@ class PollsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @poll }
-      format.csv { render csv: @poll }
+      format.csv { export_to_csv }
     end
   end
 
@@ -101,5 +101,11 @@ class PollsController < ApplicationController
     end
     #flash[:notice] = "ended poll"
   end
-  
+
+  def export_to_csv
+    send_data @poll.to_csv,
+      :type => 'text/csv; charset=iso-8859-1; header=present',
+      :disposition => "attachment; filename=poll#{@poll.id}.csv"
+  end
+
 end
