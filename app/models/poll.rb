@@ -1,7 +1,7 @@
 class Poll < ActiveRecord::Base
 
   attr_accessible :end_date, :phone, :start_date, :title, :user_id, :questions_attributes
-  belongs_to :user
+  belongs_to :author, :class_name=> "User", :foreign_key=>"user_id"
   has_and_belongs_to_many :groups
 
   has_many :questions, :dependent => :destroy
