@@ -41,9 +41,10 @@ class Question < ActiveRecord::Base
     puts "response histogramming time: #{responses}"
     if r.length > 0
       # create an array with all the words from all the responses
-      words = r.map{ |rs| rs.response.downcase.split(/[^A-Za-z0-9\-]/)}.flatten
-      unless self.options.empty?
-        words.map!{ |w| self.get_matching_option(w) }
+      if self.options.empty?
+        words = r.map{ |rs| rs.response.downcase.split(/[^A-Za-z0-9\-]/)}.flatten
+      else
+        words = r.map{ |rs| self.get_matching_option(rs.response) }
       end
 
       # reduce the words array to a set of word => frequency pairs
