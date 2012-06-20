@@ -116,4 +116,9 @@ h2{
   .login {
     margin-right: 95px;
   }
-  
+}
+
+.video {
+  border: 1px solid #ccc;
+  margin-top: 3px;
+}

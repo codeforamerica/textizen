@@ -13,7 +13,7 @@ class Question < ActiveRecord::Base
 
   validates :question_type, :inclusion => { :in => %w(MULTI OPEN YN), :message => "%{value} is not a valid question type" }  
   validates_presence_of :question_type#, :poll_id
-  
+
   def get_follow_up
     if self.options.length > 0
       self.options.each do |o|
@@ -24,33 +24,37 @@ class Question < ActiveRecord::Base
   end
 
   def get_matching_option(response)
-    self.options.each do |o|
-      if o.match?(response)
-        return o.text
+    puts "getting matching option for #{response}"
+    if response
+      self.options.each do |o|
+        if o.match?(response)
+          return o.text
+        end
       end
     end
     false
   end
 
   def response_histogram
-    excludes = ['in','i','or','and','of','at', ' ']
+    excludes = ['in','i','or','and','of','at',' ','','for','on','to','the','that',false]
     r = self.responses
     puts "response histogramming time: #{responses}"
     if r.length > 0
       # create an array with all the words from all the responses
-      words = r.map{ |rs| rs.response.downcase.split(/[^A-Za-z0-9\-]/)}.flatten
-      unless self.options.empty?
-        words.map!{ |w| self.get_matching_option(w) }
+      if self.options.empty?
+        words = r.map{ |rs| rs.response.downcase.split(/[^A-Za-z0-9\-]/)}.flatten
+      else
+        words = r.map{ |rs| self.get_matching_option(rs.response) }
       end
-      
+
       # reduce the words array to a set of word => frequency pairs
       hist = words.reduce(Hash.new(0)){|set, val| set[val] += 1; set}
       # sort the hash (into an array) by frequency, descending
       hist_sorted = hist.sort{|a,b| b[1] <=> a[1]}
       puts "hist_sorted #{hist_sorted}"
-      
+
       # return the histogram after filtering out excluded words
-      return hist_sorted.select{|i| !excludes.include?(i[0])}
+      return hist_sorted.select{|i| !excludes.include?(i[0]) && i[0].length > 1}
     end
   end
   # determines if a follow_up was triggered by a past response
@@ -85,7 +89,7 @@ class Question < ActiveRecord::Base
   def parent_option
     Option.find(self.parent_option_id)
   end
-  
+
   def multi?
     return self.question_type == 'MULTI'
   end
