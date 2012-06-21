@@ -75,13 +75,7 @@ class Poll < ActiveRecord::Base
     return _flat
   end
 
-  #returns a double hash of option keys used to decode responses?
-  #{0 => {'a':'wal-mart'}}
-  def option_keys
-
-  end
-
-  #returns an array of all question headers?
+  #return an array of all question headers?
   # [{id: 0, title: 'whatever', sequence: 0}]
   def question_headers
     headers = []
