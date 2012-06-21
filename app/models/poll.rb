@@ -13,7 +13,7 @@ class Poll < ActiveRecord::Base
   has_many :follow_up, :through => :questions
   has_many :follow_up_options, :through => :questions
   has_many :follow_up_responses, :through => :questions
-  accepts_nested_attributes_for :questions, :reject_if => :all_blank, :allow_destroy => true
+  #accepts_nested_attributes_for :questions, :reject_if => :all_blank, :allow_destroy => true
 
   validates_uniqueness_of :phone
   before_create :set_new_phone_number
@@ -74,6 +74,7 @@ class Poll < ActiveRecord::Base
     #> {"15226438959"=>[#<Response id: 55, from: "15226438959", to: nil, response: "I buy groceries IN YOUR FACE", created_at: "2012-05-24 01:37:47", updated_at: "2012-05-24 01:37:47", question_id: 40>, #<Response id: 56, from: "15226438959", to: nil, response: "I buy groceries IN YOUR FACE", created_at: "2012-05-24 01:38:26", updated_at: "2012-05-24 02:07:35", question_id: 48>]}
     return _flat
   end
+
 
   #return an array of all question headers?
   # [{id: 0, title: 'whatever', sequence: 0}]
