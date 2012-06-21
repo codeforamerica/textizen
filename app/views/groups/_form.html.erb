@@ -1,6 +1,14 @@
 <%= simple_form_for(@group) do |f| %>
   <%= f.error_notification %>
 
+  <%= f.association :polls %>
+
+
+  <%= f.simple_fields_for :users do |user| %>
+    <%= render 'user_fields', :f => user %>
+  <% end %>
+  <%= link_to_add_association 'Add User', f, :users, :class => "btn" %>
+
   <div class="form-inputs">
     <%= f.input :name %>
   </div>
