@@ -13,7 +13,7 @@ class Poll < ActiveRecord::Base
   has_many :follow_up, :through => :questions
   has_many :follow_up_options, :through => :questions
   has_many :follow_up_responses, :through => :questions
-  #accepts_nested_attributes_for :questions, :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :questions, :reject_if => :all_blank, :allow_destroy => true
 
   validates_uniqueness_of :phone
   before_create :set_new_phone_number
