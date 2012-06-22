@@ -13,6 +13,13 @@
 
 ActiveRecord::Schema.define(:version => 20120622010048) do
 
+  create_table "group_users", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "groups", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -22,13 +29,6 @@ ActiveRecord::Schema.define(:version => 20120622010048) do
   create_table "groups_polls", :id => false, :force => true do |t|
     t.integer "group_id"
     t.integer "poll_id"
-  end
-
-  create_table "groups_users", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "group_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "options", :force => true do |t|
