@@ -1,14 +1,21 @@
+<script language="text/javascript">
+  $(document).ready(function() {
+    $('#owner').bind('insertion-callback',
+    function() {
+      $("#owner_from_list").hide();
+      $("#owner a.add_fields").hide();
+    });
+  });
+</script>
 <%= simple_form_for(@group) do |f| %>
   <%= f.error_notification %>
-
-
 
   <%= f.simple_fields_for :users do |user| %>
     <%= render 'user_fields', :f => user %>
   <% end %>
 
-  <%= link_to_add_association 'Add User', f, :users, :class => "btn" %>
   <%= f.association :polls %>
+  <%= f.association :users %>
 
   <div class="form-inputs">
     <%= f.input :name %>
