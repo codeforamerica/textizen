@@ -24,11 +24,6 @@ ActiveRecord::Schema.define(:version => 20120620202954) do
     t.integer "poll_id"
   end
 
-  create_table "groups_users", :id => false, :force => true do |t|
-    t.integer "group_id"
-    t.integer "user_id"
-  end
-
   create_table "options", :force => true do |t|
     t.string   "text"
     t.integer  "question_id"
@@ -81,8 +76,8 @@ ActiveRecord::Schema.define(:version => 20120620202954) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                                 :default => "",    :null => false
-    t.string   "encrypted_password",     :limit => 128, :default => "",    :null => false
+    t.string   "email",                                 :default => "", :null => false
+    t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -91,9 +86,8 @@ ActiveRecord::Schema.define(:version => 20120620202954) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                                               :null => false
-    t.datetime "updated_at",                                               :null => false
-    t.boolean  "admin",                                 :default => false
+    t.datetime "created_at",                                            :null => false
+    t.datetime "updated_at",                                            :null => false
     t.string   "role"
   end
 
