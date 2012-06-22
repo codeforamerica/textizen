@@ -10,12 +10,13 @@
 <%= simple_form_for(@group) do |f| %>
   <%= f.error_notification %>
 
-  <%= f.simple_fields_for :users do |user| %>
-    <%= render 'user_fields', :f => user %>
+  <%= @group.users.each do |user| %>
+    <%= user.email %>
   <% end %>
 
-  <%= f.association :polls %>
   <%= f.association :users %>
+  <%= f.association :polls %>
+
 
   <div class="form-inputs">
     <%= f.input :name %>
