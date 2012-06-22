@@ -18,8 +18,8 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
   has_many :polls, :through => :groups
   has_many :created_polls, :class_name => "Poll", :foreign_key => "user_id"
-  has_many :groups_users
-  has_many :groups, :through => :groups_users
+  has_many :group_users
+  has_many :groups, :through => :group_users
 
   validates :role, :inclusion => { :in => ROLES, :message => "%{value} is not a valid user role" }
 
