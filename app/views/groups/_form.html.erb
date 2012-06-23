@@ -11,10 +11,10 @@
   <%= f.error_notification %>
 
   <%= @group.users.each do |user| %>
-    <%= user.email %>
+    <%= user.email %><%= link_to "Remove", group_user_path(GroupUser.where(user_id:user, group_id: @group)), :method => :delete %>
   <% end %>
 
-  <%= f.association :users %>
+  <%= f.association :users, :label_method=>:email %>
   <%= f.association :polls %>
 
 

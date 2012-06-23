@@ -1,5 +1,6 @@
 TxtyourcityRails::Application.routes.draw do
   resources :groups
+  resources :group_users
 
   get "static_pages/home"
 
@@ -14,7 +15,7 @@ TxtyourcityRails::Application.routes.draw do
   #devise_for :admins
 
   resources :polls do
-    put :end, :on => :member
+    put :end, :on => :member # for polls/3/end?
     collection do
       post "receive_message"
     end
