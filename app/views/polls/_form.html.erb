@@ -1,3 +1,7 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "form-filling.js" %>
+<% end %>
+
 <%= simple_form_for @poll, :html => { :class => "form-horizontal"} do |f| %>
   <script>
     function togglePhone(){
