@@ -59,20 +59,21 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
 
     respond_to do |format|
-      users = []
+#      users = []
+#      errors = false
+#      params[:group][:user_emails].each do |user_email|
+#        user = User.where(email: user_email)
+#        if user.present?
+#          users << user
+#        else
+#          errors = true
+#          @group.errors << "User #{user_email} not found"
+#        end
+#      end
       errors = false
-      params[:group][:user_emails].each do |user_email|
-        user = User.where(email: user_email)
-        if user.present?
-          users << user
-        else
-          errors = true
-          @group.errors << "User #{user_email} not found"
-        end
-      end
 
       if errors = false and @group.update_attributes(params[:group]) 
-        @group.users << users
+        #@group.users << users
         format.html { redirect_to @group, notice: 'Group was successfully updated.' }
         format.json { head :no_content }
       else 
