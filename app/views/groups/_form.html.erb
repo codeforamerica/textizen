@@ -13,17 +13,17 @@
 <%= simple_form_for(@group) do |f| %>
   <%= f.error_notification %>
 
-  <div id="emails"><ul>
+  <div id="emails">
+    <ul>
       <%= @group.users.each do |user| %>
         <li>
-        <%= user.email %><%= link_to "Remove", group_user_path(GroupUser.where(user_id:user, group_id: @group)), :method => :delete %>
+        <%= user.email %><%= link_to "Remove", group_user_path(GroupUser.where(user_id:user, group_id: @group)[0]), :method => :delete %>
         </li>
       <% end %>
     </ul>
   </div>
 
   <a class="add_email btn" id="addEmail">Add user</a>
-  <!-- <input id="email_" name="email[]" type="text" value="asdf ffda adff jjfjf jfjfff"> -->
 
   <%= f.association :polls %>
 
