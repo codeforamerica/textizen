@@ -15,7 +15,7 @@
 
   <div id="emails">
     <ul>
-      <%- @group.users.each do |user| %>
+      <% @group.users.each do |user| %>
         <li>
         <%= user.email %><%= link_to "Remove", group_user_path(GroupUser.where(user_id:user, group_id: @group)[0]), :method => :delete %>
         </li>
