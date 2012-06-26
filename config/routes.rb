@@ -19,7 +19,7 @@ TxtyourcityRails::Application.routes.draw do
     end
   end
 
-  match 'welcome' => 'static_pages#welcome'
+  match 'welcome' => 'static_pages#home'
   match 'about' => 'static_pages#about'
   match 'privacy' => 'static_pages#privacy'
   match 'getstarted' => 'static_pages#getstarted'
