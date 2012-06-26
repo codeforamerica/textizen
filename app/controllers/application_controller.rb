@@ -8,13 +8,4 @@ class ApplicationController < ActionController::Base
     end
     #render welcome page by default
   end
-  def welcome
-    render "static_pages/home"
-  end
-  def privacy
-    render "static_pages/privacy"
-  end
-  def about
-    render "static_pages/about"
-  end
 end

@@ -1,9 +1,4 @@
 TxtyourcityRails::Application.routes.draw do
-  get "static_pages/home"
-
-  get "static_pages/about"
-
-  get "static_pages/privacy"
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
@@ -24,9 +19,10 @@ TxtyourcityRails::Application.routes.draw do
     end
   end
 
-  match 'welcome' => 'application#welcome'
-  match 'about' => 'application#about'
-  match 'privacy' => 'application#privacy'
+  match 'welcome' => 'static_pages#welcome'
+  match 'about' => 'static_pages#about'
+  match 'privacy' => 'static_pages#privacy'
+  match 'getstarted' => 'static_pages#getstarted'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
