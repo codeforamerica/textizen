@@ -160,9 +160,16 @@ h3{
 	margin-bottom: 0.6em;
 }
 
+.qexamples {
+	margin-top: 0.5em;
+}
+
+.bottomspace{
+	margin-bottom: 1.5em;
+}
+
 .qexamples li{
 	line-height:125%;
-}
 }
 
 .nobullet{
