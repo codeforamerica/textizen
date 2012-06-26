@@ -38,14 +38,14 @@
 
   <div class="span3">
     <div class="counterdash">
-      <div class="responsecount"><%= @poll.responses.count %></div>
+      <div class="responsecount"><%= @poll.questions.first.responses.count %></div>
       <br>
       <span class="caption">responses</span>
       <br>
       <!--img src="http://chart.apis.google.com/chart?chf=a,s,000000&chs=100x40&cht=ls&chd=s:degddgjmqxuurruxwrro&chls=1&chf=bg,s,65432100" width="100" height="40" alt="" /-->
       <%= sparkline @poll.time_series %>
       <br>
-      <span class="caption">latest about <%= format_time@poll.time_since_last_response %> ago</span>
+      <span class="caption">latest about <%= format_time @poll.time_since_last_response %> ago</span>
     </div>
   </div>
 
@@ -61,7 +61,7 @@
       <div class="settingstext"><%= @poll.running? ? 'Running' : 'Ended' %></div>
 
 
-      <div class="btngroup">
+      <div class="btngroup edit-poll">
         <!--<input type="button" class="btn btn-danger" value="Close poll">-->
         <% if @poll.running? %>
           <%= link_to 'End poll', end_poll_path(@poll), :class => "btn btn-danger", :confirm => 'Are you sure?', :method => :put %>
@@ -109,10 +109,10 @@
             <td><%= i+1 %></td>
             <td><%= resp[:first_response_created].strftime("%m/%d/%Y at %I:%M%p")%></td>
             <% @poll.questions_all.each do |q| %>
-              <td><span class="optionvalue"><%= resp[:texts][q.id] %><% unless q.options.empty? %>:</span><%= q.get_matching_option(resp[:texts][q.id]) %><% end %>
+              <td><span class="optionvalue"><%= resp[:texts][q.id] %><% unless q.options.empty? %></span><%= q.get_matching_option(resp[:texts][q.id])? ": #{q.get_matching_option(resp[:texts][q.id])}" : '' %><% end %>
               </td>
             <% end %>
-            <td nowrap="nowrap"><%= number_to_phone(resp[:from], :area_code => true)[1..-1] %></td>
+            <td nowrap="nowrap"><%= number_to_phone(resp[:from], :area_code => true)[1..9] %>-XXXX</td>
           </tr>
         <% end %>
       </table>

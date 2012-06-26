@@ -1,6 +1,6 @@
-# Text Your City [![Build Status](https://secure.travis-ci.org/codeforamerica/cfa_template.png?branch=master)][travis]
+# Text Your City [![Build Status](https://secure.travis-ci.org/codeforamerica/textizen.png?branch=master)][travis]
 
-[travis]: http://travis-ci.org/codeforamerica/textyourcity
+[travis]: http://travis-ci.org/codeforamerica/textizen
 
 ## Installation
 
@@ -18,7 +18,7 @@
 
 
 ### Other stuff
-Make sure you have these environment variables set to enable SMS; you can acquire them in steps 2 and 3 of the _Configuring Tropo_ section above. You can either add them to your $PATH or rename the included `sample.env` to `.env` if using Foreman. 
+Make sure you have these environment variables set to enable SMS; you can acquire them in steps 2 and 3 of the _Configuring Tropo_ section above. You can either add them to your $PATH or rename the included `sample.env` to `.env` if using Foreman.
 
     export TROPO_USERNAME=
     export TROPO_PASSWORD=
@@ -26,17 +26,17 @@ Make sure you have these environment variables set to enable SMS; you can acquir
     export TROPO_APP_ID=
 
 ## Usage
-    
+
     $ rails server
 
 With Foreman:
-    
+
     $ foreman run bundle exec rails server -p $PORT
 
 _Remember, deploying locally means that you can't receive Tropo messages via their webhook. See below for deploying to Heroku._
 
 ## Deploying to Heroku
-    
+
     $ heroku create mytextyourcity --stack cedar
     $ git push heroku master
     $ heroku run rake db:migrate
@@ -122,6 +122,10 @@ Copyright (c) 2012 Code for America. See [LICENSE][] for details.
 
 [license]: https://github.com/codeforamerica/cfa_template/blob/master/LICENSE.mkd
 
-[![Code for America Tracker](http://stats.codeforamerica.org/codeforamerica/cfa_template.png)][tracker]
+[![Code for America Tracker](http://stats.codeforamerica.org/codeforamerica/textizen.png)][tracker]
 
-[tracker]: http://stats.codeforamerica.org/projects/textyourcity
+[tracker]: http://stats.codeforamerica.org/projects/textizen
+
+## Changelog
+6/15/12 v0.1.1 pushed with bugfixes for csv export and poll viewing
+5/31/12 v0.1.0 now pushed! Ready for our first pilot with the Philadelphia City Planning Commission. Look for launch announcements coming shortly...

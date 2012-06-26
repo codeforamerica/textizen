@@ -106,3 +106,7 @@
 	padding-right: 0.3em;
 	color:#999;
 }
+
+.edit-poll {
+  display: none
+}
