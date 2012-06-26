@@ -59,6 +59,14 @@ h2{
 	margin: 0.8em 0 -0.1em 0;
 }
 
+h3{
+	font-family: 'Signika Negative', Helvetica, Arial, sans-serif;
+	font-size:140%;
+	font-weight:normal;
+	text-transform:uppercase;
+	margin: 0.5em 0 0.2em 0.5em;
+}
+
 .comment{
 	color:#666;
 	font-weight:bold;
@@ -121,4 +129,43 @@ h2{
 .video {
   border: 1px solid #ccc;
   margin-top: 3px;
+}
+
+.getstarted h2{
+	margin-left: -1.1em;
+}
+
+.getstarted p,li{
+	font-size: 107%;
+}
+
+.sidebar{
+	margin-top: 3.3em;
+}
+
+.sidebar h3{
+	margin: 0 0 3px 7px;
+}
+
+.sideblock{
+	margin: 0 0 12px 0;
+	padding:0.6em 1em 0.3em 0.5em;
+	background-color: #CED8E6;
+	height: 100%;
+	font-size:92%;
+}
+
+.copylist li{
+	line-height:125%;
+	margin-bottom: 0.6em;
+}
+
+.qexamples li{
+	line-height:125%;
+}
+}
+
+.nobullet{
+	list-style-type:none;
+	margin-left: 0.6em;
 }
