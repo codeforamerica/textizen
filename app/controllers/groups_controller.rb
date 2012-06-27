@@ -67,7 +67,7 @@ class GroupsController < ApplicationController
         format.html { redirect_to @group, notice: 'Group was successfully updated.' }
         format.json { head :no_content }
       else 
-        @group.errors.add(:polls, errors)
+        @group.errors.add(:users, errors)
         format.html { render action: "edit" }
         format.json { render json: @group.errors, status: :unprocessable_entity }
       end

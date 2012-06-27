@@ -21,6 +21,15 @@
         </li>
       <% end %>
     </ul>
+    <%- if @group.errors.messages && @group.errors.messages[:users] -%>
+      <ul>
+        <div class="control-group error">
+          <%- @group.errors.messages[:users].each do |message| -%>
+            <li class="help-block"><%= message[0] -%></li>
+          <%- end -%>
+        </div>
+      </ul>
+    <%- end -%>
   </div>
 
   <a class="add_email btn" id="addEmail">Add user</a>

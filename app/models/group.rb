@@ -19,5 +19,4 @@ class Group < ActiveRecord::Base
     puts errors
     return errors
   end
-  #accepts_nested_attributes_for :users, :polls
 end
