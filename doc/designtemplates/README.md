@@ -7,6 +7,9 @@ This library includes design assets that may be used as inspiration or templates
 
 For more information about distribution and deployment, see [Getting Started With Textizen](http://www.textizen.com/getstarted).
 
+### Download the .zip archive
+This is probably the easiest way to get access to the files. Download it from Dropbox: [designtemplates.zip](https://www.dropbox.com/s/sdim9piv4wvndpc/designtemplates.zip).
+
 ### Give back to this gallery?
 Help this gallery grow by sharing your designs! Submit your files by email at `textizen@codeforamerica.org` and we'll publish them here under the same license as below, giving credit to you and your organization.
 
