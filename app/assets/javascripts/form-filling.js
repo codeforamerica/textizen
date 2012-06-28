@@ -1,37 +1,33 @@
-$('select.select').bind('change', function(){ 
-	console.log('Value changed'); 
-	if $('select.select').val() == 'YN' {
-			console.log('Yes/No Selected'); }
+$(document).ready(function(){
+	$('.simple_form').on("change", "select.select", question_type_listener);
 });
 
-/*$(document).ready(function() {  
-
+function question_type_listener(event) {	
+	var value = $(this).val();
+	$('span.result').text('Value: ' + value); //debugging purposes
 	
-	$('select.select').change(function(
-		console.log($('select.select').val());
-		){
-			if (val == 'YN') 
-				console.log($('select.select').val());
-			else if (val == 'MULTI') 
-				console.log($('select.select').val());
-			else  (val == 'OPEN') 
-				console.log($('select.select').val());
-			
-		})
+	if (value == "YN") {
+		$('div.options > a.add_fields').next().click(form_options(value));
+	}
+	else if (value == "MULTI") {
+		$('div.options > a.add_fields').next().click(form_options(value));
+	}
+}
+
+
+function form_val(value) {
+	if (value == "YN")
+		$("span.result").text("YN = " + value);
 		
-	});*/
+	else if (value == "OPTION")
+		$("span.result").text("OPTION = " + value);
+		$('div.options > a.add_fields').next().click(form_options(value));
+	else if (value == "MULTI")
+		$("span.result").text("MULTI = " + value);
+		$('div.options > a.add_fields').next().click(form_options(value));
+}
 
-
-
-
-		/*function yesnoPoll() {
-			console.log("Yes/No poll initiated.");
-			$("label.control-label").text("A").addClass(".yes-no-active");
-			$("label.control-label").text("B").addClass(".yes-no-active");
-			$("label.control-label").text("C").addClass(".yes-no-inactive");
-	
-			if $(click.("input.inactive")) {
-				$(".yes-no-inactive").replaceClass(".yes-no-active");
-				// Add another 'd'... incrementing option
-			}
-		}*/
+function form_options(value) {
+	//
+	//
+}
