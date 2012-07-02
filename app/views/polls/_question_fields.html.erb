@@ -1,7 +1,7 @@
-<div class="nested-fields">
+<div class="nested-fields bottom-border">
 
   <%= f.input :sequence %>
-  <%= f.input :text, :hint => (link_to_remove_association "Remove question", f, :class => "inline") %>
+  <%= f.input :text, :hint => (link_to_remove_association "Remove question", f, :class => "inline btn btn-danger") %>
   <%= f.input :question_type, :collection=>[['Open','OPEN'],['Multiple Choice','MULTI'],['Yes / No', 'YN']] %>
 
   
