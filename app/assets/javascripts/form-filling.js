@@ -15,6 +15,8 @@ $(document).ready(function(){
 			$('div.nested-fields.options').remove();
 			$('div.options > a.add_fields').click();
 			multi_form();
+			$('div.options > a.add_fields').click();
+			multi_form();
 		}
 		else if (value == "OPEN") {
 			$('div.nested-fields.options').remove();
@@ -29,6 +31,7 @@ function yn_form() {
 
 function multi_form() {
 	$('.control-group.string.required').html('<div class="input-prepend"><span class="add-on">A:</span><input class="span2" id="prependedInput" size="" type="text"></div>');
+	$('div.options > fieldset > div.control-group:odd').hide()
 	$('span.add-on:last').text('B');
 	/*$('.control-group.string.required').html('<div class="input-prepend"><span class="add-on">B:</span><input class="span2" id="prependedInput" size="" type="text"></div>');
 	*/}
