@@ -29,12 +29,16 @@
 
 .item-container 
 {
+	padding-top: 0px;
+	margin-bottom: 30px;
+	/* Prettifications */
 	border:1px solid #999;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
-	padding-top: 0px;
-	margin-bottom: 30px;
+	-webkit-box-shadow: 1px 1px 1px rgba(50, 50, 50, 0.49);
+	-moz-box-shadow:    1px 1px 1px rgba(50, 50, 50, 0.49);
+	box-shadow:         1px 1px 1px rgba(50, 50, 50, 0.49);
 	.form-actions 
 	{
 		margin-bottom: 0px;
