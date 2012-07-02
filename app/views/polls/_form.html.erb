@@ -1,3 +1,5 @@
+<body onload="show_questions">
+
 <%= simple_form_for @poll, :html => { :class => "form-horizontal"} do |f| %>
   <script>
     function togglePhone(){
@@ -15,7 +17,10 @@
 
   <div class="links">
     <br>
-    <%= link_to_add_association 'Add Question', f, :questions, :class => "btn" %>
+    <%= link_to_add_association 'Add Question', f, :questions, :class => "btn", :id => 'add_qn_button' %>
+    <script type="text/javascript">
+      document.getElementById('add_qn_button').click();
+    </script>
   </div>
 
   <hr>
