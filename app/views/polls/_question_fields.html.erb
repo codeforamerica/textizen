@@ -1,15 +1,10 @@
 <div class="nested-fields">
 
-  <%= f.input :sequence %><%= f.input :text, :hint => (link_to_remove_association "Remove question", f, :class => "inline") %>
+  <%= f.input :sequence %>
+  <%= f.input :text, :hint => (link_to_remove_association "Remove question", f, :class => "inline") %>
+  <%= f.input :question_type, :collection=>[['Open','OPEN'],['Multiple Choice','MULTI'],['Yes / No', 'YN']] %>
 
-  <fieldset>
-    <div class="control-group">
-      <div class="controls">
-        <%= f.input :question_type, :collection=>[['Open','OPEN'],['Multiple Choice','MULTI'],['Yes / No', 'YN']] %>
-      </div>
-    </div>
-  </fieldset>
-
+  
   <div class="options">
     <%= f.simple_fields_for :options do |option| %>
       <%= render 'option_fields', :f => option %>
@@ -17,3 +12,4 @@
     <%= link_to_add_association 'Add option', f, :options %>
   </div>
 </div>
+

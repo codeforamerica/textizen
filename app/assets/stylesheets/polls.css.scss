@@ -17,3 +17,34 @@
 	position:relative;
 	top: -2px;
 }
+
+.form-horizontal 
+{
+	.help-inline 
+	{
+		color: #888;
+		font-size: 0.9em;
+	}
+}
+
+.item-container 
+{
+	border:1px solid #999;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	padding-top: 0px;
+	margin-bottom: 30px;
+	.form-actions 
+	{
+		margin-bottom: 0px;
+		margin-top: 0px;
+	}
+	.nested-fields 
+	{
+		padding-left: 10px;
+		border-bottom: 1px solid #ccc;
+		margin-top: 30px;
+		padding-bottom: 20px;
+	}
+}

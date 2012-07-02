@@ -8,44 +8,59 @@
     }
   </script>
 
-  <h3>Script</h3>
-  <%= f.simple_fields_for :questions do |question| %>
-    <%= render 'question_fields', :f => question %>
-  <% end %>
+  <div class="row">
+    <div class="span8">
 
-  <div class="links">
-    <br>
-    <%= link_to_add_association 'Add Question', f, :questions, :class => "btn", :id => 'add_qn_button' %>
-    <script type="text/javascript">
-      document.getElementById('add_qn_button').click();
-    </script>
-  </div>
+      <h3>Questions</h3>
+      <div class="item-container">
+        <%= f.simple_fields_for :questions do |question| %>
+          <%= render 'question_fields', :f => question %>
+        <% end %>
 
-  <hr>
-
-  <h3>Settings</h3>
-  <%= f.input :title, :label => "Nickname", :hint => "For messages, e.g. \"Thanks for responding to our survey on [nickname]\"" %>
-  <%= f.input :phone, :hint => "<input type='checkbox' name='auto_assign' onClick='togglePhone()' class='alignbox'></input> Automatically assign?", :disabled => "false" %>
-  <!--<input type="checkbox" name="auto_assign" onClick="togglePhone()"></input>-->
-
-  <div class="field" style="display:none;">
-    <%= f.label :start_date %>
-    <%= f.datetime_select :start_date %>
-  </div>
-
-  <div class="field">
-    <fieldset>
-      <div class="control-group">
-          <%= f.label :end_date, :class => "control-label" %>
-        <div class="controls">
-          <%= f.date_select(:end_date, {:use_short_month => 1, :order => [:month, :day, :year]}, {:class => "span1"}) %>
+        <div class="form-actions">
+          <%= link_to_add_association '+ Add Question', f, :questions, :class => "btn btn-large btn-success", :id => 'add_qn_button' %>
+          <!-- Javascript to "click" the add question button (hackaround!) -->
+          <script type="text/javascript">
+            document.getElementById('add_qn_button').click();
+          </script>
         </div>
       </div>
-  </fieldset>
-  </div>
 
-<div class="form-actions">
-    <%= f.button :submit, :class => 'btn btn-large btn-primary' %>
-    <%= link_to 'Cancel', @poll, :class => 'btn btn-large' %>
-</div>
+
+      <h3>Settings</h3>
+      <div class="item-container">
+        <div class= "nested-fields">
+          <%= f.input :title, :label => "Confirmation", :placeholder => "Thanks for your feedback! More info: [your organization's website", :as => :text , :input_html => { :rows => 3 } %>
+          <%= f.input :title, :label => "Nickname", :hint => "Only for reports. Example: \"15 responses this week to your poll on ________.\"" %>
+          <%= f.input :phone, :hint => "<input type='checkbox' name='auto_assign' onClick='togglePhone()' class='alignbox'></input> Automatically assign?", :disabled => "false" %>
+          <!--<input type="checkbox" name="auto_assign" onClick="togglePhone()"></input>-->
+
+          <div class="field" style="display:none;">
+            <%= f.label :start_date %>
+            <%= f.datetime_select :start_date %>
+          </div>
+
+          <div class="field">
+            <fieldset>
+              <div class="control-group">
+                  <%= f.label :end_date, :class => "control-label" %>
+                <div class="controls">
+                  <%= f.date_select(:end_date, {:use_short_month => 1, :order => [:month, :day, :year]}, {:class => "span1"}) %>
+                </div>
+              </div>
+          </fieldset>
+          </div>
+        </div>
+
+        <div class="form-actions">
+            <%= f.button :submit, :class => 'btn btn-large btn-primary' %>
+            <%= link_to 'Cancel', @poll, :class => 'btn btn-large' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="span4">
+      hello world!
+    </div>
+  </div>
 <% end %>
