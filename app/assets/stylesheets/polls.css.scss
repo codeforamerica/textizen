@@ -29,6 +29,7 @@
 
 .item-container 
 {
+	position: relative;
 	padding-top: 0px;
 	margin-bottom: 30px;
 	/* Prettifications */
@@ -46,12 +47,20 @@
 	}
 	.nested-fields 
 	{
+		position: relative;
 		padding-left: 10px;
 		margin-top: 30px;
 		padding-bottom: 20px;
+		.top-right
+		{
+			position: absolute;
+			top: -30px;
+			right: 0;
+		}
 	}
 	.bottom-border
 	{
 		border-bottom: 1px solid #ccc;
 	}
+	
 }
