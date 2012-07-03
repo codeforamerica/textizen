@@ -94,4 +94,8 @@ describe Poll do
     end
 
   end
+
+
+  # Describe a spec test to check that at least one question has been added
+  
 end
