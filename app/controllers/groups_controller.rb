@@ -44,10 +44,15 @@ class GroupsController < ApplicationController
     @group = Group.new(params[:group])
 
     respond_to do |format|
-      if @group.save
+      if (emails=params[:user_emails])
+        errors = @group.save_users_by_emails(emails)
+      end
+      @group.users << current_user if errors.empty?
+      if errors.empty? and @group.save
         format.html { redirect_to @group, notice: 'Group was successfully created.' }
         format.json { render json: @group, status: :created, location: @group }
       else
+        @group.errors.add(:users, errors)
         format.html { render action: "new" }
         format.json { render json: @group.errors, status: :unprocessable_entity }
       end
