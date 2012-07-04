@@ -1,5 +1,6 @@
 class PollsController < ApplicationController
   before_filter :authenticate_user!
+  load_and_authorize_resource
 
   # GET /polls
   # GET /polls.json
@@ -48,7 +49,7 @@ class PollsController < ApplicationController
   # POST /polls.json
   def create
     @poll = Poll.new(params[:poll])
-    @poll.user = current_user
+    @poll.author = current_user
 
     respond_to do |format|
       if @poll.save

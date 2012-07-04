@@ -6,8 +6,8 @@ class Ability
       can :manage, :all
       #can :view_all, Poll
     else
-      can :manage, Poll, :group => { :id => user.group_ids }
-      can :manage, GroupUser, :group => { :id => user.group_ids }
+      can :manage, Poll, :groups => { :id => user.group_ids }
+      can :manage, GroupUser, :groups => { :id => user.group_ids }
     end
     # Define abilities for the passed in user here. For example:
     #
