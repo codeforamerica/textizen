@@ -6,6 +6,7 @@ class Ability
       can :manage, :all
       #can :view_all, Poll
     else
+      can :create, Poll
       can :manage, Poll, :groups => { :id => user.group_ids }
       can :create, Group
       can :manage, Group, :users => { :id => user.id }

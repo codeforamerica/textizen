@@ -8,7 +8,7 @@ class PollsController < ApplicationController
     if current_user.role?(:superadmin) # TODO: transfer this to cancan syntax, eventually
       @polls = Poll.all
     else
-      @polls = current_user.polls
+      @polls = current_user.polls + current_user.created_polls 
     end
 
     respond_to do |format|
