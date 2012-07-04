@@ -41,6 +41,8 @@
   </fieldset>
   </div>
 
+  <%= f.association :groups, :collection => current_user.groups %>
+
 <div class="form-actions">
     <%= f.button :submit, :class => 'btn btn-large btn-primary' %>
     <%= link_to 'Cancel', @poll, :class => 'btn btn-large' %>
