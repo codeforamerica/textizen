@@ -7,7 +7,9 @@ class Ability
       #can :view_all, Poll
     else
       can :manage, Poll, :groups => { :id => user.group_ids }
-      can :manage, GroupUser, :groups => { :id => user.group_ids }
+      can :create, Group
+      can :manage, Group, :users => { :id => user.id }
+      can :manage, GroupUser, :groups => { :id => user.group_ids } # allows anyone to remove themselves from a group, or add polls to a group they're in
     end
     # Define abilities for the passed in user here. For example:
     #
