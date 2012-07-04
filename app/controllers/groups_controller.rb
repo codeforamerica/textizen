@@ -3,7 +3,11 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    @groups = Group.all
+    if current_user.role?(:superadmin) # TODO use a cancan ability here instead
+      @groups = Group.all
+    else
+      @grups = current_user.groups
+    end
 
     respond_to do |format|
       format.html # index.html.erb
