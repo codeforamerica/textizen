@@ -4,6 +4,7 @@ class Ability
   def initialize(user)
     if user.role?(:superadmin)
       can :manage, :all
+      #can :view_all, Poll
     else
       can :manage, Poll, :group => { :id => user.group_ids }
       can :manage, GroupUser, :group => { :id => user.group_ids }
