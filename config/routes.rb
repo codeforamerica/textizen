@@ -10,7 +10,7 @@ TxtyourcityRails::Application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => "registrations" }
   #devise_for :users, :path_names => { :sign_in => 'login', :sign_out => 'logout', :password => 'secret', :confirmation => 'verification', :unlock => 'unblock', :registration => 'register'}#, :controllers=>{:registrations=>"registrations"}
   #devise_for :admins
 
