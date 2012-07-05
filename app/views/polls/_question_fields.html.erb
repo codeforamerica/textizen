@@ -5,7 +5,7 @@
 
   <%= f.input :sequence, :as => :hidden %>
   <%= f.input :text, :label => "Question Text" %>
-  <%= f.input :question_type, :collection=>[['Open','OPEN'],['Multiple Choice','MULTI'],['Yes / No', 'YN']], :hint => "Hello!" %>
+  <%= f.input :question_type, :collection=>[['Open','OPEN'],['Multiple Choice','MULTI'],['Yes / No', 'YN']] %>
   
   <div class="options">
     <%= f.simple_fields_for :options do |option| %>
