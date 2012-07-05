@@ -47,9 +47,6 @@
 	}
 	.nested-fields 
 	{
-		position: relative;
-		margin-top: 30px;
-		padding-bottom: 20px;
 		.top-right
 		{
 			position: absolute;
@@ -60,6 +57,16 @@
 	.bottom-border
 	{
 		border-bottom: 1px solid #ccc;
+	}
+	.spacing 
+	{
+		position: relative;
+		margin-top: 30px;
+		padding-bottom: 20px;
+	}
+	.small-spacing
+	{
+		padding-top: 5px;
 	}
 	
 }
