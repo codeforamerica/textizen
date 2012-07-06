@@ -49,7 +49,7 @@
 		/* Placeholder for contingency */
 	}
 
-	.container-entry	{
+	.question-entry	{
 		border-bottom: 1px solid #ccc;
 		position: relative;
 		margin-top: 30px;
@@ -62,18 +62,26 @@
 		.add-option-button	{
 			display:none;
 		}
+		.option_field	{
+			margin-top: -5px;
+			.yes-no {
+				width: 60px;
+			}
+		}
+		.disabled	{
+			cursor: not-allowed;
+			background-color: #EEE;
+			border-color: #DDD;
+		}
 	}
 
-	.option_field	{
-		margin-top: -5px;
+	.spacing {
+		position: relative;
+		margin-top: 30px;
+		padding-bottom: 20px;
 	}
-	.disabled	{
-		cursor: not-allowed;
-		background-color: #EEE;
-		border-color: #DDD;
-	}
-	.yes-no {
-		width: 60px;
-	}
+	
+	
+	
 	
 }

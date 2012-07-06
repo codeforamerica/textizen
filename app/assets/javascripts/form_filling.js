@@ -3,11 +3,11 @@ $(document).ready(function(){
 	$('.simple_form').on("change", "select.select", function(event) {
 
 		// Wipes existing options TODO: hide, instead of remove?
-		$(this).parents(".container-entry").children(".option_field").remove();
+		$(this).parents(".question-entry").children(".option_field").remove();
 		
 		var value = $(this).val();
 
-		var parent_container_entry = $(this).parents(".container-entry");
+		var parent_container_entry = $(this).parents(".question-entry");
 		console.log(parent_container_entry.find(".add-option-button").hide());	
 
 		if (value == "YN") {	
