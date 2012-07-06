@@ -1,19 +1,21 @@
-<div class="nested-fields bottom-border">
-  <div class="spacing">
-    <div>
-      <%= link_to_remove_association raw("<div class=\"btn btn-danger\">X</div>"), f, :class => "top-right" %>
-    </div>
+<div class="nested-fields container-entry spacing">
+  <div>
+    <%= link_to_remove_association raw("<div class=\"btn btn-danger\">X</div>"), f, :class => "top-right" %>
+  </div>
 
-    <%= f.input :sequence, :as => :hidden %>
-    <%= f.input :text, :label => "Question" %>
-    <%= f.input :question_type, :label => "Type" , :collection=>[['Open','OPEN'],['Multiple Choice','MULTI'],['Yes / No', 'YN']] %>
+  <%= f.input :sequence, :as => :hidden %>
+  <%= f.input :text, :label => "Question" %>
+  <%= f.input :question_type, :label => "Type" , :collection=>[['Open','OPEN'],['Multiple Choice','MULTI'],['Yes / No', 'YN']] %>
+
+  
+  <div class="options">
+
+    <%= f.simple_fields_for :options do |option| %>
+      <%= render 'option_fields', :f => option %>
+    <% end %>
+    <%= link_to_add_association 'Add option', f, :options, 
+            :class => "controls add_option_button"%>
     
-    <div class="options">
-      <%= f.simple_fields_for :options do |option| %>
-        <%= render 'option_fields', :f => option %>
-      <% end %>
-      <%= link_to_add_association 'Add option', f, :options, :class => "controls" %>
-    </div>
   </div>
 </div>
 

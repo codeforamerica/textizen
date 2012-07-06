@@ -1,4 +1,4 @@
-<div class="nested-fields small-spacing">
+<div class="nested-fields option_field">
   <fieldset>
     <%= f.input :text, :label => false, :hint => (link_to_remove_association "Remove option", f, :class => "inline btn btn-danger btn-mini") %>
     <%= f.input :value, :as => :hidden, :label => 'Option value' %>
@@ -10,6 +10,6 @@
 
   </fieldset>
   <div class="links tempmargin">
-   <!--  <%= link_to_add_association 'Add followup', f, :follow_up %> -->
+<!--     <%= link_to_add_association 'Add followup', f, :follow_up %> -->
   </div>
 </div>

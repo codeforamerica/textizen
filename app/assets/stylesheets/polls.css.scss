@@ -53,8 +53,12 @@
 			top: -30px;
 			right: 0;
 		}
+		.add_option_button
+		{
+			display:none;
+		}
 	}
-	.bottom-border
+	.container-entry
 	{
 		border-bottom: 1px solid #ccc;
 	}
@@ -64,9 +68,15 @@
 		margin-top: 30px;
 		padding-bottom: 20px;
 	}
-	.small-spacing
+	.option-field
 	{
 		padding-top: 5px;
+	}
+	.disabled 
+	{
+		cursor: not-allowed;
+		background-color: #EEE;
+		border-color: #DDD;
 	}
 	
 }
