@@ -4,6 +4,15 @@ class Group < ActiveRecord::Base
   has_many :group_users
   has_many :users, :through => :group_users
 
+  after_save :update_polls
+  def update_polls
+    unless poll_ids.nil?
+      self.polls do |poll|
+        poll.destroy unless poll_ids.include?(poll.id) # first delete all removed groups
+      end
+    end
+  end
+
   def save_users_by_emails(emails)
     errors = []
     puts "**Saving emails**"
