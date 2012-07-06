@@ -1,3 +1,7 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "form-filling.js" %>
+<% end %>
+
 <%= simple_form_for @poll, :html => { :class => "form-horizontal"} do |f| %>
   <script>
     function togglePhone(){
@@ -29,7 +33,7 @@
 
       <h3>Settings</h3>
       <div class="item-container">
-        <div class= "nested-fields">
+        <div class= "nested-fields spacing">
           <%= f.input :title, :label => "Confirmation", :placeholder => "Thanks for your feedback! More info: [your organization's website", :as => :text , :input_html => { :rows => 3 } %>
           <%= f.input :title, :label => "Nickname", :hint => "Only for reports. Example: \"15 responses this week to your poll on ________.\"" %>
           <%= f.input :phone, :hint => "<input type='checkbox' name='auto_assign' onClick='togglePhone()' class='alignbox'></input> Automatically assign?", :disabled => "false" %>
@@ -59,7 +63,7 @@
       </div>
     </div>
 
-    <div class="span4">
+    <div class="span4" id="form_sidebar">
       hello world!
     </div>
   </div>
