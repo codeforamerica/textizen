@@ -4,13 +4,13 @@
   </div>
 
   <%= f.input :sequence, :as => :hidden %>
-  <%= f.input :text, :label => "Question" %>
+  <%= f.input :text, :label => "Question", :label_html => { :class => "label-bold" }  %>
   <%= f.input :question_type, :label => "Type" , :collection=>[['Open','OPEN'],['Multiple Choice','MULTI'],['Yes / No', 'YN']] %>
 
   
   <div class="options">
 
-    <%= f.simple_fields_for :options do |option| %>
+    <%= f.simple_fields_for :options, :wrapper => "bootstrap" do |option| %>
       <%= render 'option_fields', :f => option %>
     <% end %>
     <%= link_to_add_association 'Add option', f, :options, 

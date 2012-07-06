@@ -8,11 +8,6 @@
 	margin-bottom: 1em;
 }
 
-.tempfollowup{
-	margin-left: 12em;
-	margin-bottom: 2em;
-}
-
 .alignbox{
 	position:relative;
 	top: -2px;
@@ -54,32 +49,59 @@
 		position: relative;
 		margin-top: 30px;
 		padding-bottom: 20px;
+
 		.top-right	{
 			position: absolute;
 			top: -30px;
 			right: 0;
 		}
+
 		.add-option-button	{
 			display:none;
 		}
-		.option_field	{
+		.option-field	{
 			margin-top: -5px;
+
+			input {
+				// width: 180px;
+			}
 			.yes-no {
 				width: 60px;
 			}
+			.followup-field {
+				margin-top: 20px;
+				margin-left: 130px;
+				margin-bottom: 2em;
+			}
 		}
-		.disabled	{
-			cursor: not-allowed;
-			background-color: #EEE;
-			border-color: #DDD;
+		.add-followup-button {
+			//display:none;
+			//position: absolute;
+			//right: 130px;
 		}
+		.add-followup-option-button {
+			display:none;
+		}
+
 	}
 
+	/* Generic stuff */
 	.spacing {
 		position: relative;
 		margin-top: 30px;
 		padding-bottom: 20px;
 	}
+	.label-bold 
+	{
+		font-weight: bold;
+	}
+	.disabled	
+	{
+		cursor: not-allowed;
+		background-color: #EEE;
+		border-color: #DDD;
+	}
+
 	
 	
 	

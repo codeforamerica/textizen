@@ -1,12 +1,14 @@
-<div class="nested-fields tempfollowup">
-  <%= f.input :text, :label => 'Followup question', :hint => "User reads this message" %>
+<div class="nested-fields followup-field">
+  
+
+  <%= f.input :text, :label => 'Followup', :label_html => { :class => "label-bold" } , :hint => (link_to_remove_association "X", f, :class => "inline btn btn-danger btn-mini") %>
   
   <fieldset>
     <div class="control-group">
-      <label class="control-label">Followup type</label>
+      <label class="control-label">Type</label>
       <div class="controls">
         <%= f.select(:question_type, options_for_select([['Open','OPEN'],['Multiple Choice','MULTI'],['Yes/No', 'YN']],1)) %>
-        <%= link_to_remove_association "Remove followup", f %>
+        
       </div>
     </div>
   </fieldset>
@@ -16,6 +18,6 @@
       <%= render 'option_fields', :f => option %>
     <% end %>
 
-    <%= link_to_add_association 'Add followup option', f, :options, :partial => 'polls/follow_up_option_fields' %>
+    <%= link_to_add_association 'Add followup option', f, :options, :partial => 'polls/follow_up_option_fields', :class => "add-followup-option-button btn btn-mini" %>
   </div>
 </div>
