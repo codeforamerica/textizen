@@ -5,11 +5,8 @@ class PollsController < ApplicationController
   # GET /polls
   # GET /polls.json
   def index
-    if current_user.role?(:superadmin) # TODO: transfer this to cancan syntax, eventually
-      @polls = Poll.all
-    else
-      @polls = current_user.polls + current_user.created_polls 
-    end
+    # TODO: transfer this to cancan syntax, eventually
+    @polls = current_user.visible_polls
 
     respond_to do |format|
       format.html # index.html.erb

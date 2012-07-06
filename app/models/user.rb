@@ -13,6 +13,14 @@ class User < ActiveRecord::Base
     ROLES.index(base_role.to_s) <= ROLES.index(role)
   end
 
+  def visible_polls
+    if role?(:superadmin)
+      return Poll.all
+    else
+      return polls + created_polls
+    end
+  end
+
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :role
   # attr_accessible :title, :body

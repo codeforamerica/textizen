@@ -34,7 +34,7 @@
 
   <a class="add_email btn" id="addEmail">Add user</a>
 
-  <%= f.association :polls %>
+  <%= f.association :polls, :collection => current_user.visible_polls %>
 
   <div class="form-inputs">
     <%= f.input :name %>
