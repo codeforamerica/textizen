@@ -69,6 +69,7 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
 
     respond_to do |format|
+      errors = []
       if (emails=params[:user_emails])
         errors = @group.save_users_by_emails(emails)
       end
