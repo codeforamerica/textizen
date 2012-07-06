@@ -1,4 +1,4 @@
-<div class="nested-fields container-entry spacing">
+<div class="nested-fields container-entry">
   <div>
     <%= link_to_remove_association raw("<div class=\"btn btn-danger\">X</div>"), f, :class => "top-right" %>
   </div>
@@ -14,7 +14,7 @@
       <%= render 'option_fields', :f => option %>
     <% end %>
     <%= link_to_add_association 'Add option', f, :options, 
-            :class => "controls add_option_button"%>
+            :class => "controls add-option-button"%>
     
   </div>
 </div>

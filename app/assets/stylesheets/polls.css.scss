@@ -27,8 +27,7 @@
 	}
 }
 
-.item-container 
-{
+.item-container {
 	position: relative;
 	padding-top: 0px;
 	margin-bottom: 30px;
@@ -40,43 +39,41 @@
 	-webkit-box-shadow: 1px 1px 1px rgba(50, 50, 50, 0.49);
 	-moz-box-shadow:    1px 1px 1px rgba(50, 50, 50, 0.49);
 	box-shadow:         1px 1px 1px rgba(50, 50, 50, 0.49);
-	.form-actions 
-	{
+
+	.form-actions 	{
 		margin-bottom: 0px;
 		margin-top: 0px;
 	}
-	.nested-fields 
-	{
-		.top-right
-		{
+
+	.nested-fields 	{
+		/* Placeholder for contingency */
+	}
+
+	.container-entry	{
+		border-bottom: 1px solid #ccc;
+		position: relative;
+		margin-top: 30px;
+		padding-bottom: 20px;
+		.top-right	{
 			position: absolute;
 			top: -30px;
 			right: 0;
 		}
-		.add_option_button
-		{
+		.add-option-button	{
 			display:none;
 		}
 	}
-	.container-entry
-	{
-		border-bottom: 1px solid #ccc;
+
+	.option_field	{
+		margin-top: -5px;
 	}
-	.spacing 
-	{
-		position: relative;
-		margin-top: 30px;
-		padding-bottom: 20px;
-	}
-	.option-field
-	{
-		padding-top: 5px;
-	}
-	.disabled 
-	{
+	.disabled	{
 		cursor: not-allowed;
 		background-color: #EEE;
 		border-color: #DDD;
+	}
+	.yes-no {
+		width: 60px;
 	}
 	
 }
