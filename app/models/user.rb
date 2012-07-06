@@ -1,24 +1,11 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are: :registerable
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
+  # only allow signups on dev machines during the beta. TODO make this a config var, not hardcoded?
   if Rails.env.production?
     devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
   else
     devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :registerable 
-  end
-
-  ROLES = %w[editor superadmin]
-  # for role inheritance
-  def role?(base_role)
-    ROLES.index(base_role.to_s) <= ROLES.index(role)
-  end
-
-  def visible_polls
-    if role?(:superadmin)
-      return Poll.all
-    else
-      return polls + created_polls
-    end
   end
 
   # Setup accessible (or protected) attributes for your model
@@ -29,7 +16,23 @@ class User < ActiveRecord::Base
   has_many :group_users
   has_many :groups, :through => :group_users
 
+  ROLES = %w[editor superadmin]
   validates :role, :inclusion => { :in => ROLES, :message => "%{value} is not a valid user role" }
+
+
+  # for role inheritance
+  def role?(base_role)
+    ROLES.index(base_role.to_s) <= ROLES.index(role)
+  end
+
+  def visible_polls
+    if role?(:superadmin)
+      return Poll.all
+    else
+      return polls | created_polls #union of poll and created_polls for non admin users
+    end
+  end
+
 
 
 end
