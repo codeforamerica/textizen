@@ -2,8 +2,9 @@ $(document).ready(function(){
 	
 	// Javascript that fills out value tag when label is filled out
 
-
-	$('.nested-fields').on("click", "a.add-followup-dummy", function(event){
+	// TODO THIS BREAKS!
+	$(document).on("click", "a.add-followup-dummy", function(event){
+		console.log("HellO!");
 		$(this).parents(".option-field").find(".add-followup-button").click();
 		event.preventDefault();
 	});
