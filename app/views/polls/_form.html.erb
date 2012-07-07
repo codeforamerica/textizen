@@ -42,6 +42,7 @@
   </div>
 
   <%= f.association :groups, :collection => current_user.groups %>
+  <%= f.input :confirmation, :input_html => {:rows => 3, :cols => 20} %>
 
 <div class="form-actions">
     <%= f.button :submit, :class => 'btn btn-large btn-primary' %>
