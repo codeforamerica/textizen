@@ -86,14 +86,17 @@
 				margin-left: 130px;
 				padding-bottom: 30px;
 				.control-group {
-					margin-bottom: 5px;
+					margin-bottom: 10px;
 				}
 				.add-followup-option-button {
 					display:none;
 				}
 				/* Followup options */
-				.followup-options {
-
+				.followup-option-field {
+					margin-bottom: 5px;
+					.control-group {
+						margin-bottom: 5px;
+					}
 				}
 			}
 		}

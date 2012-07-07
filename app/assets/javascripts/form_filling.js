@@ -64,7 +64,7 @@ $(document).ready(function(){
 			parent_container_entry.find(".followup-option-field input.string").last().addClass("disabled yes-no").val("No");
 
 			// Removes "remove option" button
-			parent_container_entry.find(".followup-option-field.help-inline a.remove_fields").remove();
+			parent_container_entry.find(".followup-option-field a.remove_fields").remove();
 		}
 		else if (value == "MULTI") {
 			// Show "add option" button
