@@ -1,11 +1,10 @@
 <div class="nested-fields question-entry">
-  <div>
-    <%= link_to_remove_association raw("<div class=\"btn btn-danger\">X</div>"), f, :class => "top-right" %>
-  </div>
+
+  <%= link_to_remove_association raw("<div class=\"btn btn-danger\">X</div>"), f, :class => "top-right" %>
 
   <%= f.input :sequence, :as => :hidden %>
   <%= f.input :text, :label => "Question", :label_html => { :class => "label-bold" }  %>
-  <%= f.input :question_type, :label => "Type" , :collection=>[['Open','OPEN'],['Multiple Choice','MULTI'],['Yes / No', 'YN']] %>
+  <%= f.input :question_type, :label => "Type" , :collection=>[['Open','OPEN'],['Multiple Choice','MULTI'],['Yes / No', 'YN']], :input_html => { :class => "question-type" } %>
 
   
   <div class="options">
@@ -13,6 +12,7 @@
     <%= f.simple_fields_for :options, :wrapper => "bootstrap" do |option| %>
       <%= render 'option_fields', :f => option %>
     <% end %>
+
     <%= link_to_add_association 'Add option', f, :options, 
             :class => "controls add-option-button"%>
     

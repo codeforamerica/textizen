@@ -1,14 +1,16 @@
 <div class="nested-fields option-field">
-  <fieldset>
-    <%= f.input :text, :label => false, :hint => (link_to_remove_association "X", f, :class => "inline btn btn-danger btn-mini") %>
-    <%= f.input :value, :as => :hidden, :label => 'Option value' %>
 
-    <%= f.simple_fields_for :follow_up, :wrapper => "bootstrap" do |followup| %>
-      <%= render 'question_fields', :f => followup %>
+  <%= f.input :text, :label => false, 
+  :hint => (link_to_remove_association('X', f, :class => 'inline btn btn-danger btn-mini') + link_to("Add followup", '#', :class => "btn btn-mini add-followup-dummy")) %>
 
-    <% end %>
+  <%= f.input :value, :as => :hidden, :label => 'Option value' %>
 
-  </fieldset>
+  <%= f.simple_fields_for :follow_up, :wrapper => "bootstrap" do |followup| %>
+
+    <%= render 'question_fields', :f => followup %>
+
+  <% end %>
+
   <div class="links tempmargin">
   <%= link_to_add_association 'Add followup', f, :follow_up , :class => "add-followup-button btn btn-mini" %>
   </div>
