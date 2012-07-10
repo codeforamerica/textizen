@@ -44,7 +44,7 @@ $(document).ready(function(){
 		}
 	});
 
-	// This is the 
+	// This is the
 	$(".simple_form").on("change", "select.followup-type", function(event) {
 
 		// Wipes existing options TODO: hide, instead of remove?

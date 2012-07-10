@@ -50,7 +50,7 @@
 
 	/* CSS for an individual question entry */
 	.question-entry	{
-		border-bottom: 1px solid #ccc;
+		border-bottom: 1px solid #999;
 		position: relative;
 		margin-top: 30px;
 		padding-bottom: 20px;
@@ -105,6 +105,7 @@
 	/* Generic stuff */
 
 	.spacing {
+		border-bottom: 1px solid #999;
 		position: relative;
 		margin-top: 30px;
 		padding-bottom: 20px;
