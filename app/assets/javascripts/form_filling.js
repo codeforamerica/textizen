@@ -8,6 +8,7 @@ $(document).ready(function(){
 		$(this).parents(".option-field").find(".add-followup-button").click();
 		event.preventDefault();
 	});
+	
 
 	/* Autofills the options form when a question type is selected */
 	$(".simple_form").on("change", "select.question-type", function(event) {
@@ -19,6 +20,7 @@ $(document).ready(function(){
 
 		var parent_container_entry = $(this).parents(".question-entry");
 		parent_container_entry.find(".add-option-button").hide();	
+		
 
 		if (value == "YN") {	
 			// Clicks the add_option button twice
@@ -34,11 +36,21 @@ $(document).ready(function(){
 		}
 		else if (value == "MULTI") {
 			// Show "add option" button
-			parent_container_entry.find(".add-option-button").show();	
+			parent_container_entry.find(".add-option-button").show();
+			
+			// Find specific input to manipulate
+			var input_container_entry = $(this).parents(".option-field");
+			
+			var multi_vals = ["A", "B", "C", "D", "E", "F", "G"];
+			
 
 			// Clicks the add_option button twice 
 			parent_container_entry.find(".add-option-button").click();
+			input_container_entry.find('input.string.required').before('<div class="input-prepend"><span class="add-on">' + multi_vals[0] +'</span>');
+			input_container_entry.find('input.string.required').after('</div>');
 			parent_container_entry.find(".add-option-button").click();
+			input_container_entry.find('input.string.required').before('<div class="input-prepend"><span class="add-on">' + multi_vals[1] +'</span>');
+			input_container_entry.find('input.string.required').after('</div>');
 		}
 		else if (value == "OPEN") {
 		}
@@ -80,6 +92,3 @@ $(document).ready(function(){
 	});
 
 });
-
-function form_options(value) {
-}
