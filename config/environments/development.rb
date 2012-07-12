@@ -62,4 +62,8 @@ TxtyourcityRails::Application.configure do
 #   def $outbound_flocky.destroy_phone_number_asynchronous(area_code)
 #     destroy_phone_number_synchronous(area_code)
 #   end
+  
+
+  #logging for foreman
+  STDOUT.sync = true
 end
