@@ -1,5 +1,5 @@
 var _kmq = _kmq || [];
-var _kmk = _kmk || <%= ENV['KISS_KEY'] || ''%> ;
+var _kmk = _kmk || '<%= ENV['KISS_KEY'] if ENV['KISS_KEY']%>';
 
 function _kms(u){
   setTimeout(function(){
