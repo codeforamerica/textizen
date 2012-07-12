@@ -40,14 +40,17 @@ $(document).ready(function(){
 			
 			// Find specific input to manipulate
 			var input_container_entry = $(this).parents(".option-field");
-			
+			console.log("#1: ");
+			console.log($(this));
+			console.log("#2: ");
+			console.log($(this).parents(".option-field"));
+			// Array store of all multi values
 			var multi_vals = ["A", "B", "C", "D", "E", "F", "G"];
 			
-
 			// Clicks the add_option button twice 
 			parent_container_entry.find(".add-option-button").click();
-			input_container_entry.find('input.string.required').before('<div class="input-prepend"><span class="add-on">' + multi_vals[0] +'</span>');
-			input_container_entry.find('input.string.required').after('</div>');
+			input_container_entry.find(".option-field input.string").before('<div class="input-prepend"><span class="add-on">' + multi_vals[0] +'</span>');
+			input_container_entry.find(".option-field input.string").after('</div>');
 			parent_container_entry.find(".add-option-button").click();
 			input_container_entry.find('input.string.required').before('<div class="input-prepend"><span class="add-on">' + multi_vals[1] +'</span>');
 			input_container_entry.find('input.string.required').after('</div>');
