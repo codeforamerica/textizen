@@ -17,7 +17,25 @@
         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
+        })();
+
+      var _kmq = _kmq || [];
+      var _kmk = _kmk || '<%= ENV['KISS_KEY'] if ENV['KISS_KEY']%>';
+
+      function _kms(u){
+        setTimeout(function(){
+          var d = document, f = d.getElementsByTagName('script')[0],
+          s = d.createElement('script');
+          s.type = 'text/javascript'; s.async = true; s.src = u;
+          f.parentNode.insertBefore(s, f);
+        }, 1);
+      }
+      _kms('//i.kissmetrics.com/i.js');
+      _kms('//doug1izaerwt3.cloudfront.net/' + _kmk + '.1.js');
+      _kmq.push(['record', 'Page View']);
+      <% if current_user && current_user.email.present? %>
+      _kmq.push(['identify', '<%= current_user.email %>']);
+      <% end %>
     </script>
   </head>
   <body>
