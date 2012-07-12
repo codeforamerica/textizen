@@ -123,6 +123,14 @@ class Poll < ActiveRecord::Base
     return @address
   end
 
+  # fetches a list of sms-enabled exchanges from the tropo API
+  def get_exchanges
+    puts 'get exchanges'
+    uri = open("https://api.tropo.com/v1/exchanges", :http_basic_authentication=>[ENV['TROPO_USERNAME'], ENV['TROPO_PASSWORD'])
+
+
+  end
+
   def to_csv
     Rails.logger.info "[INFO] Converting to CSV"
 
