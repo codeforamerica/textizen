@@ -18,11 +18,13 @@ class Group < ActiveRecord::Base
     puts "**Saving emails**"
     puts emails
     emails.each do |email|
-      user = User.where(email: email)
-      if user.present?
-        users << user
-      else
-        errors << "User #{email} not found"
+      unless email.blank?
+        user = User.where(email: email)
+        if user.present?
+          users << user
+        else
+          errors << "User #{email} not found"
+        end
       end
     end
     puts errors
