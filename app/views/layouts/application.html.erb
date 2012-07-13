@@ -34,9 +34,9 @@
       <% else %>
         <%= render "layouts/default_top_bar" %>
       <% end %>
-
+      <%= render :partial => "layouts/flash", :locals => {:flash => flash} %>
       <%= yield %>
-      
+
       <%= render "layouts/footer" %>
 
     </div>
