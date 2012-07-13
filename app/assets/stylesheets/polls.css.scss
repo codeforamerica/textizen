@@ -3,130 +3,136 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .tempmargin{
-	margin-left: 12.5em;
-	margin-top: -1em;
-	margin-bottom: 1em;
+  margin-left: 12.5em;
+  margin-top: -1em;
+  margin-bottom: 1em;
 }
 
 .alignbox{
-	position:relative;
-	top: -2px;
+  position:relative;
+  top: -2px;
 }
 
 .form-horizontal 
 {
-	.help-inline 
-	{
-		color: #888;
-		font-size: 0.9em;
-	}
+  .help-inline 
+  {
+    color: #888;
+    font-size: 0.9em;
+  }
 }
 
 
 /* Overall large container for questions and setting */
 
 .item-container {
-	position: relative;
-	padding-top: 0px;
-	margin-bottom: 30px;
-	/* Prettifications */
-	border:1px solid #999;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	-webkit-box-shadow: 1px 1px 1px rgba(50, 50, 50, 0.49);
-	-moz-box-shadow:    1px 1px 1px rgba(50, 50, 50, 0.49);
-	box-shadow:         1px 1px 1px rgba(50, 50, 50, 0.49);
+  position: relative;
+  padding-top: 0px;
+  margin-bottom: 30px;
+  /* Prettifications */
+  border:1px solid #999;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 1px 1px 1px rgba(50, 50, 50, 0.49);
+  -moz-box-shadow:    1px 1px 1px rgba(50, 50, 50, 0.49);
+  box-shadow:         1px 1px 1px rgba(50, 50, 50, 0.49);
 
-	.form-actions 	
-	{
-		margin-bottom: 0px;
-		margin-top: 0px;
-	}
-	.nested-fields 	{
-		/* Placeholder for contingency */
-		/* Needs to exist for cocoon to work! */
-	}
+  .form-actions 	
+  {
+    margin-bottom: 0px;
+    margin-top: 0px;
+  }
+  .nested-fields 	{
+    /* Placeholder for contingency */
+    /* Needs to exist for cocoon to work! */
+  }
 
-	/* CSS for an individual question entry */
-	.question-entry	{
-		border-bottom: 1px solid #999;
-		position: relative;
-		margin-top: 30px;
-		padding-bottom: 20px;
+  /* CSS for an individual question entry */
+  .question-entry	{
+    border-bottom: 1px solid #999;
+    position: relative;
+    margin-top: 30px;
+    padding-bottom: 20px;
 
-		.top-right	{    // For the "delete question" icon
-			position: absolute;
-			top: -30px;
-			right: 0;
-		}
-		.add-option-button	{
-			display:none;
-		}
+    .top-right	{    // For the "delete question" icon
+      position: absolute;
+      top: -30px;
+      right: 0;
+    }
+    .add-option-button	{
+      display:none;
+    }
 
-		/* CSS for the options field within a question entry */
-		.option-field	{
-			margin-top: -5px;
-			.yes-no {
-				width: 60px;
-			}
-			.add-followup-dummy {  
-				/* Fake button for layout purposes. Triggers add-followup-button */
+    /* CSS for the options field within a question entry */
+    .option-field	{
+      margin-top: -5px;
+      .yes-no {
+        width: 60px;
+      }
+      .add-followup-dummy {  
+        /* Fake button for layout purposes. Triggers add-followup-button */
 
-			}
-			.add-followup-button {
-				display:none;
-				//position: absolute;
-				//right: 130px;
-			}
+      }
+      .add-followup-button {
+        display:none;
+        //position: absolute;
+        //right: 130px;
+      }
 
-			/* CSS for the followup field */
-			.followup-field {
-				margin-top: 10px;
-				margin-left: 130px;
-				padding-bottom: 30px;
-				.control-group {
-					margin-bottom: 10px;
-				}
-				.add-followup-option-button {
-					display:none;
-				}
-				/* Followup options */
-				.followup-option-field {
-					margin-bottom: 5px;
-					.control-group {
-						margin-bottom: 5px;
-					}
-				}
-			}
-		}
-	}
+      /* CSS for the followup field */
+      .followup-field {
+        margin-top: 10px;
+        margin-left: 130px;
+        padding-bottom: 30px;
+        .control-group {
+          margin-bottom: 10px;
+        }
+        .add-followup-option-button {
+          display:none;
+        }
+        /* Followup options */
+        .followup-option-field {
+          margin-bottom: 5px;
+          .control-group {
+            margin-bottom: 5px;
+          }
+        }
+      }
+    }
+  }
+  /* hide all follow-up buttons for any question that already has one follow-up */
+  .question-entry.has-follow-up {
+    .add-followup-dummy {
+      display: none;
+    }
+  }
 
-	/* Generic stuff */
+  /* Generic stuff */
 
-	.spacing {
-		border-bottom: 1px solid #999;
-		position: relative;
-		margin-top: 30px;
-		padding-bottom: 20px;
-	}
-	.label-bold 
-	{
-		font-weight: bold;
-	}
-	.disabled	
-	{
-		cursor: not-allowed;
-		background-color: #EEE;
-		border-color: #DDD;
-	}
-	.btn 
-	{
-		margin-left: 5px;
-	}
+  .spacing {
+    border-bottom: 1px solid #999;
+    position: relative;
+    margin-top: 30px;
+    padding-bottom: 20px;
+  }
+  .label-bold 
+  {
+    font-weight: bold;
+  }
+  .disabled	
+  {
+    cursor: not-allowed;
+    background-color: #EEE;
+    border-color: #DDD;
+  }
+  .btn 
+  {
+    margin-left: 5px;
+  }
 
-	
-	
-	
-	
+
+
+
+
 }

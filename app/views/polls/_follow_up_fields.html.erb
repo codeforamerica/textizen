@@ -1,6 +1,6 @@
 <div class="nested-fields followup-field">
   
-  <%= f.input :text, :label => 'Followup Question:', :label_html => { :class => "label-bold" } , :hint => (link_to_remove_association '×', f, :class => 'inline btn btn-danger btn-mini') %>
+  <%= f.input :text, :label => 'Followup Question:', :label_html => { :class => "label-bold" } , :hint => (link_to_remove_association '×', f, :class => 'inline btn btn-danger btn-mini remove-follow-up') %>
   <%= f.input :question_type, :label => "Type:" , :collection=>[['Open','OPEN'],['Multiple Choice','MULTI'],['Yes / No', 'YN']], :input_html => { :class => "followup-type" }%>
 
   <div class="options">
