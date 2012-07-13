@@ -6,7 +6,7 @@ describe Poll do
   it { should have_many(:responses) }
   it { should belong_to(:user) }
 #  it { should authenticate_user }
-  
+
 
 
   describe "check get_next_question" do
@@ -38,14 +38,6 @@ describe Poll do
     end
   end
 
-  describe "check get_poll_by_phone" do
-    it "should find a poll by phone number" do
-      @phone = '16172223333'
-      @poll = FactoryGirl.create(:poll, :phone=>@phone)
-      Poll.get_poll_by_phone(@phone).should_not be_nil
-    end
-  end
-
   describe "check poll ender" do
     it "should end the poll" do
       @poll = FactoryGirl.create(:poll)
@@ -61,9 +53,9 @@ describe Poll do
     before(:each) do
       @poll = FactoryGirl.create(:poll)
     end
-    
+
     it { should validate_uniqueness_of(:phone) }
-    
+
     it "should get a phone number from tropo" do
       @number_response = '
         {
@@ -78,7 +70,7 @@ describe Poll do
          to_return(:status => 200, :body => @number_response, :headers => {'Content-Type'=>'application/json'})
       result = @poll.get_phone_number
       puts "Phone: "+result
-      
+
       result.should == '14075551234'
     end
 
