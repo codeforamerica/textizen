@@ -1,8 +1,8 @@
 <div class="nested-fields followup-option-field">
   <fieldset>
-    <%= f.input :text, :label => false, :hint => (link_to_remove_association "×", f , :class => 'inline btn btn-danger btn-mini remove-follow-up-option') %>
+    <%= f.input :text, :label => false, :input_html => {:class => 'followup-option-text'}, :hint => (link_to_remove_association "×", f , :class => 'inline btn btn-danger btn-mini remove-follow-up-option') %>
 
-    <%= f.input :value, :as => :hidden, :label => 'Option value' %>
+    <%= f.input :value, :as => :hidden, :label => 'Option value', :input_html => {:class => 'followup-option-value'} %>
 
     <!-- 
     <%= f.simple_fields_for :follow_up do |followup| %>

@@ -1,9 +1,9 @@
 <div class="nested-fields option-field">
 
-  <%= f.input :text, :label => false, 
+  <%= f.input :text, :label => false, :input_html => {:class => 'option-text'},
   :hint => (link_to_remove_association('×', f, :class => 'inline btn btn-danger btn-mini') + link_to("Add followup", '#', :class => "btn btn-mini add-followup-dummy")) %>
 
-  <%= f.input :value, :as => :hidden, :label => 'Option value' %>
+  <%= f.input :value, :label => 'Option value', :as => :hidden, :input_html => {:class => 'option-value'} %>
 
   <%= f.simple_fields_for :follow_up, :wrapper => "bootstrap" do |followup| %>
 
