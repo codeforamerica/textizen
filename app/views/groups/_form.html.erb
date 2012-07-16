@@ -10,14 +10,20 @@
     $(item).parent().remove();
   }
 </script>
-<%= simple_form_for(@group) do |f| %>
+
+<%= simple_form_for @group, :html => { :class => "form-horizontal"} do |f| %>
   <%= f.error_notification %>
+
+<h3>People</h3>
+<div>Adding people here will give them the same access (to create and edit polls and view results) as you. To share only survey results, go to the dashboard page after results come in. You can print to PDF or export a CSV. Maybe rewrite this text.</div>
 
   <div id="emails">
     <ul>
       <% @group.users.each do |user| %>
         <li>
-        <%= user.email %><%= link_to "Remove", group_user_path(GroupUser.where(user_id:user, group_id: @group)[0]), :method => :delete %>
+        <%= user.email %>
+        <button class="close">&times;</button>
+        <%= link_to "Remove", group_user_path(GroupUser.where(user_id:user, group_id: @group)[0]), :method => :delete %> 
         </li>
       <% end %>
     </ul>
@@ -34,13 +40,26 @@
 
   <a class="add_email btn" id="addEmail">Add user</a>
 
+<div style="display:none;">
   <%= f.association :polls, :collection => current_user.visible_polls %>
+</div>
 
+<hr>
+
+<h3>Settings</h3>
   <div class="form-inputs">
-    <%= f.input :name %>
+    <%= f.input :name, :label => "Group name", :hint => "E.g. 'Philadelphia2035' or 'Chattanooga Regional Planning'" %>
+    <%= f.input :name, :label => "Preferred area code",
+      :collection =>[
+        ['215 - Philadelphia','215'],
+        ['415 - San Francisco','415'],
+        ['423 - Chattanooga','423']
+        ], :selected => "215", :hint => "Choose one that’s local to your city or community" %>
+     <%= f.input :name, :label => "Time", :collection=>[['Eastern Standard Time','EST']], :selected => "EST", :hint => "Used to timestamp responses. Maybe punted off v2." %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, :class => 'btn btn-large btn-primary' %>
+    <%= link_to 'Cancel', groups_path, :class => 'btn btn-large' %>
   </div>
 <% end %>
