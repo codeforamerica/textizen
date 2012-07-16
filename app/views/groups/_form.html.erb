@@ -15,14 +15,15 @@
   <%= f.error_notification %>
 
 <h3>People</h3>
-<div>Adding people here will give them the same access (to create and edit polls and view results) as you. To share only survey results, go to the dashboard page after results come in. You can print to PDF or export a CSV. Maybe rewrite this text.</div>
-
+<div>Adding some rockstars to this party will give them the same access &mdash; to create and edit polls and view results &mdash; as you. (To share results only, go to the survey page after. From there, you can export a CSV or print the webpage to PDF. Maybe rewrite this text.)</div>
+<br>
   <div id="emails">
+    <%= f.input :name, :label => "1", :hint => "You’re automatically a member of any group you create" %>
+    <%= f.input :name, :label => "2", :placeholder => "Add an email address" %> 
     <ul>
       <% @group.users.each do |user| %>
         <li>
         <%= user.email %>
-        <button class="close">&times;</button>
         <%= link_to "Remove", group_user_path(GroupUser.where(user_id:user, group_id: @group)[0]), :method => :delete %> 
         </li>
       <% end %>
@@ -54,8 +55,16 @@
         ['215 - Philadelphia','215'],
         ['415 - San Francisco','415'],
         ['423 - Chattanooga','423']
-        ], :selected => "215", :hint => "Choose one that’s local to your city or community" %>
-     <%= f.input :name, :label => "Time", :collection=>[['Eastern Standard Time','EST']], :selected => "EST", :hint => "Used to timestamp responses. Maybe punted off v2." %>
+        ], :selected => "215" %>
+    <%= f.input :name, :label => "Timezone",
+      :collection=>[
+        ['Eastern Time','EST'],
+        ['Central Time','CST'],
+        ['Mountain Time','MST'],
+        ['Pacific Time','PST'],
+        ['Alaska Time','AKST'],
+        ['Hawaii Time','HST']
+        ], :selected => "EST", :hint => "Used to timestamp responses. Maybe punted to v3" %>
   </div>
 
   <div class="form-actions">
