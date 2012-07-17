@@ -15,11 +15,14 @@
   <%= f.error_notification %>
 
 <h3>People</h3>
-<div>Adding some rockstars to this party will give them the same access &mdash; to create and edit polls and view results &mdash; as you. (To share results only, go to the survey page after. From there, you can export a CSV or print the webpage to PDF. Maybe rewrite this text.)</div>
+<div>Adding some rockstars to this party will give them the same access &mdash; to create and edit polls and view results &mdash; as you. (To share results only, go to the survey page. From there, you can export a CSV or print the webpage to PDF.)</div>
 <br>
   <div id="emails">
-    <%= f.input :name, :label => "1", :hint => "You’re automatically a member of any group you create" %>
+
+    <%= f.input :name, :label => "1", :placeholder => current_user.email, :disabled => true, :hint => "You’re automatically a member of any group you create" %>
+
     <%= f.input :name, :label => "2", :placeholder => "Add an email address" %> 
+    
     <ul>
       <% @group.users.each do |user| %>
         <li>
@@ -28,6 +31,7 @@
         </li>
       <% end %>
     </ul>
+
     <%- if @group.errors.messages && @group.errors.messages[:users] -%>
       <ul>
         <div class="control-group error">
