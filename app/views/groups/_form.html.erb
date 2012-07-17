@@ -5,6 +5,7 @@
     $(document).on('click', '.add-email', function(e){
       if (!$(this).hasClass('email-added')){
         $(this).addClass('email-added');
+        $(this).attr('placeholder', 'Enter user email');
         appendEmail();
       }
     });
