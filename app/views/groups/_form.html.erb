@@ -2,21 +2,25 @@
   $(function() {
     var count = 0;
     appendEmail();
-    $(document).on('click', '.add-email', function(e){
-      if (!$(this).hasClass('email-added')){
+    $(document).on('focus', '.add-email', function(e){
+      if (!$(this).hasClass('email-added')){ // only insert a blank email field once per click
         $(this).addClass('email-added');
-        $(this).attr('placeholder', 'Enter user email');
+        $(this).attr('placeholder', 'Enter user email'); // update the placeholder text
         appendEmail();
       }
     });
+    // show the remove link once an email is entered
+    $(document).on('change', 'input.add-email', function(e){
+      $(this).parent().find('.remove-email').fadeIn();
+    });
 
     function appendEmail(){
-      $('#user-list').append('<li id="emailInput'+(count++)+'"><%= text_field_tag "user_emails[]", params[:email], :class => "input add-email", :placeholder => "Click to add user"%><a href="javascript:void()" class="removeEmail" onclick="removeEmail(this)">Remove</a></li>');
-    }
-    function removeEmail(item){
-      $(item).parent().remove();
+      $('#user-list').append('<li id="emailInput'+(count++)+'"><%= text_field_tag "user_emails[]", params[:email], :class => "input add-email", :placeholder => "Click to add user"%><a href="javascript:void()" class="remove-email" style="display:none" onclick="removeEmail(this)">Remove</a></li>');
     }
   });
+  function removeEmail(item){
+    $(item).parent().remove();
+  }
 </script>
 
 <%= simple_form_for @group, :html => { :class => "form-horizontal"} do |f| %>
@@ -63,7 +67,7 @@
       :collection =>@group.get_exchanges,
       :label_method => lambda {
         |i| label = ""
-        label << "#{i['prefix']} (#{i['city']}, "
+        label << "#{i['prefix'][1,3]} (#{i['city']}, "
         label << "#{i['state']}, " if !i['state'].blank?
         label << "#{i['country']})"},
         :value_method => lambda {|i| i["prefix"]}
