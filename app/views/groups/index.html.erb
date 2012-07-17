@@ -12,8 +12,7 @@
     <% @groups.each do |group| %>
       <tr>
         <td><%= group.name %></td>
-        <td><%= link_to 'Show', group %></td>
-        <td><%= link_to 'Edit', edit_group_path(group) %></td>
+        <td><i class="icon-th-large"></i> <%= link_to 'Details', edit_group_path(group) %></td>
         <td><%= link_to 'Destroy', group, confirm: 'Are you sure?', method: :delete %></td>
       </tr>
     <% end %>
