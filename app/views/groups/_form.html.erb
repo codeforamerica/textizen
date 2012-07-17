@@ -28,7 +28,7 @@
   <div id="emails">
     <ol id="user-list">
       <li>
-      <%= text_field_tag "user_emails[]", params[:email], :placeholder => current_user.email, :disabled => true, :hint => "test" %> You’re automatically a member of any group you create.
+      <%= text_field_tag "user_emails[]", params[:email], :placeholder => current_user.email, :disabled => true %><span class="help-inline">You’re automatically a member of any group you create.</span>
       </li>
       <% @group.users.each do |user| %>
         <li>
