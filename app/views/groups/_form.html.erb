@@ -5,7 +5,7 @@
     $(document).on('focus', '.add-email', function(e){
       if (!$(this).hasClass('email-added')){ // only insert a blank email field once per click
         $(this).addClass('email-added');
-        $(this).attr('placeholder', 'Enter user email'); // update the placeholder text
+        $(this).attr('placeholder', "Enter registered user's email"); // update the placeholder text
         appendEmail();
       }
     });
@@ -32,7 +32,7 @@
   <div id="emails">
     <ol id="user-list">
       <li>
-      <%= text_field_tag "user_emails[]", params[:email], :placeholder => current_user.email, :disabled => true, :hint => "test" %>
+      <%= text_field_tag "user_emails[]", params[:email], :placeholder => current_user.email, :disabled => true %><span class="help-inline">You’re automatically a member of any group you create.</span>
       </li>
       <% @group.users.each do |user| %>
         <li>
@@ -40,7 +40,7 @@
         <%= link_to "Remove", group_user_path(GroupUser.where(user_id:user, group_id: @group)[0]), :method => :delete %> 
         </li>
       <% end %>
-    </ul>
+    </ol>
 
     <%- if @group.errors.messages && @group.errors.messages[:users] -%>
       <ul>
