@@ -5,7 +5,7 @@
     $(document).on('focus', '.add-email', function(e){
       if (!$(this).hasClass('email-added')){ // only insert a blank email field once per click
         $(this).addClass('email-added');
-        $(this).attr('placeholder', "Enter registered user's email"); // update the placeholder text
+        $(this).attr('placeholder', "Type a registered user's email"); // update the placeholder text
         appendEmail();
       }
     });
@@ -15,7 +15,7 @@
     });
 
     function appendEmail(){
-      $('#user-list').append('<li id="emailInput'+(count++)+'"><%= text_field_tag "user_emails[]", params[:email], :class => "input add-email", :placeholder => "Click to add user"%><a href="javascript:void()" class="remove-email" style="display:none" onclick="removeEmail(this)">Remove</a></li>');
+      $('#user-list').append('<li id="emailInput'+(count++)+'"><%= text_field_tag "user_emails[]", params[:email], :class => "input add-email", :placeholder => "Type a registered user’s email"%> <button class="close remove-email" style="display:none" type="button" onclick="removeEmail(this)">×</button></li>');
     }
   });
   function removeEmail(item){
@@ -67,9 +67,9 @@
       :collection =>@group.get_exchanges,
       :label_method => lambda {
         |i| label = ""
-        label << "#{i['prefix'][1,3]} (#{i['city']}, "
+        label << "#{i['prefix'][1,3]} - #{i['city']}, "
         label << "#{i['state']}, " if !i['state'].blank?
-        label << "#{i['country']})"},
+        label << "#{i['country']}"},
         :value_method => lambda {|i| i["prefix"]}
     %>
     <%= f.input :name, :label => "Timezone",
