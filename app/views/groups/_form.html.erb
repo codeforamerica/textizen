@@ -2,21 +2,21 @@
   $(function() {
     var count = 0;
     appendEmail();
-    $(document).on('click', '.add-email', function(e){
+    $(document).on('focus', '.add-email', function(e){
       if (!$(this).hasClass('email-added')){
         $(this).addClass('email-added');
-        $(this).attr('placeholder', 'Enter user email');
+        $(this).attr('placeholder', 'Add an email address');
         appendEmail();
       }
     });
 
     function appendEmail(){
-      $('#user-list').append('<li id="emailInput'+(count++)+'"><%= text_field_tag "user_emails[]", params[:email], :class => "input add-email", :placeholder => "Click to add user"%><a href="javascript:void()" class="removeEmail" onclick="removeEmail(this)">Remove</a></li>');
-    }
-    function removeEmail(item){
-      $(item).parent().remove();
+      $('#user-list').append('<li id="emailInput'+(count++)+'"><%= text_field_tag "user_emails[]", params[:email], :class => "input add-email", :placeholder => "Add an email address"%> <a href="javascript:void()" class="removeEmail" onclick="removeEmail(this)">Remove</a></li>');
     }
   });
+  function removeEmail(item){
+    $(item).parent().remove();
+  }
 </script>
 
 <%= simple_form_for @group, :html => { :class => "form-horizontal"} do |f| %>
