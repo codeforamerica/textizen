@@ -1,5 +1,7 @@
 $(document).ready(function(){
-
+  if (typeof initEditing === 'undefined') {
+    initEditing = false;
+  }
   var alphabet = ['A','B','C','D','E','F','G'];
 
   // Javascript that fills out value tag when label is filled out
@@ -76,7 +78,10 @@ $(document).ready(function(){
   $(".simple_form").on("change", "select.question-type", function(event) {
 
     // Wipes existing options TODO: hide, instead of remove?
-    $(this).parents(".nested-fields").children(".option-field").remove();
+
+    if (!initEditing){
+      $(this).parents(".nested-fields").find(".option-field").remove();
+    }
     $(this).parents(".question-entry").removeClass("has-followup");
 
     var value = $(this).val();
@@ -86,10 +91,12 @@ $(document).ready(function(){
 
 
     if (value == "YN") {
-      // Clicks the add_option button twice
-      parent_container_entry.find(".add-option-button").click();
-      parent_container_entry.find(".add-option-button").click();	
-
+      
+      if (!initEditing){
+        // Clicks the add_option button twice
+        parent_container_entry.find(".add-option-button").click();
+        parent_container_entry.find(".add-option-button").click();	
+      }
       // Pre-fills out information, sets class to disabled
       parent_container_entry.find(".option-field .option-text").first().addClass("disabled yes-no").val("Yes");
       parent_container_entry.find(".option-field .option-value").first().addClass("disabled yes-no").val("yes");
@@ -103,9 +110,11 @@ $(document).ready(function(){
       // Show "add option" button
       parent_container_entry.find(".add-option-button").show();
 
-      // Clicks the add_option button twice 
-      parent_container_entry.find(".add-option-button").click();
-      parent_container_entry.find(".add-option-button").click();
+      if (!initEditing){
+        // Clicks the add_option button twice 
+        parent_container_entry.find(".add-option-button").click();
+        parent_container_entry.find(".add-option-button").click();
+      }
     }
     else if (value == "OPEN") {
     }
@@ -115,18 +124,22 @@ $(document).ready(function(){
   $(".simple_form").on("change", "select.followup-type", function(event) {
 
     // Wipes existing options TODO: hide, instead of remove?
-    $(this).parents(".nested-fields").children(".followup-option-field").remove();
+    
+    if (!initEditing){
+      $(this).parents(".nested-fields").find(".followup-option-field").remove();
+    }
 
     var value = $(this).val();
 
     var parent_container_entry = $(this).parents(".followup-field");
     parent_container_entry.find(".add-followup-option-button").hide();	
 
-    if (value == "YN") {	
-      // Clicks the add_option button twice
-      parent_container_entry.find(".add-followup-option-button").click();
-      parent_container_entry.find(".add-followup-option-button").click();	
-
+    if (value == "YN") {
+      if (!initEditing){
+        // Clicks the add_option button twice
+        parent_container_entry.find(".add-followup-option-button").click();
+        parent_container_entry.find(".add-followup-option-button").click();	
+      }
       // Pre-fills out information, sets class to disabled
       parent_container_entry.find(".followup-option-field .followup-option-text").first().addClass("disabled yes-no").val("Yes");
       parent_container_entry.find(".followup-option-field .followup-option-text").last().addClass("disabled yes-no").val("No");
@@ -139,13 +152,14 @@ $(document).ready(function(){
     else if (value == "MULTI") {
       // Show "add option" button
       parent_container_entry.find(".add-followup-option-button").show();	
-
-      // Clicks the add_option button twice 
-      parent_container_entry.find(".add-followup-option-button").click();
-      parent_container_entry.find(".add-followup-option-button").click();
+      
+      if (!initEditing){
+        // Clicks the add_option button twice 
+        parent_container_entry.find(".add-followup-option-button").click();
+        parent_container_entry.find(".add-followup-option-button").click();
+      }
     }
     else if (value == "OPEN") {
     }
   });
-
 });
