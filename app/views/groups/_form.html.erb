@@ -33,13 +33,15 @@
 <br>
   <div id="emails">
     <ol id="user-list">
-      <li>
-      <%= text_field_tag "user_emails[]", params[:email], :placeholder => current_user.email, :disabled => true %><span class="help-inline">You’re automatically a member of any group you create</span>
-      </li>
+      <% unless @editing %>
+        <li>
+        <%= text_field_tag "user_emails[]", params[:email], :placeholder => current_user.email, :disabled => true %><span class="help-inline">You’re automatically a member of any group you create</span>
+        </li>
+      <% end %>
       <% @group.users.each do |user| %>
         <li>
         <%= user.email %>
-        <%= link_to "Remove", group_user_path(GroupUser.where(user_id:user, group_id: @group)[0]), :method => :delete %> 
+        <%= link_to "Remove", group_user_path(GroupUser.where(user_id:user, group_id: @group)[0]), :method => :delete, :confirm => "Are you sure?" %> 
         </li>
       <% end %>
     </ol>

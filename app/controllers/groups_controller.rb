@@ -39,6 +39,7 @@ class GroupsController < ApplicationController
 
   # GET /groups/1/edit
   def edit
+    @editing = true
     @group = Group.find(params[:id])
   end
 
