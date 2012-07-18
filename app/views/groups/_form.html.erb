@@ -34,7 +34,7 @@
   <div id="emails">
     <ol id="user-list">
       <li>
-      <%= text_field_tag "user_emails[]", params[:email], :placeholder => current_user.email, :disabled => true %><span class="help-inline">You’re automatically a member of any group you create.</span>
+      <%= text_field_tag "user_emails[]", params[:email], :placeholder => current_user.email, :disabled => true %><span class="help-inline">You’re automatically a member of any group you create</span>
       </li>
       <% @group.users.each do |user| %>
         <li>
@@ -82,7 +82,7 @@
         ['Pacific Time','PST'],
         ['Alaska Time','AKST'],
         ['Hawaii Time','HST']
-        ], :selected => "EST", :hint => "Used to timestamp responses. Maybe punted to v3" %>
+        ], :selected => "EST", :hint => "Used to timestamp responses" %>
   </div>
 
   <div class="form-actions">
