@@ -5,7 +5,7 @@
 
   <div class="options">
     <%= f.simple_fields_for :options do |option| %>
-      <%= render 'option_fields', :f => option %>
+      <%= render 'follow_up_option_fields', :f => option %>
     <% end %>
 
     <%= link_to_add_association 'Add followup option', f, :options, :partial => 'polls/follow_up_option_fields', :class => "controls add-followup-option-button" %>
