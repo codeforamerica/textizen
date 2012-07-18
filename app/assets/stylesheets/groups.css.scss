@@ -1,0 +1,24 @@
+// Place all the styles related to the groups controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.add-email{
+	margin: 4px 0 4px 0;
+}
+
+#emails{
+	margin-left: 135px;
+}
+
+button.close {
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    cursor: pointer;
+    padding: 0;
+    float:none;
+}
+
+.groupname{
+	font-size: 140%;
+	font-weight:bold;
+}

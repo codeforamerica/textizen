@@ -3,8 +3,8 @@
   <%= link_to_remove_association raw("<div class=\"btn btn-danger\">&times;</div>"), f, :class => "top-right" %>
 
   <%= f.input :sequence, :as => :hidden %>
-  <%= f.input :text, :label => "Question", :label_html => { :class => "label-bold" }  %>
-  <%= f.input :question_type, :label => "Type" , :collection=>[['Open','OPEN'],['Multiple Choice','MULTI'],['Yes / No', 'YN']], :input_html => { :class => "question-type" } %>
+  <%= f.input :text, :label => "Question 1", :label_html => { :class => "label-bold" }, :input_html => { :rows => 3 } %>
+  <%= f.input :question_type, :label => "Format" , :collection=>[['Open','OPEN'],['Multiple Choice','MULTI'],['Yes / No', 'YN']], :input_html => { :class => "question-type span2" } %>
 
   
   <div class="options">
@@ -18,4 +18,3 @@
     
   </div>
 </div>
-
