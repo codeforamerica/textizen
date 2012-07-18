@@ -22,7 +22,6 @@
   }
 }
 
-
 /* Overall large container for questions and setting */
 
 .item-container {
@@ -130,9 +129,14 @@
   {
     margin-left: 5px;
   }
+}
 
+.sideblock p{
+  margin-top: 9px;
+  margin-bottom: -8px;
+}
 
-
-
-
+.blockmiddle{
+  text-align:center;
+  padding-bottom: 8px;
 }
