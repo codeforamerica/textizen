@@ -7,8 +7,15 @@
 
   <%= f.simple_fields_for :follow_up, :wrapper => "bootstrap" do |followup| %>
 
-    <%= render 'question_fields', :f => followup %>
+    <%= render 'follow_up_fields', :f => followup %>
 
+  <% end %>
+  <% if @editing %>
+    <script type="text/javascript">
+      $(document).ready(function(){
+          $('.followup-field').trigger('insertion-callback');
+          });
+    </script>
   <% end %>
 
   <div class="links tempmargin">

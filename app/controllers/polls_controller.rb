@@ -37,6 +37,7 @@ class PollsController < ApplicationController
 
   # GET /polls/1/edit
   def edit
+    @editing = true
     @poll = Poll.find(params[:id])
   end
 
