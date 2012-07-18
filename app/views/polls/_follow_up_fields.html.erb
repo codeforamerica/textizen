@@ -1,7 +1,7 @@
 <div class="nested-fields followup-field">
   
   <%= f.input :text, :label => 'Followup Question', :label_html => { :class => "label-bold" } , :hint => (link_to_remove_association '×', f, :class => 'inline btn btn-danger btn-mini remove-follow-up') %>
-  <%= f.input :question_type, :label => "Format" , :collection=>[['Open','OPEN'],['Multiple Choice','MULTI'],['Yes / No', 'YN']], :input_html => { :class => "followup-type span2" }%>
+  <%= f.input :question_type, :label => "Format" , :collection=>[['Open Ended','OPEN'],['Multiple Choice','MULTI'],['Yes / No', 'YN']], :selected => "OPEN", :input_html => { :class => "followup-type span2" }%>
 
   <div class="options">
     <%= f.simple_fields_for :options do |option| %>

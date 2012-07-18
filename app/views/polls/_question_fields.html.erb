@@ -6,7 +6,7 @@
 
   <%= f.input :text, :label => "Question 1", :label_html => { :class => "label-bold" }, :as => :text, :input_html => { :class => "input-xlarge", :rows => 2 } %>
 
-  <%= f.input :question_type, :label => "Format" , :collection=>[['Open','OPEN'],['Multiple Choice','MULTI'],['Yes / No', 'YN']], :input_html => { :class => "question-type span2" } %>
+  <%= f.input :question_type, :label => "Format" , :collection=>[['Open Ended','OPEN'],['Multiple Choice','MULTI'],['Yes / No', 'YN']], :selected => "OPEN", :input_html => { :class => "question-type span2" } %>
 
   <div class="options">
 
