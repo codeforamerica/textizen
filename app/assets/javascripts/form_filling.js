@@ -14,8 +14,11 @@ $(document).ready(function(){
   // recalculate all form values
   $(".item-container").on("insertion-callback after-removal-callback", ".question-entry", function (event){
     var entry = $(this);
-    if (entry.find(".followup-field").length === 0){
+
+    if (entry.find(".followup-field").length === 0 || entry.find(".followup-field").is(":hidden")){ // second piece is for deleted followups when editing an existing poll
       entry.removeClass("has-followup");
+    } else {
+      entry.addClass("has-followup");
     }
     // make sure this is not a yes/no question
     if (entry.find("select.question-type").val() == "MULTI"){
@@ -69,7 +72,7 @@ $(document).ready(function(){
     }
   });
 
-  /* Autofills the options form when a question type is selected */
+  // Autofills the options form when a question type is selected 
   $(".simple_form").on("change", "select.question-type", function(event) {
 
     // Wipes existing options TODO: hide, instead of remove?
