@@ -131,6 +131,19 @@
   }
 }
 
+.close {
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    cursor: pointer;
+    padding: 0;
+    float:none;
+}
+
+.deleter{
+  line-height:25px;
+  margin-right: 8px;
+}
+
 .sideblock p{
   margin-top: 9px;
   margin-bottom: -8px;
