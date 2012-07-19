@@ -59,7 +59,7 @@ class Poll < ActiveRecord::Base
     return opts
   end
 
-  # a nice flat view of responses, sorted by first response time
+  # a nice flat view of responses, sorted by first response time. TODO: use reduce instead
   # [{from: 124, responses: {0:'y', 2:'02460'}, first_response_time: , last_response_time: }]
   # [{from: 123, responses: {0:'n', 1: 'just cuz', 2: '02459'} ...}]
   def responses_flat
