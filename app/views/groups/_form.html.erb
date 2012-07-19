@@ -41,6 +41,7 @@
       <% @group.users.each do |user| %>
         <li>
         <%= user.email %>
+        &nbsp;
         <%= link_to "Remove", group_user_path(GroupUser.where(user_id:user, group_id: @group)[0]), :method => :delete, :confirm => "Are you sure?" %> 
         </li>
       <% end %>
@@ -76,6 +77,7 @@
         label << "#{i['country']}"},
         :value_method => lambda {|i| i["prefix"]}
     %>
+    <!--
     <%= f.input :name, :label => "Timezone",
       :collection=>[
         ['Eastern Time','EST'],
@@ -85,6 +87,7 @@
         ['Alaska Time','AKST'],
         ['Hawaii Time','HST']
         ], :selected => "EST", :hint => "Used to timestamp responses" %>
+    -->
   </div>
 
   <div class="form-actions">
