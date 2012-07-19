@@ -59,12 +59,28 @@
   </div>
 
 
-<div style="display:none;">
+
+<hr>
+<h3>Polls</h3>
+
+<div>
   <%= f.association :polls, :collection => current_user.visible_polls %>
 </div>
 
-<hr>
 
+this list doesn't work.
+<ul>
+  <li>zero</li>
+  <% @group.polls.each do |poll| %>
+    <li> list item
+      <%= link_to(poll.questions.first.text, poll_path(poll)) %>
+    </li>
+  <% end %>
+</ul>
+
+
+
+<hr>
 <h3>Settings</h3>
   <div class="form-inputs">
     <%= f.input :name, :label => "Group name", :hint => "E.g. 'Philadelphia2035' or 'Chattanooga Regional Planning'" %>
