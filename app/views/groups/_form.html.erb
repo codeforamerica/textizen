@@ -28,8 +28,9 @@
 
 <h3>People</h3>
 <div>
-<p>Adding some rockstars to this party will give them the same access &mdash; to create and edit polls and view results &mdash; as you. (To share results only, go to the survey page. From there, you can export to CSV or print the webpage to PDF.)</p>
-<p>For now, you can only add people who already have Textizen accounts. To get your colleagues signed up first, just forward your beta invite.</p></div>
+  <p>Adding some rockstars to this party will give them the same access &mdash; to create and edit polls and view results &mdash; as you. (To share results only, go to the survey page. From there, you can export to CSV or print the webpage to PDF.)</p>
+  <p>For now, you can only add people who already have Textizen accounts. To get your colleagues signed up first, just forward your beta invite.</p>
+</div>
 <br>
   <div id="emails">
     <ol id="user-list">
@@ -57,55 +58,51 @@
       </ul>
     <%- end -%>
   </div>
-
-
+  <br>
 
 <hr>
 <h3>Polls</h3>
-
-<div>
-  <%= f.association :polls, :collection => current_user.visible_polls %>
+<div class="row">
+  <div class="span6 groupsunit">
+      <ol class="pollsol">
+        <% @group.polls.each do |poll| %>
+        <li>
+          <span class="pollsol-text"><%= link_to(poll.questions.first.text, poll_path(poll)) %> </span>
+        </li>
+        <% end %>
+      </ol>
+  </div>
 </div>
-
-
-this list doesn't work.
-<ul>
-  <li>zero</li>
-  <% @group.polls.each do |poll| %>
-    <li> list item
-      <%= link_to(poll.questions.first.text, poll_path(poll)) %>
-    </li>
-  <% end %>
-</ul>
-
-
+<br>
 
 <hr>
-<h3>Settings</h3>
-  <div class="form-inputs">
-    <%= f.input :name, :label => "Group name", :hint => "E.g. 'Philadelphia2035' or 'Chattanooga Regional Planning'" %>
-    <%= f.input :exchange, :label => "Preferred area code",
-      :collection => @group.get_exchanges,
-      :label_method => lambda {
-        |i| label = ""
-        label << "#{i['prefix'][1,3]} - #{i['city']}, "
-        label << "#{i['state']}, " if !i['state'].blank?
-        label << "#{i['country']}"},
-        :value_method => lambda {|i| i["prefix"]}
-    %>
-    <!--
-    <%= f.input :name, :label => "Timezone",
-      :collection=>[
-        ['Eastern Time','EST'],
-        ['Central Time','CST'],
-        ['Mountain Time','MST'],
-        ['Pacific Time','PST'],
-        ['Alaska Time','AKST'],
-        ['Hawaii Time','HST']
-        ], :selected => "EST", :hint => "Used to timestamp responses" %>
-    -->
-  </div>
 
+<h3>Settings</h3>
+<div class="form-inputs">
+  <%= f.input :name, :label => "Group name", :hint => "E.g. 'Philadelphia2035' or 'Chattanooga Regional Planning'" %>
+  <%= f.input :exchange, :label => "Preferred area code",
+    :collection => @group.get_exchanges,
+    :label_method => lambda {
+      |i| label = ""
+      label << "#{i['prefix'][1,3]} - #{i['city']}, "
+      label << "#{i['state']}, " if !i['state'].blank?
+      label << "#{i['country']}"},
+      :value_method => lambda {|i| i["prefix"]}
+  %>
+  <!--
+  <%= f.input :name, :label => "Timezone",
+    :collection=>[
+      ['Eastern Time','EST'],
+      ['Central Time','CST'],
+      ['Mountain Time','MST'],
+      ['Pacific Time','PST'],
+      ['Alaska Time','AKST'],
+      ['Hawaii Time','HST']
+      ], :selected => "EST", :hint => "Used to timestamp responses" %>
+  -->
+</div>
+
+<br>
   <div class="form-actions">
     <%= f.button :submit, :class => 'btn btn-large btn-primary' %>
     <%= link_to 'Cancel', groups_path, :class => 'btn btn-large' %>
