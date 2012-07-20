@@ -105,6 +105,14 @@ hr {
 .poll-edit {
   display: none;
 }
+
+a.link-danger{
+	color: #E0534E;
+}
+
+a.link-danger:hover{
+	color: #C34A44;
+}
 /*
 tr:nth-of-type(odd) {
   background-color:#F1DCA7;
