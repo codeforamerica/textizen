@@ -104,6 +104,8 @@
   <div class="form-actions">
     <%= f.button :submit, :class => 'btn btn-large btn-primary' %>
     <%= link_to 'Cancel', groups_path, :class => 'btn btn-large' %>
-    <%= link_to(raw('<i class="icon-trash"></i>Destroy'), @group, :class => 'link-danger', confirm: 'This is probably a bad idea. Are you sure?', method: :delete) %>
+    <div class="link-destroy-group">
+      <%= link_to(raw('<i class="icon-trash"></i>Destroy'), @group, :class => 'link-danger', confirm: 'This is probably a bad idea. Are you sure?', method: :delete) %>
+    </div>
   </div>
 <% end %>
