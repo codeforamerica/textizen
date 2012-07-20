@@ -4,6 +4,9 @@
       <div class="grouptitle">
         <%= group.name %>
       </div>
+      <% if group.polls.empty? %>
+        <div class="caption nopolls">No polls in this group yet.</div>
+      <% end %>
       <table class="table pollslist">
         <% group.polls.each_with_index do |poll, i| %>
           <tr onClick="window.location.href='polls/<%= poll.id %>'">
