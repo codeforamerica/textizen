@@ -28,8 +28,9 @@
 
 <h3>People</h3>
 <div>
-<p>Adding some rockstars to this party will give them the same access &mdash; to create and edit polls and view results &mdash; as you. (To share results only, go to the survey page. From there, you can export to CSV or print the webpage to PDF.)</p>
-<p>For now, you can only add people who already have Textizen accounts. To get your colleagues signed up first, just forward your beta invite.</p></div>
+  <p>Adding some rockstars to this party will give them the same access &mdash; to create and edit polls and view results &mdash; as you. (To share results only, go to the survey page. From there, you can export to CSV or print the webpage to PDF.)</p>
+  <p>For now, you can only add people who already have Textizen accounts. To get your colleagues signed up first, just forward your beta invite.</p>
+</div>
 <br>
   <div id="emails">
     <ol id="user-list">
@@ -41,6 +42,7 @@
       <% @group.users.each do |user| %>
         <li>
         <%= user.email %>
+        &nbsp;
         <%= link_to "Remove", group_user_path(GroupUser.where(user_id:user, group_id: @group)[0]), :method => :delete, :confirm => "Are you sure?" %> 
         </li>
       <% end %>
@@ -56,11 +58,22 @@
       </ul>
     <%- end -%>
   </div>
+  <br>
 
-
-<div style="display:none;">
-  <%= f.association :polls, :collection => current_user.visible_polls %>
+<hr>
+<h3>Polls</h3>
+<div class="row">
+  <div class="span6 groupsunit">
+      <ol class="pollsol">
+        <% @group.polls.each do |poll| %>
+        <li>
+          <span class="pollsol-text"><%= link_to(poll.questions.first.text, poll_path(poll)) %> </span>
+        </li>
+        <% end %>
+      </ol>
+  </div>
 </div>
+<br>
 
 <hr>
 
@@ -71,17 +84,20 @@
       :collection => @group.get_exchanges,
       :label_method => lambda { |i| i['label']}, :value_method => lambda {|i| i['prefix']}
     %>
-    <%= f.input :name, :label => "Timezone",
-      :collection=>[
-        ['Eastern Time','EST'],
-        ['Central Time','CST'],
-        ['Mountain Time','MST'],
-        ['Pacific Time','PST'],
-        ['Alaska Time','AKST'],
-        ['Hawaii Time','HST']
-        ], :selected => "EST", :hint => "Used to timestamp responses" %>
-  </div>
+  <!--
+  <%= f.input :name, :label => "Timezone",
+    :collection=>[
+      ['Eastern Time','EST'],
+      ['Central Time','CST'],
+      ['Mountain Time','MST'],
+      ['Pacific Time','PST'],
+      ['Alaska Time','AKST'],
+      ['Hawaii Time','HST']
+      ], :selected => "EST", :hint => "Used to timestamp responses" %>
+  -->
+</div>
 
+<br>
   <div class="form-actions">
     <%= f.button :submit, :class => 'btn btn-large btn-primary' %>
     <%= link_to 'Cancel', groups_path, :class => 'btn btn-large' %>
