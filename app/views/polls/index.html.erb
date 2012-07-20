@@ -1,37 +1,39 @@
 <div class="row">
-    <div class="span12 main">
-        <div class="grouptitle">Philadelphia2035 June Pilot</div>
-            <table class="table pollslist">
+  <div class="span12 main">
+    <% current_user.groups.each do |group| %>
+      <div class="grouptitle">
+        <%= group.name %>
+      </div>
+      <table class="table pollslist">
+        <% group.polls.each_with_index do |poll, i| %>
+          <tr onClick="window.location.href='polls/<%= poll.id %>'">
+            <td class="number"><%= i+1 %></td>
 
-            <% @polls.each_with_index do |poll, i| %>
-              <tr onClick="window.location.href='polls/<%= poll.id %>'">
-                <td class="number"><%= i+1 %></td>
+            <td class="polltext">
+              <%= poll.questions.first.text if poll.questions.length > 0 %>
+            </td>
 
-                <td class="polltext">
-                     <%= poll.questions.first.text if poll.questions.length > 0 %>
-                </td>
+            <td>
+              <div class="dashboardresponsecount"><%= poll.questions.empty? ? '0' : poll.questions.first.responses.count %></div>
+              <div class="caption">responses</div>
+            </td>
 
-                <td>
-                    <div class="dashboardresponsecount"><%= poll.questions.empty? ? '0' : poll.questions.first.responses.count %></div>
-                    <div class="caption">responses</div>
-                </td>
+            <td><%= sparkline poll.time_series %><br><span class="caption">latest <%= format_time poll.time_since_last_response %> ago</span></td>
 
-                <td><%= sparkline poll.time_series %><br><span class="caption">latest <%= format_time poll.time_since_last_response %> ago</span></td>
+            <td>Live <%= poll.start_date.strftime("%m/%d/%y %I:%M %p")%><br><%= time_ago_in_words(poll.start_date, include_seconds = false) %> ago</td>
 
-                <td>Live <%= poll.start_date.strftime("%m/%d/%y %I:%M %p")%><br><%= time_ago_in_words(poll.start_date, include_seconds = false) %> ago</td>
-                
-                <td id="pollactions">
-                    <%= link_to(raw('<i class="icon-th-large"></i>Show'), poll) %>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <span class="poll-edit"><%= link_to(raw('<i class="icon-pencil"></i>Edit'), edit_poll_path(poll)) %></span>
-                </td>
+            <td id="pollactions">
+              <%= link_to(raw('<i class="icon-th-large"></i>Show'), poll) %>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <span class="poll-edit"><%= link_to(raw('<i class="icon-pencil"></i>Edit'), edit_poll_path(poll)) %></span>
+            </td>
 
-              </tr>
-            <% end %>
-            </table>
+          </tr>
+        <% end %>
+      </table>
 
-            <br />
-            <%= link_to 'New Poll', new_poll_path, :class => "btn btn-large" %>
-        </div>
-    </div>
+      <br />
+      <%= link_to 'New Poll', new_poll_path, :class => "btn btn-large" %>
+    <% end %>
+  </div>
 </div>
