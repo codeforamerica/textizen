@@ -110,7 +110,7 @@ class Poll < ActiveRecord::Base
     unless self.groups.empty? or self.groups.first.exchange.empty? # just in case
       prefix = self.groups.first.exchange
     end
-    address = tp.create_address(ENV['TROPO_APP_ID'], { :type => 'number', :prefix => prefix || '1415' })
+    address = tp.create_address(ENV['TROPO_APP_ID'], { :type => 'number', :prefix => prefix || '1215' })
 
     @address = Poll.normalize_phone(address['address'])
 
