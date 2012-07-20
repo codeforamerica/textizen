@@ -125,8 +125,8 @@ $(document).ready(function(){
 
     // Wipes existing options TODO: hide, instead of remove?
     
-    if (!initEditing){
-      $(this).parents(".nested-fields").find(".followup-option-field").remove();
+    if (!initEditing){ // make sure it's not just the /edit UI refresh
+      $(this).parents(".nested-fields").find(".remove-follow-up-option").click();
     }
 
     var value = $(this).val();
