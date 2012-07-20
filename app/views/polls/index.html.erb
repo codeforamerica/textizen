@@ -38,6 +38,8 @@
       <br />
       <%= link_to "New Poll in #{group.name}", new_poll_path(:group => group.id), :class => "btn btn-large"%>
     <% end %>
+
+    <% unless (current_user.created_polls - current_user.polls).empty? %>
       <div class="grouptitle">
         Orphaned Polls :(
       </div>
@@ -68,7 +70,7 @@
           </tr>
         <% end %>
       </table>
-
-      <br />
+    <% end %>
+    <br />
   </div>
 </div>
