@@ -33,7 +33,7 @@
       </table>
 
       <br />
-      <%= link_to 'New Poll', new_poll_path, :class => "btn btn-large" %>
+      <%= link_to "New Poll in #{group.name}", new_poll_path(:group => group.id), :class => "btn btn-large"%>
     <% end %>
       <div class="grouptitle">
         Orphaned Polls :(
