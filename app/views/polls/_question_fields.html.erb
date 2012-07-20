@@ -13,8 +13,7 @@
       <%= render 'option_fields', :f => option %>
     <% end %>
 
-    <%= link_to_add_association 'Add option', f, :options, 
-            :class => "controls add-option-button"%>
+    <%= link_to_add_association 'Add option', f, :options, :"data-association-insertion-method" => :append, :class => "controls add-option-button"%>
     
   </div>
 </div>

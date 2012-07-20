@@ -8,6 +8,6 @@
       <%= render 'follow_up_option_fields', :f => option %>
     <% end %>
 
-    <%= link_to_add_association 'Add followup option', f, :options, :partial => 'polls/follow_up_option_fields', :class => "controls add-followup-option-button" %>
+    <%= link_to_add_association 'Add followup option', f, :options, :partial => 'polls/follow_up_option_fields', :"data-association-insertion-method" => :append, :class => "controls add-followup-option-button" %>
   </div>
 </div>
