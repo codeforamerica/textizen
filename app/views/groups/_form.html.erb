@@ -64,8 +64,9 @@
 <h3>Polls</h3>
 <div class="row">
   <div class="span6 groupsunit">
-
-      <!--<div class="caption nopolls">No polls in this group yet.</div>-->
+      <% if @group.polls.empty? %>
+        <div class="caption nopolls">No polls in this group yet. Go <%= link_to 'create a poll', new_poll_path %>!</div>
+      <% end %>
 
       <ol class="pollsol">
         <% @group.polls.each do |poll| %>
