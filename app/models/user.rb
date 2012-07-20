@@ -2,7 +2,8 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are: :registerable
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   # only allow signups on dev machines during the beta. TODO make this a config var, not hardcoded?
-  if Rails.env.production?
+
+  unless ENV['block_registrations']
     devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
   else
     devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :registerable 
