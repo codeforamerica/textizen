@@ -31,7 +31,6 @@ class Group < ActiveRecord::Base
     puts errors
     return errors
   end
-  # THIS SHOULD NOT WORK!
   def get_exchanges
     json = open("https://api.tropo.com/v1/exchanges", :http_basic_authentication=>[ENV['TROPO_USERNAME'],ENV['TROPO_PASSWORD']]).read
     result = JSON.parse(json).find_all{|item| item["smsEnabled"]==true and item["country"] == "United States" } # no canada for now
@@ -46,7 +45,7 @@ class Group < ActiveRecord::Base
       end
       set
     end
-    result.map do |i|
+    result_hash.map do |j,i|
       i['label'] = "#{i['prefix'][1,3]} - #{i['city']}, "
       i['label'] << "#{i['state']}" if !i['state'].blank? # just in case
       # i['label'] << "#{i['country']}"
