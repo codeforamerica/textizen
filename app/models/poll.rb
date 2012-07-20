@@ -107,7 +107,10 @@ class Poll < ActiveRecord::Base
   def get_phone_number(addresses_to_clear = [])
     puts 'get phone number'
     tp = TropoProvisioning.new(ENV['TROPO_USERNAME'], ENV['TROPO_PASSWORD'])
-    address = tp.create_address(ENV['TROPO_APP_ID'], { :type => 'number', :prefix => '1415' })
+    unless self.groups.empty? or self.groups.first.exchange.empty? # just in case
+      prefix = self.groups.first.exchange
+    end
+    address = tp.create_address(ENV['TROPO_APP_ID'], { :type => 'number', :prefix => prefix || '1415' })
 
     @address = Poll.normalize_phone(address['address'])
 
