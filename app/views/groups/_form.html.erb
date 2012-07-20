@@ -81,8 +81,7 @@
   <div class="form-inputs">
     <%= f.input :name, :label => "Group name", :hint => "E.g. 'Philadelphia2035' or 'Chattanooga Regional Planning'" %>
     <%= f.input :exchange, :label => "Preferred area code",
-      :collection => @group.get_exchanges,
-      :label_method => lambda { |i| i['label']}, :value_method => lambda {|i| i['prefix']}
+      :collection => @group.get_exchanges
     %>
   <!--
   <%= f.input :name, :label => "Timezone",
