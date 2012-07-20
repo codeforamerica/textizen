@@ -69,12 +69,7 @@
     <%= f.input :name, :label => "Group name", :hint => "E.g. 'Philadelphia2035' or 'Chattanooga Regional Planning'" %>
     <%= f.input :exchange, :label => "Preferred area code",
       :collection => @group.get_exchanges,
-      :label_method => lambda {
-        |i| label = ""
-        label << "#{i['prefix'][1,3]} - #{i['city']}, "
-        label << "#{i['state']}, " if !i['state'].blank?
-        label << "#{i['country']}"},
-        :value_method => lambda {|i| i["prefix"]}
+      :label_method => lambda { |i| i['label']}, :value_method => lambda {|i| i['prefix']}
     %>
     <%= f.input :name, :label => "Timezone",
       :collection=>[

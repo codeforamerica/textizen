@@ -35,5 +35,11 @@ class Group < ActiveRecord::Base
   def get_exchanges
     json = open("https://api.tropo.com/v1/exchanges", :http_basic_authentication=>[ENV['TROPO_USERNAME'],ENV['TROPO_PASSWORD']]).read
     result = JSON.parse(json).find_all{|item| item["smsEnabled"]==true}
+    result.map do |i|
+      i['label'] = "#{i['prefix'][1,3]} - #{i['city']}, "
+      i['label'] << "#{i['state']}, " if !i['state'].blank?
+      i['label'] << "#{i['country']}"
+      i
+    end
   end
 end
