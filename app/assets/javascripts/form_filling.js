@@ -104,7 +104,7 @@ $(document).ready(function(){
       parent_container_entry.find(".option-field .option-value").last().addClass("disabled yes-no").val("no");
 
       // Removes "remove option" button
-      parent_container_entry.find(".help-inline a.remove_fields").remove();
+      parent_container_entry.find(".help-inline a.remove_fields").hide();
     }
     else if (value == "MULTI") {
       // Show "add option" button
@@ -147,7 +147,7 @@ $(document).ready(function(){
       parent_container_entry.find(".followup-option-field .followup-option-value").first().addClass("disabled yes-no").val("yes");
       parent_container_entry.find(".followup-option-field .followup-option-value").last().addClass("disabled yes-no").val("no");
       // Removes "remove option" button
-      parent_container_entry.find(".followup-option-field a.remove_fields").hide();
+//      parent_container_entry.find(".followup-option-field a.remove_fields").hide();
     }
     else if (value == "MULTI") {
       // Show "add option" button
