@@ -3,7 +3,7 @@ class Option < ActiveRecord::Base
   belongs_to :question
   has_many :follow_up, :class_name => "Question", :foreign_key => "parent_option_id", :dependent => :destroy
   has_many :follow_up_responses, :through => :follow_up, :source => :responses
-  has_many :follow_up_options, :through => :follow_up, :source => :options
+  has_many :follow_up_options, :through => :follow_up
   validates_presence_of :text, :value
 
   accepts_nested_attributes_for :follow_up, :reject_if => :all_blank, :allow_destroy => true
