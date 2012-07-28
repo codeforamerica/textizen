@@ -70,7 +70,7 @@
           </tr>
         <% end %>
       </table>
-    <% elsif current_user.visible_polls - current_user.created_polls - current_user.polls %> <!-- for superadmins -->
+    <% elsif !(current_user.visible_polls - current_user.created_polls - current_user.polls).empty? %> <!-- for superadmins -->
       <div class="grouptitle">
         ALL OF THE Polls :D
       </div>
