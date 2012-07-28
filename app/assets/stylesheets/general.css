@@ -21,6 +21,10 @@ body {
 	margin-bottom: 1em;
 }
 
+.pollsgroup{
+	margin-bottom:4em;
+}
+
 .pollslist td {
 	vertical-align: middle;
 	padding: 0.5em;
