@@ -76,9 +76,10 @@
           </tr>
         <% end %>
       </table>
-    <% elsif !(current_user.visible_polls - current_user.created_polls - current_user.polls).empty? %> <!-- for superadmins -->
+    <% end %>
+    <% if !(current_user.visible_polls - current_user.created_polls - current_user.polls).empty? %> <!-- for superadmins -->
       <div class="grouptitle">
-        ALL OF THE Polls :D
+        All Orphaned Polls
       </div>
       <table class="table pollslist">
         <% (current_user.visible_polls - current_user.created_polls - current_user.polls).each_with_index do |poll, i| %>
