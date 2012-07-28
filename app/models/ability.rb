@@ -4,13 +4,15 @@ class Ability
   def initialize(user)
     if user.role?(:superadmin)
       can :manage, :all
-      #can :view_all, Poll
-    else
-      can :create, Poll
-      can :manage, Poll, :groups => { :id => user.group_ids }
-      can :manage, Poll, :author => { :id => user.id }
+      can :access, :rails_admin   # grant access to rails_admin
+      can :dashboard              # grant access to the dashboard
+      #can :view_all, Poll # TODO
+    elsif user.role?(:editor)
+      can :create, Poll # editor can create polls
+      can :manage, Poll, :groups => { :id => user.group_ids } # editor can manage polls in their groups
+      can :manage, Poll, :author => { :id => user.id } # and also polls they created
       can :create, Group
-      can :manage, Group, :users => { :id => user.id }
+      can :manage, Group, :users => { :id => user.id } # can manage groups they're members of
       can :manage, GroupUser, :groups => { :id => user.group_ids } # allows anyone to remove themselves from a group, or add polls to a group they're in
     end
     # Define abilities for the passed in user here. For example:
