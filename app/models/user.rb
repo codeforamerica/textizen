@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   # only allow signups on dev machines during the beta. TODO make this a config var, not hardcoded?
 
-  unless ENV['block_registrations']
+  if ENV['BLOCK_REGISTRATIONS'] == 'true'
     devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
   else
     devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :registerable 
