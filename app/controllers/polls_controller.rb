@@ -7,6 +7,11 @@ class PollsController < ApplicationController
   def index
     # TODO: transfer this to cancan syntax, eventually
     @polls = current_user.visible_polls
+    if current_user.role?(:superadmin)
+      @groups = Group.all
+    else
+      @groups = current_user.groups
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -40,6 +45,11 @@ class PollsController < ApplicationController
   # GET /polls/1/edit
   def edit
     @poll = Poll.find(params[:id])
+    if current_user.role?(:superadmin)
+      @groups = Group.all
+    else
+      @groups = current_user.groups
+    end
   end
 
   # POST /polls
