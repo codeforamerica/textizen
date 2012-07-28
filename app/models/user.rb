@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   # for role inheritance
   def role?(base_role)
     puts base_role
-    unless base_role.nil?
+    unless role.nil?
       ROLES.index(base_role.to_s) <= ROLES.index(role)
     else
       false
