@@ -7,7 +7,7 @@ class GroupUsersController < ApplicationController
     @group_user.destroy
 
     respond_to do |format|
-      format.html { redirect_to group_url(@group_user.group) }
+      format.html { redirect_to edit_group_path(@group_user.group) }
       format.json { head :no_content }
     end
   end

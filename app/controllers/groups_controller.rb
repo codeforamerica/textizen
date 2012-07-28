@@ -77,7 +77,7 @@ class GroupsController < ApplicationController
       end
 
       if errors.empty? and @group.update_attributes(params[:group]) 
-        format.html { redirect_to @group, notice: 'Group was successfully updated.' }
+        format.html { redirect_to edit_group_path(@group), notice: 'Group was successfully updated.' }
         format.json { head :no_content }
       else 
         @group.errors.add(:users, errors)
