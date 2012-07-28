@@ -1,13 +1,15 @@
 TxtyourcityRails::Application.routes.draw do
+  resources :groups
+  resources :group_users
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => "registrations" }, :path_names => { :sign_up => ENV['SIGN_UP_PATH'] || 'textizen4eva' }
   #devise_for :users, :path_names => { :sign_in => 'login', :sign_out => 'logout', :password => 'secret', :confirmation => 'verification', :unlock => 'unblock', :registration => 'register'}#, :controllers=>{:registrations=>"registrations"}
   #devise_for :admins
 
   resources :polls do
-    put :end, :on => :member
+    put :end, :on => :member # for polls/3/end?
     collection do
       post "receive_message"
     end

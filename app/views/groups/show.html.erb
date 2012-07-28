@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+<b>Name:</b>
+<%= @group.name %>
+</p>
+
+<h3>Polls</h3>
+<ul>
+  <% @group.polls.each do |poll| %>
+    <li>
+      <%= link_to poll.questions.first.text, poll_path(poll) %>
+    </li>
+  <% end %>
+
+</ul>
+
+<h3>Users</h3>
+<ul>
+  <% @group.users.each do |user| %>
+    <li>
+    <%= user.email %>  <%= link_to "Remove", group_user_path(GroupUser.where(user_id:user, group_id: @group)[0]), :method => :delete %>
+    </li>
+  <% end %>
+
+</ul>
+
+<div>Area code: <%= @group.exchange %></div>
+
+<%= link_to 'Edit', edit_group_path(@group) %> |
+<%= link_to 'Back', groups_path %>

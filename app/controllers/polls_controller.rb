@@ -1,10 +1,17 @@
 class PollsController < ApplicationController
   before_filter :authenticate_user!
+  load_and_authorize_resource
 
   # GET /polls
   # GET /polls.json
   def index
-    @polls = Poll.all
+    # TODO: transfer this to cancan syntax, eventually
+    @polls = current_user.visible_polls
+    if current_user.role?(:superadmin)
+      @groups = Group.all
+    else
+      @groups = current_user.groups
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -38,12 +45,18 @@ class PollsController < ApplicationController
   # GET /polls/1/edit
   def edit
     @poll = Poll.find(params[:id])
+    if current_user.role?(:superadmin)
+      @groups = Group.all
+    else
+      @groups = current_user.groups
+    end
   end
 
   # POST /polls
   # POST /polls.json
   def create
     @poll = Poll.new(params[:poll])
+    @poll.author = current_user
 
     respond_to do |format|
       if @poll.save

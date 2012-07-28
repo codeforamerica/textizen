@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="span12 main">
+  <div class="grouptitle">All Groups</div>
+
+    <table class="table pollslist">
+      <% @groups.each do |group| %>
+        <tr onClick="window.location.href='<%= edit_group_path(group) %>'">
+          <td class="groupname"><%= group.name %></td>
+
+          <td>
+            <div class="dashboardresponsecount">
+              <%= group.users.count %>
+            </div>
+            <div class="caption">people</div>
+          </td>
+
+          <td>
+            <div class="dashboardresponsecount">
+              <%= group.polls.count %>
+              
+            </div>
+            <div class="caption">polls</div>
+          </td>
+          
+          <td>
+            <%= link_to(raw('<i class="icon-user"></i>Show'), edit_group_path(group)) %>
+          </td>
+
+        </tr>
+      <% end %>
+    </table>
+
+    <br />
+
+    <%= link_to 'New Group', new_group_path, :class => "btn btn-large" %>
+
+  </div>
+</div>
