@@ -39,12 +39,43 @@
       <%= link_to "New Poll in #{group.name}", new_poll_path(:group => group.id), :class => "btn btn-large"%>
     <% end %>
 
-    <% unless (current_user.created_polls - current_user.polls).empty? %>
+    <% if !(current_user.created_polls - current_user.polls).empty? %>
       <div class="grouptitle">
         Orphaned Polls :(
       </div>
       <table class="table pollslist">
         <% (current_user.created_polls - current_user.polls).each_with_index do |poll, i| %>
+          <tr onClick="window.location.href='polls/<%= poll.id %>'">
+            <td class="number"><%= i+1 %></td>
+
+            <td class="polltext">
+              <%= poll.questions.first.text if poll.questions.length > 0 %>
+            </td>
+
+            <td>
+              <div class="dashboardresponsecount"><%= poll.questions.empty? ? '0' : poll.questions.first.responses.count %></div>
+              <div class="caption">responses</div>
+            </td>
+
+            <td><%= sparkline poll.time_series %><br><span class="caption">latest <%= format_time poll.time_since_last_response %> ago</span></td>
+
+            <td>Live <%= poll.start_date.strftime("%m/%d/%y %I:%M %p")%><br><%= time_ago_in_words(poll.start_date, include_seconds = false) %> ago</td>
+
+            <td id="pollactions">
+              <%= link_to(raw('<i class="icon-th-large"></i>Show'), poll) %>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <span class="poll-edit"><%= link_to(raw('<i class="icon-pencil"></i>Edit'), edit_poll_path(poll)) %></span>
+            </td>
+
+          </tr>
+        <% end %>
+      </table>
+    <% elsif current_user.visible_polls - current_user.created_polls - current_user.polls %> <!-- for superadmins -->
+      <div class="grouptitle">
+        ALL OF THE Polls :D
+      </div>
+      <table class="table pollslist">
+        <% (current_user.visible_polls - current_user.created_polls - current_user.polls).each_with_index do |poll, i| %>
           <tr onClick="window.location.href='polls/<%= poll.id %>'">
             <td class="number"><%= i+1 %></td>
 
