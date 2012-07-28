@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
       ROLES.index(base_role.to_s) <= ROLES.index(role)
     else
       false
+    end
   end
 
   def visible_polls
