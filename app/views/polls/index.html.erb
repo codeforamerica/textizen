@@ -1,5 +1,8 @@
 <div class="row">
   <div class="span12 main">
+    <% if current_user.visible_polls.empty? and current_user.groups.empty? %>
+        <div class="caption nopolls">No groups yet. Get invited to a group, or <%= link_to 'create one now', new_group_path %>!</div>
+    <% end %>
     <% current_user.groups.each do |group| %>
       <div class="pollsgroup">
           <div class="grouptitle">
