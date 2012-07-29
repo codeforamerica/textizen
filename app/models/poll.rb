@@ -106,21 +106,26 @@ class Poll < ActiveRecord::Base
   # once a non-duplicate number is found, all duplicates are destroyed
   def get_phone_number(addresses_to_clear = [])
     puts 'get phone number'
-    tp = TropoProvisioning.new(ENV['TROPO_USERNAME'], ENV['TROPO_PASSWORD'])
     prefix = '1215'
-    unless self.groups.empty? or self.groups.first.exchange.empty? # just in case
+    unless self.groups.empty? or self.groups.first.exchange.nil? # just in case
       prefix = self.groups.first.exchange
     end
-    address = tp.create_address(ENV['TROPO_APP_ID'], { :type => 'number', :prefix => prefix })
 
-    @address = Poll.normalize_phone(address['address'])
+    if Rails.env == "development"
+      @address = "1#{prefix}"+rand(10 ** 7).to_s
+    else 
+      tp = TropoProvisioning.new(ENV['TROPO_USERNAME'], ENV['TROPO_PASSWORD'])
+      address = tp.create_address(ENV['TROPO_APP_ID'], { :type => 'number', :prefix => prefix })
 
-    unless Poll.where(:phone=>@address).empty?
-      addresses_to_clear.push(@address)
-      return get_phone_number(addresses_to_clear)
-    else
-      addresses_to_clear.each do |a|
-        destroy_phone_number(a)
+      @address = Poll.normalize_phone(address['address'])
+
+      unless Poll.where(:phone=>@address).empty?
+        addresses_to_clear.push(@address)
+        return get_phone_number(addresses_to_clear)
+      else
+        addresses_to_clear.each do |a|
+          destroy_phone_number(a)
+        end
       end
     end
     puts @address
