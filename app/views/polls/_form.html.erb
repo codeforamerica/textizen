@@ -34,7 +34,7 @@
       <h3>Settings</h3>
       <div class="item-container">
         <div class= "nested-fields spacing">
-          <%= f.input :title, :label => "Confirmation", :placeholder => "Thanks for your feedback! More info: [your organization's website", :as => :text , :input_html => { :rows => 3 } %>
+          <%= f.input :confirmation, :placeholder => "Thanks for your feedback! More info: [your organization's website", :input_html => {:rows => 3, :cols => 20} %>
           <%= f.input :title, :label => "Nickname", :hint => "Only for reports. Example: \"15 responses this week to your poll on ________.\"" %>
           <%= f.input :phone, :hint => "<input type='checkbox' name='auto_assign' onClick='togglePhone()' class='alignbox'></input> Automatically assign?", :disabled => "false" %>
           <!--<input type="checkbox" name="auto_assign" onClick="togglePhone()"></input>-->
@@ -52,6 +52,7 @@
                   <%= f.date_select(:end_date, {:use_short_month => 1, :order => [:month, :day, :year]}, {:class => "span1"}) %>
                 </div>
               </div>
+              <%= f.input :group_ids, :label => "Group", :selected => (params[:group] if params[:group]), :collection => @groups, :include_blank => false, :input_html => {:multiple => false} %>
           </fieldset>
           </div>
         </div>
@@ -62,12 +63,4 @@
         </div>
       </div>
     </div>
-
-  <%= f.input :group_ids, :label => "Group", :selected => (params[:group] if params[:group]), :collection => @groups, :include_blank => false, :input_html => {:multiple => false} %>
-  <%= f.input :confirmation, :input_html => {:rows => 3, :cols => 20} %>
-
-<div class="form-actions">
-    <%= f.button :submit, :class => 'btn btn-large btn-primary' %>
-    <%= link_to 'Cancel', @poll, :class => 'btn btn-large' %>
-</div>
 <% end %>
