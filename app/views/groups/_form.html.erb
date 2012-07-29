@@ -60,24 +60,26 @@
   </div>
   <br>
 
+<% unless @group.new_record? %>
 <hr>
-<h3>Polls</h3>
-<div class="row">
-  <div class="span6 groupsunit">
+  <h3>Polls</h3>
+  <div class="row">
+    <div class="span6 groupsunit">
       <% if @group.polls.empty? %>
-        <div class="caption nopolls">No polls in this group yet. Go <%= link_to 'create a poll', new_poll_path %>!</div>
+        <div class="caption nopolls">No polls in this group yet. Go <%= link_to 'create a poll', new_poll_path(:group => @group.id) %>!</div>
       <% end %>
 
       <ol class="pollsol">
         <% @group.polls.each do |poll| %>
-        <li>
+          <li>
           <span class="pollsol-text"><%= link_to(poll.questions.first.text, poll_path(poll)) %> </span>
-        </li>
+          </li>
         <% end %>
       </ol>
+    </div>
   </div>
-</div>
-<br>
+  <br>
+<% end %>
 
 <hr>
 
