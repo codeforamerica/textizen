@@ -48,6 +48,7 @@ class PollsController < ApplicationController
 
   # GET /polls/1/edit
   def edit
+    @editing = true
     @poll = Poll.find(params[:id])
     if current_user.role?(:superadmin)
       @groups = Group.all

@@ -1,10 +1,6 @@
-<div class="nested-fields">
+<div class="nested-fields followup-option-field">
   <fieldset>
-    <%= f.input :text, :label => 'Option label' %>
-    <%= f.input :value, :label => 'Option value' %>
-    <%= link_to_remove_association "Remove followup option", f %>
-    <%= f.simple_fields_for :follow_up do |followup| %>
-      <%= render 'question_fields', :f => followup %>  
-    <% end %>
+    <%= f.input :text, :label => false, :input_html => {:class => 'followup-option-text'}, :hint => (link_to_remove_association "×", f , :class => 'close remove-follow-up-option') %>
+    <%= f.input :value, :as => :hidden, :label => 'Option value', :input_html => {:class => 'followup-option-value'} %>
   </fieldset>
 </div>

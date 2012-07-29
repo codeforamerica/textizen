@@ -1,11 +1,11 @@
 class Question < ActiveRecord::Base
-  attr_accessible :poll_id, :question_type, :text, :parent_option_id, :sequence, :options_attributes
+  attr_accessible :poll_id, :question_type, :text, :parent_option_id, :sequence, :options_attributes, :follow_up_options_attributes
   has_many :responses
   has_many :options, :dependent => :destroy
   has_many :follow_up, :through => :options
-  has_many :follow_up_options, :through => :options 
+  has_many :follow_up_options, :class_name => "Option", :foreign_key => "question_id", :dependent => :destroy
   has_many :follow_up_responses, :through => :options
-  accepts_nested_attributes_for :options, :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :options, :follow_up_options, :reject_if => :all_blank, :allow_destroy => true
 
 
   belongs_to :poll
