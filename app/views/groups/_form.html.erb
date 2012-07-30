@@ -66,8 +66,9 @@
   <div class="row">
     <div class="span6 groupsunit">
       <% if @group.polls.empty? %>
-        <div class="caption nopolls">No polls in this group yet. Go <%= link_to 'create a poll', new_poll_path(:group => @group.id) %>!</div>
+        <div class="caption nopolls">No polls in this group yet.</div>
       <% end %>
+      
 
       <ol class="pollsol">
         <% @group.polls.each do |poll| %>
@@ -76,6 +77,7 @@
           </li>
         <% end %>
       </ol>
+      <%= link_to raw("<i class='icon-plus'></i>New Poll in #{@group.name}"), new_poll_path(:group => @group.id), :class => "btn btn-large"%>
     </div>
   </div>
   <br>
