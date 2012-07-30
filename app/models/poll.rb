@@ -15,7 +15,7 @@ class Poll < ActiveRecord::Base
   has_many :follow_up_responses, :through => :questions
   accepts_nested_attributes_for :questions, :reject_if => :all_blank, :allow_destroy => true
 
-  validates_uniqueness_of :phone
+# validates_uniqueness_of :phone
   before_create :set_new_phone_number
   before_destroy :destroy_phone_number
 
@@ -98,7 +98,7 @@ class Poll < ActiveRecord::Base
 
   def set_new_phone_number
     puts 'set new phone number'
-    self.phone = self.phone || get_phone_number
+    self.phone ||= get_phone_number
   end
 
   # recursive function to get a new phone number, making sure that it wasn't previously assigned
