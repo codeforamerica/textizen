@@ -39,22 +39,15 @@
     </script>
   </head>
   <body>
-    <!--div id="tag">
-      <a href="www.codeforamerica.org">
-        <img width="100px" border="0" src="/assets/tag_cfa.png">
-      </a>
-    </div-->
-    <script src="http://boundsj.github.com/cfa_banner/banner.js?type=corner-right&forkUrl=https://github.com/codeforamerica/textizen" id="cfa_banner_script"></script>
-
     <div class="container">
       <% if user_signed_in? %>
         <%= render "users/top_bar" %>
       <% else %>
         <%= render "layouts/default_top_bar" %>
       <% end %>
-
+      <%= render :partial => "layouts/flash", :locals => {:flash => flash} %>
       <%= yield %>
-      
+
       <%= render "layouts/footer" %>
 
     </div>
@@ -76,5 +69,13 @@
          loadChartbeat : function() { oldonload(); loadChartbeat(); };
     })();
   </script>
+
+  <!-- Get Satisfaction -->
+  <div id="getsat-widget-843"></div>
+  <script type="text/javascript" src="https://loader.engage.gsfn.us/loader.js"></script>
+  <script type="text/javascript">
+    if (typeof GSFN !== "undefined") { GSFN.loadWidget(843,{"containerId":"getsat-widget-843"}); }
+  </script>
+  
   </body>
 </html>

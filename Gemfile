@@ -13,6 +13,7 @@ gem 'simple_form'
 gem 'thin'
 gem 'airbrake'
 gem 'taps'
+gem 'cancan'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -28,7 +29,7 @@ end
 
 gem 'jquery-rails'
 # gem 'flocky', :git => 'git://github.com/codeforamerica/flocky.git'
-gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
+gem 'rails_admin', '~> 0.0.4' 
 gem 'tropo-webapi-ruby'
 gem 'factory_girl_rails', '~> 3.3.0'
 gem 'tropo-provisioning'

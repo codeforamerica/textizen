@@ -86,11 +86,6 @@
 	background-color:#aaa; 
 }
 
-.nested-fields {
-	border-left: 2px solid #ccc;
-	padding-left: 10px;
-}
-
 .qtext {
 	font-weight:bold;
 	font-size:120%;
@@ -107,6 +102,3 @@
 	color:#999;
 }
 
-.edit-poll {
-  display: none
-}

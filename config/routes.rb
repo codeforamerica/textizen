@@ -1,18 +1,15 @@
 TxtyourcityRails::Application.routes.draw do
-  get "static_pages/home"
-
-  get "static_pages/about"
-
-  get "static_pages/privacy"
+  resources :groups
+  resources :group_users
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => "registrations" }, :path_names => { :sign_up => ENV['SIGN_UP_PATH'] || 'textizen4eva' }
   #devise_for :users, :path_names => { :sign_in => 'login', :sign_out => 'logout', :password => 'secret', :confirmation => 'verification', :unlock => 'unblock', :registration => 'register'}#, :controllers=>{:registrations=>"registrations"}
   #devise_for :admins
 
   resources :polls do
-    put :end, :on => :member
+    put :end, :on => :member # for polls/3/end?
     collection do
       post "receive_message"
     end
@@ -24,9 +21,10 @@ TxtyourcityRails::Application.routes.draw do
     end
   end
 
-  match 'welcome' => 'application#welcome'
-  match 'about' => 'application#about'
-  match 'privacy' => 'application#privacy'
+  match 'welcome' => 'static_pages#home'
+  match 'about' => 'static_pages#about'
+  match 'privacy' => 'static_pages#privacy'
+  match 'getstarted' => 'static_pages#getstarted'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

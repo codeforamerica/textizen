@@ -2,8 +2,11 @@ require 'csv'
 
 class Poll < ActiveRecord::Base
 
-  attr_accessible :end_date, :phone, :start_date, :title, :user_id, :questions_attributes
-  belongs_to :user
+  attr_accessible :end_date, :phone, :start_date, :title, :user_id, :questions_attributes, :group_ids, :confirmation
+  belongs_to :author, :class_name=> "User", :foreign_key=>"user_id"
+  has_and_belongs_to_many :groups
+  has_many :users, :through => :groups
+
   has_many :questions, :dependent => :destroy
   has_many :responses, :through => :questions
 #  has_many :options, :through => :questions # broken
@@ -12,7 +15,7 @@ class Poll < ActiveRecord::Base
   has_many :follow_up_responses, :through => :questions
   accepts_nested_attributes_for :questions, :reject_if => :all_blank, :allow_destroy => true
 
-  validates_uniqueness_of :phone
+# validates_uniqueness_of :phone
   before_create :set_new_phone_number
   before_destroy :destroy_phone_number
 
@@ -56,7 +59,7 @@ class Poll < ActiveRecord::Base
     return opts
   end
 
-  # a nice flat view of responses, sorted by first response time
+  # a nice flat view of responses, sorted by first response time. TODO: use reduce instead
   # [{from: 124, responses: {0:'y', 2:'02460'}, first_response_time: , last_response_time: }]
   # [{from: 123, responses: {0:'n', 1: 'just cuz', 2: '02459'} ...}]
   def responses_flat
@@ -72,13 +75,8 @@ class Poll < ActiveRecord::Base
     return _flat
   end
 
-  #returns a double hash of option keys used to decode responses?
-  #{0 => {'a':'wal-mart'}}
-  def option_keys
 
-  end
-
-  #returns an array of all question headers?
+  #return an array of all question headers?
   # [{id: 0, title: 'whatever', sequence: 0}]
   def question_headers
     headers = []
@@ -100,7 +98,7 @@ class Poll < ActiveRecord::Base
 
   def set_new_phone_number
     puts 'set new phone number'
-    self.phone = self.phone || get_phone_number
+    self.phone ||= get_phone_number
   end
 
   # recursive function to get a new phone number, making sure that it wasn't previously assigned
@@ -108,17 +106,26 @@ class Poll < ActiveRecord::Base
   # once a non-duplicate number is found, all duplicates are destroyed
   def get_phone_number(addresses_to_clear = [])
     puts 'get phone number'
-    tp = TropoProvisioning.new(ENV['TROPO_USERNAME'], ENV['TROPO_PASSWORD'])
-    address = tp.create_address(ENV['TROPO_APP_ID'], { :type => 'number', :prefix => '1415' })
+    prefix = '1215'
+    unless self.groups.empty? or self.groups.first.exchange.nil? # just in case
+      prefix = self.groups.first.exchange
+    end
 
-    @address = Poll.normalize_phone(address['address'])
+    if Rails.env == "development"
+      @address = "1#{prefix}"+rand(10 ** 7).to_s
+    else 
+      tp = TropoProvisioning.new(ENV['TROPO_USERNAME'], ENV['TROPO_PASSWORD'])
+      address = tp.create_address(ENV['TROPO_APP_ID'], { :type => 'number', :prefix => prefix })
 
-    unless Poll.where(:phone=>@address).empty?
-      addresses_to_clear.push(@address)
-      return get_phone_number(addresses_to_clear)
-    else
-      addresses_to_clear.each do |a|
-        destroy_phone_number(a)
+      @address = Poll.normalize_phone(address['address'])
+
+      unless Poll.where(:phone=>@address).empty?
+        addresses_to_clear.push(@address)
+        return get_phone_number(addresses_to_clear)
+      else
+        addresses_to_clear.each do |a|
+          destroy_phone_number(a)
+        end
       end
     end
     puts @address

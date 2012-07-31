@@ -1,19 +1,19 @@
-<div class="nested-fields">
+<div class="nested-fields question-entry">
 
-  <%= f.input :sequence %><%= f.input :text, :hint => (link_to_remove_association "Remove question", f, :class => "inline") %>
+  <%= link_to_remove_association raw("<button class=\"close questiondeleter\">&times;</button>"), f, :class => "top-right" %>
 
-  <fieldset>
-    <div class="control-group">
-      <div class="controls">
-        <%= f.input :question_type, :collection=>[['Open','OPEN'],['Multiple Choice','MULTI'],['Yes / No', 'YN']] %>
-      </div>
-    </div>
-  </fieldset>
+  <%= f.input :sequence, :as => :hidden %>
+
+  <%= f.input :text, :label => "Question 1", :label_html => { :class => "label-bold" }, :as => :text, :input_html => { :class => "input-xlarge", :rows => 2 } %>
+  <%= f.input :question_type, :label => "Format" , :collection=>[['Open Ended','OPEN'],['Multiple Choice','MULTI'],['Yes / No', 'YN']], :include_blank => false, :disabled => (!@poll.new_record? and !@poll.responses.empty?), :input_html => { :class => "question-type span2" } %>
 
   <div class="options">
-    <%= f.simple_fields_for :options do |option| %>
+
+    <%= f.simple_fields_for :options, :wrapper => "bootstrap" do |option| %>
       <%= render 'option_fields', :f => option %>
     <% end %>
-    <%= link_to_add_association 'Add option', f, :options %>
+
+    <%= link_to_add_association 'Add option', f, :options, :"data-association-insertion-method" => :append, :class => "controls add-option-button"%>
+    
   </div>
 </div>

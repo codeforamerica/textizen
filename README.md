@@ -34,6 +34,9 @@ With Foreman:
     $ foreman run bundle exec rails server -p $PORT
 
 _Remember, deploying locally means that you can't receive Tropo messages via their webhook. See below for deploying to Heroku._
+## Environment vars
+  sign_up_path
+  block_registrations
 
 ## Deploying to Heroku
 
