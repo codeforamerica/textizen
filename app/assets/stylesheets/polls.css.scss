@@ -59,15 +59,22 @@
       top: -30px;
       right: 0;
     }
+
+    .options {
+      margin-top: -5px;
+    }
+
     .add-option-button	{
       display:none;
     }
 
     /* CSS for the options field within a question entry */
     .option-field	{
-      margin-top: -5px;
       .yes-no {
         width: 60px;
+        cursor: not-allowed;
+        background-color: #eee;
+        border-color: #ddd;
       }
       .add-followup-dummy {  
         /* Fake button for layout purposes. Triggers add-followup-button */
