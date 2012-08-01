@@ -24,6 +24,10 @@
         this.msgPreviewNode.html(message);
       }
 
+      if (this.countNode){
+        this.countNode.html(message.length + "/160");
+      }
+
     };
 
 
