@@ -1,4 +1,102 @@
+(function(){
+  var labelLength = 2;
+  var paddingLength = 3;
+
+  var CharCounter = function(node){
+    this.node = $(node);
+
+    this.refreshInputs = function(){
+
+      this.inputs = inputsForQuestion(node);
+      console.log('inputs:');
+      console.log(this.inputs);
+    }
+    this.refreshInputs();
+
+    this.node.bind('keyup', {counter: this}, function(event){
+      console.log("keyup");
+      console.log(event.target);
+      event.data.counter.refreshInputs();
+      var l = messageLength(event.data.counter.inputs);
+      this.valid = (l <= 160);
+      console.log("MESSAGE LENGTH: "+l+" VALID?: "+this.valid);
+      // do DOM stuff
+    });
+  }
+
+  $.fn.charCounter = function(){
+    this.each(function(index, item){
+      console.log(item);
+      new CharCounter(item);
+    });
+  };
+
+  function inputsForQuestion(question){
+    question = $(question);
+    console.log('inputsForQuestion:');
+    console.log(question);
+    if (question.hasClass('confirmation')){
+      return $(question);
+    } else {
+      var inputs = question.find('textarea,select,input:visible');
+      console.log(inputs);
+      return $(inputs);
+      // if confirmation, inputs = [confirmation]
+      // if open ended or yes/no question inputs = [question, type]
+      // if multi inputs = [question, type, options]
+
+    }
+  }
+  // returns the message length for a set of inputs
+  function messageLength(inputs){
+    console.log('messageLength');
+    console.log(inputs);
+    var count = inputs[0].value.length; // the question text, or the confirmation 
+    if (inputs.length > 1){ //won't fire if only confirmation
+      var questionType = inputs[1].value;
+      count += textForQuestionType(questionType);
+    }
+    if (inputs.length > 2){ // we have options
+      count += inputs.length * labelLength;
+      count += (inputs.length - 1) * paddingLength;
+      inputs.each(function(input){
+        count += input.value ? input.value.length : 0;
+      });
+    }
+
+    return count;
+  }
+  // returns the additional text to be counted for each question type
+  function textForQuestionType(questionType){
+    switch (questionType) {
+      case 'YN':
+        return 'Reply with Yes or No'.length;
+      case 'MULTI':
+        return 'Reply with letter: '.length;
+      default:
+        return 0;
+    }
+  }
+})();
+
 $(document).ready(function(){
+  /************* char counter stuff ******************/
+  $('.question-entry').charCounter();
+  $('.confirmation').charCounter();
+  $(document).on('insertion-callback', function(event){
+    // figure out if it was a question
+    // or a followup question
+    
+//    $(event.target).charCounter();
+    // or an option
+    // or a followup option
+
+//    $(event.target).getParentQuestion().optionAdded();
+
+  });
+
+  /********* form editing stuff ********************/
+  // form editing stuff
   if (typeof initEditing === 'undefined') {
     initEditing = false;
   }
