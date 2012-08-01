@@ -1,6 +1,7 @@
-(function(){
-  var labelLength = 2;
-  var paddingLength = 3;
+(function($){
+  var separator = " / ";
+  var label = "A ";
+  var alphabet = ['A','B','C','D','E','F','G'];
 
   var CharCounter = function(node){
     this.node = $(node);
@@ -9,24 +10,49 @@
 
       this.inputs = inputsForQuestion(node);
       console.log('inputs:');
-      console.log(this.inputs);
+ //     console.log(this.inputs);
     }
     this.refreshInputs();
 
     this.node.bind('keyup', {counter: this}, function(event){
       console.log("keyup");
-      console.log(event.target);
+   //   console.log(event.target);
       event.data.counter.refreshInputs();
-      var l = messageLength(event.data.counter.inputs);
+      var l = event.data.counter.message().length;
       this.valid = (l <= 160);
       console.log("MESSAGE LENGTH: "+l+" VALID?: "+this.valid);
       // do DOM stuff
     });
+    this.node.addClass('counting');
+
+    this.message = function(){
+      var message = "";
+      console.log('messageLength');
+      //    console.log(inputs);
+      message += this.inputs[0].value; // the question text, or the confirmation 
+      if (this.inputs.length > 1){ //won't fire if only confirmation
+        var questionType = this.inputs[1].value;
+        message += textForQuestionType(questionType);
+      }
+      if (this.inputs.length > 2){ // we have options
+        console.log("OPTIONS!");
+        var options = this.inputs.splice(2);
+        options = $.map(options, function(item, index){
+          return alphabet[index] + ' ' + item.value;
+        });
+        options = options.join(separator);
+        console.log("OPTIONS: "+options);
+        message += options;
+      }
+      console.log(message);
+      return message;
+
+    }
   }
 
   $.fn.charCounter = function(){
     this.each(function(index, item){
-      console.log(item);
+//      console.log(item);
       new CharCounter(item);
     });
   };
@@ -48,42 +74,32 @@
     }
   }
   // returns the message length for a set of inputs
-  function messageLength(inputs){
-    console.log('messageLength');
-    console.log(inputs);
-    var count = inputs[0].value.length; // the question text, or the confirmation 
-    if (inputs.length > 1){ //won't fire if only confirmation
-      var questionType = inputs[1].value;
-      count += textForQuestionType(questionType);
-    }
-    if (inputs.length > 2){ // we have options
-      count += inputs.length * labelLength;
-      count += (inputs.length - 1) * paddingLength;
-      inputs.each(function(input){
-        count += input.value ? input.value.length : 0;
-      });
-    }
-
-    return count;
-  }
   // returns the additional text to be counted for each question type
   function textForQuestionType(questionType){
     switch (questionType) {
       case 'YN':
-        return 'Reply with Yes or No'.length;
+        return ' Reply with Yes or No';
       case 'MULTI':
-        return 'Reply with letter: '.length;
+        return ' Reply with letter: ';
       default:
-        return 0;
+        return '';
     }
   }
-})();
+})(jQuery);
+function refreshQuestionCounters(){
+  $($('.question-entry').splice(1).filter(function(item){
+    return !$(item).hasClass('counting');
+  })).charCounter();
+}
 
 $(document).ready(function(){
   /************* char counter stuff ******************/
-  $('.question-entry').charCounter();
+  refreshQuestionCounters();
   $('.confirmation').charCounter();
   $(document).on('insertion-callback', function(event){
+    console.log('insertion');
+    console.log(event.target);
+    refreshQuestionCounters();
     // figure out if it was a question
     // or a followup question
     
@@ -100,8 +116,8 @@ $(document).ready(function(){
   if (typeof initEditing === 'undefined') {
     initEditing = false;
   }
-  var alphabet = ['A','B','C','D','E','F','G'];
 
+  var alphabet = ['A','B','C','D','E','F','G'];
   // Javascript that fills out value tag when label is filled out
 
   // TODO THIS BREAKS!
