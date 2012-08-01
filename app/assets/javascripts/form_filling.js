@@ -34,16 +34,17 @@
       if (this.inputs.length > 1){ //won't fire if only confirmation
         var questionType = this.inputs[1].value;
         message += textForQuestionType(questionType);
-      }
-      if (this.inputs.length > 2 && questionType != "YN"){ // we have options
-        console.log("OPTIONS!");
-        var options = this.inputs.splice(2);
-        options = $.map(options, function(item, index){
-          return alphabet[index] + ' ' + item.value;
-        });
-        options = options.join(separator);
-        console.log("OPTIONS: "+options);
-        message += options;
+
+        if (this.inputs.length > 2 && questionType != "YN"){ // we have options
+          console.log("OPTIONS!");
+          var options = this.inputs.splice(2);
+          options = $.map(options, function(item, index){
+            return alphabet[index] + ' ' + item.value;
+          });
+          options = options.join(separator);
+          console.log("OPTIONS: "+options);
+          message += options;
+        }
       }
       console.log(message);
       return message;
