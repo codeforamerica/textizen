@@ -79,7 +79,7 @@
     <% end %>
     <% if !(current_user.visible_polls - current_user.created_polls - current_user.polls).empty? %> <!-- for superadmins -->
       <div class="grouptitle">
-        All Orphaned Polls
+        All Polls Without a Group
       </div>
       <table class="table pollslist">
         <% (current_user.visible_polls - current_user.created_polls - current_user.polls).each_with_index do |poll, i| %>
