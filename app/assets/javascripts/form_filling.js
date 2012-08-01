@@ -1,40 +1,41 @@
 (function($){
   var separator = " / ";
-  var label = "A ";
   var alphabet = ['A','B','C','D','E','F','G'];
 
   var CharCounter = function(node){
     this.node = $(node);
+    this.msgPreviewNode = $(this.node.find('.msg-preview'));
+    this.countNode = $(this.node.find('.msg-count'));
 
     this.refreshInputs = function(){
-
       this.inputs = inputsForQuestion(node);
-      console.log('inputs:');
- //     console.log(this.inputs);
-    }
-    this.refreshInputs();
+    };
 
-    this.node.bind('keyup', {counter: this}, function(event){
-      console.log("keyup");
-   //   console.log(event.target);
-      event.data.counter.refreshInputs();
-      var l = event.data.counter.message().length;
-      this.valid = (l <= 160);
-      console.log("MESSAGE LENGTH: "+l+" VALID?: "+this.valid);
-      // do DOM stuff
-    });
-    this.node.addClass('counting');
+    this.validate = function(){
+      var message = this.message();
+      this.valid = message.length <= 160;
+      if (this.valid){
+        this.node.removeClass('error');
+      } else {
+        this.node.addClass('error');
+      }
+      console.log("VALIDATE! "+this.valid);
+      if (this.msgPreviewNode){
+        this.msgPreviewNode.html(message);
+      }
+
+    };
+
 
     this.message = function(){
       var message = "";
-      console.log('messageLength');
-      //    console.log(inputs);
+      console.log(this.inputs);
       message += this.inputs[0].value; // the question text, or the confirmation 
       if (this.inputs.length > 1){ //won't fire if only confirmation
         var questionType = this.inputs[1].value;
         message += textForQuestionType(questionType);
       }
-      if (this.inputs.length > 2){ // we have options
+      if (this.inputs.length > 2 && questionType != "YN"){ // we have options
         console.log("OPTIONS!");
         var options = this.inputs.splice(2);
         options = $.map(options, function(item, index){
@@ -47,8 +48,17 @@
       console.log(message);
       return message;
 
-    }
-  }
+    };
+
+    this.refreshInputs();
+
+    this.node.on('keyup change', {counter: this}, function(event){
+      console.log("keyup");
+      event.data.counter.validate();
+      event.data.counter.refreshInputs();
+    });
+    this.node.addClass('counting');
+  };
 
   $.fn.charCounter = function(){
     this.each(function(index, item){
@@ -60,12 +70,10 @@
   function inputsForQuestion(question){
     question = $(question);
     console.log('inputsForQuestion:');
-    console.log(question);
     if (question.hasClass('confirmation')){
-      return $(question);
+      return $(question).find('textarea');
     } else {
       var inputs = question.find('textarea,select,input:visible');
-      console.log(inputs);
       return $(inputs);
       // if confirmation, inputs = [confirmation]
       // if open ended or yes/no question inputs = [question, type]
@@ -86,6 +94,7 @@
     }
   }
 })(jQuery);
+// function to call to add charCounter to any non-counted questions
 function refreshQuestionCounters(){
   $($('.question-entry').splice(1).filter(function(item){
     return !$(item).hasClass('counting');

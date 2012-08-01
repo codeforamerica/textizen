@@ -165,3 +165,8 @@
 abbr[title='required'] {
   display: none;
 }
+
+
+.question-entry.error { /* for inputs with too many characters */
+  border: 1px solid #f00;
+}
