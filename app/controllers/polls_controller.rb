@@ -34,7 +34,7 @@ class PollsController < ApplicationController
   # GET /polls/new
   # GET /polls/new.json
   def new
-    @poll = Poll.new
+    @poll = Poll.new(:end_date => Time.now + 2.months)
     if current_user.role?(:superadmin)
       @groups = Group.all
     else
