@@ -1,6 +1,7 @@
-(function($){
+$(document).ready(function(){
   var separator = " / ";
   var alphabet = ['A','B','C','D','E','F','G'];
+  var submitBtn = $('input[type=submit]');
 
   var CharCounter = function(node){
     this.node = $(node);
@@ -15,9 +16,15 @@
       var message = this.message();
       this.valid = message.length <= 160;
       if (this.valid){
-        this.node.removeClass('error');
+        this.node.find('.control-group').removeClass('error');
+        this.countNode.removeClass('error');
+        submitBtn.attr('disabled', false);
+        submitBtn.removeClass('disabled');
       } else {
-        this.node.addClass('error');
+        this.node.find('.control-group').addClass('error');
+        this.countNode.addClass('error');
+        submitBtn.attr('disabled', true);
+        submitBtn.addClass('disabled');
       }
       console.log("VALIDATE! "+this.valid);
       if (this.msgPreviewNode){
@@ -67,7 +74,7 @@
 
   $.fn.charCounter = function(){
     this.each(function(index, item){
-//      console.log(item);
+      //      console.log(item);
       new CharCounter(item);
     });
   };
@@ -98,15 +105,13 @@
         return '';
     }
   }
-})(jQuery);
-// function to call to add charCounter to any non-counted questions
-function refreshQuestionCounters(){
-  $($('.question-entry').splice(1).filter(function(item){
-    return !$(item).hasClass('counting');
-  })).charCounter();
-}
+  // function to call to add charCounter to any non-counted questions
+  function refreshQuestionCounters(){
+    $($('.question-entry').splice(1).filter(function(item){
+      return !$(item).hasClass('counting');
+    })).charCounter();
+  }
 
-$(document).ready(function(){
   /************* char counter stuff ******************/
   refreshQuestionCounters();
   $('.confirmation').charCounter();
@@ -116,12 +121,12 @@ $(document).ready(function(){
     refreshQuestionCounters();
     // figure out if it was a question
     // or a followup question
-    
-//    $(event.target).charCounter();
+
+    //    $(event.target).charCounter();
     // or an option
     // or a followup option
 
-//    $(event.target).getParentQuestion().optionAdded();
+    //    $(event.target).getParentQuestion().optionAdded();
 
   });
 
@@ -219,7 +224,7 @@ $(document).ready(function(){
 
 
     if (value == "YN") {
-      
+
       if (!initEditing){
         // Clicks the add_option button twice
         parent_container_entry.find(".add-option-button").click();
@@ -252,7 +257,7 @@ $(document).ready(function(){
   $(".simple_form").on("change", "select.followup-type", function(event) {
 
     // Wipes existing options TODO: hide, instead of remove?
-    
+
     if (!initEditing){ // make sure it's not just the /edit UI refresh
       $(this).parents(".nested-fields").find(".remove-follow-up-option").click();
     }
@@ -275,12 +280,12 @@ $(document).ready(function(){
       parent_container_entry.find(".followup-option-field .followup-option-value").first().addClass("disabled yes-no").val("yes");
       parent_container_entry.find(".followup-option-field .followup-option-value").last().addClass("disabled yes-no").val("no");
       // Removes "remove option" button
-//      parent_container_entry.find(".followup-option-field a.remove_fields").hide();
+      //      parent_container_entry.find(".followup-option-field a.remove_fields").hide();
     }
     else if (value == "MULTI") {
       // Show "add option" button
       parent_container_entry.find(".add-followup-option-button").show();	
-      
+
       if (!initEditing){
         // Clicks the add_option button twice 
         parent_container_entry.find(".add-followup-option-button").click();

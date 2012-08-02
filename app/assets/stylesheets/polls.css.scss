@@ -170,3 +170,18 @@ abbr[title='required'] {
 .question-entry.error { /* for inputs with too many characters */
   border: 1px solid #f00;
 }
+
+.msg-preview {
+  float: right;
+  clear: right;
+  width: 150px;
+  height: 40px;
+  margin-right: 5px;
+  font-family: monospace;
+}
+.msg-count {
+  float: right;
+}
+.msg-count.error {
+  color: #B94A48;
+}
