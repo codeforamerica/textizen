@@ -139,6 +139,10 @@ h3{
 	font-size: 107%;
 }
 
+.inline-list li{
+	font-size: 100%;
+}
+
 .sidebar{
 	margin-top: 3.3em;
 }
