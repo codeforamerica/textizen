@@ -45,7 +45,10 @@
       <h3>Settings</h3>
       <div class="item-container">
         <div class= "nested-fields spacing">
-          <%= f.input :confirmation, :placeholder => "Thanks for your feedback! More info: [your organization's website", :input_html => {:rows => 3, :cols => 20 }, :wrapper_html=>{:class => "confirmation"} %>
+          <div class = "confirmation">
+            <div class="msg-count"></div>
+            <%= f.input :confirmation, :placeholder => "Thanks for your feedback! More info: [your organization's website", :input_html => {:rows => 3, :cols => 20 } %>
+          </div>
           <%= f.input :title, :label => "Nickname", :hint => "Only for reports. Example: \"15 responses this week to your poll on ________.\"" %>
 
           <div class="field" style="display:none;">
