@@ -65,7 +65,7 @@
                 </div>
               </div>
               <%= f.input :group_ids, :label => "Group", :selected => (params[:group] if params[:group]), :collection => @groups, :include_blank => false, :input_html => {:multiple => false} %>
-              <%= f.input :phone, :hint => "<input type='checkbox' name='auto_assign' onClick='togglePhone()' class='alignbox'></input> Override?", :disabled=>true %>
+              <%= f.input :phone, :placeholder => "Will be auto assigned (215)", :hint => "<input type='checkbox' name='auto_assign' onClick='togglePhone()' class='alignbox'></input> Override?", :disabled=>true %>
           </fieldset>
           </div>
         </div>
