@@ -3,15 +3,17 @@ $(document).ready(function(){
   var alphabet = ['A','B','C','D','E','F','G'];
   var submitBtn = $('input[type=submit]');
 
+  // CharCounter object to be created for each instance of a char counter
   var CharCounter = function(node){
-    this.node = $(node);
-    this.msgPreviewNode = $(this.node.find('.msg-preview'));
-    this.countNode = $(this.node.find('.msg-count'));
+    this.node = $(node); // the question/confirmation node with child inputs to count
+    this.msgPreviewNode = $(this.node.find('.msg-preview')[0]); // the node to put the preview stuff
+    this.countNode = $(this.node.find('.msg-count')[0]);
 
     this.refreshInputs = function(){
-      this.inputs = inputsForQuestion(node);
+      this.inputs = inputsForQuestion(node); // call this to pull in any newly added options
     };
 
+    // validate the form, checking we're not over 160 and toggling the proper error classes
     this.validate = function(){
       var message = this.message();
       this.valid = message.length <= 160;
@@ -37,7 +39,7 @@ $(document).ready(function(){
 
     };
 
-
+    // construct the sms messsage from any child inputs
     this.message = function(){
       var message = "";
       console.log(this.inputs);
@@ -69,7 +71,7 @@ $(document).ready(function(){
       event.data.counter.validate();
       event.data.counter.refreshInputs();
     });
-    this.node.addClass('counting');
+    this.node.removeClass('counting');
   };
 
   $.fn.charCounter = function(){
@@ -84,13 +86,14 @@ $(document).ready(function(){
     console.log('inputsForQuestion:');
     if (question.hasClass('confirmation')){
       return $(question).find('textarea');
-    } else {
-      var inputs = question.find('textarea,select,input:visible');
-      return $(inputs);
+    } else if (question.hasClass('question-entry')){
+      return $(question.find('.question-input,.question-type,.option-text'));
       // if confirmation, inputs = [confirmation]
       // if open ended or yes/no question inputs = [question, type]
       // if multi inputs = [question, type, options]
 
+    } else {
+      return $(question.find('.followup-input,.followup-type,.followup-option-text'));
     }
   }
   // returns the message length for a set of inputs
@@ -105,14 +108,14 @@ $(document).ready(function(){
         return '';
     }
   }
-  // function to call to add charCounter to any non-counted questions
+  // function to call to add charCounter to any non-counted questions, excluding the first
   function refreshQuestionCounters(){
-    $($('.question-entry').splice(1).filter(function(item){
-      return !$(item).hasClass('counting');
-    })).charCounter();
+    
+    $($('.question-entry.not-counted').splice(1)).charCounter();
+    $('.followup-field.not-counted').charCounter();
   }
 
-  /************* char counter stuff ******************/
+  /************* char counter initialization stuff ******************/
   refreshQuestionCounters();
   $('.confirmation').charCounter();
   $(document).on('insertion-callback', function(event){
@@ -139,7 +142,7 @@ $(document).ready(function(){
   var alphabet = ['A','B','C','D','E','F','G'];
   // Javascript that fills out value tag when label is filled out
 
-  // TODO THIS BREAKS!
+  // TODO THIS BREAKS! ???????? 
   $(document).on("click", "a.add-followup-dummy", function(event){
     $(this).parents(".option-field").find(".add-followup-button").click();
     $(this).parents(".question-entry").addClass("has-followup");
