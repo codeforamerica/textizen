@@ -19,6 +19,11 @@
 
 .optionslist{
 	list-style-type:none;
+	margin-left:0;
+}
+
+.questionindent{
+	margin-left: 22px;
 }
 
 .counterdash{
