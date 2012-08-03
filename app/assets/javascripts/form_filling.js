@@ -34,7 +34,7 @@ $(document).ready(function(){
       }
 
       if (this.countNode){
-        this.countNode.html("<span class='msg-count-status'>" + message.length + "</span>/160 chars");
+        this.countNode.html("<span class='msg-count-status'>" + message.length + "</span>/160");
       }
 
     };

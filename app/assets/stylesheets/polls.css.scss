@@ -137,7 +137,7 @@
   }
 }
 
-.close {
+.remove-follow-up {
     background: none repeat scroll 0 0 transparent;
     border: 0 none;
     cursor: pointer;
@@ -199,6 +199,10 @@ abbr[title='required'] {
   position: absolute;
   color: #888888;
   font-size: 0.9em;
+}
+
+.msg-count-confirmation{
+  margin-top: 61px;
 }
 
 .msg-count.error {

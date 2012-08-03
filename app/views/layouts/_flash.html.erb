@@ -1,18 +1,18 @@
 <% if flash[:notice] %>
   <div class="alert alert-info fade in" data-alert="true">
-    <a class ="close" data-dismiss="alert" href="#">x</a>
-    <p><%= flash[:notice] %></p>
+    <a class ="close" data-dismiss="alert" href="#">×</a>
+    <%= flash[:notice] %>
   </div>
 <% end %>
 <% if flash[:warning] %>
   <div class="alert fade in" data-alert="true">
-    <a class ="close" data-dismiss="alert" href="#">x</a>
+    <a class ="close" data-dismiss="alert" href="#">×</a>
     <p><%= flash[:warning] %></p>
   </div>
 <% end %>
 <% if flash[:error] || flash[:alert] %>
   <div class="alert alert-error fade in" data-alert="true">
-    <a class ="close" data-dismiss="alert" href="#">x</a>
+    <a class ="close" data-dismiss="alert" href="#">×</a>
     <% if flash[:error] %>
       <p><%= flash[:error] %></p>
     <% else %>
@@ -20,7 +20,3 @@
     <% end %>
   </div>
 <% end %>
-
-
-
-

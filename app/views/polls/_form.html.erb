@@ -46,8 +46,7 @@
       <div class="item-container">
         <div class= "nested-fields spacing">
           <div class = "confirmation">
-            <div class="msg-count"></div>
-            <%= f.input :confirmation, :placeholder => "Thanks for your feedback! More info: [your org's website]", :input_html => {:rows => 3, :cols => 20 } %>
+            <%= f.input :confirmation, :placeholder => "Thanks for your feedback! More info: [your org's website]", :input_html => {:rows => 3, :cols => 20 }, :hint => "<div class='msg-count msg-count-confirmation'></div>" %>
           </div>
           <%= f.input :title, :label => "Nickname", :hint => "Only for reports. Example: \"15 responses this week to your poll on ________.\"" %>
 
