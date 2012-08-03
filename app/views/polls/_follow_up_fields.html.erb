@@ -1,7 +1,7 @@
 <div class="nested-fields followup-field not-counted">
-  <div class="msg-count"></div>
-  <div class="msg-preview"></div>
+  <!--<div class="msg-preview"></div> -->
   <%= f.input :text, :as => :text, :label => 'Followup', :label_html => { :class => "label-bold" }, :input_html => { :class => "input-xlarge followup-input", :rows => 2 }, :hint => (link_to_remove_association '×', f, :class => 'close remove-follow-up') %>
+  <div class="msg-count msg-count-followup"></div>
   <%= f.input :question_type, :label => "Format" , :collection=>[['Open','OPEN'],['Multiple Choice','MULTI'],['Yes / No', 'YN']], :include_blank => false, :disabled => (!@poll.new_record? and !@poll.responses.empty?), :input_html => { :class => "followup-type span2" }%>
 
   <div class="options">	
