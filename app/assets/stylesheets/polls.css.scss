@@ -78,7 +78,8 @@
       }
       .add-followup-dummy {  
         /* Fake button for layout purposes. Triggers add-followup-button */
-
+        margin-top: 1px;
+        margin-right: 7px;
       }
       .add-followup-button {
         display:none;
