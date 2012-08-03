@@ -182,12 +182,22 @@ abbr[title='required'] {
 
 .msg-count {
   margin-top: 43px;
+  .msg-count-status {
+  color: #009933;
+}
 }
 
-.msg-count-ok {
-  color:#009933;
+.msg-count-followup {
+  margin-left: 443px;
+  margin-top: -28px;
+  position: absolute;
+  color: #888888;
+  font-size: 0.9em;
 }
 
 .msg-count.error {
   color: #B94A48;
+  .msg-count-status {
+  color: #B94A48;
+}
 }
