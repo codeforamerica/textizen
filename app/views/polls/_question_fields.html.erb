@@ -13,8 +13,8 @@
     <%= f.simple_fields_for :options, :wrapper => "bootstrap" do |option| %>
       <%= render 'option_fields', :f => option %>
     <% end %>
-
-    <%= link_to_add_association 'Add option', f, :options, :"data-association-insertion-method" => :append, :class => "controls add-option-button"%>
     
   </div>
+    <%= link_to_add_association 'Add option', f, :options, :"data-association-insertion-method" => :append, :class => "controls add-option-button"%>
+
 </div>
