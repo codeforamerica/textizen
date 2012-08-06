@@ -73,7 +73,7 @@ class ResponsesController < ApplicationController
       puts 'sending next question'
       send_question(qnext)
     else
-      say(poll.confirmation || "Thank you for responding to our poll on %s. More info: phila2035.org" % @poll.title)
+      say(poll.confirmation || "Thank you for responding to our poll on %s." % @poll.title)
     end
   end
   
