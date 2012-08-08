@@ -63,7 +63,11 @@
                   <%= f.date_select(:end_date, {:use_short_month => 1, :order => [:month, :day, :year]}, {:class => "span1"}) %>
                 </div>
               </div>
-              <%= f.input :group_ids, :label => "Group", :selected => (params[:group] if params[:group]), :collection => @groups, :include_blank => false, :input_html => {:multiple => false} %>
+              <% if params[:group] %>
+                <%= f.input :group_ids, :label => "Group", :selected => params[:group], :collection => @groups, :include_blank => false, :input_html => {:multiple => false} %>
+              <% else %>
+                <%= f.input :group_ids, :label => "Group", :collection => @groups, :include_blank => false, :input_html => {:multiple => false} %>
+              <% end %>
               <%= f.input :phone, :placeholder => "Will be auto assigned (215)", :hint => "<input type='checkbox' name='auto_assign' onClick='togglePhone()' class='alignbox'></input> Override?", :disabled=>true %>
           </fieldset>
           </div>
