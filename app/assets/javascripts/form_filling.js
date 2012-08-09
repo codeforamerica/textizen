@@ -139,7 +139,11 @@ $(document).ready(function(){
     initEditing = false;
   }
 
-  var alphabet = ['A','B','C','D','E','F','G'];
+  if (initEditing === false) {
+    console.log("not editing");
+    $('#add_qn_button').click();
+  }
+
   // Javascript that fills out value tag when label is filled out
 
   // TODO THIS BREAKS! ???????? 

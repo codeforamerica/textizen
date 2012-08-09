@@ -13,7 +13,6 @@
       $('select.question-type').trigger('change');
       $('select.followup-type').trigger('change');
       initEditing = false;
-
     });
   <% end %>
 </script>
@@ -35,9 +34,6 @@
         <div class="form-actions">
           <%= link_to_add_association '+ Add Question', f, :questions, :class => "btn btn-large btn-success", :id => 'add_qn_button' %>
           <!-- Javascript to "click" the add question button (hackaround!) -->
-          <script type="text/javascript">
-            document.getElementById('add_qn_button').click();
-          </script>
         </div>
       </div>
 
