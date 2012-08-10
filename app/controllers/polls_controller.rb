@@ -144,8 +144,6 @@ class PollsController < ApplicationController
     end
   end
 
-  def
-
   def export_to_csv
     send_data @poll.to_csv,
       :type => 'text/csv; charset=iso-8859-1; header=present',
