@@ -120,6 +120,22 @@ class PollsController < ApplicationController
     #flash[:notice] = "ended poll"
   end
 
+  def clear_responses
+    @poll = Poll.find(params[:id])
+
+    respond_to do |format|
+      if @poll.responses.each(&:destroy)
+        format.html { redirect_to @poll, notice: 'Responses successfully cleared.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to @poll, error: 'Error clearing responses :(' }
+        format.json { render json: @poll.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def
+
   def export_to_csv
     send_data @poll.to_csv,
       :type => 'text/csv; charset=iso-8859-1; header=present',
