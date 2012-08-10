@@ -18,12 +18,12 @@ $(document).ready(function(){
       var message = this.message();
       this.valid = message.length <= 160;
       if (this.valid){
-        this.node.find('.control-group').removeClass('error');
+        //this.node.find('.control-group').removeClass('error');
         this.countNode.removeClass('error');
         submitBtn.attr('disabled', false);
         submitBtn.removeClass('disabled');
       } else {
-        this.node.find('.control-group').addClass('error');
+        //this.node.find('.control-group').addClass('error');
         this.countNode.addClass('error');
         submitBtn.attr('disabled', true);
         submitBtn.addClass('disabled');
@@ -66,11 +66,13 @@ $(document).ready(function(){
 
     this.refreshInputs();
 
-    this.node.on('keyup change', {counter: this}, function(event){
-      //console.log("keyup");
+    // setup event handlers to count updates when ui changes
+    this.node.on('keyup change removal-callback insertion-callback', {counter: this}, function(event){
       event.data.counter.validate();
       event.data.counter.refreshInputs();
     });
+
+    // mark as counting so we don't add another char counter
     this.node.removeClass('counting');
   };
 
@@ -87,13 +89,13 @@ $(document).ready(function(){
     if (question.hasClass('confirmation')){
       return $(question).find('textarea');
     } else if (question.hasClass('question-entry')){
-      return $(question.find('.question-input,.question-type,.option-text'));
+      return $(question.find('.question-input,.question-type,.option-text:visible'));
       // if confirmation, inputs = [confirmation]
       // if open ended or yes/no question inputs = [question, type]
       // if multi inputs = [question, type, options]
 
     } else {
-      return $(question.find('.followup-input,.followup-type,.followup-option-text'));
+      return $(question.find('.followup-input,.followup-type,.followup-option-text:visible'));
     }
   }
   // returns the message length for a set of inputs
@@ -122,14 +124,6 @@ $(document).ready(function(){
     //console.log('insertion');
     //console.log(event.target);
     refreshQuestionCounters();
-    // figure out if it was a question
-    // or a followup question
-
-    //    $(event.target).charCounter();
-    // or an option
-    // or a followup option
-
-    //    $(event.target).getParentQuestion().optionAdded();
 
   });
 
@@ -308,7 +302,7 @@ $(document).ready(function(){
   } else {
     console.log('editing');
     $('.followup-field').trigger('insertion-callback');
-    $('.option-text').trigger('insertion-callback');    
+    $('.option-text').trigger('insertion-callback');
     $('select.question-type').trigger('change');
     $('select.followup-type').trigger('change');
     initEditing = false;
