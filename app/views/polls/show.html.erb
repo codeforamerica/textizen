@@ -62,13 +62,28 @@
       <div class="settingstext"><%= @poll.running? ? 'Running' : 'Ended' %></div>
 
 
-      <div class="btngroup edit-poll">
+      <div class="btn-toolbar btngroup edit-poll">
         <!--<input type="button" class="btn btn-danger" value="Close poll">-->
+        <div class="btn-group"><%= link_to 'Edit', edit_poll_path(@poll), :class => "btn btn-info" %></div>
+
         <% if @poll.running? %>
-          <%= link_to 'End poll', end_poll_path(@poll), :class => "btn btn-danger", :confirm => 'Are you sure?', :method => :put %>
+          <div class="btn-group">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+              Dangerous
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><%= link_to 'End poll', end_poll_path(@poll), :confirm => 'Are you sure?', :method => :put %></li>
+              <li class="divider"></li>
+              <li><a href="">Clear all responses</a></li>
+              <li><%= link_to 'Trash', @poll, confirm: 'Are you sure?', method: :delete %></li>
+            </ul>
+          </div>
+        <% else %>
+          <div class="btn-group"><%= link_to 'Trash', @poll, confirm: 'Are you sure?', method: :delete, :class => "btn" %></div>
         <% end %>
-        <%= link_to 'Edit', edit_poll_path(@poll), :class => "btn" %>
-        &nbsp;<%= link_to 'Trash', @poll, confirm: 'Are you sure?', method: :delete %>
+
+        <!--&nbsp;<%= link_to 'Trash', @poll, confirm: 'Are you sure?', method: :delete %>-->
       </div>
 
     </div>
