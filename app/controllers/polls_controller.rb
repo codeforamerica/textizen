@@ -122,9 +122,10 @@ class PollsController < ApplicationController
 
   def clear_responses
     @poll = Poll.find(params[:id])
+    @responses = @poll.responses + @poll.follow_up_responses
 
     respond_to do |format|
-      if @poll.responses.each(&:destroy)
+      if @responses.each(&:destroy)
         format.html { redirect_to @poll, notice: 'Responses successfully cleared.' }
         format.json { head :no_content }
       else
