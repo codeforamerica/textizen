@@ -56,7 +56,12 @@
 
 .settings .btngroup{
 	position:absolute;
-	bottom:1em;
+	bottom:0.4em;
+	margin-bottom:0;
+}
+
+.btn-group{
+	margin-right:-4px;
 }
 
 .caption{
