@@ -142,6 +142,9 @@ $(document).ready(function(){
   if (initEditing === false) {
     console.log("not editing");
     $('#add_qn_button').click();
+  } else { // editing 
+
+
   }
 
   // Javascript that fills out value tag when label is filled out
