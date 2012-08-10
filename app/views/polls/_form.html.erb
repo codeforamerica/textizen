@@ -64,7 +64,7 @@
               <% else %>
                 <%= f.input :group_ids, :label => "Group", :collection => @groups, :include_blank => false, :input_html => {:multiple => false} %>
               <% end %>
-              <%= f.input :phone, :placeholder => "Will be auto assigned (215)", :hint => "<input type='checkbox' name='auto_assign' onClick='togglePhone()' class='alignbox'></input> Override?", :disabled=>true %>
+              <%= f.input :phone, :placeholder => "Will be auto assigned", :hint => "<input type='checkbox' name='auto_assign' onClick='togglePhone()' class='alignbox'></input> Override?", :disabled=>true %>
           </fieldset>
           </div>
         </div>
