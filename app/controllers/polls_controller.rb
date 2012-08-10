@@ -68,6 +68,11 @@ class PollsController < ApplicationController
         format.html { redirect_to @poll, notice: 'Poll was successfully created.' }
         format.json { render json: @poll, status: :created, location: @poll }
       else
+        if current_user.role?(:superadmin)
+          @groups = Group.all
+        else
+          @groups = current_user.groups
+        end
         puts @poll.errors.full_messages
         format.html { render action: "new" }
         format.json { render json: @poll.errors, status: :unprocessable_entity }
@@ -85,6 +90,11 @@ class PollsController < ApplicationController
         format.html { redirect_to @poll, notice: 'Poll was successfully updated.' }
         format.json { head :no_content }
       else
+        if current_user.role?(:superadmin)
+          @groups = Group.all
+        else
+          @groups = current_user.groups
+        end
         puts @poll.errors.full_messages
         format.html { render action: "edit" }
         format.json { render json: @poll.errors, status: :unprocessable_entity }
