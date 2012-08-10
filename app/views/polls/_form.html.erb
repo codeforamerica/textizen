@@ -25,11 +25,13 @@
   <div class="row">
     <div class="span8">
 
-      <div class="alert" style="margin-top: 0;">
-        <a class="close" data-dismiss="alert" href="#">×</a>
-        <strong>Warning!</strong>
-        You already have responses for this poll, so you can't change an existing question's type unless you <%= link_to 'clear all responses', clear_responses_poll_path(@poll), :confirm => 'Are you sure?!', :method => :put %> first. You can still make most other edits, though.
-      </div>
+      <% if (!@poll.new_record? and !@poll.responses.empty?) %>
+        <div class="alert" style="margin-top: 0;">
+          <a class="close" data-dismiss="alert" href="#">×</a>
+          <strong>Warning!</strong>
+          You already have responses for this poll, so you can't change an existing question's type or remove options unless you <%= link_to 'clear all responses', clear_responses_poll_path(@poll), :confirm => 'Are you sure?!', :method => :put %> first. You can still make most other edits, though.
+        </div>
+      <% end %>
 
       <h3>Questions</h3>
       <div class="item-container">
