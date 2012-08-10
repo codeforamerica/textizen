@@ -13,6 +13,7 @@ class Question < ActiveRecord::Base
 
   validates :question_type, :inclusion => { :in => %w(MULTI OPEN YN), :message => "%{value} is not a valid question type" }  
   validates_presence_of :question_type#, :poll_id
+  validates_presence_of :text
 
   def get_follow_up
     if self.options.length > 0
