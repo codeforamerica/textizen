@@ -10,6 +10,7 @@ TxtyourcityRails::Application.routes.draw do
 
   resources :polls do
     put :end, :on => :member # for polls/3/end?
+    put :clear_responses, :on => :member # for polls/3/nuke
     collection do
       post "receive_message"
     end
