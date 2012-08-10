@@ -129,7 +129,7 @@ class PollsController < ApplicationController
         format.html { redirect_to @poll, notice: 'Responses successfully cleared.' }
         format.json { head :no_content }
       else
-        format.html { redirect_to @poll, error: 'Error clearing responses :(' }
+        format.html { redirect_to @poll, notice: 'Error clearing responses :(' }
         format.json { render json: @poll.errors, status: :unprocessable_entity }
       end
     end

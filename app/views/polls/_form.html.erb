@@ -28,7 +28,7 @@
       <div class="alert" style="margin-top: 0;">
         <a class="close" data-dismiss="alert" href="#">×</a>
         <strong>Warning!</strong>
-        You already have responses for this poll, so you can't change an existing question's type unless you clear all responses (from the <a href="">PLACEHOLDER poll page</a>) first. You can still make most other edits, though.
+        You already have responses for this poll, so you can't change an existing question's type unless you <%= link_to 'clear all responses', clear_responses_poll_path(@poll), :confirm => 'Are you sure?!', :method => :put %> first. You can still make most other edits, though.
       </div>
 
       <h3>Questions</h3>
