@@ -25,6 +25,12 @@
   <div class="row">
     <div class="span8">
 
+      <div class="alert" style="margin-top: 0;">
+        <a class="close" data-dismiss="alert" href="#">×</a>
+        <strong>Warning!</strong>
+        You already have responses for this poll, so you can't change a question's type unless you clear all responses (from the <a href="">PLACEHOLDER poll page</a>) first. You can still make most other edits, though.
+      </div>
+
       <h3>Questions</h3>
       <div class="item-container">
         <%= f.simple_fields_for :questions do |question| %>
