@@ -1,19 +1,11 @@
 <script>
   function togglePhone(){
-    console.log('toggle');
     var phoneInput = $('#poll_phone')
     phoneInput.prop('disabled', function(i,v){ return !v; });
     phoneInput.toggleClass('disabled');
   }
-  <% if @editing %>
+  <% unless @poll.new_record? %>
     var initEditing = true;
-    $(document).ready(function(){
-      console.log('editing');
-      $('.followup-field').trigger('insertion-callback');
-      $('select.question-type').trigger('change');
-      $('select.followup-type').trigger('change');
-      initEditing = false;
-    });
   <% end %>
 </script>
 

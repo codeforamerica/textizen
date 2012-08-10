@@ -28,7 +28,7 @@ $(document).ready(function(){
         submitBtn.attr('disabled', true);
         submitBtn.addClass('disabled');
       }
-      console.log("VALIDATE! "+this.valid);
+      //console.log("VALIDATE! "+this.valid);
       if (this.msgPreviewNode){
         this.msgPreviewNode.html(message);
       }
@@ -42,24 +42,24 @@ $(document).ready(function(){
     // construct the sms messsage from any child inputs
     this.message = function(){
       var message = "";
-      console.log(this.inputs);
+      //console.log(this.inputs);
       message += this.inputs[0].value; // the question text, or the confirmation 
       if (this.inputs.length > 1){ //won't fire if only confirmation
         var questionType = this.inputs[1].value;
         message += textForQuestionType(questionType);
 
         if (this.inputs.length > 2 && questionType != "YN"){ // we have options
-          console.log("OPTIONS!");
+          //console.log("OPTIONS!");
           var options = this.inputs.splice(2);
           options = $.map(options, function(item, index){
             return alphabet[index] + ' ' + item.value;
           });
           options = options.join(separator);
-          console.log("OPTIONS: "+options);
+          //console.log("OPTIONS: "+options);
           message += options;
         }
       }
-      console.log(message);
+      //console.log(message);
       return message;
 
     };
@@ -67,7 +67,7 @@ $(document).ready(function(){
     this.refreshInputs();
 
     this.node.on('keyup change', {counter: this}, function(event){
-      console.log("keyup");
+      //console.log("keyup");
       event.data.counter.validate();
       event.data.counter.refreshInputs();
     });
@@ -83,7 +83,7 @@ $(document).ready(function(){
 
   function inputsForQuestion(question){
     question = $(question);
-    console.log('inputsForQuestion:');
+    //console.log('inputsForQuestion:');
     if (question.hasClass('confirmation')){
       return $(question).find('textarea');
     } else if (question.hasClass('question-entry')){
@@ -119,8 +119,8 @@ $(document).ready(function(){
   refreshQuestionCounters();
   $('.confirmation').charCounter();
   $(document).on('insertion-callback', function(event){
-    console.log('insertion');
-    console.log(event.target);
+    //console.log('insertion');
+    //console.log(event.target);
     refreshQuestionCounters();
     // figure out if it was a question
     // or a followup question
@@ -139,13 +139,6 @@ $(document).ready(function(){
     initEditing = false;
   }
 
-  if (initEditing === false) {
-    console.log("not editing");
-    $('#add_qn_button').click();
-  } else { // editing 
-
-
-  }
 
   // Javascript that fills out value tag when label is filled out
 
@@ -305,4 +298,19 @@ $(document).ready(function(){
     else if (value == "OPEN") {
     }
   });
+
+
+
+ /** INITIALIZATION STUFF **/ 
+  if (initEditing === false && $('.question-entry').length === 0) { // make sure we're not editing or failing validation with saved stuff
+    console.log("not editing");
+    $('#add_qn_button').click();
+  } else {
+    console.log('editing');
+    $('.followup-field').trigger('insertion-callback');
+    $('.option-text').trigger('insertion-callback');    
+    $('select.question-type').trigger('change');
+    $('select.followup-type').trigger('change');
+    initEditing = false;
+  }
 });
