@@ -209,14 +209,15 @@ $(document).ready(function(){
 
     // Wipes existing options TODO: hide, instead of remove?
 
+    var parent_container_entry = $(this).parents(".question-entry");
+
     if (!initEditing){
-      $(this).parents(".nested-fields").find(".option-field").remove();
+      parent_container_entry.find(".help-inline a.remove_fields").click(); // remove existing options using the remove field button
     }
     $(this).parents(".question-entry").removeClass("has-followup");
 
     var value = $(this).val();
 
-    var parent_container_entry = $(this).parents(".question-entry");
     parent_container_entry.find(".add-option-button").hide();	
 
 
@@ -227,11 +228,13 @@ $(document).ready(function(){
         parent_container_entry.find(".add-option-button").click();
         parent_container_entry.find(".add-option-button").click();	
       }
+      var option_texts = parent_container_entry.find(".option-field .option-text");
+      var option_values = parent_container_entry.find(".option-field .option-value");
       // Pre-fills out information, sets class to disabled
-      parent_container_entry.find(".option-field .option-text").first().addClass("disabled yes-no").val("Yes");
-      parent_container_entry.find(".option-field .option-value").first().addClass("disabled yes-no").val("yes");
-      parent_container_entry.find(".option-field .option-text").last().addClass("disabled yes-no").val("No");
-      parent_container_entry.find(".option-field .option-value").last().addClass("disabled yes-no").val("no");
+      $(option_texts[option_texts.length - 2]).addClass("disabled yes-no").val("Yes");
+      $(option_values[option_values.length - 2]).addClass("yes-no").val("yes");
+      option_texts.last().addClass("disabled yes-no").val("No");
+      option_values.last().addClass("yes-no").val("no");
 
       // Removes "remove option" button
       parent_container_entry.find(".help-inline a.remove_fields").hide();
