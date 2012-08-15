@@ -147,7 +147,7 @@ $(document).ready(function(){
   $(".item-container").on("insertion-callback after-removal-callback", ".question-entry", function (event){
     var entry = $(this);
 
-    if (entry.find(".followup-field").length === 0 || entry.find(".followup-field").is(":hidden")){ // second piece is for deleted followups when editing an existing poll
+    if (entry.find(".followup-field:visible").length === 0){ // second piece is for deleted followups when editing an existing poll
       entry.removeClass("has-followup");
     } else {
       entry.addClass("has-followup");

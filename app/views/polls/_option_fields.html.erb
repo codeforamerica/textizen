@@ -1,7 +1,7 @@
 <div class="nested-fields option-field">
 
 <%= f.input :text, :label => false, :input_html => {:class => 'option-text'},
-  :hint => (@poll.new_record? or @poll.responses.empty?) ? link_to_remove_association('×', f, :class => 'close deleter') : '' + link_to("Add followup", '#', :class => "btn btn-mini add-followup-dummy") %>
+  :hint => ((@poll.new_record? or @poll.responses.empty?) ? link_to_remove_association('×', f, :class => 'close deleter') : '') + link_to("Add followup", '#', :class => "btn btn-mini add-followup-dummy") %>
 
   <%= f.input :value, :label => 'Option value', :as => :hidden, :input_html => {:class => 'option-value'} %>
 
