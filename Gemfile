@@ -42,6 +42,7 @@ group :test, :development do
   gem 'shoulda'
   gem 'faker'
   gem 'simplecov'
+  gem 'foreman'
 end
 
 group :test do
