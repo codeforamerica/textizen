@@ -273,12 +273,14 @@ $(document).ready(function(){
         parent_container_entry.find(".add-followup-option-button").click();
         parent_container_entry.find(".add-followup-option-button").click();	
       }
+      var followup_option_texts = parent_container_entry.find(".followup-option-field .followup-option-text");
+      var followup_option_values = parent_container_entry.find(".followup-option-field .followup-option-value");
       // Pre-fills out information, sets class to disabled
-      parent_container_entry.find(".followup-option-field .followup-option-text").first().addClass("disabled yes-no").val("Yes");
-      parent_container_entry.find(".followup-option-field .followup-option-text").last().addClass("disabled yes-no").val("No");
+      $(followup_option_texts[followup_option_texts.length - 2]).addClass("disabled yes-no").val("Yes");
+      $(followup_option_values[followup_option_values.length - 2]).addClass("yes-no").val("yes");
+      followup_option_texts.last().addClass("disabled yes-no").val("No");
+      followup_option_values.last().addClass("yes-no").val("no");
 
-      parent_container_entry.find(".followup-option-field .followup-option-value").first().addClass("disabled yes-no").val("yes");
-      parent_container_entry.find(".followup-option-field .followup-option-value").last().addClass("disabled yes-no").val("no");
       // Removes "remove option" button
       //      parent_container_entry.find(".followup-option-field a.remove_fields").hide();
     }
