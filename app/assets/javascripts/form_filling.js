@@ -170,12 +170,15 @@ $(document).ready(function(){
       });
 
       // refresh all prepended label values
+      var visibleCount = 0;
+      var optionValues = entry.find(".option-field .option-value");
       entry.find(".option-field .option-add-on").each(function(i, el){
-        $(el).text(alphabet[i]);
-      });
-      // refresh all hidden value inputs
-      entry.find(".option-field .option-value").each(function(i, el){
-        $(el).val(alphabet[i]);
+        el = $(el);
+        if (el.is(':visible')){
+          var letter = alphabet[visibleCount++];
+          el.text(letter);
+          $(optionValues[i]).val(letter);
+        }
       });
     }
     if (entry.find("select.followup-type").val() == "MULTI"){
@@ -193,13 +196,18 @@ $(document).ready(function(){
         }
       });
 
-      // refresh all prepended label values
-      entry.find(".followup-option-field .followup-add-on").each(function(i, el){
-        $(el).text(alphabet[i]);
-      });
-
-      entry.find(".followup-option-field .followup-option-value").each(function(i, e){
-        $(e).val(alphabet[i]);
+      // refresh all prepended labels, and option values
+      var followupVisibleCount = 0;
+      var followupOptionValues = entry.find(".followup-option-field .followup-option-value");
+      entry.find(".followup-option-field .followup-add-on:visible").each(function(i, el){
+        el = $(el);
+        if (el.is(':visible')){
+          var letter = alphabet[followupVisibleCount++];
+          console.log("element "+i+" is visible");
+          el.text(letter);
+          $(followupOptionValues[i]).val(letter);
+          console.log(followupOptionValues[i]);
+        }
       });
     }
   });
