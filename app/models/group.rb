@@ -32,8 +32,7 @@ class Group < ActiveRecord::Base
     return errors
   end
   def get_exchanges
-    unless Rails.env == 'development'
-
+    begin
       json = open("https://api.tropo.com/v1/exchanges", :http_basic_authentication=>[ENV['TROPO_USERNAME'],ENV['TROPO_PASSWORD']]).read
       result = JSON.parse(json).find_all{|item| item["smsEnabled"]==true and item["country"] == "United States" } # no canada for now
       result.sort_by! {|x| x['prefix']}
@@ -53,8 +52,9 @@ class Group < ActiveRecord::Base
         # i['label'] << "#{i['country']}"
         i
       end
-    else
+    rescue Exception=>e
       result_hash = {'1415' => {label: '415 - San Francisco', prefix: '1415'}}
+    ensure
       return result_hash
     end
   end
