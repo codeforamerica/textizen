@@ -32,25 +32,30 @@ class Group < ActiveRecord::Base
     return errors
   end
   def get_exchanges
-    json = open("https://api.tropo.com/v1/exchanges", :http_basic_authentication=>[ENV['TROPO_USERNAME'],ENV['TROPO_PASSWORD']]).read
-    result = JSON.parse(json).find_all{|item| item["smsEnabled"]==true and item["country"] == "United States" } # no canada for now
-    result.sort_by! {|x| x['prefix']}
-    result_hash = result.reduce(Hash.new()) do |set, val| # concatenate all cities and combine duplicate area codes
-      unless set[val['prefix']].nil? # not added to set yet, no duplicates
-        unless set[val['prefix']]['city'].casecmp(val['city']) == 0 # unless the cities are the same already (returns 0 if two strings match, case insensitive
-          set[val['prefix']]['city'] << ", #{val['city']}"
+    unless Rails.env == 'development'
+
+      json = open("https://api.tropo.com/v1/exchanges", :http_basic_authentication=>[ENV['TROPO_USERNAME'],ENV['TROPO_PASSWORD']]).read
+      result = JSON.parse(json).find_all{|item| item["smsEnabled"]==true and item["country"] == "United States" } # no canada for now
+      result.sort_by! {|x| x['prefix']}
+      result_hash = result.reduce(Hash.new()) do |set, val| # concatenate all cities and combine duplicate area codes
+        unless set[val['prefix']].nil? # not added to set yet, no duplicates
+          unless set[val['prefix']]['city'].casecmp(val['city']) == 0 # unless the cities are the same already (returns 0 if two strings match, case insensitive
+            set[val['prefix']]['city'] << ", #{val['city']}"
+          end
+        else # not added to set yet, add it
+          set[val['prefix']] = val
         end
-      else # not added to set yet, add it
-        set[val['prefix']] = val
+        set
       end
-      set
+      result_hash.map do |j,i|
+        i['label'] = "#{i['prefix'][1,3]} - #{i['city']}, "
+        i['label'] << "#{i['state']}" if !i['state'].blank? # just in case
+        # i['label'] << "#{i['country']}"
+        i
+      end
+    else
+      result_hash = {'1415' => {label: '415 - San Francisco', prefix: '1415'}}
+      return result_hash
     end
-    result_hash.map do |j,i|
-      i['label'] = "#{i['prefix'][1,3]} - #{i['city']}, "
-      i['label'] << "#{i['state']}" if !i['state'].blank? # just in case
-      # i['label'] << "#{i['country']}"
-      i
-    end
-    return result_hash
   end
 end
