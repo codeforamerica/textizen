@@ -199,14 +199,18 @@ $(document).ready(function(){
       // refresh all prepended labels, and option values
       var followupVisibleCount = 0;
       var followupOptionValues = entry.find(".followup-option-field .followup-option-value");
-      entry.find(".followup-option-field .followup-add-on:visible").each(function(i, el){
+      entry.find(".followup-option-field").each(function(i, el){
         el = $(el);
         if (el.is(':visible')){
+          var addon = el.find(".followup-add-on");
           var letter = alphabet[followupVisibleCount++];
           console.log("element "+i+" is visible");
-          el.text(letter);
+          addon.text(letter);
+          console.log(followupOptionValues[i].value);
           $(followupOptionValues[i]).val(letter);
-          console.log(followupOptionValues[i]);
+          console.log(followupOptionValues[i].value);
+        } else {
+          console.log('invisible');
         }
       });
     }
