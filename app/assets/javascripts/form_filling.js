@@ -249,7 +249,7 @@ $(document).ready(function(){
       option_values.last().addClass("yes-no").val("no");
 
       // Removes "remove option" button
-      parent_container_entry.find(".help-inline a.remove_fields").hide();
+      parent_container_entry.find(".help-inline a.remove-option").hide();
     }
     else if (value == "MULTI") {
       // Show "add option" button
@@ -294,7 +294,7 @@ $(document).ready(function(){
       followup_option_values.last().addClass("yes-no").val("no");
 
       // Removes "remove option" button
-      //      parent_container_entry.find(".followup-option-field a.remove_fields").hide();
+      parent_container_entry.find(".followup-option-field a.remove-follow-up-option").hide();
     }
     else if (value == "MULTI") {
       // Show "add option" button
