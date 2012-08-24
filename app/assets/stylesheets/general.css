@@ -127,3 +127,29 @@ tr:nth-of-type(odd) {
 	margin-top:19px;
 	margin-bottom:0;
 }
+
+#feedback {
+	display: block;
+	position: fixed;
+	top: 60%;
+	left: 0;
+	margin: 0;
+	padding: 6px 10px;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: bold;
+	text-decoration:none;
+	color: #fff;
+
+	background-color: #BF4048;
+	border: 2px solid #9e363f;
+	border-top: medium none;
+    text-align: center;
+    z-index: 100000;
+
+	-webkit-transform: rotate(270deg);
+	-webkit-transform-origin: 0 0;
+
+	-moz-transform: rotate(270deg);
+	-moz-transform-origin: 0 0;
+}
