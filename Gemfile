@@ -9,7 +9,7 @@ gem 'pg'
 # gem 'awesome_nested_fields'
 gem 'cocoon', '1.0.21' # for nested models->forms
 gem 'devise', '>= 2.0.0'
-#gem 'devise_invitable', '~> 1.0.0'
+gem 'devise_invitable', '~> 1.0.0'
 gem 'simple_form'
 gem 'thin'
 gem 'airbrake'
