@@ -14,22 +14,21 @@ class Group < ActiveRecord::Base
     end
   end
 
-  def save_users_by_emails(emails)
-    errors = []
+  def save_users_by_emails(emails, current_user = nil)
     puts "**Saving emails**"
     puts emails
     emails.each do |email|
       unless email.blank?
-        user = User.where(email: email)
+        user = User.where(:email => email)
         if user.present?
           users << user
         else
-          errors << "User #{email} not found"
+          u = User.invite!({:email => email}, current_user)
+          u.update_attributes(:role => "editor")
+          self.users << u
         end
       end
     end
-    puts errors
-    return errors
   end
   def get_exchanges
     begin
