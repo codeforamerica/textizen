@@ -15,7 +15,7 @@
           <% end %>
           <table class="table pollslist">
             <% group.polls.each_with_index do |poll, i| %>
-              <tr onClick="window.location.href='polls/<%= poll.id %>'">
+              <tr onClick="window.location.href='<%= poll_path(poll) %>'">
                 <td class="number"><%= i+1 %></td>
 
                 <td class="polltext">
@@ -51,7 +51,7 @@
       </div>
       <table class="table pollslist">
         <% (current_user.created_polls - current_user.polls).each_with_index do |poll, i| %>
-          <tr onClick="window.location.href='polls/<%= poll.id %>'">
+          <tr onClick="window.location.href='<%= poll_path(poll) %>'">
             <td class="number"><%= i+1 %></td>
 
             <td class="polltext">
@@ -83,7 +83,7 @@
       </div>
       <table class="table pollslist">
         <% (current_user.visible_polls - current_user.created_polls - current_user.polls).each_with_index do |poll, i| %>
-          <tr onClick="window.location.href='polls/<%= poll.id %>'">
+          <tr onClick="window.location.href='<%= poll_path(poll) %>'">
             <td class="number"><%= i+1 %></td>
 
             <td class="polltext">
