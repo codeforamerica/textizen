@@ -4,7 +4,7 @@ TxtyourcityRails::Application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
-  devise_for :users, :controllers => { :registrations => "registrations" }, :path_names => { :sign_up => ENV['SIGN_UP_PATH'] || 'textizen4eva' }
+  devise_for :users, :controllers => { :registrations => "registrations", :invitations => "invitations" }, :path_names => { :sign_up => ENV['SIGN_UP_PATH'] || 'textizen4eva' }
   #devise_for :users, :path_names => { :sign_in => 'login', :sign_out => 'logout', :password => 'secret', :confirmation => 'verification', :unlock => 'unblock', :registration => 'register'}#, :controllers=>{:registrations=>"registrations"}
   #devise_for :admins
 
