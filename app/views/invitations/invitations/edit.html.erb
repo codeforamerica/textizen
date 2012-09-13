@@ -1,11 +1,28 @@
-<h2><%= t 'devise.invitations.edit.header' %></h2>
+<div class="login-panel">
+	<h2>Change your password</h2>
 
-<%= simple_form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => { :method => :put } do |f| %>
-  <%= devise_error_messages! %>
-  <%= f.hidden_field :invitation_token %>
+	<h2><%= t 'devise.invitations.edit.header' %></h2>
 
-  <%= f.input :password %>
-  <%= f.input :password_confirmation %>
+	<%= simple_form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => { :method => :put, :class => "form-horizontal" } do |f| %>
+	  <%= devise_error_messages! %>
+	  <%= f.hidden_field :invitation_token %>
 
-  <%= f.submit t("devise.invitations.edit.submit_button") %>
-<% end %>
+	  <fieldset>
+		<div class="control-group">
+		  <%= f.label :password, "New password", :class => "control-label" %>
+		  <div class="controls"><%= f.password_field :password %></div>
+		</div>
+	  </fieldset>
+
+	  <%= f.input :password_confirmation %>
+
+
+		<div class="form-actions login-actions">
+			<%= f.submit "Set my pass" , t("devise.invitations.edit.submit_button"), :class => 'btn btn-large btn-primary' %>
+			<%= f.submit "Change my password", :class => 'btn btn-large btn-primary'  %>
+			<br>
+			<% end %>
+		</div>
+
+	<% end %>
+</div>

@@ -1,8 +1,9 @@
-<p>Hello <%= @resource.email %>!</p>
+<p>Dear <%= @resource.email %>,</p>
 
-<p>Someone has invited you to <%= root_url %>, you can accept it through the link below.</p>
+<p>I’m inviting you to our group on Textizen. Once you create your account, you’ll be able to view, edit, and create text-message surveys for citizen feedback.</p>
 
-<p><%= link_to 'Accept invitation', accept_invitation_url(@resource, :invitation_token => @resource.invitation_token) %></p>
+<p><%= link_to 'Create your account »', accept_invitation_url(@resource, :invitation_token => @resource.invitation_token) %></p>
 
-<p>If you don't want to accept the invitation, please ignore this email.<br />
-Your account won't be created until you access the link above and set your password.</p>
+<br />
+
+<p>Textizen is a service to help city officials, community leaders, and local organizations get feedback from the public via SMS to make more data-driven, representative decisions. Find out more at <a href="http://textizen.com">Textizen.com</a>.</p>
