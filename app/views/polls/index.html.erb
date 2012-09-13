@@ -6,7 +6,7 @@
     <% @groups.each do |group| %>
       <div class="pollsgroup">
           <div class="grouptitle">
-            <%= group.name %>
+            <%= link_to group.name, edit_group_path(group) %>
           </div>
           <div class="groupnewpoll">
           </div>
