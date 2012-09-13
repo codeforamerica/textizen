@@ -71,7 +71,7 @@ class GroupsController < ApplicationController
 
     respond_to do |format|
       if (emails=params[:user_emails])
-        @group.save_users_by_emails(emails)
+        @group.save_users_by_emails(emails, current_user)
       end
 
       if @group.update_attributes(params[:group]) 
