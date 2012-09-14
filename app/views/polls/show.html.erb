@@ -118,17 +118,31 @@
           <% @poll.questions_all.each do |q| %>
             <th><%= q.text %></th>
           <% end %>
-          <th>Phone number</th>
+          <% if can? :read_full, @poll %>
+            <th>Phone number</th>
+          <% end %>
         </tr>
         <% @poll.responses_flat.each_with_index do |resp, i| %>
           <tr>
             <td><%= i+1 %></td>
             <td><%= resp[:first_response_created].strftime("%m/%d/%Y at %I:%M%p")%></td>
             <% @poll.questions_all.each do |q| %>
-              <td><span class="optionvalue"><%= resp[:texts][q.id] %><% unless q.options.empty? %></span><%= q.get_matching_option(resp[:texts][q.id])? ": #{q.get_matching_option(resp[:texts][q.id])}" : '' %><% end %>
+              <td>
+                <span class="optionvalue">
+                  <% if can? :read_full, @poll %>
+                    <%= resp[:texts][q.id] %>
+                  <% else %>
+                    <%= resp[:texts][q.id].nil? ? '' : resp[:texts][q.id].gsub(Question::POISON_WORDS_REGEX, '---') %>
+                  <% end %>
+                </span>
+                <% unless q.options.empty? %>
+                  <%= q.get_matching_option(resp[:texts][q.id])? ": #{q.get_matching_option(resp[:texts][q.id])}" : '' %>
+                <% end %>
               </td>
             <% end %>
-            <td nowrap="nowrap"><%= number_to_phone(resp[:from], :area_code => true)[1..9] %>-XXXX</td>
+            <% if can? :read_full, @poll %>
+              <td nowrap="nowrap"><%= number_to_phone(resp[:from], :area_code => true)[1..9] %>-XXXX</td>
+            <% end %>
           </tr>
         <% end %>
       </table>

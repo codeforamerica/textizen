@@ -2,6 +2,8 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    user ||= User.new # guest user (not logged in)
+
     if user.role?(:superadmin)
       can :manage, :all
       can :access, :rails_admin   # grant access to rails_admin
@@ -14,6 +16,9 @@ class Ability
       can :create, Group
       can :manage, Group, :users => { :id => user.id } # can manage groups they're members of
       can :manage, GroupUser, :groups => { :id => user.group_ids } # allows anyone to remove themselves from a group, or add polls to a group they're in
+      can :read_full, Poll # can see profanity and phones
+    else
+      can :read, Poll, :public => true
     end
     # Define abilities for the passed in user here. For example:
     #
