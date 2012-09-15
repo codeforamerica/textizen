@@ -150,4 +150,20 @@ class PollsController < ApplicationController
       :disposition => "attachment; filename=poll#{@poll.id}.csv"
   end
 
+  def publish
+    @poll = Poll.find(params[:id])
+
+    respond_to do |format|
+      if @poll.update_attributes({:public=> !@poll.public})
+        format.html { redirect_to @poll, notice: "Poll was successfully #{@poll.public ? 'published' : 'unpublished'}" }
+        format.json { head :no_content }
+      else
+        format.html { render action: "show" }
+        format.json { render json: @poll.errors, status: :unprocessable_entity }
+      end
+    end
+    #flash[:notice] = "ended poll"
+  end
+    
+
 end
