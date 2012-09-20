@@ -222,10 +222,14 @@ h3{
    background: #e1e1e1;
    color: #000;
    font: normal 17px 'Signika Negative', Helvetica, Arial, sans-serif;
-   text-align: center;;
+   text-align: center;
 /*   -moz-border-radius: 10px;
    -webkit-border-radius: 10px; 
    border-radius: 10px; */
+}
+
+.speech-bubble a,a:hover{
+	text-decoration: none;
 }
 
 .speech-bubble:after{
