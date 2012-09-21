@@ -39,6 +39,7 @@ class Question < ActiveRecord::Base
   end
 
   def response_histogram
+    no_match_text = "Unmatched"
     excludes = [false," ","","a","about","above","after","again","against","all","am","an","and","any","are","aren't","as","at","be","because","been","before","being","below","between","both","but","by","can't","cannot","could","couldn't","did","didn't","do","does","doesn't","doing","don't","down","during","each","few","for","from","further","had","hadn't","has","hasn't","have","haven't","having","he","he'd","he'll","he's","her","here","here's","hers","herself","him","himself","his","how","how's","i","i'd","i'll","i'm","i've","if","in","into","is","isn't","it","it's","its","itself","let's","me","more","most","mustn't","my","myself","no","nor","not","of","off","on","once","only","or","other","ought","our","ours","ourselves","out","over","own","same","shan't","she","she'd","she'll","she's","should","shouldn't","so","some","such","than","that","that's","the","their","theirs","them","themselves","then","there","there's","these","they","they'd","they'll","they're","they've","this","those","through","to","too","under","until","up","very","was","wasn't","we","we'd","we'll","we're","we've","were","weren't","what","what's","when","when's","where","where's","which","while","who","who's","whom","why","why's","with","won't","would","wouldn't","you","you'd","you'll","you're","you've","your","yours","yourself","yourselves"]
     r = self.responses
     puts "response histogramming time: #{responses}"
@@ -56,8 +57,17 @@ class Question < ActiveRecord::Base
       hist_sorted = hist.sort{|a,b| b[1] <=> a[1]}
       puts "hist_sorted #{hist_sorted}"
 
+      if self.options.empty?
+        histogram = hist_sorted.select{|i| !excludes.include?(i[0]) && i[0].length > 1 && !i[0].match(POISON_WORDS_REGEX)}
+      else
+        histogram = hist_sorted.map do |i|
+          i[0] = i[0] ? i[0] : no_match_text
+          i
+        end
+      end
+
       # return the histogram after filtering out excluded words
-      return hist_sorted.select{|i| !excludes.include?(i[0]) && i[0].length > 1 && !i[0].match(POISON_WORDS_REGEX)}
+      return histogram
     end
   end
   # determines if a follow_up was triggered by a past response
