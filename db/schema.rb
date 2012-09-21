@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120907193102) do
+ActiveRecord::Schema.define(:version => 20120914203730) do
 
   create_table "group_users", :force => true do |t|
     t.integer  "user_id"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(:version => 20120907193102) do
     t.datetime "updated_at",   :null => false
     t.integer  "user_id"
     t.text     "confirmation"
+    t.boolean  "public"
   end
 
   create_table "questions", :force => true do |t|

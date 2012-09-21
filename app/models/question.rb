@@ -1,4 +1,6 @@
 class Question < ActiveRecord::Base
+  POISON_WORDS_REGEX = /(\b(ahole|anus|ash0le|ash0les|asholes|Assface|assh0le|assh0lez|asshole|assholes|assholz|asswipe|azzhole|bastard|bastards|bastardz|basterds|basterdz|Biatch|bitch|bitches|BlowJob|butthole|buttwipe|c0ck|c0cks|c0k|Carpet Muncher|cawk|cawks|Clit|cock|cocks|CockSucker|cock-sucker|cum|cunt|cunts|cuntz|dick|dild0|dild0s|dildo|dildos|dyke|f u c k|f u c k e r|fag|faggot|fags|fuck|fucker|fuckin|fucking|Fukker|Fukkin|g00k|gay|gays|gayz|hell|jackoff|jap|japs|jerk-off|jisimjizm|jizz|kunt|kunts|kuntz|Lesbian|massterbait|masstrbait|masstrbate|masterbaiter|masterbate|masterbates|orgasim;|orgasm|orgasum|pecker|peenus|peinus|pen1s|penas|penis|penus|Phuck|Phuk|Phuker|Phukker|polack|Poonani|pr1ck|pussee|pussy|queer|queers|queerz|qweers|qweerz|recktum|rectum|retard|scank|schlong|screwing|semen|Sh!t|sh1t|sh1ter|sh1ts|sh1tter|sh1tz|shit|shits|shitter|Shitty|Shity|shitz|Shyt|Shyte|Shytty|Shyty|skanck|skank|skankee|skankey|skanks|Skanky|slut|sluts|Slutty|slutz|son-of-a-bitch|tit|turd|vag1na|vagiina|vagina|vaj1na|vajina|vulva|w0p|wh00r|wh0re|whore|b!\+ch|bitch|blowjob|clit|fuck|shit|ass|asshole|b!tch|b17ch|b1tch|bastard|bi+ch|c0ck|cawk|chink|clits|cock|cum|cunt|dildo|ejakulate|fatass|fcuk|fuk|fux0r|lesbian|masturbate|masterbat|masterbat3|motherfucker|s\.o\.b\.|mofo|nazi|nigga|nigger|nutsack|pussy|scrotum|sh!t|shi\+|sh!\+|slut|teets|tits|boobs|b00bs|testical|testicle|titt|jackoff|wank|whore|damn|dyke|fuck|shit|bitch|bollock|breasts|butt-pirate|cabron|Cock|cunt|dick|fag|gay|gook|hell|jizz|kike|lesbo|nigger|screw|spic|splooge|b00b|testicle|titt|twat|wank|wetback|wop))|fuck/i
+
   attr_accessible :poll_id, :question_type, :text, :parent_option_id, :sequence, :options_attributes, :follow_up_options_attributes
   has_many :responses
   has_many :options, :dependent => :destroy
@@ -55,7 +57,7 @@ class Question < ActiveRecord::Base
       puts "hist_sorted #{hist_sorted}"
 
       # return the histogram after filtering out excluded words
-      return hist_sorted.select{|i| !excludes.include?(i[0]) && i[0].length > 1}
+      return hist_sorted.select{|i| !excludes.include?(i[0]) && i[0].length > 1 && !i[0].match(POISON_WORDS_REGEX)}
     end
   end
   # determines if a follow_up was triggered by a past response

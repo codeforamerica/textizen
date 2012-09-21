@@ -8,4 +8,7 @@ class ApplicationController < ActionController::Base
     end
     #render welcome page by default
   end
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to new_user_session_url, :alert => exception.message
+  end
 end
