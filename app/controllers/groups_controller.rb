@@ -50,16 +50,14 @@ class GroupsController < ApplicationController
     @group = Group.new(params[:group])
 
     respond_to do |format|
-      errors = []
       if (emails=params[:user_emails])
-        errors = @group.save_users_by_emails(emails)
+        @group.save_users_by_emails(emails, current_user)
       end
-      @group.users << current_user if errors.empty?
-      if errors.empty? and @group.save
+      @group.users << current_user
+      if @group.save
         format.html { redirect_to edit_group_path(@group), notice: 'Group was successfully created.' }
         format.json { render json: @group, status: :created, location: @group }
       else
-        @group.errors.add(:users, errors)
         format.html { render action: "new" }
         format.json { render json: @group.errors, status: :unprocessable_entity }
       end
@@ -72,16 +70,14 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
 
     respond_to do |format|
-      errors = []
       if (emails=params[:user_emails])
-        errors = @group.save_users_by_emails(emails)
+        @group.save_users_by_emails(emails)
       end
 
-      if errors.empty? and @group.update_attributes(params[:group]) 
+      if @group.update_attributes(params[:group]) 
         format.html { redirect_to edit_group_path(@group), notice: 'Group was successfully updated.' }
         format.json { head :no_content }
       else 
-        @group.errors.add(:users, errors)
         format.html { render action: "edit" }
         format.json { render json: @group.errors, status: :unprocessable_entity }
       end

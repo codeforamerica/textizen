@@ -4,9 +4,9 @@ class User < ActiveRecord::Base
   # only allow signups on dev machines during the beta. TODO make this a config var, not hardcoded?
 
   if ENV['BLOCK_REGISTRATIONS'] == 'true'
-    devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
+    devise :invitable, :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
   else
-    devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :registerable 
+    devise :invitable, :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :registerable 
   end
 
   # Setup accessible (or protected) attributes for your model
