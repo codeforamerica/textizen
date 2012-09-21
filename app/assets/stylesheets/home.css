@@ -19,7 +19,7 @@
 }
 
 .morecolumn{
-	min-height:330px;
+	min-height:450px;
 	margin-right: -1px;
 	border-right:1px solid #BFD5E0;
 }
@@ -179,4 +179,79 @@ h3{
 .nobullet{
 	list-style-type:none;
 	margin-left: 0.6em;
+}
+
+.press-section{
+	margin-top: 3em;
+}
+
+.press-section h2{
+	margin-bottom: 12px;
+}
+
+.presslogo{
+	display:block;
+	margin-top: 1.5em;
+	margin-left:auto;
+	margin-right: auto;
+	margin-bottom:3em;
+}
+
+.speech-bubble-wrap{
+   width: 286px;
+   height: 78px;
+   padding: 2px 0 4px 4px;
+   background: #ccc;
+}
+
+.speech-bubble-wrap:after{
+   content: "";
+   border: solid 10px transparent; /* set all borders to 10 pixels width */
+   border-top-color: #ccc; /* the callout */
+   border-bottom: 0; /* we do not need the bottom border in this case */
+   width: 0;
+   height: 0;
+   overflow: hidden;
+   display: block;
+   position: relative;
+   bottom: -2px; /* border-width of the :after element + padding of the root element */
+   margin: auto;
+}
+
+.speech-bubble{
+   width: 270px;
+   height:73px;
+   padding: 10px 10px 1px 10px;
+   margin: -6px -3px 0 0;
+   background: #e1e1e1;
+   color: #000;
+   font: normal 17px 'Signika Negative', Helvetica, Arial, sans-serif;
+   text-align: center;
+/*   -moz-border-radius: 10px;
+   -webkit-border-radius: 10px; 
+   border-radius: 10px; */
+}
+
+.speech-bubble a,a:hover{
+	text-decoration: none;
+}
+
+.speech-bubble:after{
+   content: "";
+   border: solid 10px transparent; /* set all borders to 10 pixels width */
+   border-top-color: #e1e1e1; /* the callout */
+   border-bottom: 0; /* we do not need the bottom border in this case */
+   width: 0;
+   height: 0;
+   overflow: hidden;
+   display: block;
+   position: relative;
+   bottom: -10px; /* border-width of the :after element + padding of the root element */
+   margin: auto;
+   z-index:100;
+}
+
+.speech-short{
+    margin-bottom: 0.5em;
+    padding-top: 0.8em;
 }
