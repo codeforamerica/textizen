@@ -3,8 +3,9 @@
 
 <div class="row">
   <div class="span12 main">
-    <div class="grouptitle">Philadelphia2035 June Pilot &rsaquo; <%= @poll.title %></div>
-    <p id="notice"><%= notice %></p>
+    <div class="grouptitle"><%= @poll.groups.empty? ? "Polls" : @poll.groups.first.name %> &rsaquo; <%= @poll.title %></div>
+
+    <!--<p id="notice"><%= notice %></p>-->
   </div>
 </div>
 
@@ -18,10 +19,10 @@
             <% q.options.each do |o| %>
               <li><span class="optionvalue"><%= o.value %>:</span> <%= o.text %></li>
               <% o.follow_up.each do |fup| %>
-                <ul class="optionslist">
+                <ul class="optionslist questionindent">
                   <li class="question"><span class="qtext"><%= fup.text %></span> <span class="qtype">(<%= fup.question_type %>)</span></li>
                   <% unless fup.options.empty? %>
-                    <ul>
+                    <ul class="optionslist">
                       <% fup.options.each do |o| %>
                         <li><span class="optionvalue"><%= o.value %>:</span> <%= o.text %></li>
                       <% end %>
@@ -35,7 +36,7 @@
       <% end %>
     </ol>
   </div>
-
+  
   <div class="span3">
     <div class="counterdash">
       <div class="responsecount"><%= @poll.questions.first.responses.count %></div>
@@ -61,13 +62,28 @@
       <div class="settingstext"><%= @poll.running? ? 'Running' : 'Ended' %></div>
 
 
-      <div class="btngroup edit-poll">
+      <div class="btn-toolbar btngroup edit-poll">
         <!--<input type="button" class="btn btn-danger" value="Close poll">-->
+        <div class="btn-group"><%= link_to 'Edit', edit_poll_path(@poll), :class => "btn btn-info", :id => "edit-button" %></div>
+
         <% if @poll.running? %>
-          <%= link_to 'End poll', end_poll_path(@poll), :class => "btn btn-danger", :confirm => 'Are you sure?', :method => :put %>
+          <div class="btn-group">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#" id="danger-dropdown">
+              Dangerous
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><%= link_to 'End poll', end_poll_path(@poll), :confirm => 'Are you sure?', :method => :put %></li>
+              <li class="divider"></li>
+              <li><%= link_to 'Clear all responses', clear_responses_poll_path(@poll), :confirm => 'Are you sure?!', :method => :put %></li>
+              <li><%= link_to 'Trash', @poll, confirm: 'Are you sure?', method: :delete %></li>
+            </ul>
+          </div>
+        <% else %>
+          <div class="btn-group"><%= link_to 'Trash', @poll, confirm: 'Are you sure?', method: :delete, :class => "btn" %></div>
         <% end %>
-        <%= link_to 'Edit', edit_poll_path(@poll), :class => "btn" %>
-        &nbsp;<%= link_to 'Trash', @poll, confirm: 'Are you sure?', method: :delete %>
+
+        <!--&nbsp;<%= link_to 'Trash', @poll, confirm: 'Are you sure?', method: :delete %>-->
       </div>
 
     </div>
@@ -92,7 +108,7 @@
 <div class="row">
   <div class="span12">
     <div class="download">
-      <%= link_to "→ Download CSV", request.parameters.merge({:format => :csv})%>
+      <%= link_to "→ Download CSV", request.parameters.merge({:format => :csv}), :id => 'download-csv-link'%>
     </div>
     <h3>Responses</h3>
     <table class="table">

@@ -1,48 +1,113 @@
-<%= simple_form_for @poll, :html => { :class => "form-horizontal"} do |f| %>
-  <script>
-    function togglePhone(){
-      console.log('toggle');
-      var phoneInput = $('#poll_phone')
-      phoneInput.prop('disabled', function(i,v){ console.log(v); return !v; });
-      phoneInput.toggleClass('disabled');
-    }
-  </script>
-
-  <h3>Script</h3>
-  <%= f.simple_fields_for :questions do |question| %>
-    <%= render 'question_fields', :f => question %>
+<script>
+  function togglePhone(){
+    var phoneInput = $('#poll_phone')
+    phoneInput.prop('disabled', function(i,v){ return !v; });
+    phoneInput.toggleClass('disabled');
+  }
+  <% unless @poll.new_record? %>
+    var initEditing = true;
   <% end %>
+</script>
 
-  <div class="links">
-    <br>
-    <%= link_to_add_association 'Add Question', f, :questions, :class => "btn" %>
-  </div>
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "form-filling.js" %>
+<% end %>
+<%= simple_form_for @poll, :html => { :class => "form-horizontal"} do |f| %>
 
-  <hr>
+  <div class="row">
+    <div class="span8">
 
-  <h3>Settings</h3>
-  <%= f.input :title, :label => "Nickname", :hint => "For messages, e.g. \"Thanks for responding to our survey on [nickname]\"" %>
-  <%= f.input :phone, :hint => "<input type='checkbox' name='auto_assign' onClick='togglePhone()' class='alignbox'></input> Automatically assign?", :disabled => "false" %>
-  <!--<input type="checkbox" name="auto_assign" onClick="togglePhone()"></input>-->
+      <% if (!@poll.new_record? and !@poll.responses.empty?) %>
+        <div class="alert" style="margin-top: 0;">
+          <a class="close" data-dismiss="alert" href="#">×</a>
+          <strong>Warning!</strong>
+          You already have responses for this poll, so you can't change an existing question's type or remove options unless you <%= link_to 'clear all responses', clear_responses_poll_path(@poll), :confirm => 'Are you sure?!', :method => :put %> first. You can still make most other edits, though.
+        </div>
+      <% end %>
 
-  <div class="field" style="display:none;">
-    <%= f.label :start_date %>
-    <%= f.datetime_select :start_date %>
-  </div>
+      <h3>Questions</h3>
+      <div class="item-container">
+        <%= f.simple_fields_for :questions do |question| %>
+          <%= render 'question_fields', :f => question %>
+        <% end %>
 
-  <div class="field">
-    <fieldset>
-      <div class="control-group">
-          <%= f.label :end_date, :class => "control-label" %>
-        <div class="controls">
-          <%= f.date_select(:end_date, {:use_short_month => 1, :order => [:month, :day, :year]}, {:class => "span1"}) %>
+        <div class="form-actions">
+          <%= link_to_add_association '+ Add Question', f, :questions, :class => "btn btn-large", :id => 'add_qn_button' %>
+          <!-- Javascript to "click" the add question button (hackaround!) -->
         </div>
       </div>
-  </fieldset>
-  </div>
 
-<div class="form-actions">
-    <%= f.button :submit, :class => 'btn btn-large btn-primary' %>
-    <%= link_to 'Cancel', @poll, :class => 'btn btn-large' %>
-</div>
+
+      <h3>Settings</h3>
+      <div class="item-container">
+
+        <div class= "nested-fields spacing">
+          <div class = "confirmation">
+            <%= f.input :confirmation, :placeholder => "Thanks for your feedback! More info: [your org's website]", :input_html => {:rows => 3, :cols => 20 }, :hint => "<div class='msg-count msg-count-confirmation'></div>" %>
+          </div>
+          <%= f.input :title, :label => "Nickname", :hint => "Only for reports. Example: \"15 responses this week to your poll on ________.\"" %>
+
+          <div class="field" style="display:none;">
+            <%= f.label :start_date %>
+            <%= f.datetime_select :start_date %>
+          </div>
+
+          <div class="field">
+            <fieldset>
+              <div class="control-group">
+                  <%= f.label :end_date, :class => "control-label" %>
+                <div class="controls">
+                  <%= f.date_select(:end_date, {:use_short_month => 1, :order => [:month, :day, :year]}, {:class => "span1"}) %>
+                </div>
+              </div>
+              <% if params[:group] %>
+                <%= f.input :group_ids, :label => "Group", :selected => params[:group], :collection => @groups, :include_blank => false, :input_html => {:multiple => false} %>
+              <% else %>
+                <%= f.input :group_ids, :label => "Group", :collection => @groups, :include_blank => false, :input_html => {:multiple => false} %>
+              <% end %>
+              <%= f.input :phone, :placeholder => "Will be auto assigned", :hint => "<input type='checkbox' name='auto_assign' onClick='togglePhone()' class='alignbox'></input> Override?", :disabled=>true %>
+          </fieldset>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <%= f.button :submit, :class => 'btn btn-large btn-primary', :id => 'poll-form-submit' %>
+          <%= link_to 'Cancel', @poll, :class => 'btn btn-large' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="span4" id="form_sidebar">
+      <!-- TODO: refactor so that Five Tips is a partial called from both this page and getstarted -->
+      <div class="sideblock">
+        <h3>Five Tips for Great Surveys</h3>
+        <ol class="copylist">
+          <li>
+            <b>Start by getting people opinionated enough to engage</b>
+            <br>Yes/No and Multiple Choice questions are low pressure ways to get people hooked. When using an Open Ended as your first question, be specific (i.e. "What was the last time...") to break the ice.</li>
+          <li>
+            <b>Ask questions that give the data you need</b>
+            <br>If you want to know whether people support a new construction project, ask a Yes/No question. If you want to know why, an open ended question works best.
+          </li>
+          <li>
+            <b>Consider adding 1 open-ended question</b>
+            <br>Sometimes the best feedback comes after the formal survey is over. If you start with Yes/No or Multiple Choice questions, you can follow with an open question such as “Why or why not?” or “Anything else to add?”
+          </li>
+          <li>
+            <b>Limit your survey to 3-5 questions</b>
+            <br>People are taking time to respond to your survey and using up their text limits (or paying per message) to text in their responses. Keeping your survey to 3-5 questions shows you respect these commitments while maintaining room to get the data you need.
+          </li>
+          <li>
+            <b>When using a survey for instant feedback, create it beforehand.</b>
+            <br>When you create a new survey, the phone number takes 2-5 minutes to go live. All other edits go live immediately. For example, create a survey for a city council meeting in the afternoon to ensure that it's live for the evening meeting.
+          </li>
+        </ol>
+      </div>
+      <div class="sideblock blockmiddle">
+        <p>For more tips &amp; examples, check out:</p>
+        <h3><a href="../../getstarted">Getting Started With Textizen ›</a></h3>
+      </div>
+
+    </div>
+  </div>
 <% end %>

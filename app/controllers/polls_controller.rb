@@ -1,10 +1,17 @@
 class PollsController < ApplicationController
   before_filter :authenticate_user!
+  load_and_authorize_resource
 
   # GET /polls
   # GET /polls.json
   def index
-    @polls = Poll.all
+    # TODO: transfer this to cancan syntax, eventually
+    @polls = current_user.visible_polls
+    if current_user.role?(:superadmin)
+      @groups = Group.all
+    else
+      @groups = current_user.groups
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -27,8 +34,12 @@ class PollsController < ApplicationController
   # GET /polls/new
   # GET /polls/new.json
   def new
-    @poll = Poll.new
-
+    @poll = Poll.new(:end_date => Time.now + 2.months)
+    if current_user.role?(:superadmin)
+      @groups = Group.all
+    else
+      @groups = current_user.groups
+    end
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @poll }
@@ -37,19 +48,31 @@ class PollsController < ApplicationController
 
   # GET /polls/1/edit
   def edit
+    @editing = true
     @poll = Poll.find(params[:id])
+    if current_user.role?(:superadmin)
+      @groups = Group.all
+    else
+      @groups = current_user.groups
+    end
   end
 
   # POST /polls
   # POST /polls.json
   def create
     @poll = Poll.new(params[:poll])
+    @poll.author = current_user
 
     respond_to do |format|
       if @poll.save
         format.html { redirect_to @poll, notice: 'Poll was successfully created.' }
         format.json { render json: @poll, status: :created, location: @poll }
       else
+        if current_user.role?(:superadmin)
+          @groups = Group.all
+        else
+          @groups = current_user.groups
+        end
         puts @poll.errors.full_messages
         format.html { render action: "new" }
         format.json { render json: @poll.errors, status: :unprocessable_entity }
@@ -67,6 +90,11 @@ class PollsController < ApplicationController
         format.html { redirect_to @poll, notice: 'Poll was successfully updated.' }
         format.json { head :no_content }
       else
+        if current_user.role?(:superadmin)
+          @groups = Group.all
+        else
+          @groups = current_user.groups
+        end
         puts @poll.errors.full_messages
         format.html { render action: "edit" }
         format.json { render json: @poll.errors, status: :unprocessable_entity }
@@ -100,6 +128,20 @@ class PollsController < ApplicationController
       end
     end
     #flash[:notice] = "ended poll"
+  end
+
+  def clear_responses
+    @poll = Poll.find(params[:id])
+
+    respond_to do |format|
+      if @poll.responses_all.each(&:destroy) # destroy all responses, including follow-ups
+        format.html { redirect_to @poll, notice: 'Responses successfully cleared.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to @poll, notice: 'Error clearing responses :(' }
+        format.json { render json: @poll.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def export_to_csv

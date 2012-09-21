@@ -1,11 +1,11 @@
 class Question < ActiveRecord::Base
-  attr_accessible :poll_id, :question_type, :text, :parent_option_id, :sequence, :options_attributes
+  attr_accessible :poll_id, :question_type, :text, :parent_option_id, :sequence, :options_attributes, :follow_up_options_attributes
   has_many :responses
   has_many :options, :dependent => :destroy
   has_many :follow_up, :through => :options
-  has_many :follow_up_options, :through => :options 
+  has_many :follow_up_options, :class_name => "Option", :foreign_key => "question_id", :dependent => :destroy
   has_many :follow_up_responses, :through => :options
-  accepts_nested_attributes_for :options, :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :options, :follow_up_options, :reject_if => :all_blank, :allow_destroy => true
 
 
   belongs_to :poll
@@ -13,6 +13,7 @@ class Question < ActiveRecord::Base
 
   validates :question_type, :inclusion => { :in => %w(MULTI OPEN YN), :message => "%{value} is not a valid question type" }  
   validates_presence_of :question_type#, :poll_id
+  validates_presence_of :text
 
   def get_follow_up
     if self.options.length > 0
@@ -36,7 +37,7 @@ class Question < ActiveRecord::Base
   end
 
   def response_histogram
-    excludes = ['in','i','or','and','of','at',' ','','for','on','to','the','that',false]
+    excludes = [false," ","","a","about","above","after","again","against","all","am","an","and","any","are","aren't","as","at","be","because","been","before","being","below","between","both","but","by","can't","cannot","could","couldn't","did","didn't","do","does","doesn't","doing","don't","down","during","each","few","for","from","further","had","hadn't","has","hasn't","have","haven't","having","he","he'd","he'll","he's","her","here","here's","hers","herself","him","himself","his","how","how's","i","i'd","i'll","i'm","i've","if","in","into","is","isn't","it","it's","its","itself","let's","me","more","most","mustn't","my","myself","no","nor","not","of","off","on","once","only","or","other","ought","our","ours","ourselves","out","over","own","same","shan't","she","she'd","she'll","she's","should","shouldn't","so","some","such","than","that","that's","the","their","theirs","them","themselves","then","there","there's","these","they","they'd","they'll","they're","they've","this","those","through","to","too","under","until","up","very","was","wasn't","we","we'd","we'll","we're","we've","were","weren't","what","what's","when","when's","where","where's","which","while","who","who's","whom","why","why's","with","won't","would","wouldn't","you","you'd","you'll","you're","you've","your","yours","yourself","yourselves"]
     r = self.responses
     puts "response histogramming time: #{responses}"
     if r.length > 0

@@ -17,48 +17,82 @@
         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
+        })();
+
+      var _kmq = _kmq || [];
+      var _kmk = _kmk || '<%= ENV['KISS_KEY'] if ENV['KISS_KEY']%>';
+
+      function _kms(u){
+        setTimeout(function(){
+          var d = document, f = d.getElementsByTagName('script')[0],
+          s = d.createElement('script');
+          s.type = 'text/javascript'; s.async = true; s.src = u;
+          f.parentNode.insertBefore(s, f);
+        }, 1);
+      }
+      _kms('//i.kissmetrics.com/i.js');
+      _kms('//doug1izaerwt3.cloudfront.net/' + _kmk + '.1.js');
+      _kmq.push(['record', 'Page View']);
+      <% if current_user && current_user.email.present? %>
+      _kmq.push(['identify', '<%= current_user.email %>']);
+      <% end %>
     </script>
   </head>
   <body>
-
     <div class="container">
       <% if user_signed_in? %>
         <%= render "users/top_bar" %>
       <% else %>
         <%= render "layouts/default_top_bar" %>
       <% end %>
-
+      <%= render :partial => "layouts/flash", :locals => {:flash => flash} %>
       <%= yield %>
-      
+
       <%= render "layouts/footer" %>
 
     </div>
-  <script type="text/javascript">
-    var _sf_async_config={uid:20661,domain:"textizen.com"};
-    (function(){
-      function loadChartbeat() {
-        window._sf_endpt=(new Date()).getTime();
-        var e = document.createElement('script');
-        e.setAttribute('language', 'javascript');
-        e.setAttribute('type', 'text/javascript');
-        e.setAttribute('src',
-           (("https:" == document.location.protocol) ? "https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/" : "http://static.chartbeat.com/") +
-           "js/chartbeat.js");
-        document.body.appendChild(e);
-      }
-      var oldonload = window.onload;
-      window.onload = (typeof window.onload != 'function') ?
-         loadChartbeat : function() { oldonload(); loadChartbeat(); };
-    })();
-  </script>
 
-  <!-- Get Satisfaction -->
-  <div id="getsat-widget-843"></div>
-  <script type="text/javascript" src="https://loader.engage.gsfn.us/loader.js"></script>
-  <script type="text/javascript">
-    if (typeof GSFN !== "undefined") { GSFN.loadWidget(843,{"containerId":"getsat-widget-843"}); }
-  </script>
-  
+    <!-- Manual link to Zoho -->
+    <div id="feedback" onclick="window.open('https://discussions.zoho.com/textizen-users#AllForums', '_new')">
+      Help + User Forum
+    </div>
+
+    <!-- Chartbeat -->
+    <script type="text/javascript">
+      var _sf_async_config={uid:20661,domain:"textizen.com"};
+      (function(){
+        function loadChartbeat() {
+          window._sf_endpt=(new Date()).getTime();
+          var e = document.createElement('script');
+          e.setAttribute('language', 'javascript');
+          e.setAttribute('type', 'text/javascript');
+          e.setAttribute('src',
+             (("https:" == document.location.protocol) ? "https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/" : "http://static.chartbeat.com/") +
+             "js/chartbeat.js");
+          document.body.appendChild(e);
+        }
+        var oldonload = window.onload;
+        window.onload = (typeof window.onload != 'function') ?
+           loadChartbeat : function() { oldonload(); loadChartbeat(); };
+      })();
+    </script>
+
+    <!-- Get Satisfaction 
+    <div id="getsat-widget-843"></div>
+    <script type="text/javascript" src="https://loader.engage.gsfn.us/loader.js"></script>
+    <script type="text/javascript">
+      if (typeof GSFN !== "undefined") { GSFN.loadWidget(843,{"containerId":"getsat-widget-843"}); }
+    </script>-->
+
+    <!-- UserVoice 
+    <script type="text/javascript">
+      var uvOptions = {};
+      (function() {
+        var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
+        uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/0wQ9hkQ6AneNzCOIBKNkA.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
+      })();
+    </script>
+    --> 
   </body>
 </html>

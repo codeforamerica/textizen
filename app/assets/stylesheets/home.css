@@ -64,7 +64,7 @@ h3{
 	font-size:140%;
 	font-weight:normal;
 	text-transform:uppercase;
-	margin: 0.5em 0 0.2em 0.5em;
+	margin: 0.5em 0 0.2em 0;
 }
 
 .comment{
@@ -137,6 +137,10 @@ h3{
 
 .getstarted p,li{
 	font-size: 107%;
+}
+
+.inline-list li{
+	font-size: 100%;
 }
 
 .sidebar{

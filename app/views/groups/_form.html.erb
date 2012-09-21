@@ -1,0 +1,114 @@
+<script>
+  $(function() {
+    var count = 0;
+    appendEmail();
+    $(document).on('focus', '.add-email', function(e){
+      if (!$(this).hasClass('email-added')){ // only insert a blank email field once per click
+        $(this).addClass('email-added');
+        $(this).attr('placeholder', "Type a registered user's email"); // update the placeholder text
+        appendEmail();
+      }
+    });
+    // show the remove link once an email is entered
+    $(document).on('change', 'input.add-email', function(e){
+      $(this).parent().find('.remove-email').fadeIn();
+    });
+
+    function appendEmail(){
+      $('#user-list').append('<li id="emailInput'+(count++)+'"><%= text_field_tag "user_emails[]", params[:email], :class => "input add-email", :placeholder => "Type a registered user’s email"%> <button class="close remove-email" style="display:none" type="button" onclick="removeEmail(this)">×</button></li>');
+    }
+  });
+  function removeEmail(item){
+    $(item).parent().remove();
+  }
+</script>
+
+<%= simple_form_for @group, :html => { :class => "form-horizontal"} do |f| %>
+  <%= f.error_notification %>
+
+<h3>People</h3>
+<div>
+  <p>Adding some rockstars to this party will give them the same access &mdash; to create and edit polls and view results &mdash; as you. (To share results only, go to the survey page. From there, you can export to CSV or print the webpage to PDF.)</p>
+  <p>For now, you can only add people who already have Textizen accounts. To get your colleagues signed up first, just forward your beta invite.</p>
+</div>
+<br>
+  <div id="emails">
+    <ol id="user-list">
+      <% unless @editing %>
+        <li>
+        <%= text_field_tag "user_emails[]", params[:email], :placeholder => current_user.email, :disabled => true %><span class="help-inline">You’re automatically a member of any group you create</span>
+        </li>
+      <% end %>
+      <% @group.users.each do |user| %>
+        <li>
+        <%= user.email %>
+        &nbsp;
+        <%= link_to "Remove", group_user_path(GroupUser.where(user_id:user, group_id: @group)[0]), :method => :delete, :confirm => "Are you sure?" %> 
+        </li>
+      <% end %>
+    </ol>
+
+    <%- if @group.errors.messages && @group.errors.messages[:users] -%>
+      <ul>
+        <div class="control-group error">
+          <%- @group.errors.messages[:users].each do |message| -%>
+            <li class="help-block"><%= message[0] -%></li>
+          <%- end -%>
+        </div>
+      </ul>
+    <%- end -%>
+  </div>
+  <br>
+
+<% unless @group.new_record? %>
+<hr>
+  <h3>Polls</h3>
+  <div class="row">
+    <div class="span6 groupsunit">
+      <% if @group.polls.empty? %>
+        <div class="caption nopolls">No polls in this group yet.</div>
+      <% end %>
+      
+
+      <ol class="pollsol">
+        <% @group.polls.each do |poll| %>
+          <li>
+          <span class="pollsol-text"><%= link_to(poll.questions.first.text, poll_path(poll)) %> </span>
+          </li>
+        <% end %>
+      </ol>
+    </div>
+  </div>
+  <br>
+<% end %>
+
+<hr>
+
+<h3>Settings</h3>
+  <div class="form-inputs">
+    <%= f.input :name, :label => "Group name", :hint => "E.g. 'Philadelphia2035' or 'Chattanooga Regional Planning'" %>
+    <%= f.input :exchange, :label => "Preferred area code",
+      :collection => @group.get_exchanges
+    %>
+  <!--
+  <%= f.input :name, :label => "Timezone",
+    :collection=>[
+      ['Eastern Time','EST'],
+      ['Central Time','CST'],
+      ['Mountain Time','MST'],
+      ['Pacific Time','PST'],
+      ['Alaska Time','AKST'],
+      ['Hawaii Time','HST']
+      ], :selected => "EST", :hint => "Used to timestamp responses" %>
+  -->
+</div>
+
+<br>
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn btn-large btn-primary' %>
+    <%= link_to 'Cancel', groups_path, :class => 'btn btn-large' %>
+    <div class="link-destroy-group">
+      <%= link_to(raw('<i class="icon-trash"></i>Destroy'), @group, :class => 'link-danger', confirm: 'This is probably a bad idea. Are you sure?', method: :delete) %>
+    </div>
+  </div>
+<% end %>

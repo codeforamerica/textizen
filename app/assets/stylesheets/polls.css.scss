@@ -3,17 +3,210 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .tempmargin{
-	margin-left: 12.5em;
-	margin-top: -1em;
-	margin-bottom: 1em;
-}
-
-.tempfollowup{
-	margin-left: 12em;
-	margin-bottom: 2em;
+  margin-left: 12.5em;
+  margin-top: -1em;
+  margin-bottom: 1em;
 }
 
 .alignbox{
-	position:relative;
-	top: -2px;
+  position:relative;
+  top: -2px;
+}
+
+.form-horizontal 
+{
+  .help-inline 
+  {
+    color: #888;
+    font-size: 0.9em;
+  }
+}
+
+/* Overall large container for questions and setting */
+
+.item-container {
+  position: relative;
+  padding-top: 0px;
+  margin-bottom: 30px;
+  /* Prettifications */
+  border:1px solid #999;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 1px 1px 1px rgba(50, 50, 50, 0.49);
+  -moz-box-shadow:    1px 1px 1px rgba(50, 50, 50, 0.49);
+  box-shadow:         1px 1px 1px rgba(50, 50, 50, 0.49);
+
+  .form-actions 	
+  {
+    margin-bottom: 0px;
+    margin-top: 0px;
+  }
+  .nested-fields 	{
+    /* Placeholder for contingency */
+    /* Needs to exist for cocoon to work! */
+  }
+
+  /* CSS for an individual question entry */
+  .question-entry	{
+    border-bottom: 1px solid #999;
+    position: relative;
+    margin-top: 30px;
+    padding-bottom: 20px;
+
+    .top-right	{    // For the "delete question" icon
+      position: absolute;
+      top: -30px;
+      right: 0;
+    }
+
+    .options {
+      margin-top: -5px;
+    }
+
+    .add-option-button	{
+      display:none;
+    }
+
+    /* CSS for the options field within a question entry */
+    .option-field	{
+      .yes-no {
+        width: 60px;
+        cursor: not-allowed;
+        background-color: #eee;
+        border-color: #ddd;
+      }
+      .add-followup-dummy {  
+        /* Fake button for layout purposes. Triggers add-followup-button */
+        margin-top: 1px;
+        margin-right: 7px;
+      }
+      .add-followup-button {
+        display:none;
+        //position: absolute;
+        //right: 130px;
+      }
+
+      /* CSS for the followup field */
+      .followup-field {
+        background-image: url('/assets/followup-symbol.png');
+        background-position: 92px -5px;
+        background-repeat: no-repeat;
+        margin-top: -14px;
+        margin-left: 80px;
+        padding-top: 7px;
+        padding-left: 30px;
+        padding-bottom:1px;
+        .control-group {
+          margin-bottom: 10px;
+        }
+        .add-followup-option-button {
+          display:none;
+        }
+        /* Followup options */
+        .followup-option-field {
+          margin-bottom: 5px;
+          .control-group {
+            margin-bottom: 5px;
+          }
+        }
+      }
+    }
+  }
+  /* hide all follow-up buttons for any question that already has one follow-up */
+  .question-entry.has-followup {
+    .add-followup-dummy {
+      display: none;
+    }
+  }
+
+  /* Generic stuff */
+
+  .spacing {
+    border-bottom: 1px solid #999;
+    position: relative;
+    margin-top: 30px;
+    padding-bottom: 20px;
+  }
+  .label-bold 
+  {
+    font-weight: bold;
+  }
+  .btn 
+  {
+    margin-left: 5px;
+  }
+}
+
+.remove-follow-up {
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    cursor: pointer;
+    padding: 0;
+    float:none;
+}
+
+.deleter{
+  line-height:25px;
+  margin-right: 8px;
+}
+
+.questiondeleter{
+  margin: 2px 5px 0 0;
+}
+
+.top-right:hover{
+  text-decoration:none;
+}
+
+.sideblock p{
+  margin-top: 9px;
+  margin-bottom: -8px;
+}
+
+.blockmiddle{
+  text-align:center;
+  padding-bottom: 8px;
+}
+
+abbr[title='required'] {
+  display: none;
+}
+
+
+.question-entry.error { /* for inputs with too many characters */
+  border: 1px solid #f00;
+}
+
+.msg-preview {
+  float: right;
+  clear: right;
+  width: 150px;
+  height: 40px;
+  margin-right: 5px;
+  font-family: monospace;
+}
+
+.msg-count {
+  .msg-count-status {
+  color: #009933;
+}
+}
+
+.msg-count-followup {
+  margin-left: 445px;
+  margin-top: -28px;
+  position: absolute;
+  color: #888888;
+  font-size: 0.9em;
+}
+
+.msg-count-confirmation{
+}
+
+.msg-count.error {
+  color: #B94A48;
+  .msg-count-status {
+  color: #B94A48;
+}
 }

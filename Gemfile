@@ -13,6 +13,7 @@ gem 'simple_form'
 gem 'thin'
 gem 'airbrake'
 gem 'taps'
+gem 'cancan'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -41,6 +42,7 @@ group :test, :development do
   gem 'shoulda'
   gem 'faker'
   gem 'simplecov'
+  gem 'foreman'
 end
 
 group :test do

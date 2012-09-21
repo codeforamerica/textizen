@@ -19,6 +19,11 @@
 
 .optionslist{
 	list-style-type:none;
+	margin-left:0;
+}
+
+.questionindent{
+	margin-left: 22px;
 }
 
 .counterdash{
@@ -51,7 +56,12 @@
 
 .settings .btngroup{
 	position:absolute;
-	bottom:1em;
+	bottom:0.4em;
+	margin-bottom:0;
+}
+
+.btn-group{
+	margin-right:-4px;
 }
 
 .caption{
@@ -86,11 +96,6 @@
 	background-color:#aaa; 
 }
 
-.nested-fields {
-	border-left: 2px solid #ccc;
-	padding-left: 10px;
-}
-
 .qtext {
 	font-weight:bold;
 	font-size:120%;
@@ -107,6 +112,3 @@
 	color:#999;
 }
 
-.edit-poll {
-  display: none
-}
