@@ -6,10 +6,13 @@ common: &common
 development:
   <<: *common
   database: textyourcity_dev
+  host: localhost
+
 
 test:
   <<: *common
   database: textyourcity_test
+  host: localhost
 
 production:
   <<: *common
