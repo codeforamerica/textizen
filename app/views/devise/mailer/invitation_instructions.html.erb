@@ -1,9 +1,11 @@
 <p>Dear <%= @resource.email %>,</p>
 
-<p>I'm inviting you to our group on Textizen. Once you create your account, you’ll be able to view, edit, and create text-message surveys for citizen feedback.</p>
+<p>You've been invited to Textizen by <%=@resource.invited_by.email %>. Once you create your account, you’ll be able to view, edit, and create text-message surveys for citizen feedback.</p>
 
-<p><%= link_to 'Create your account »', accept_invitation_url(@resource, :invitation_token => @resource.invitation_token) %></p>
+<p style="display:inline-block; background-color:#ADD8E6; font-size:16px; padding:4px 8px;"><%= link_to 'Create your account »', accept_invitation_url(@resource, :invitation_token => @resource.invitation_token) %></p>
 
+<p>Thanks,<br />
+The Textizen Team</p>
 <br />
 
-<p>Textizen is a service to help city officials, community leaders, and local organizations get feedback from the public via SMS to make more data-driven, representative decisions. Find out more at <a href="http://textizen.com">Textizen.com</a>.</p>
+<p style="color:gray;border-top:1px solid #999; padding-top:0.5em;">Textizen is a service to help city officials, community leaders, and local organizations get feedback from the public via SMS to make more data-driven, representative decisions. Find out more at <a href="http://textizen.com">Textizen.com</a>.</p>

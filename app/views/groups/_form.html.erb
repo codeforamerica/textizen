@@ -41,7 +41,7 @@
       <% end %>
       <% @group.users.each do |user| %>
         <li>
-        <%= user.email %> <%= link_to "resend invitation", invitation_resend_path(user.id), :method => :post, :remote => true unless !user.invited_to_sign_up? or user.invitation_accepted? %>
+        <%= user.email %> <%= link_to "Resend invitation", invitation_resend_path(user.id), :method => :post, :remote => true unless !user.invited_to_sign_up? or user.invitation_accepted? %>
         &nbsp;
         <%= link_to "Remove", group_user_path(GroupUser.where(user_id:user, group_id: @group)[0]), :method => :delete, :confirm => "Are you sure?" %> 
         </li>
