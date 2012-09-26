@@ -5,7 +5,7 @@
     $(document).on('focus', '.add-email', function(e){
       if (!$(this).hasClass('email-added')){ // only insert a blank email field once per click
         $(this).addClass('email-added');
-        $(this).attr('placeholder', "Type a registered user's email"); // update the placeholder text
+        $(this).attr('placeholder', "Type any email"); // update the placeholder text
         appendEmail();
       }
     });
@@ -15,7 +15,7 @@
     });
 
     function appendEmail(){
-      $('#user-list').append('<li id="emailInput'+(count++)+'"><%= text_field_tag "user_emails[]", params[:email], :class => "input add-email", :placeholder => "Type a registered user’s email"%> <button class="close remove-email" style="display:none" type="button" onclick="removeEmail(this)">×</button></li>');
+      $('#user-list').append('<li id="emailInput'+(count++)+'"><%= text_field_tag "user_emails[]", params[:email], :class => "input add-email", :placeholder => "Type any email"%> <button class="close remove-email" style="display:none" type="button" onclick="removeEmail(this)">×</button></li>');
     }
   });
   function removeEmail(item){
@@ -29,7 +29,6 @@
 <h3>People</h3>
 <div>
   <p>Adding some rockstars to this party will give them the same access &mdash; to create and edit polls and view results &mdash; as you. (To share results only, go to the survey page. From there, you can export to CSV or print the webpage to PDF.)</p>
-  <p>For now, you can only add people who already have Textizen accounts. To get your colleagues signed up first, just forward your beta invite.</p>
 </div>
 <br>
   <div id="emails">
@@ -41,9 +40,12 @@
       <% end %>
       <% @group.users.each do |user| %>
         <li>
-        <%= user.email %> <%= link_to "Resend invitation", invitation_resend_path(user.id), :method => :post, :remote => true unless !user.invited_to_sign_up? or user.invitation_accepted? %>
+        <%= user.email %>
         &nbsp;
         <%= link_to "Remove", group_user_path(GroupUser.where(user_id:user, group_id: @group)[0]), :method => :delete, :confirm => "Are you sure?" %> 
+        &nbsp;
+        <%= link_to "Resend invitation", invitation_resend_path(user.id), :method => :post, :remote => true unless !user.invited_to_sign_up? or user.invitation_accepted? %>
+
         </li>
       <% end %>
     </ol>

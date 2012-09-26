@@ -22,6 +22,7 @@ TxtyourcityRails::Application.configure do
     :enable_starttls_auto => true,
     :address        => "smtp.gmail.com",
     :port           => 587,
+    :domain => "gmail.com",
     :authentication => :plain,
     :user_name  => ENV["GMAIL_ADDRESS"],
     :password  => ENV["GMAIL_PASS"] 
