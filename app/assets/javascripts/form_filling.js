@@ -204,13 +204,13 @@ $(document).ready(function(){
         if (el.is(':visible')){
           var addon = el.find(".followup-add-on");
           var letter = alphabet[followupVisibleCount++];
-          console.log("element "+i+" is visible");
+          //console.log("element "+i+" is visible");
           addon.text(letter);
-          console.log(followupOptionValues[i].value);
+          //console.log(followupOptionValues[i].value);
           $(followupOptionValues[i]).val(letter);
-          console.log(followupOptionValues[i].value);
+          //console.log(followupOptionValues[i].value);
         } else {
-          console.log('invisible');
+          //console.log('invisible');
         }
       });
     }
@@ -314,10 +314,10 @@ $(document).ready(function(){
 
  /** INITIALIZATION STUFF **/ 
   if (initEditing === false && $('.question-entry').length === 0) { // make sure we're not editing or failing validation with saved stuff
-    console.log("not editing");
+    //console.log("not editing");
     $('#add_qn_button').click();
   } else {
-    console.log('editing');
+    //console.log('editing');
     $('.followup-field').trigger('insertion-callback');
     $('.option-text').trigger('insertion-callback');
     $('select.question-type').trigger('change');
