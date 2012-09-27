@@ -61,8 +61,8 @@
       <div class="caption">Status</div>
       <div class="settingstext"><%= @poll.running? ? 'Running' : 'Ended' %></div>
 
-      <div class="caption">Visibility</div>
-      <div class="settingstext"><%= @poll.public ? 'Published' : 'Private' %> <%=  link_to @poll.public ? "Undo" : "Publish", publish_poll_path(@poll), :method => :put, :id => "publish-button" %></div>
+      <div class="caption">Published?</div>
+      <div class="settingstext"><input type="checkbox" data-publish-url="<%= publish_poll_path(@poll)%>" id="poll_public_button" onChange="console.log($(this).attr('checked'))" <%=@poll.public ? "checked" : ""%> ></div>
 
       <% if can? :manage, @poll %>
         <div class="btn-toolbar btngroup edit-poll">
@@ -77,7 +77,6 @@
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
-                <li><%=  link_to @poll.public ? "Unpublish" : "Publish", publish_poll_path(@poll), :method => :put, :id => "publish-button" %></li>
                 <li><%= link_to 'End poll', end_poll_path(@poll), :confirm => 'Are you sure?', :method => :put %></li>
                 <li class="divider"></li>
                 <li><%= link_to 'Clear all responses', clear_responses_poll_path(@poll), :confirm => 'Are you sure?!', :method => :put %></li>
