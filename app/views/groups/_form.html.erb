@@ -16,7 +16,6 @@
 
     function appendEmail(){
       $('#user-list').append('<li id="emailInput'+(count++)+'"><%= text_field_tag "user_emails[]", params[:email], :class => "input add-email email", :placeholder => "Type any email"%> <button class="close remove-email" style="display:none" type="button" onclick="removeEmail(this)">×</button></li>');
-      $('<%="#edit_group_#{@group.id}"%>').validate();
     }
   });
   function removeEmail(item){

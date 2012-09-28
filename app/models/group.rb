@@ -18,7 +18,7 @@ class Group < ActiveRecord::Base
     puts "**Saving emails**"
     puts emails
     emails.each do |email|
-      unless email.blank?
+      unless email.blank? or !Devise.email_regexp.match(email)
         user = User.where(:email => email)
         if user.present?
           users << user
