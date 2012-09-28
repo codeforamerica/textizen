@@ -69,7 +69,7 @@
 
       <% if can? :manage, @poll %>
         <div class="caption">Results public?</div>
-        <div class="settingstext"><input type="checkbox" data-publish-url="<%= publish_poll_path(@poll)%>" id="poll_public_button" onChange="console.log($(this).attr('checked'))" <%=@poll.public ? "checked" : ""%> ></div>
+        <div class="settingstext"><%= @poll.public ? "Yes" : "No" %></div>
 
         <div class="btn-toolbar btngroup edit-poll">
           <div class="btn-group">
