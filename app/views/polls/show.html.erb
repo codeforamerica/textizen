@@ -1,14 +1,19 @@
 <% choices = {} %>
 
 
+<% if can? :manage, @poll and @poll.public %>
+  <div class="alert">
+    <strong>Note:</strong>
+    This poll is now <strong>public</strong> and can be accessed by anyone at this url: <%= link_to poll_path(@poll, :only_path => false), poll_path(@poll) %>
+  </div>
+<% end %>
+
 <div class="row">
   <div class="span12 main">
     <div class="grouptitle"><%= @poll.groups.empty? ? "Polls" : @poll.groups.first.name %> &rsaquo; <%= @poll.title %></div>
-
     <!--<p id="notice"><%= notice %></p>-->
   </div>
 </div>
-
 <div class="row">
   <div class="span6">
     <ol>
