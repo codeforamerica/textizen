@@ -53,3 +53,9 @@ button.close {
 .form-actions{
 	position:relative;
 }
+
+label.error {
+  display: inline;
+  color: red;
+  padding-left: 5px;
+}
