@@ -15,7 +15,8 @@ $ ->
               type: 'put',
               error: (error) -> console.log(error),
               contentType: 'json',
-              url: $el.attr('data-publish-url')+'.json'
+              url: $el.attr('data-publish-url')+'.json',
+              beforeSend: (xhr) -> xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
           )
         
         else
