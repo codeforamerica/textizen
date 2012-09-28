@@ -15,4 +15,5 @@
 //= require_tree .
 //= require cocoon
 //= require ios-checkboxes
+//= require jquery.validate
 
