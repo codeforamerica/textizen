@@ -66,7 +66,8 @@
                 <%= f.input :group_ids, :label => "Group", :collection => @groups, :include_blank => false, :input_html => {:multiple => false} %>
               <% end %>
               <%= f.input :phone, :placeholder => "Will be auto assigned", :hint => "<input type='checkbox' name='auto_assign' onClick='togglePhone()' class='alignbox'></input> Override?", :disabled=>true %>
-              <%= f.input :public, :label => "Publish results?", :as => :radio_buttons %>
+              <%= f.input :public, :label => "Publish results?", :as => :radio, :collection => [["No", false],["Yes, let anyone view results at #{poll_path(@poll, :only_path => false)}", true]] %>
+              <%=  %>
           </fieldset>
           </div>
         </div>

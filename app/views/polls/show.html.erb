@@ -3,8 +3,7 @@
 
 <% if can? :manage, @poll and @poll.public %>
   <div class="alert">
-    <strong>Note:</strong>
-    This poll is now <strong>public</strong> and can be accessed by anyone at this url: <%= link_to poll_path(@poll, :only_path => false), poll_path(@poll) %>. 
+    This poll is <strong>public</strong>. Here's the URL to share results: <%= link_to poll_path(@poll, :only_path => false), poll_path(@poll) %>
     <a id="twitter-share-poll" href="https://twitter.com/share" class="twitter-share-button" data-related="Textizen" data-dnt="true" data-text="<%="Just published our @Textizen poll on #{@poll.title}! See results as they come in: #{poll_path(@poll, :only_path => false)}"%>">Tweet this poll!</a>
   </div>
 <% end %>
