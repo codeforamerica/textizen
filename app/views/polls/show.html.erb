@@ -4,7 +4,7 @@
 <% if can? :manage, @poll and @poll.public %>
   <div class="alert">
     This poll is <strong>public</strong>. Here's the URL to share results: <%= link_to poll_path(@poll, :only_path => false), poll_path(@poll) %>
-    <a id="twitter-share-poll" href="https://twitter.com/share" class="twitter-share-button" data-related="Textizen" data-dnt="true" data-text="<%="Just published our @Textizen poll on #{@poll.title}! See results as they come in: #{poll_path(@poll, :only_path => false)}"%>">Tweet this poll!</a>
+    <a id="twitter-share-poll" href="https://twitter.com/share" class="twitter-share-button" data-related="Textizen" data-dnt="true" data-text="<%="Just published our @Textizen poll on #{@poll.title}. See results as they come in!"%>">Tweet this poll!</a>
   </div>
 <% end %>
 
