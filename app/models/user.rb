@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   end
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :role
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :role, :invitation_token
   # attr_accessible :title, :body
   has_many :created_polls, :class_name => "Poll", :foreign_key => "user_id"
   has_many :group_users
