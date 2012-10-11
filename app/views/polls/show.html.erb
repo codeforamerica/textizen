@@ -140,14 +140,10 @@
               <td>
                 <span class="optionvalue">
                   <% if can? :read_full, @poll %>
-                    <%= resp[:texts][q.id] %>
+                    <%= resp[:texts][q.id] %></span><%= q.get_matching_option(resp[:texts][q.id])? ": #{q.get_matching_option(resp[:texts][q.id])}" : '' unless q.options.empty? %>
                   <% else %>
-                    <%= resp[:texts][q.id].nil? ? '' : resp[:texts][q.id].gsub(Question::POISON_WORDS_REGEX, '---') %>
+                    <%= resp[:texts][q.id].nil? ? '' : resp[:texts][q.id].gsub(Question::POISON_WORDS_REGEX, '---') %></span><%= q.get_matching_option(resp[:texts][q.id])? ": #{q.get_matching_option(resp[:texts][q.id])}" : '' unless q.options.empty? %>
                   <% end %>
-                </span>
-                <% unless q.options.empty? %>
-                  <%= q.get_matching_option(resp[:texts][q.id])? ": #{q.get_matching_option(resp[:texts][q.id])}" : '' %>
-                <% end %>
               </td>
             <% end %>
             <% if can? :read_full, @poll %>
