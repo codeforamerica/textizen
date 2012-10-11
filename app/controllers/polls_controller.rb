@@ -1,21 +1,22 @@
 class PollsController < ApplicationController
-  # before_filter :authenticate_user!
+  before_filter :authenticate_user!, :only => :index
   load_and_authorize_resource
 
   # GET /polls
   # GET /polls.json
   def index
     # TODO: transfer this to cancan syntax, eventually
-    @polls = current_user.visible_polls
-    if current_user.role?(:superadmin)
-      @groups = Group.all
-    else
-      @groups = current_user.groups
-    end
+    if can? :index, Poll
+      if current_user.role?(:superadmin)
+        @groups = Group.all
+      else
+        @groups = current_user.groups
+      end
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @polls }
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: @polls }
+      end
     end
   end
 
