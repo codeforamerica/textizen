@@ -1,6 +1,6 @@
 <div class="nested-fields question-entry not-counted">
   <!-- <div class="msg-preview"></div> -->
-  <div class='msg-count-error'>This question has too many characters, please edit before saving poll</div>
+  <div class='msg-count-error'>This question has too many characters to fit in one text message</div>
   <%= link_to_remove_association raw("<button class=\"close questiondeleter\">&times;</button>"), f, :class => "top-right", :confirm => f.object.responses.empty? ? "" : "This question already has responses! Deleting it will also delete responses. Are you sure?"  %>
 
   <%= f.input :sequence, :as => :hidden %>
