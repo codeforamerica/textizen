@@ -147,6 +147,7 @@ class Poll < ActiveRecord::Base
         end
       end
       headers.push('Area Code')
+      headers.push('Phone Prefix')
       csv << headers
       self.responses_flat.each do |resp|
         r = []
@@ -159,6 +160,7 @@ class Poll < ActiveRecord::Base
           end
         end
         r.push(resp[:from][1,3])
+        r.push(resp[:from][4,3])
         csv << r
       end
     end
