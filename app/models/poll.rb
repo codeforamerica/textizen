@@ -113,8 +113,10 @@ class Poll < ActiveRecord::Base
     end
 
     if Rails.env == "development"
-      @address = "1#{prefix}"+rand(10 ** 7).to_s
+      @address = "#{prefix}"+rand(10 ** 7).to_s
     else 
+      p "Trying to get number for prefix #{prefix}"
+
       tp = TropoProvisioning.new(ENV['TROPO_USERNAME'], ENV['TROPO_PASSWORD'])
       address = tp.create_address(ENV['TROPO_APP_ID'], { :type => 'number', :prefix => prefix })
 
