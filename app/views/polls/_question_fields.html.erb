@@ -3,7 +3,7 @@
   <div class='msg-count-error'>This question has too many characters to fit in one text message</div>
   <%= link_to_remove_association raw("<button class=\"close questiondeleter\">&times;</button>"), f, :class => "top-right", :confirm => f.object.responses.empty? ? "" : "This question already has responses! Deleting it will also delete responses. Are you sure?"  %>
 
-  <%= f.input :sequence, :as => :hidden %>
+  <%= f.input :sequence, :as => :hidden, :input_html => { :class => "sequence" } %>
 
   <%= f.input :text, :label => "Question", :label_html => { :class => "label-bold" }, :as => :text, :input_html => { :class => "input-xlarge question-input", :rows => 2 }, :hint => "<div class='msg-count'></div>" %>
   <%= f.input :question_type, :label => "Format" , :collection=>[['Open Ended','OPEN'],['Multiple Choice','MULTI'],['Yes / No', 'YN']], :include_blank => false, :disabled => (!@poll.new_record? and !@poll.responses.empty?), :input_html => { :class => "question-type span2" } %>

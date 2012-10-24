@@ -88,6 +88,13 @@ $.fn.charCounter = function(){
   });
 };
 
+function refreshSequence(){
+  $('.question-entry:visible .sequence').each(function(i,el){
+    $(el).val(i);
+    console.log($(el).val());
+  });
+}
+
 function inputsForQuestion(question){
   question = $(question);
   //console.log('inputsForQuestion:');
@@ -122,26 +129,32 @@ function refreshQuestionCounters(){
   $('.followup-field.not-counted').charCounter();
 }
 
-/************* char counter initialization stuff ******************/
+/*************  initialization stuff ******************/
 refreshQuestionCounters();
 $('.confirmation').charCounter();
-$(document).on('insertion-callback', function(event){
-  //console.log('insertion');
-  //console.log(event.target);
-  refreshQuestionCounters();
 
-});
-
-/********* form editing stuff ********************/
 // form editing stuff
 if (typeof initEditing === 'undefined') {
   initEditing = false;
 }
 
+/************* events ********************************/
+$(document).on('insertion-callback', function(event){
+  //console.log('insertion');
+  //console.log(event.target);
+  refreshQuestionCounters();
+});
+
+// fired on every insertion or removal
+$(document).on('insertion-callback after-removal-callback', function(event){
+  console.log('callback');
+  refreshSequence();
+});
+
+
 
 // Javascript that fills out value tag when label is filled out
 
-// TODO THIS BREAKS! ???????? 
 $(document).on("click", "a.add-followup-dummy", function(event){
   $(this).parents(".option-field").find(".add-followup-button").click();
   $(this).parents(".question-entry").addClass("has-followup");
@@ -149,7 +162,10 @@ $(document).on("click", "a.add-followup-dummy", function(event){
 });
 
 // recalculate all form values
+// this fires whenever a followup is added or removed
 $(".item-container").on("insertion-callback after-removal-callback", ".question-entry", function (event){
+
+
   var entry = $(this);
 
   if (entry.find(".followup-field:visible").length === 0){ // second piece is for deleted followups when editing an existing poll
