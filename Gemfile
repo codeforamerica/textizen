@@ -26,12 +26,14 @@ group :assets do
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platform => :ruby
 
+  gem 'jquery-ui-rails'
+
   gem 'uglifier', '>= 1.0.3'
 end
 
 gem 'jquery-rails'
 # gem 'flocky', :git => 'git://github.com/codeforamerica/flocky.git'
-gem 'rails_admin', '~> 0.0.4' 
+gem 'rails_admin', '~> 0.1.2' 
 gem 'tropo-webapi-ruby'
 gem 'factory_girl_rails', '~> 3.3.0'
 gem 'tropo-provisioning'
