@@ -8,7 +8,7 @@ class Poll < ActiveRecord::Base
   has_and_belongs_to_many :groups
   has_many :users, :through => :groups
 
-  has_many :questions, :dependent => :destroy
+  has_many :questions, :order => "sequence ASC, created_at ASC", :dependent => :destroy
   has_many :responses, :through => :questions
 #  has_many :options, :through => :questions # broken
   has_many :follow_up, :through => :questions
