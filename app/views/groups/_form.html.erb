@@ -90,7 +90,7 @@
   <div class="form-inputs">
     <%= f.input :name, :label => "Group name", :hint => "E.g. 'Philadelphia2035' or 'Chattanooga Regional Planning'" %>
     <%= f.input :exchange, :label => "Preferred area code",
-      :collection => @group.get_exchanges
+      :collection => @group.exchanges
     %>
   <!--
   <%= f.input :name, :label => "Timezone",
