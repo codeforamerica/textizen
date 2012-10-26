@@ -27,16 +27,14 @@ describe PollsController do
     end
 
 
-    describe "boilerplate stuff" do
-      describe "index" do
-        it "should set @polls" do
-          get :index
-          assigns[:polls].should_not be_nil
-        end
+    describe "#index" do
+      it "should set @polls" do
+        get :index
+        assigns[:polls].should_not be_nil
       end
     end
 
-    describe "show/edit" do
+    describe "#show/edit" do
       it "should set @poll and a @page_title" do
         [:show,:edit].each do |meth|
           get meth, {:id=>@poll.id}
@@ -44,5 +42,21 @@ describe PollsController do
         end
       end
     end
+
+    context "logged in superadmin" do
+      before do
+        subject.current_user.role = "superadmin"
+        subject.current_user.save
+      end
+
+      describe "GET index" do
+        it "returns all polls if they exist" do
+          poll = FactoryGirl.create(:poll)
+          get :index
+          assigns(:polls).should == Poll.all
+        end
+      end
+    end
+
   end
 end
