@@ -20,6 +20,8 @@ class User < ActiveRecord::Base
   ROLES = %w[editor superadmin]
   validates :role, :inclusion => { :in => ROLES, :message => "%{value} is not a valid user role" }
 
+  validates_uniqueness_of :email
+
 
   # for role inheritance
   def role?(base_role)

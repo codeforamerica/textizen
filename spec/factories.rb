@@ -1,9 +1,13 @@
 FactoryGirl.define do
   
   factory :user do
-    email "test@codeforamerica.org"
+    email Faker::Internet.email
     password "testpass"
     password_confirmation "testpass"
+    role "editor"
+  end
+
+  factory :group do
   end
 
   factory :poll do

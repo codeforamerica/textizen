@@ -37,7 +37,9 @@ RSpec.configure do |config|
 
   # For testing devise
   config.include Devise::TestHelpers, :type => :controller
+  config.include Devise::TestHelpers, :type => :view
   config.extend ControllerMacros, :type => :controller
+  config.extend ControllerMacros, :type => :view
 end
 
 def fixture_path

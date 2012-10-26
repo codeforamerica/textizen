@@ -2,9 +2,14 @@ require 'spec_helper'
 
 describe Poll do
 
+  it { should belong_to(:author) }
+  it { should have_many(:users) }
+  it { should have_and_belong_to_many(:groups) }
   it { should have_many(:questions) }
   it { should have_many(:responses) }
-  it { should belong_to(:user) }
+  it { should have_many(:follow_up) }
+  it { should have_many(:follow_up_options) }
+  it { should have_many(:follow_up_responses) }
 #  it { should authenticate_user }
   
 
@@ -73,7 +78,7 @@ describe Poll do
          with(:headers => {'Content-Type'=>'application/json'}).
          to_return(:status => 200, :body => '{"dust": "dust"}', :headers => {})
       stub_request(:post, "https://api.tropo.com/v1/applications//addresses").
-         with(:body => "{\"type\":\"number\",\"prefix\":\"1415\"}",
+         with(:body => "{\"type\":\"number\",\"prefix\":\"1215\"}",
               :headers => {'Content-Type'=>'application/json'}).
          to_return(:status => 200, :body => @number_response, :headers => {'Content-Type'=>'application/json'})
       result = @poll.get_phone_number

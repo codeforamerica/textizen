@@ -6,6 +6,7 @@ class Group < ActiveRecord::Base
   has_many :users, :through => :group_users
 
   after_save :update_polls
+
   def update_polls
     unless poll_ids.nil?
       self.polls do |poll|
@@ -30,6 +31,7 @@ class Group < ActiveRecord::Base
       end
     end
   end
+
   def get_exchanges
     begin
       json = open("https://api.tropo.com/v1/exchanges", :http_basic_authentication=>[ENV['TROPO_USERNAME'],ENV['TROPO_PASSWORD']]).read
