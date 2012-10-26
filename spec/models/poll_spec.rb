@@ -11,10 +11,8 @@ describe Poll do
   it { should have_many(:follow_up_options) }
   it { should have_many(:follow_up_responses) }
 #  it { should authenticate_user }
-  
-
-
-  describe "check get_next_question" do
+  #
+  describe "validate phone number uniqueness" do
     pending
   end
 
@@ -61,13 +59,11 @@ describe Poll do
   end
 
 
-  describe "check phone assignment and uniqueness" do
+  describe "check phone assignment" do
 
     before(:each) do
       @poll = FactoryGirl.create(:poll)
     end
-    
-    it { should validate_uniqueness_of(:phone) }
     
     it "should get a phone number from tropo" do
       @number_response = '
