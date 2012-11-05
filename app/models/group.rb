@@ -16,8 +16,6 @@ class Group < ActiveRecord::Base
   end
 
   def save_users_by_emails(emails, current_user = nil)
-    puts "**Saving emails**"
-    puts emails
     emails.each do |email|
       unless email.blank? or !Devise.email_regexp.match(email)
         user = User.where(:email => email)
@@ -34,7 +32,7 @@ class Group < ActiveRecord::Base
 
   def get_exchanges
     begin
-      json = open("https://api.tropo.com/v1/exchanges", :http_basic_authentication=>[ENV['TROPO_USERNAME'],ENV['TROPO_PASSWORD']]).read
+      json = open("https://api.tropo.com/v1/exchanges", :http_basic_authentication=>[ENV['TROPO_USERNAME'], ENV['TROPO_PASSWORD']]).read
       result = JSON.parse(json).find_all{|item| item["smsEnabled"]==true and item["country"] == "United States" } # no canada for now
       result.sort_by! {|x| x['prefix']}
       result_hash = result.reduce(Hash.new()) do |set, val| # concatenate all cities and combine duplicate area codes
@@ -53,7 +51,7 @@ class Group < ActiveRecord::Base
         # i['label'] << "#{i['country']}"
         i
       end
-    rescue Exception=>e
+    rescue StandardError=>e
       result_hash = {'1415' => {label: '415 - San Francisco', prefix: '1415'}}
     ensure
       return result_hash

@@ -40,10 +40,10 @@ RSpec.configure do |config|
   config.include Devise::TestHelpers, :type => :view
   config.extend ControllerMacros, :type => :controller
   config.extend ControllerMacros, :type => :view
-end
 
-def fixture_path
-  File.expand_path("../fixtures", __FILE__)
+  config.treat_symbols_as_metadata_keys_with_true_values = true
+  config.filter_run_including :focus
+  config.run_all_when_everything_filtered = true
 end
 
 def fixture(file)

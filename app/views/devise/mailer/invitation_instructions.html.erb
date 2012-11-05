@@ -1,6 +1,6 @@
 <p>Dear <%= @resource.email %>,</p>
 
-<p>You've been invited to Textizen by <%=@resource.invited_by.email %>. Once you create an account, you’ll be able to view, edit, and create text-message surveys for citizen feedback.</p>
+<p>You've been invited to Textizen by <%= @resource.invited_by != nil ? @resource.invited_by.email : "info@textizen.com" %>. Once you create an account, you’ll be able to view, edit, and create text-message surveys for citizen feedback.</p>
 
 <p style="display:inline-block; background-color:#ADD8E6; font-size:16px; padding:4px 8px;"><%= link_to 'Create your account »', accept_invitation_url(@resource, :invitation_token => @resource.invitation_token) %></p>
 
