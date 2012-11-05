@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(:version => 20120914203730) do
     t.datetime "updated_at",       :null => false
     t.integer  "sequence"
     t.integer  "parent_option_id"
+    t.string   "type"
   end
 
   create_table "rails_admin_histories", :force => true do |t|
@@ -68,7 +69,7 @@ ActiveRecord::Schema.define(:version => 20120914203730) do
     t.string   "username"
     t.integer  "item"
     t.string   "table"
-    t.integer  "month"
+    t.integer  "month",      :limit => 2
     t.integer  "year",       :limit => 8
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
@@ -86,7 +87,7 @@ ActiveRecord::Schema.define(:version => 20120914203730) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                                 :default => "", :null => false
+    t.string   "email",                                 :default => "",    :null => false
     t.string   "encrypted_password",     :limit => 128, :default => ""
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -96,8 +97,9 @@ ActiveRecord::Schema.define(:version => 20120914203730) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                                            :null => false
-    t.datetime "updated_at",                                            :null => false
+    t.datetime "created_at",                                               :null => false
+    t.datetime "updated_at",                                               :null => false
+    t.boolean  "admin",                                 :default => false
     t.string   "role"
     t.string   "invitation_token",       :limit => 60
     t.datetime "invitation_sent_at"

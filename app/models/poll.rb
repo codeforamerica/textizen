@@ -98,7 +98,6 @@ class Poll < ActiveRecord::Base
   end
 
   def set_new_phone_number
-    puts 'set new phone number'
     self.phone ||= get_phone_number
   end
 
@@ -106,7 +105,6 @@ class Poll < ActiveRecord::Base
   # if the number was assigned to a previous (closed) poll, then it calls itself again
   # once a non-duplicate number is found, all duplicates are destroyed
   def get_phone_number(addresses_to_clear = [])
-    puts 'get phone number'
     prefix = '1215'
     unless self.groups.empty? or self.groups.first.exchange.nil? # just in case
       prefix = self.groups.first.exchange
@@ -115,7 +113,7 @@ class Poll < ActiveRecord::Base
     if Rails.env == "development"
       @address = "#{prefix}"+rand(10 ** 7).to_s
     else 
-      p "Trying to get number for prefix #{prefix}"
+      logger.info "Trying to get number for prefix #{prefix}"
 
       tp = TropoProvisioning.new(ENV['TROPO_USERNAME'], ENV['TROPO_PASSWORD'])
       address = tp.create_address(ENV['TROPO_APP_ID'], { :type => 'number', :prefix => prefix })
