@@ -10,6 +10,10 @@ FactoryGirl.define do
   factory :group do
   end
 
+  factory :group_user do
+    group
+  end
+
   factory :poll do
     start_date { Time.now - 1.week }
     end_date { Time.now + 1.week }
