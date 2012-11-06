@@ -65,9 +65,7 @@ describe Poll do
   describe "relationship methods" do
     describe "#questions_all" do
       it "returns all questions and follow ups associated with a poll" do
-        q = FactoryGirl.create(:question_with_follow_up)
-        poll.questions << q
-        poll.save
+        q = FactoryGirl.create(:question_with_follow_up, :poll => poll)
 
         poll.questions_all.should include(q)
         poll.questions_all.should include(q.get_follow_up)
@@ -76,9 +74,7 @@ describe Poll do
 
     describe "#responses_all" do
       it "returns all responses associated with questions and follow ups" do
-        q = FactoryGirl.create(:question_with_responses)
-        poll.questions << q
-        poll.save
+        q = FactoryGirl.create(:question_with_responses, :poll => poll)
 
         responses = poll.responses_all
         responses.length.should == 1
@@ -87,20 +83,58 @@ describe Poll do
     end
 
     describe "#options_all" do
+      it "returns all options associated with questions and follow ups" do
+        q = FactoryGirl.create(:question_yn, :poll => poll)
 
+        opts = poll.options_all
+        opts.length.should == 4
+        opts.first.class.should == Option
+      end
     end
 
     describe "#responses_flat" do
+      it "organizes the responses for a poll by number" do
+        q = FactoryGirl.create(:question_with_responses, :poll => poll)
 
+        res = poll.responses_flat
+        res.length.should == 1
+        res[0][:from].should == Response.first.from
+        res[0][:texts].should_not be_nil
+        res[0][:first_response_time].should == res[0][:last_response_time]
+      end
     end
 
     describe "#question_headers" do
+      it "returns the header information for all of the questions attached to a poll" do
+        q = FactoryGirl.create(:question_with_follow_up, :poll => poll)
 
+        head = poll.question_headers
+        head.length.should == 2
+        head[0][:id].should == q.id
+        head[0][:text].should == q.text
+      end
+    end
+
+    describe "#time_since_last_response" do
+      context "poll has responses" do
+        it "returns the time since the poll last recieved a response" do
+          q = FactoryGirl.create(:question_with_responses, :poll => poll)
+
+          t = poll.time_since_last_response
+          t.should > 0
+        end
+      end
+
+      context "poll has no responses" do
+        it "returns 0" do
+          poll.time_since_last_response.should == 0
+        end
+      end
     end
   end
 
 
-  describe "phone number assignment" do
+  describe "phone number assignment and disassignment" do
     before :each do 
       stub_request(:get, "https://api.tropo.com/v1/users/").
          with(:headers => {'Content-Type'=>'application/json'}).
@@ -127,6 +161,31 @@ describe Poll do
     it "respects passed-in phone number parameters" do
       @poll = FactoryGirl.create(:poll, :phone=>"14151112222")
       @poll.phone.should == "14151112222"
+    end
+
+    describe "#destroy_phone_number" do
+      pending
+    end
+  end
+
+
+  describe "export methods" do
+    describe "#to_csv" do
+      it "generates a csv file with responses" do
+        q = FactoryGirl.create(:question_with_responses, :poll => poll)
+        r1 = q.responses.first
+
+        csv = CSV.parse(poll.to_csv)
+        headers = ['Timestamp:first', 'Timestamp:last', q.text, "Area Code", "Phone Prefix"]
+        row1 = [r1.created_at.to_s, r1.created_at.to_s, r1[:response], r1[:from][1,3], r1[:from][4,3]]
+        csv.class.should == Array
+        csv[0].should == headers
+        csv[1].should == row1
+      end
+    end
+
+    describe "#time_series" do
+
     end
   end
 end

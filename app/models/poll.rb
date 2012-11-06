@@ -31,6 +31,10 @@ class Poll < ActiveRecord::Base
   end
 
 
+  #######################################
+  #ASSOCIATION HELPER METHODS
+  #######################################
+
   # returns all questions, including followups IN ORDER
   def questions_all
     allq = []
@@ -45,7 +49,7 @@ class Poll < ActiveRecord::Base
   #return an array of all question headers
   # [{id: 0, title: 'whatever', sequence: 0}]
   def question_headers
-    self.all_questions.collect{ |q| q.header }
+    self.questions_all.collect{ |q| q.header }
   end
 
   # returns the next unanswered question for this person
@@ -57,7 +61,6 @@ class Poll < ActiveRecord::Base
     end
     false
   end
-
 
   def options_all
     #return self.options + self.follow_up_options #broken
@@ -86,6 +89,20 @@ class Poll < ActiveRecord::Base
     return _flat
   end
 
+  # returns the time since the last response for the poll
+  def time_since_last_response
+    if self.responses.length > 0
+      Time.now - self.responses.sort{|a,b| a.created_at <=> b.created_at}.last.created_at
+    else
+      return 0
+    end
+  end
+
+
+
+  #######################################
+  #PHONE NUMBER METHODS
+  #######################################
 
   def set_new_phone_number
     self.phone ||= get_phone_number
@@ -122,6 +139,23 @@ class Poll < ActiveRecord::Base
     address
   end
 
+  def destroy_phone_number(phone = '')
+    phone = phone || self.phone
+    phone = Poll.denormalize_phone(phone)
+    begin
+      tp = TropoProvisioning.new(ENV['TROPO_USERNAME'], ENV['TROPO_PASSWORD'])
+      tp.delete_address(ENV['TROPO_APP_ID'], phone)
+    rescue StandardError=>e
+      Rails.logger.debug("#{phone} could not be destroyed")
+    end
+  end
+
+
+
+  #######################################
+  #DATA PRESENTATION METHODS
+  #######################################
+
   def to_csv
     Rails.logger.info "Converting poll to CSV"
 
@@ -157,17 +191,6 @@ class Poll < ActiveRecord::Base
     csv_data
   end
 
-  def destroy_phone_number(phone = '')
-    phone = phone || self.phone
-    phone = Poll.denormalize_phone(phone)
-    begin
-      tp = TropoProvisioning.new(ENV['TROPO_USERNAME'], ENV['TROPO_PASSWORD'])
-      tp.delete_address(ENV['TROPO_APP_ID'], phone)
-    rescue StandardError=>e
-      Rails.logger.debug("#{phone} could not be destroyed")
-    end
-  end
-
   # returns an array of responses per day suitable for google chart time series visualization
   def time_series
     datehash = {}
@@ -187,17 +210,10 @@ class Poll < ActiveRecord::Base
     datearray
   end
 
-  # returns the time since the last response for the poll
-  def time_since_last_response
-    if self.responses.length > 0
-      Time.now - self.responses.sort{|a,b| a.created_at <=> b.created_at}.last.created_at
-    else
-      return 0
-    end
-  end
 
-
+  #######################################
   #CLASS METHODS
+  #######################################
 
   #takes in a phone number and removes a plus if it has one
   def self.normalize_phone(phone)
