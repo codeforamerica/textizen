@@ -174,18 +174,52 @@ describe Poll do
       it "generates a csv file with responses" do
         q = FactoryGirl.create(:question_with_responses, :poll => poll)
         r1 = q.responses.first
-
-        csv = CSV.parse(poll.to_csv)
         headers = ['Timestamp:first', 'Timestamp:last', q.text, "Area Code", "Phone Prefix"]
         row1 = [r1.created_at.to_s, r1.created_at.to_s, r1[:response], r1[:from][1,3], r1[:from][4,3]]
+
+        csv = CSV.parse(poll.to_csv)
+
         csv.class.should == Array
         csv[0].should == headers
         csv[1].should == row1
       end
+
+      it "includes options in csv" do
+        q = FactoryGirl.create(:question_yn, :poll => poll)
+        r1 = FactoryGirl.create(:response_y, :question => q)
+        headers = ['Timestamp:first', 'Timestamp:last', q.text, q.text + " (value)", "Area Code", "Phone Prefix"]
+
+        csv = CSV.parse(poll.to_csv)
+
+        csv[0].should == headers
+      end
     end
 
     describe "#time_series" do
+      context "running poll" do
+        it "returns an array of responses per day since the poll began" do
+          q = FactoryGirl.create(:question_with_responses, :poll => poll)
 
+          series = poll.time_series
+
+          series.length.should == 9
+          6.times do |i|
+            series[i].should == 0
+          end
+          series[7].should == 1
+        end
+      end
+
+      context "poll has ended" do
+        it "returns an array of responses per day for the poll's duration" do
+          q = FactoryGirl.create(:question_with_responses, :poll => poll)
+          poll.update_attribute(:end_date, Time.now - 2.days)
+
+          series = poll.time_series
+
+          series.length.should == 7
+        end
+      end
     end
   end
 end
