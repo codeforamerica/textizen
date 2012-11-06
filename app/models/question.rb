@@ -22,10 +22,8 @@ class Question < ActiveRecord::Base
 
   def get_matching_option(response)
     return false unless response
-    self.options.each do |o|
-     return o.text if o.match?(response)
-    end
-    false
+    match = self.options.detect{ |o| o.match?(response) }
+    match.nil? ? false : match.text
   end
 
 

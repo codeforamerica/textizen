@@ -146,10 +146,38 @@ describe Question do
   end
 
   describe "#to_sms" do
-    pending
+    context "open question" do
+      it "returns the text of the question" do
+        question.to_sms.should == "Where do you buy groceries? "
+
+      end
+    end
+
+    context "yes/no question" do
+      it "returns the text of the question with yes/no instructions" do
+        question = FactoryGirl.create(:question_yn)
+        
+        question.to_sms.should == "Would you ride light rail along the boulevard? Reply with Yes or No"
+      end
+    end
+
+    context "multiple choice question" do
+      it "returns the text of the questions with multiple choice options appended" do
+        question = FactoryGirl.create(:question_multi)
+
+        question.to_sms.should == "Where do you buy groceries? Reply with letter: A wal-mart / B farmers market / C corner store"
+      end
+    end
   end
 
   describe "#response_histogram" do
-    pending
+    it "returns an array of arrays of words and how frequently they occur in question responses" do
+      question = FactoryGirl.create(:question_with_responses)
+
+      hist = question.response_histogram
+
+      hist.length.should == 3
+      hist.should == [["buy", 1], ["groceries", 1], ["face", 1]]
+    end
   end
 end
