@@ -57,6 +57,7 @@ class Question < ActiveRecord::Base
     false
   end
 
+
   def valid_response?(response)
     return true if self.open?
     return true if self.options.any? { |o| o.match?(response) }
@@ -85,6 +86,10 @@ class Question < ActiveRecord::Base
     self.responses.where(from: from).length > 0
   end
 
+
+  def header
+    { id: id, text: text, sequence: sequence }
+  end
 
   #returns a nicely formatted string for sending via sms
   def to_sms
