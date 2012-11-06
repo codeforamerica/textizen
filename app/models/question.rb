@@ -18,6 +18,8 @@ class Question < ActiveRecord::Base
   validates_presence_of :question_type#, :poll_id
   validates_presence_of :text
 
+  scope :in_order, order(:sequence)
+
   def get_matching_option(response)
     return false unless response
     self.options.each do |o|

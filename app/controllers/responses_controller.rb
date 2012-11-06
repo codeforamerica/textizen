@@ -18,7 +18,7 @@ class ResponsesController < ApplicationController
       if @poll.running? #if the poll is running
         logger.debug "poll running"
         if @poll.questions.length > 0 #and has questions
-          @poll.questions_ordered.each do |q|
+          @poll.questions.in_order.each do |q|
             if !q.answered?(@from) #and has no responses from this person
               if q.valid_response?(@response) #make sure it's  valid response
                 logger.debug "valid response, creating new response"

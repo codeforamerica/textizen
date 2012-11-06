@@ -20,10 +20,6 @@ class Poll < ActiveRecord::Base
   before_create :set_new_phone_number
   before_destroy :destroy_phone_number
 
-
-  def questions_ordered
-    return self.questions.order(:sequence)
-  end
   def running?
     return self.start_date < Time.now && self.end_date > Time.now
   end
@@ -41,7 +37,7 @@ class Poll < ActiveRecord::Base
   # returns all questions, including followups IN ORDER
   def questions_all
     allq = []
-    self.questions_ordered.each do |q|
+    self.questions.in_order.each do |q|
       allq.push(q)
       f = q.get_follow_up
       allq.push(f) if f
@@ -90,7 +86,7 @@ class Poll < ActiveRecord::Base
   # returns the next unanswered question for this person
   def get_next_question(phone)
     if self.questions.length > 0
-      self.questions_ordered.each do |q|
+      self.questions.in_order.each do |q|
         return q if q.responses.where(from: phone).length == 0
       end
     end
