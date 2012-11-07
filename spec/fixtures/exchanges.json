@@ -1,0 +1,33 @@
+[
+  {
+    "prefix": "1747",
+    "city": "Agoura",
+    "state": "CA",
+    "country": "United States",
+    "description": "Phone Number w/ SMS",
+    "smsEnabled": true
+  },
+  {
+    "prefix": "1289",
+    "city": "AJAX-PICKERING",
+    "country": "Canada",
+    "description": "Phone Number w/ SMS",
+    "smsEnabled": true
+  },
+  {
+    "prefix": "1234",
+    "city": "Akron",
+    "state": "OH",
+    "country": "United States",
+    "description": "Phone Number w/ SMS",
+    "smsEnabled": true
+  },
+  {
+    "prefix": "1518",
+    "city": "Albany",
+    "state": "NY",
+    "country": "United States",
+    "description": "Phone Number w/ SMS",
+    "smsEnabled": true
+  }
+]

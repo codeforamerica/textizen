@@ -1,9 +1,13 @@
 FactoryGirl.define do
   
   factory :user do
-    email "test@codeforamerica.org"
+    email Faker::Internet.email
     password "testpass"
     password_confirmation "testpass"
+    role "editor"
+  end
+
+  factory :group do
   end
 
   factory :poll do
@@ -81,10 +85,10 @@ FactoryGirl.define do
       question_type 'YN'
       text "Would you ride light rail along the boulevard?"
       after(:create) do |question, evaluator|
-        @y = FactoryGirl.create(:option_y, question: question) 
-        @fup = FactoryGirl.create(:question)
-        @y.follow_up = @fup
-        @y.save
+        y = FactoryGirl.create(:option_y, question: question)
+        fup = FactoryGirl.create(:question)
+        y.follow_up << fup
+        y.save
         FactoryGirl.create(:option_n, question: question) 
       end
     end

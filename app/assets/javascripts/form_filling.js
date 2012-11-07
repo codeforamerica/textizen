@@ -1,4 +1,6 @@
 $(document).ready(function(){
+
+  // char counter vars
   var separator = " / ";
   var alphabet = ['A','B','C','D','E','F','G'];
   var submitBtn = $('input[type=submit]');
@@ -8,6 +10,7 @@ $(document).ready(function(){
     this.node = $(node); // the question/confirmation node with child inputs to count
     this.msgPreviewNode = $(this.node.find('.msg-preview')[0]); // the node to put the preview stuff
     this.countNode = $(this.node.find('.msg-count')[0]);
+    this.errorNode = $(this.node.find('.msg-count-error')[0]);
 
     this.refreshInputs = function(){
       this.inputs = inputsForQuestion(node); // call this to pull in any newly added options
@@ -22,11 +25,15 @@ $(document).ready(function(){
         this.countNode.removeClass('error');
         submitBtn.attr('disabled', false);
         submitBtn.removeClass('disabled');
+        this.node.removeClass('count-error');
+        this.errorNode.hide();
       } else {
         //this.node.find('.control-group').addClass('error');
         this.countNode.addClass('error');
         submitBtn.attr('disabled', true);
         submitBtn.addClass('disabled');
+        this.node.addClass('count-error');
+        this.errorNode.show();
       }
       //console.log("VALIDATE! "+this.valid);
       if (this.msgPreviewNode){
@@ -68,14 +75,16 @@ $(document).ready(function(){
 
     // setup event handlers to count updates when ui changes
     this.node.on('keyup change removal-callback insertion-callback', {counter: this}, function(event){
-      event.data.counter.validate();
       event.data.counter.refreshInputs();
+      event.data.counter.validate();
     });
 
     // mark as counting so we don't add another char counter
     this.node.removeClass('counting');
   };
 
+
+  /******** SMS COUNTER ************/
   $.fn.charCounter = function(){
     this.each(function(index, item){
       //      console.log(item);
@@ -112,31 +121,22 @@ $(document).ready(function(){
   }
   // function to call to add charCounter to any non-counted questions, excluding the first
   function refreshQuestionCounters(){
-    
+
     $($('.question-entry.not-counted').splice(1)).charCounter();
     $('.followup-field.not-counted').charCounter();
   }
 
-  /************* char counter initialization stuff ******************/
-  refreshQuestionCounters();
-  $('.confirmation').charCounter();
+
+  /************* events ********************************/
   $(document).on('insertion-callback', function(event){
     //console.log('insertion');
     //console.log(event.target);
     refreshQuestionCounters();
-
   });
-
-  /********* form editing stuff ********************/
-  // form editing stuff
-  if (typeof initEditing === 'undefined') {
-    initEditing = false;
-  }
 
 
   // Javascript that fills out value tag when label is filled out
 
-  // TODO THIS BREAKS! ???????? 
   $(document).on("click", "a.add-followup-dummy", function(event){
     $(this).parents(".option-field").find(".add-followup-button").click();
     $(this).parents(".question-entry").addClass("has-followup");
@@ -144,7 +144,10 @@ $(document).ready(function(){
   });
 
   // recalculate all form values
+  // this fires whenever a followup is added or removed
   $(".item-container").on("insertion-callback after-removal-callback", ".question-entry", function (event){
+
+
     var entry = $(this);
 
     if (entry.find(".followup-field:visible").length === 0){ // second piece is for deleted followups when editing an existing poll
@@ -310,9 +313,46 @@ $(document).ready(function(){
     }
   });
 
+  /********** SORTABLE ***************/
+
+  function initSortable(){
+    $('.item-container').sortable({
+      items:".question-entry",
+      update: function(event, ui){
+        refreshSequence();
+      }
+    });
+  }
+
+  function refreshSequence(){
+    $('.question-entry:visible .sequence').each(function(i,el){
+      $(el).val(i);
+      //console.log($(el).val());
+    });
+  }
 
 
- /** INITIALIZATION STUFF **/ 
+  // fired on every insertion or removal. TODO: don't set this up until the UI has loaded?
+  $(document).on('insertion-callback after-removal-callback', function(){
+    refreshSequence();
+  });
+
+
+
+
+  /*************  initialization stuff ******************/
+  // sortable
+  initSortable();
+
+  // question counters
+  refreshQuestionCounters();
+  $('.confirmation').charCounter();
+
+  // form editing stuff
+  if (typeof initEditing === 'undefined') {
+    initEditing = false; // ewww global
+  }
+
   if (initEditing === false && $('.question-entry').length === 0) { // make sure we're not editing or failing validation with saved stuff
     //console.log("not editing");
     $('#add_qn_button').click();

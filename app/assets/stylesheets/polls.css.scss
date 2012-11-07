@@ -209,8 +209,17 @@ abbr[title='required'] {
 .msg-count.error {
   color: #B94A48;
   .msg-count-status {
-  color: #B94A48;
+    color: #B94A48;
+  }
 }
+.msg-count-error {
+  float: left;
+  padding: 5px 5px 0;
+  color: #B94A48;
+  display: none;
+  margin-top: -28px;
+  margin-left: 156px;
+
 }
 
 .twitter-share-button {
@@ -220,3 +229,4 @@ abbr[title='required'] {
 .twittershare .twitter-share-button {
   vertical-align: top;
 }
+

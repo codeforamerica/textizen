@@ -20,6 +20,8 @@ class User < ActiveRecord::Base
   ROLES = %w[editor superadmin]
   validates :role, :inclusion => { :in => ROLES, :message => "%{value} is not a valid user role" }
 
+  validates_uniqueness_of :email
+
 
   # for role inheritance
   def role?(base_role)
@@ -37,7 +39,5 @@ class User < ActiveRecord::Base
       return polls | created_polls #union of poll and created_polls for non admin users
     end
   end
-
-
 
 end
