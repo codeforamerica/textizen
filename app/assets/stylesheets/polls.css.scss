@@ -31,6 +31,7 @@ require ios-checkboxes
   padding-top: 0px;
   margin-bottom: 30px;
   /* Prettifications */
+  background-color: #ddd;
   border:1px solid #999;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -53,8 +54,10 @@ require ios-checkboxes
   .question-entry	{
     border-bottom: 1px solid #999;
     position: relative;
-    margin-top: 30px;
+    padding-top: 30px;
     padding-bottom: 20px;
+    background-color: #fff;
+    cursor: pointer;
 
     .top-right	{    // For the "delete question" icon
       position: absolute;
@@ -154,7 +157,7 @@ require ios-checkboxes
 }
 
 .questiondeleter{
-  margin: 2px 5px 0 0;
+  margin: 31px 5px 0 0;
 }
 
 .top-right:hover{
