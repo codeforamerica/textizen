@@ -31,14 +31,13 @@ require ios-checkboxes
   padding-top: 0px;
   margin-bottom: 30px;
   /* Prettifications */
-  background-color: #ddd;
   border:1px solid #999;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
   -webkit-box-shadow: 1px 1px 1px rgba(50, 50, 50, 0.49);
   -moz-box-shadow:    1px 1px 1px rgba(50, 50, 50, 0.49);
-  box-shadow:         1px 1px 1px rgba(50, 50, 50, 0.49);
+  box-shadow:         1px 1px 1px rgba(50, 50, 50, 0.49); 
 
   .form-actions 	
   {
@@ -118,6 +117,25 @@ require ios-checkboxes
       }
     }
   }
+
+  /* UI affordances for dragging */
+  
+  .question-entry:hover {
+    /* border-left: 2px solid #eee; */
+    -moz-box-shadow: inset 3px 0 0px 0px #eee;
+    -webkit-box-shadow: inset 3px 0 0px 0px #eee;
+    box-shadow: inset 3px 0 0px 0px #eee;
+  }
+
+  /* Change style while dragging */
+  /* TODO: Switch to this class when dragging */
+
+  .question-entry-dragging {
+    opacity: 0.8;
+    cursor: move;
+    border: 1px dotted #999;
+  }
+
   /* hide all follow-up buttons for any question that already has one follow-up */
   .question-entry.has-followup {
     .add-followup-dummy {
@@ -141,6 +159,10 @@ require ios-checkboxes
   {
     margin-left: 5px;
   }
+}
+
+.dragenabled {
+  background-color: #ddd;
 }
 
 .remove-follow-up {
