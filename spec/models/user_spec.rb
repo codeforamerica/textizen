@@ -7,8 +7,14 @@ describe User do
   it { should have_many(:group_users) }
   it { should have_many(:groups) }
   it { should have_many(:polls) }
-  
-  it { should validate_uniqueness_of(:email) }
+
+  describe "validations" do
+    before :each do
+      @user = FactoryGirl.create(:user)
+    end
+
+    it { should validate_uniqueness_of(:email) }
+  end
 
   describe "#role?" do
     it "returns true if argument matches user role" do
