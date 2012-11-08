@@ -17,7 +17,7 @@
 <div class="row">
   <div class="span6">
     <ol>
-      <% @poll.questions_ordered.each do |q| %>
+      <% @poll.questions.in_order.each do |q| %>
         <li class="question"><span class="qtext"><%= q.text %></span> <span class="qtype">(<%= q.question_type %>)</span></li>
         <% unless q.options.empty? %>
           <ul class="optionslist">

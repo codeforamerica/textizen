@@ -29,7 +29,7 @@
 
                 <td><%= sparkline poll.time_series %><br><span class="caption">latest <%= format_time poll.time_since_last_response %> ago</span></td>
 
-                <td>Live <%= poll.start_date.strftime("%m/%d/%y %I:%M %p")%><br><%= time_ago_in_words(poll.start_date, include_seconds = false) %> ago</td>
+                <td><%= format_poll_running(poll)%><br/><%= raw format_poll_ran_dates(poll)%></td>
 
                 <td id="pollactions">
                   <%= link_to(raw('<i class="icon-th-large"></i>Show'), poll) %>

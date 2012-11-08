@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe "groups/new" do
+  login_user
+
   before(:each) do
-    assign(:group, stub_model(Group,
-      :name => "MyString"
-    ).as_new_record)
+    assign(:group, stub_model(Group).as_new_record)
   end
 
   it "renders new group form" do

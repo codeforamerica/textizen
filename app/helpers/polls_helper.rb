@@ -13,6 +13,27 @@ module PollsHelper
     return image_tag(Gchart.sparkline(:data=>data, :width=>width, :height=>height, :bg=>'00000000'), :style=>style, :class=>_class)
   end
 
+  def format_poll_running(poll)
+    return poll.running? ? "Live" : "Ended"
+  end
+  def format_poll_date(date)
+    return date.strftime("%m/%d/%y")
+  end
+
+  def format_poll_ran_dates(poll)
+    if poll.running?
+      str = "Running #{time_ago_in_words(poll.start_date, include_seconds = false)} &bull; #{format_poll_date(poll.start_date)} &ndash; now"
+    else
+      str = "Ran #{distance_of_time_in_words(poll.end_date, poll.start_date)} &bull; #{format_poll_date(poll.start_date)} &ndash;  #{format_poll_date(poll.end_date)}"
+    end
+    return str
+    #str = poll.running? ? "Running " : "Ran "
+    #<%= poll.start_date.strftime("%m/%d/%y %I:%M %p")%><
+
+    #             %= time_ago_in_words(poll.start_date, include_seconds = false) %> ago</td>
+  end
+    
+
   #formats seconds into days, minutes, etc
   def format_time(secs)
     if secs < 60
