@@ -30,6 +30,12 @@ class Group < ActiveRecord::Base
     end
   end
 
+  def exchanges
+    Rails.cache.fetch("group-#{id}-exchanges") do
+      self.get_exchanges
+    end
+  end
+
   def get_exchanges
     begin
       json = open("https://api.tropo.com/v1/exchanges", :http_basic_authentication=>[ENV['TROPO_USERNAME'], ENV['TROPO_PASSWORD']]).read
@@ -54,6 +60,7 @@ class Group < ActiveRecord::Base
     rescue StandardError=>e
       result_hash = {'1415' => {label: '415 - San Francisco', prefix: '1415'}}
     ensure
+      Rails.cache.write("group-#{id}-exchanges", result_hash)
       return result_hash
     end
   end

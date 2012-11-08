@@ -26,7 +26,7 @@
       <% end %>
 
       <h3>Questions</h3>
-      <div class="item-container">
+      <div class="item-container dragenabled">
         <%= f.simple_fields_for :questions do |question| %>
           <%= render 'question_fields', :f => question %>
         <% end %>

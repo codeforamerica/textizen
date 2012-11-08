@@ -47,6 +47,7 @@ GEM
     coffee-script-source (1.2.0)
     crack (0.3.1)
     daemons (1.1.8)
+    dalli (2.3.0)
     devise (2.1.2)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -223,6 +224,7 @@ DEPENDENCIES
   cancan
   cocoon (= 1.0.21)
   coffee-rails (~> 3.2.1)
+  dalli
   devise (>= 2.0.0)
   devise_invitable (~> 1.0.0)
   factory_girl_rails (~> 3.3.0)
