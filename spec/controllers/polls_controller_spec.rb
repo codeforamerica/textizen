@@ -9,11 +9,39 @@ describe PollsController do
       @poll = FactoryGirl.create(:poll, :author => subject.current_user ) #:user=>controller.current_user
     end
 
-    describe "#create" do
-      it "after successful create, should redirect to show page" do
+    describe "GET new" do
+      it "assigns @poll" do
+        get :new
+        assigns[:poll].should_not be_nil
+      end
+
+      it "has a 200 status code" do
+        get :new
+        response.code.should == "200"
+      end
+    end
+
+    describe "POST create" do
+      it "redirects to the show page after successful create" do
         post :create, :poll=> FactoryGirl.attributes_for(:poll)
         assigns[:poll].should_not be_nil # :poll should exist
         response.should redirect_to(assigns[:poll])
+      end
+    end
+
+    describe "PUT update" do
+      context "valid params" do
+        it "redirects to poll page" do
+          put :update, :id => @poll.id, :poll => { :title => "Where my groceries at?" }
+          response.should redirect_to(@poll)
+        end
+      end
+    end
+
+    describe "DELETE destroy" do
+      it "redirects to poll index page" do
+        delete :destroy, :id => @poll.id
+        response.should redirect_to(polls_path)
       end
     end
 
@@ -27,7 +55,7 @@ describe PollsController do
     end
 
 
-    describe "#index" do
+    describe "GET index" do
       it "should set @polls" do
         get :index
         assigns[:polls].should_not be_nil
@@ -43,6 +71,48 @@ describe PollsController do
       end
     end
 
+    describe "GET clear_responses" do
+      it "removes responses for a poll" do
+        poll = FactoryGirl.create(:question_with_responses, :poll => @poll)
+        poll.responses.count.should > 0
+
+        get :clear_responses, :id => @poll.id
+
+        poll.responses.count.should == 0
+      end
+
+      it "redirects to poll page" do
+        get :clear_responses, :id => @poll.id
+
+        response.should redirect_to(@poll)
+      end
+    end
+
+    describe "PUT publish" do
+      context "unpublished poll" do
+        it "publishes the selected poll" do
+          @poll.update_attribute(:public, true)
+          put :publish, :id => @poll.id
+
+          @poll.public.should be_true
+        end
+      end
+
+      context "published poll" do
+        it "unpublishes the poll" do
+          put :publish, :id => @poll.id
+
+          @poll.public.should be_false
+        end
+      end
+
+      it "redirects to show page if save is successful" do
+        put :publish, :id => @poll.id
+
+        response.should redirect_to(@poll)
+      end
+    end
+
     context "logged in superadmin" do
       before do
         subject.current_user.role = "superadmin"
@@ -55,6 +125,10 @@ describe PollsController do
           get :index
           assigns(:polls).should == Poll.all
         end
+      end
+      
+      describe "POST create" do
+
       end
     end
 
