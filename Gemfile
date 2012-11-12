@@ -37,6 +37,9 @@ gem 'factory_girl_rails', '~> 3.3.0'
 gem 'tropo-provisioning'
 gem 'googlecharts'
 
+group :production do
+  gem 'newrelic_rpm'
+end
 
 group :test, :development do
   gem 'test-unit'
