@@ -38,6 +38,7 @@ gem 'jquery-rails'
 gem 'rails_admin', '~> 0.1.2' 
 gem 'tropo-webapi-ruby'
 gem 'factory_girl_rails', '~> 3.3.0'
+gem 'faker'
 gem 'tropo-provisioning'
 gem 'googlecharts'
 
@@ -49,7 +50,6 @@ group :test, :development do
   gem 'test-unit'
   gem 'rspec-rails'
   gem 'shoulda'
-  gem 'faker'
   gem 'simplecov'
   gem 'foreman'
 end
