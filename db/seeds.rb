@@ -30,14 +30,15 @@ puts "creating responses for p2"
   @r2 = @p2q2.responses.create(:from => @from, :to => @p2.phone, :response => 'everywhere')
 }  
 
-puts "creating p3"
-@op = FactoryGirl.create(:poll_open)
-@responses = ['Acme or Supreme', 'I buy groceries in Paris', 'I love Wal-mart', 'Walgreens at noon', 'CVS', 'Stater bros']
-25.times {
-  @resp = @op.questions.first.responses.create(:from => '1'+rand(10 ** 10).to_s, :to => @op.phone, :response => @responses.sample) 
-  @resp.created_at = (rand*7).days.ago
-  @resp.save
-}
+
+# puts "creating p3"
+# @op = FactoryGirl.create(:poll_open)
+# @responses = ['Acme or Supreme', 'I buy groceries in Paris', 'I love Wal-mart', 'Walgreens at noon', 'CVS', 'Stater bros']
+# 25.times {
+#   @resp = @op.questions.first.responses.create(:from => '1'+rand(10 ** 10).to_s, :to => @op.phone, :response => @responses.sample) 
+#   @resp.created_at = (rand*7).days.ago
+#   @resp.save
+# }
 
 
 
