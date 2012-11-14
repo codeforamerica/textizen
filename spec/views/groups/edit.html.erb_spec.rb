@@ -1,9 +1,12 @@
 require 'spec_helper'
 
 describe "groups/edit" do
+  login_user
+
   before(:each) do
     @group = assign(:group, stub_model(Group,
-      :name => "MyString"
+      :name => "MyString",
+      :users => [ User.last ]
     ))
   end
 

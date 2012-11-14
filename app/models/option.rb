@@ -10,20 +10,20 @@ class Option < ActiveRecord::Base
 
   # determines if a response matched the option, with handling for yes/y/No/n 
   def match?(text)
-    puts "matching #{text} against #{self.value} or #{self.text}"
+    Rails.logger.debug "matching #{text} against #{self.value} or #{self.text}"
     if text
       if text[0] && self.value[0].match(/(y|n)/) && text[0].downcase.match(self.value)
         return true
       end
       if text.downcase.strip == self.value.downcase.strip
-        puts "matched #{self.value}"
+        Rails.logger.debug "matched #{self.value}"
         return true
       elsif text.downcase.match(self.text.downcase)
-        puts "matched #{self.text}"
+        Rails.logger.debug "matched #{self.text}"
         return true
       end
     end
-    puts 'no match'
+    Rails.logger.debug 'no match'
     false
-  end  
+  end
 end

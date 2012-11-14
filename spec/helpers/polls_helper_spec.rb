@@ -11,6 +11,9 @@ require 'spec_helper'
 #   end
 # end
 describe PollsHelper do
+
+  let(:poll){ FactoryGirl.create(:poll) }
+
   describe "format_poll_type" do
     it "should return Open" do
       result = format_poll_type('OPEN')
@@ -26,9 +29,31 @@ describe PollsHelper do
     end
   end
 
+  describe "#format_poll_running" do
+    it "returns whether the poll is running formatted as a string" do
+      format_poll_running(poll).should == "Live"
+    end
+  end
+
+  describe "#format_poll_date" do
+    it "returns a formatted version of the date" do
+      date = Date.new(2001, 10, 5)
+
+      format_poll_date(date).should == "10/05/01"
+    end
+  end
+
+  describe "#format_poll_ran_dates" do
+    it "returns the length of time the poll ran formatted as a string" do
+      format_poll_ran_dates(poll).should =~ /Running /
+    end
+  end
+
   describe "word histogram helper" do
     it "should generate a word histogram hash for a poll's responses" do
-      pending "factory for poll with responses"
+      poll = FactoryGirl.create(:poll_with_responses)
+
+      hist = html_histogram(poll.time_series)
     end
   end
 
@@ -39,7 +64,7 @@ describe PollsHelper do
       @width = 100
       @height = 40
       @expected = "<img alt=\"Chart?chf=bg,s,00000000&amp;chd=s:zzup9kkka&amp;cht=ls&amp;chs=100x40&amp;chxr=0,10,12\" class=\"\" src=\"http://chart.apis.google.com/chart?chf=bg,s,00000000&amp;chd=s:zzUp9kkKA&amp;cht=ls&amp;chs=100x40&amp;chxr=0,10,12\" style=\"\" />"
-      puts sparkline(@data, @width, @height)
+
       sparkline(@data, @width, @height).should == @expected
     end
   end

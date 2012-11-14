@@ -1,5 +1,5 @@
 class GroupUsersController < ApplicationController
-  
+
   # DELETE /group_users/1
   # DELETE /group_users/1.json
   def destroy
@@ -11,7 +11,5 @@ class GroupUsersController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
-
 
 end
