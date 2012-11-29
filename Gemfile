@@ -11,6 +11,7 @@ gem 'pg'
 gem 'cocoon', '1.0.21' # for nested models->forms
 gem 'devise', '>= 2.0.0'
 gem 'devise_invitable', '~> 1.0.0'
+gem 'devise-async'
 gem 'simple_form'
 gem 'thin'
 gem 'airbrake'
@@ -18,6 +19,7 @@ gem 'taps'
 gem 'cancan'
 
 gem "dalli"
+gem "sidekiq"
 
 # Gems used only for assets and not required
 # in production environments by default.
