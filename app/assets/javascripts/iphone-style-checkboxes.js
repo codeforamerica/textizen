@@ -34,6 +34,18 @@
       this.onSpan = this.onLabel.children('span');
       return this.handle = $("<div class='" + this.handleClass + "'>\n  <div class='" + this.handleRightClass + "'>\n    <div class='" + this.handleCenterClass + "' />\n  </div>\n</div>").appendTo(this.container);
     };
+    //http://stackoverflow.com/questions/14923301/uncaught-typeerror-cannot-read-property-msie-of-undefined-jquery-tools
+    //FIX
+    jQuery.browser = {};
+    (function () {
+      jQuery.browser.msie = false;
+      jQuery.browser.version = 0;
+      if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
+        jQuery.browser.msie = true;
+        jQuery.browser.version = RegExp.$1;
+      }
+    })();
+    //END FIX
     iOSCheckbox.prototype.disableTextSelection = function() {
       if ($.browser.msie) {
         return $([this.handle, this.offLabel, this.onLabel, this.container]).attr("unselectable", "on");
